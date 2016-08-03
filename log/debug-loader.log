@@ -1,340 +1,340 @@
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: -------------- GET FILE SIZE FIRST-----------
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: -------------- NOW READ TO ARRAY -----------
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(0): XLS TEMPLATE=NULL
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(1): XLS TEMPLATE=NULL
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(2): XLS TEMPLATE=NULL
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(3): XLS TEMPLATE=NULL
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(4): Original TCG Templates=C:\MEF\TCG\Original
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(5): Exported TCG Templates=C:\MEF\TCG\Result
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(6): WorkBookPrefix=EPL,EVPL,
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(7): WorkBookPrefix=EP-LAN,EVP-LAN,
-6/27/2016 11:59:50 AM: GetFileLineCountByGroup: vFileLines(8): WorkBookPrefix=AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                             NULL
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                             NULL
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                             NULL
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                             NULL
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                              C:\MEF\TCG\Original
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                C:\MEF\TCG\Result
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                        EPL,EVPL,
-6/27/2016 11:59:50 AM:  GetTemplates:                                                                                  EP-LAN,EVP-LAN,
-6/27/2016 11:59:50 AM:  GetTemplates:                                                AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
-6/27/2016 11:59:50 AM:  GetMyClass: TOTAL OBJECTS IN CLASS: JunosSW                                                                  8
-6/27/2016 11:59:50 AM:  GetMyClass: TOTAL OBJECTS IN CLASS: Release                                                                 16
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                 GetMyClass: LOAD PROPERTIES FOR [Class_JunosSW] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Class = JunosSW                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Param1 = Name                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Param2 = Main                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Param3 = Minor                                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Param4 = Status                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Param5 = Folder1                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Param6 = Folder2                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Param7 = Platform                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Param8 = ImageTemplate1                                                                            
-6/27/2016 11:59:50 AM:  GetMyClass:Param9 = Display_Name                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Param10 = SecureCRT_Session                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Param11 = Main List                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Param12 = Release_Tag                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Param13 = Release_Deny_Tag                                                                         
-6/27/2016 11:59:50 AM:  GetMyClass:Param14 = Amount_of_Minors                                                                         
-6/27/2016 11:59:50 AM:  GetMyClass:Param15 = ImageTemplate2                                                                           
-6/27/2016 11:59:50 AM:  GetMyClass:Param16 = ImageFile                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = <List>                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Status = <AutoRecord>                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Format4 = checkbox                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Main = <AutoRecord>                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = <AutoRecord>                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:ListNumber11 = 3                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                 GetMyClass: LOAD PROPERTIES FOR [Class_Release] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Class = Release                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Param1 = Name                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Param2 = Minor List                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Param3 = ImagFile List                                                                             
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = <List>                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List = <List>                                                                            
-6/27/2016 11:59:50 AM:  GetMyClass:ListNumber2 = 5                                                                                    
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_0] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX-DEV                                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = acx                                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 12.3                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/acx_x54_s4                                                           
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = development/                                                                             
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 12.3                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 5                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = None                                                                            
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Development Image                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_1] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX-PROD                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = acx                                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 12.3,15.1                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = service/                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 12.3                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 99                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = X54                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = 5k                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Production Image                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_2] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-DEV                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = mx80                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 14.2,15.1,16.1                                                                         
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = daily/                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 15.1                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 5                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Development Image                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_3] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-PROD                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = mx80                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 14.2,15.1                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = release/                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Active                                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = 15.1R4.2                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 15.1                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 99                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Production Image                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_4] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-DEV                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = mx                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 14.2,15.1,16.1                                                                         
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = daily/                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall64-*-domestic-signed.tgz                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate2 = junos-install-x86-64-*.tgz                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 14.2                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 5                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Development Image                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_5] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-PROD                                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = mx                                                                                      
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 14.2,15.1                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = release/                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall64-*-domestic-signed.tgz                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate2 = junos-install-x86-64-*.tgz                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 15.1                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 99                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Production Image                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_6] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX5K-DEV                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = acx5k                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = misha_rel2_p1,misha_rel3_p1                                                            
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /.amd/bng-pb-storage01/export/export1/rbu_jenkins/                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = development/                                                                             
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-acx5k-*-domestic-signed.tgz                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = misha_rel3_p1                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 5                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = None                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Development Image                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/bng-eabu05                                                           
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [JunosSW_7] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX5K-PROD                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Platform = acx5k                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Main List = 15.1                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Folder1 = /volume/build/junos/                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Folder2 = service/                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageTemplate1 = jinstall-acx5k-*-domestic-signed.tgz                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Status = Inactive                                                                                  
-6/27/2016 11:59:50 AM:  GetMyClass:Minor = None                                                                                       
-6/27/2016 11:59:50 AM:  GetMyClass:Main = 15.1                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile =                                                                                        
-6/27/2016 11:59:50 AM:  GetMyClass:Amount_of_Minors = 99                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Tag = 5k                                                                                   
-6/27/2016 11:59:50 AM:  GetMyClass:Release_Deny_Tag = failed                                                                          
-6/27/2016 11:59:50 AM:  GetMyClass:Display_Name = Production Image                                                                    
-6/27/2016 11:59:50 AM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                      
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_0] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX-DEV-12.3                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160511.0,20160504.0,20160420.0,20160417.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_3] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX-PROD-15.1                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 15.1X54-D50.13,15.1X54-D50.11,15.1X54-D50.10,15.1X54-D37.1,15.1X54-D37,15.1X54-D36.2,15.1X54-D36.1,15.1X54-D35.9,15.1X54-D35.8,15.1X54-D35.7,15.1X54-D35.6,15.1X54-D35.5,15.1X54-D35.4,15.1X54-D35.3,15.1X54-D35.2,15.1X54-D35.11,15.1X54-D35.10,15.1X54-D35.1,15.1X54-D35,15.1X54-D30.2,15.1X54-D30.1,15.1X54-D30,15.1X54-D25.14,15.1X54-D20.7,15.1X54-D20-acx,15.1X54-D10.5,15.1X54-D10.4 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_4] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX-PROD-12.3                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 12.3X54-D29.2,12.3X54-D29.1,12.3X54-D29,12.3X54-D28.1,12.3X54-D28,12.3X54-D27.1,12.3X54-D27,12.3X54-D26.1,12.3X54-D25.7,12.3X54-D25.6,12.3X54-D25.5,12.3X54-D25.4,12.3X54-D25.3,12.3X54-D25.2,12.3X54-D25.1,12.3X54-D25,12.3X54-D20.9,12.3X54-D20.8,12.3X54-D20.7,12.3X54-D20.6,12.3X54-D20.5,12.3X54-D20.4,12.3X54-D20.3,12.3X54-D20.2,12.3X54-D16.2,12.3X54-D16.1,12.3X54-D16,12.3X54-D15.3,12.3X54-D15.2,12.3X54-D15.1,12.3X54-D15,12.3X54-D11.1,12.3X54-D10.6,12.3X54-D10.5,12.3X54-D10.4,12.3X54-D10.2,12.3X54-D10.1,12.3X54-D10 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_5] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-DEV-14.2                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_6] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-DEV-15.1                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_7] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-DEV-16.1                                                                               
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160606.0,20160605.0,20160604.0,20160603.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_8] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-PROD-14.2                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 14.2R6.5,14.2R6.4,14.2R6.3,14.2R6.2,14.2R6.1,14.2R6-S2.1,14.2R6-S2,14.2R6-S1,14.2R6,14.2R5.8,14.2R5-S4,14.2R5-S3,14.2R5-S2.1,14.2R5-S2,14.2R5-S1.2,14.2R5-J1.2,14.2R5-J1.1,14.2R5-J1,14.2R4.9,14.2R4.8,14.2R4.7,14.2R4.6,14.2R4.5,14.2R4.4,14.2R4.2,14.2R4.1,14.2R4-S4.2,14.2R4-S3.1,14.2R4-S2,14.2R4-S1,14.2R4-J2,14.2R4-J1,14.2R4,14.2R3.8-C1.1,14.2R3.8-C1,14.2R3.8,14.2R3.7,14.2R3.6,14.2R3.5,14.2R3.4,14.2R3.3,14.2R3.1,14.2R3-S8,14.2R3-S7.1,14.2R3-S6.1,14.2R3-S5,14.2R3-S4.4,14.2R3-S3,14.2R3-S2,14.2R3-S1.3,14.2R3,14.2R2.8,14.2R2.6,14.2R2.5,14.2R2.4,14.2R2.3,14.2R2.2,14.2R2.1,14.2R2-S3-J1,14.2R2-S3,14.2R2-S2,14.2R2-S1,14.2R2,14.2R1.9,14.2R1.8,14.2F2,14.2B2.3,14.2B2.2,14.2B2.1,14.2B2,14.2B1-PS 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_9] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX80-PROD-15.1                                                                              
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 15.1R4.2,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.3,15.1F6.2,15.1F6.1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S2.4,15.1F5-S2.3,15.1F5-S2.2,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1,15.1F4.15,15.1F4.14,15.1F4-S3.1,15.1F4-S2,15.1F4-S1.6,15.1F4-S1.5,15.1F4-S1.2,15.1F4-S1.1,15.1F4-S1,15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5,15.1F2.8 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_10] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-DEV-14.2                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_11] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-DEV-15.1                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_12] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-DEV-16.1                                                                                 
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160606.0,20160605.0,20160604.0,20160603.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_13] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-PROD-14.2                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 14.2R6.5,14.2R6.4,14.2R6.3,14.2R6.2,14.2R6.1,14.2R6-S2.1,14.2R6-S2,14.2R6-S1,14.2R6,14.2R5.8,14.2R5-S4,14.2R5-S3,14.2R5-S2.1,14.2R5-S2,14.2R5-S1.2,14.2R5-J1.2,14.2R5-J1.1,14.2R5-J1,14.2R4.9,14.2R4.8,14.2R4.7,14.2R4.6,14.2R4.5,14.2R4.4,14.2R4.2,14.2R4.1,14.2R4-S4.2,14.2R4-S3.1,14.2R4-S2,14.2R4-S1,14.2R4-J2,14.2R4-J1,14.2R4,14.2R3.8-C1.1,14.2R3.8-C1,14.2R3.8,14.2R3.7,14.2R3.6,14.2R3.5,14.2R3.4,14.2R3.3,14.2R3.1,14.2R3-S8,14.2R3-S7.1,14.2R3-S6.1,14.2R3-S5,14.2R3-S4.4,14.2R3-S3,14.2R3-S2,14.2R3-S1.3,14.2R3,14.2R2.8,14.2R2.6,14.2R2.5,14.2R2.4,14.2R2.3,14.2R2.2,14.2R2.1,14.2R2-S3-J1,14.2R2-S3,14.2R2-S2,14.2R2-S1,14.2R2,14.2R1.9,14.2R1.8,14.2F2,14.2B2.3,14.2B2.2,14.2B2.1,14.2B2,14.2B1-PS 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_14] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = MX-PROD-15.1                                                                                
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 15.1R4.2,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.3,15.1F6.2,15.1F6.1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S2.4,15.1F5-S2.3,15.1F5-S2.2,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1,15.1F4.15,15.1F4.14,15.1F4-S3.1,15.1F4-S2,15.1F4-S1.6,15.1F4-S1.5,15.1F4-S1.2,15.1F4-S1.1,15.1F4-S1,15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5,15.1F2.8 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_19] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX5K-DEV-misha_rel2_p1                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160226.0,20160222.0,20160219.0,20160217.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_20] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX5K-DEV-misha_rel3_p1                                                                     
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = current,20160602.0,20160601.0,20160530.0,20160526.0                                   
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                     GetMyClass: LOAD DATA FOR: [Release_21] 
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:  GetMyClass:Name = ACX5K-PROD-15.1                                                                             
-6/27/2016 11:59:50 AM:  GetMyClass:Minor List = 15.1X54-D50.13-acx5k,15.1X54-D50.11-acx5k,15.1X54-D50.10-acx5k,15.1X54-D25.14-acx5k,15.1X54-D20.7-acx5k,15.1X54-D20.6-acx5k,15.1X54-D20.5-acx5k,15.1X54-D20.4-acx5k,15.1X54-D20.2-acx5k,15.1X54-D20.1-acx5k,15.1X54-D20-acx5k 
-6/27/2016 11:59:50 AM:  GetMyClass:ImageFile List =                                                                                   
-6/27/2016 11:59:50 AM:  SetMyObject: ClassName: JunosSW ClassID = 0                                                                   
-6/27/2016 11:59:50 AM:  SetMyObject: Found  Properties for class JunosSW                                                              
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=0
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=1
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=2
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=3
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=6
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                 Dim1=0 Dim2=7
-6/27/2016 11:59:50 AM:  SetMyObject: ClassName: Release ClassID = 1                                                                   
-6/27/2016 11:59:50 AM:  SetMyObject: Found  Properties for class Release                                                              
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=0
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=1
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=2
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=3
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=4
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=5
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=6
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=7
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=8
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=9
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=10
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=11
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=12
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=13
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=14
-6/27/2016 11:59:50 AM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                 Dim1=1 Dim2=15
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:50 AM:                                IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM  
-6/27/2016 11:59:50 AM:  ---------------------------------------------------------------------------------------------------------------
-6/27/2016 11:59:51 AM:  MAIN FORM:                                                                                                   *
-6/27/2016 11:59:51 AM:  MAIN FORM:                                                                                                 MBH
-6/27/2016 11:59:51 AM:  COMMAND:  tasklist /fo csv /fi "Windowtitle eq Juniper Networks Lab Configuration Loader - Windows Internet Explorer provided by Juniper Networks" >C:\Users\vmukhin\svc-119351.dat
-6/27/2016 11:59:51 AM:  BATCH FILE EXECUTED:  C:\Users\vmukhin\run-119351.bat
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: -------------- GET FILE SIZE FIRST-----------
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: -------------- NOW READ TO ARRAY -----------
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(0): XLS TEMPLATE=NULL
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(1): XLS TEMPLATE=NULL
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(2): XLS TEMPLATE=NULL
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(3): XLS TEMPLATE=NULL
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(4): Original TCG Templates=C:\MEF\TCG\Original
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(5): Exported TCG Templates=C:\MEF\TCG\Result
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(6): WorkBookPrefix=EPL,EVPL,
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(7): WorkBookPrefix=EP-LAN,EVP-LAN,
+8/2/2016 11:00:38 PM: GetFileLineCountByGroup: vFileLines(8): WorkBookPrefix=AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                              NULL
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                              NULL
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                              NULL
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                              NULL
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                               C:\MEF\TCG\Original
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                 C:\MEF\TCG\Result
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                         EPL,EVPL,
+8/2/2016 11:00:38 PM:  GetTemplates:                                                                                   EP-LAN,EVP-LAN,
+8/2/2016 11:00:38 PM:  GetTemplates:                                                 AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+8/2/2016 11:00:38 PM:  GetMyClass: TOTAL OBJECTS IN CLASS: JunosSW                                                                   8
+8/2/2016 11:00:38 PM:  GetMyClass: TOTAL OBJECTS IN CLASS: Release                                                                  16
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                 GetMyClass: LOAD PROPERTIES FOR [Class_JunosSW] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Class = JunosSW                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Param1 = Name                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Param2 = Main                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Param3 = Minor                                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Param4 = Status                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Param5 = Folder1                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Param6 = Folder2                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Param7 = Platform                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Param8 = ImageTemplate1                                                                             
+8/2/2016 11:00:38 PM:  GetMyClass:Param9 = Display_Name                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Param10 = SecureCRT_Session                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Param11 = Main List                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Param12 = Release_Tag                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Param13 = Release_Deny_Tag                                                                          
+8/2/2016 11:00:38 PM:  GetMyClass:Param14 = Amount_of_Minors                                                                          
+8/2/2016 11:00:38 PM:  GetMyClass:Param15 = ImageTemplate2                                                                            
+8/2/2016 11:00:38 PM:  GetMyClass:Param16 = ImageFile                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = <List>                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Status = <AutoRecord>                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Format4 = checkbox                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Main = <AutoRecord>                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = <AutoRecord>                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:ListNumber11 = 3                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                 GetMyClass: LOAD PROPERTIES FOR [Class_Release] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Class = Release                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Param1 = Name                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Param2 = Minor List                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Param3 = ImagFile List                                                                              
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = <List>                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List = <List>                                                                             
+8/2/2016 11:00:38 PM:  GetMyClass:ListNumber2 = 5                                                                                     
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_0] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX-DEV                                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = acx                                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 12.3                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/acx_x54_s4                                                            
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = development/                                                                              
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 12.3                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 5                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = None                                                                             
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Development Image                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_1] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX-PROD                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = acx                                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 12.3,15.1                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = service/                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 12.3                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 99                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = X54                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = 5k                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Production Image                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_2] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-DEV                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = mx80                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 14.2,15.1,16.1                                                                          
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = daily/                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 15.1                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 5                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Development Image                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_3] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-PROD                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = mx80                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 14.2,15.1                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = release/                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Active                                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = 15.1R4.2                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 15.1                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 99                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Production Image                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_4] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-DEV                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = mx                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 14.2,15.1,16.1                                                                          
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = daily/                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall64-*-domestic-signed.tgz                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate2 = junos-install-x86-64-*.tgz                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 14.2                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 5                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Development Image                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_5] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-PROD                                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = mx                                                                                       
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 14.2,15.1                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = release/                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall64-*-domestic-signed.tgz                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate2 = junos-install-x86-64-*.tgz                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 15.1                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 99                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Production Image                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_6] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX5K-DEV                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = acx5k                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = misha_rel2_p1,misha_rel3_p1                                                             
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /.amd/bng-pb-storage01/export/export1/rbu_jenkins/                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = development/                                                                              
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-acx5k-*-domestic-signed.tgz                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = misha_rel3_p1                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 5                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = None                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Development Image                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/bng-eabu05                                                            
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [JunosSW_7] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX5K-PROD                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Platform = acx5k                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Main List = 15.1                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Folder1 = /volume/build/junos/                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Folder2 = service/                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:ImageTemplate1 = jinstall-acx5k-*-domestic-signed.tgz                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Status = Inactive                                                                                   
+8/2/2016 11:00:38 PM:  GetMyClass:Minor = None                                                                                        
+8/2/2016 11:00:38 PM:  GetMyClass:Main = 15.1                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile =                                                                                         
+8/2/2016 11:00:38 PM:  GetMyClass:Amount_of_Minors = 99                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Tag = 5k                                                                                    
+8/2/2016 11:00:38 PM:  GetMyClass:Release_Deny_Tag = failed                                                                           
+8/2/2016 11:00:38 PM:  GetMyClass:Display_Name = Production Image                                                                     
+8/2/2016 11:00:38 PM:  GetMyClass:SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01                                                       
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_0] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX-DEV-12.3                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160511.0,20160504.0,20160420.0,20160417.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_3] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX-PROD-15.1                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 15.1X54-D50.13,15.1X54-D50.11,15.1X54-D50.10,15.1X54-D37.1,15.1X54-D37,15.1X54-D36.2,15.1X54-D36.1,15.1X54-D35.9,15.1X54-D35.8,15.1X54-D35.7,15.1X54-D35.6,15.1X54-D35.5,15.1X54-D35.4,15.1X54-D35.3,15.1X54-D35.2,15.1X54-D35.11,15.1X54-D35.10,15.1X54-D35.1,15.1X54-D35,15.1X54-D30.2,15.1X54-D30.1,15.1X54-D30,15.1X54-D25.14,15.1X54-D20.7,15.1X54-D20-acx,15.1X54-D10.5,15.1X54-D10.4 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_4] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX-PROD-12.3                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 12.3X54-D29.2,12.3X54-D29.1,12.3X54-D29,12.3X54-D28.1,12.3X54-D28,12.3X54-D27.1,12.3X54-D27,12.3X54-D26.1,12.3X54-D25.7,12.3X54-D25.6,12.3X54-D25.5,12.3X54-D25.4,12.3X54-D25.3,12.3X54-D25.2,12.3X54-D25.1,12.3X54-D25,12.3X54-D20.9,12.3X54-D20.8,12.3X54-D20.7,12.3X54-D20.6,12.3X54-D20.5,12.3X54-D20.4,12.3X54-D20.3,12.3X54-D20.2,12.3X54-D16.2,12.3X54-D16.1,12.3X54-D16,12.3X54-D15.3,12.3X54-D15.2,12.3X54-D15.1,12.3X54-D15,12.3X54-D11.1,12.3X54-D10.6,12.3X54-D10.5,12.3X54-D10.4,12.3X54-D10.2,12.3X54-D10.1,12.3X54-D10 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_5] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-DEV-14.2                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_6] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-DEV-15.1                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_7] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-DEV-16.1                                                                                
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160606.0,20160605.0,20160604.0,20160603.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_8] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-PROD-14.2                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 14.2R6.5,14.2R6.4,14.2R6.3,14.2R6.2,14.2R6.1,14.2R6-S2.1,14.2R6-S2,14.2R6-S1,14.2R6,14.2R5.8,14.2R5-S4,14.2R5-S3,14.2R5-S2.1,14.2R5-S2,14.2R5-S1.2,14.2R5-J1.2,14.2R5-J1.1,14.2R5-J1,14.2R4.9,14.2R4.8,14.2R4.7,14.2R4.6,14.2R4.5,14.2R4.4,14.2R4.2,14.2R4.1,14.2R4-S4.2,14.2R4-S3.1,14.2R4-S2,14.2R4-S1,14.2R4-J2,14.2R4-J1,14.2R4,14.2R3.8-C1.1,14.2R3.8-C1,14.2R3.8,14.2R3.7,14.2R3.6,14.2R3.5,14.2R3.4,14.2R3.3,14.2R3.1,14.2R3-S8,14.2R3-S7.1,14.2R3-S6.1,14.2R3-S5,14.2R3-S4.4,14.2R3-S3,14.2R3-S2,14.2R3-S1.3,14.2R3,14.2R2.8,14.2R2.6,14.2R2.5,14.2R2.4,14.2R2.3,14.2R2.2,14.2R2.1,14.2R2-S3-J1,14.2R2-S3,14.2R2-S2,14.2R2-S1,14.2R2,14.2R1.9,14.2R1.8,14.2F2,14.2B2.3,14.2B2.2,14.2B2.1,14.2B2,14.2B1-PS 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                      GetMyClass: LOAD DATA FOR: [Release_9] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX80-PROD-15.1                                                                               
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 15.1R4.2,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.3,15.1F6.2,15.1F6.1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S2.4,15.1F5-S2.3,15.1F5-S2.2,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1,15.1F4.15,15.1F4.14,15.1F4-S3.1,15.1F4-S2,15.1F4-S1.6,15.1F4-S1.5,15.1F4-S1.2,15.1F4-S1.1,15.1F4-S1,15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5,15.1F2.8 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_10] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-DEV-14.2                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_11] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-DEV-15.1                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160605.0,20160604.0,20160603.0,20160602.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_12] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-DEV-16.1                                                                                  
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160606.0,20160605.0,20160604.0,20160603.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_13] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-PROD-14.2                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 14.2R6.5,14.2R6.4,14.2R6.3,14.2R6.2,14.2R6.1,14.2R6-S2.1,14.2R6-S2,14.2R6-S1,14.2R6,14.2R5.8,14.2R5-S4,14.2R5-S3,14.2R5-S2.1,14.2R5-S2,14.2R5-S1.2,14.2R5-J1.2,14.2R5-J1.1,14.2R5-J1,14.2R4.9,14.2R4.8,14.2R4.7,14.2R4.6,14.2R4.5,14.2R4.4,14.2R4.2,14.2R4.1,14.2R4-S4.2,14.2R4-S3.1,14.2R4-S2,14.2R4-S1,14.2R4-J2,14.2R4-J1,14.2R4,14.2R3.8-C1.1,14.2R3.8-C1,14.2R3.8,14.2R3.7,14.2R3.6,14.2R3.5,14.2R3.4,14.2R3.3,14.2R3.1,14.2R3-S8,14.2R3-S7.1,14.2R3-S6.1,14.2R3-S5,14.2R3-S4.4,14.2R3-S3,14.2R3-S2,14.2R3-S1.3,14.2R3,14.2R2.8,14.2R2.6,14.2R2.5,14.2R2.4,14.2R2.3,14.2R2.2,14.2R2.1,14.2R2-S3-J1,14.2R2-S3,14.2R2-S2,14.2R2-S1,14.2R2,14.2R1.9,14.2R1.8,14.2F2,14.2B2.3,14.2B2.2,14.2B2.1,14.2B2,14.2B1-PS 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_14] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = MX-PROD-15.1                                                                                 
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 15.1R4.2,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.3,15.1F6.2,15.1F6.1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S2.4,15.1F5-S2.3,15.1F5-S2.2,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1,15.1F4.15,15.1F4.14,15.1F4-S3.1,15.1F4-S2,15.1F4-S1.6,15.1F4-S1.5,15.1F4-S1.2,15.1F4-S1.1,15.1F4-S1,15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5,15.1F2.8 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_19] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX5K-DEV-misha_rel2_p1                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160226.0,20160222.0,20160219.0,20160217.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_20] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX5K-DEV-misha_rel3_p1                                                                      
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = current,20160602.0,20160601.0,20160530.0,20160526.0                                    
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                     GetMyClass: LOAD DATA FOR: [Release_21] 
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:  GetMyClass:Name = ACX5K-PROD-15.1                                                                              
+8/2/2016 11:00:38 PM:  GetMyClass:Minor List = 15.1X54-D50.13-acx5k,15.1X54-D50.11-acx5k,15.1X54-D50.10-acx5k,15.1X54-D25.14-acx5k,15.1X54-D20.7-acx5k,15.1X54-D20.6-acx5k,15.1X54-D20.5-acx5k,15.1X54-D20.4-acx5k,15.1X54-D20.2-acx5k,15.1X54-D20.1-acx5k,15.1X54-D20-acx5k 
+8/2/2016 11:00:38 PM:  GetMyClass:ImageFile List =                                                                                    
+8/2/2016 11:00:38 PM:  SetMyObject: ClassName: JunosSW ClassID = 0                                                                    
+8/2/2016 11:00:38 PM:  SetMyObject: Found  Properties for class JunosSW                                                               
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=0
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=1
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=2
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=3
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=6
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImageTemplate2                                                  Dim1=0 Dim2=7
+8/2/2016 11:00:38 PM:  SetMyObject: ClassName: Release ClassID = 1                                                                    
+8/2/2016 11:00:38 PM:  SetMyObject: Found  Properties for class Release                                                               
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=0
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=1
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=2
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=3
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=4
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=5
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=6
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=7
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=8
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                   Dim1=1 Dim2=9
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=10
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=11
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=12
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=13
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=14
+8/2/2016 11:00:38 PM:  GetVariable: CAN'T FIND VARIABLE: ImagFile List                                                  Dim1=1 Dim2=15
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:38 PM:                                 IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM  
+8/2/2016 11:00:38 PM:  ----------------------------------------------------------------------------------------------------------------
+8/2/2016 11:00:39 PM:  MAIN FORM:                                                                                                    *
+8/2/2016 11:00:39 PM:  MAIN FORM:                                                                                                  MBH
+8/2/2016 11:00:39 PM:  COMMAND:  tasklist /fo csv /fi "Windowtitle eq Juniper Networks Lab Configuration Loader - Windows Internet Explorer provided by Juniper Networks" >C:\Users\vmukhin\svc-356472.dat
+8/2/2016 11:00:39 PM:  BATCH FILE EXECUTED:  C:\Users\vmukhin\run-356472.bat
            GETTING SIZE OF THE FILE FIRST        
 GetFileLineCountSelect:    "Image Name","PID","Session Name","Session#","Mem Usage"
-GetFileLineCountSelect:    "iexplore.exe","16516","Console","1","34,088 K"
+GetFileLineCountSelect:    "iexplore.exe","8056","Console","1","163,792 K"
 File Size: 2 Array Size: 2
            NOW TRYING TO RIGHT INTO AN ARRAY        
 GetFileLineCountSelect: vFileLines(0)="Image Name","PID","Session Name","Session#","Mem Usage"
-GetFileLineCountSelect: vFileLines(1)="iexplore.exe","16516","Console","1","34,088 K"
+GetFileLineCountSelect: vFileLines(1)="iexplore.exe","8056","Console","1","163,792 K"
