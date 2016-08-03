@@ -1,0 +1,164 @@
+﻿--- JUNOS 13.3R2.7 built 2014-04-20 20:58:39 UTC
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# save ag3.1-mbh1.1-July-07.conf 
+Wrote 522 lines of configuration to 'ag3.1-mbh1.1-July-07.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s7> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-July-07/2016-4-5-v.02
+250 CWD successful. "/mbh1.1-July-07/2016-4-5-v.02" is current directory.
+ftp> put ag3.1-mbh1.1-July-07.conf ag3.1-mbh1.1-July-07.conf
+local: ag3.1-mbh1.1-July-07.conf remote: ag3.1-mbh1.1-July-07.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+100% |**********************************************************************************************************************************************************| 14291       00:00 ETAA
+226 Successfully transferred "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+14291 bytes sent in 0.10 seconds (140.18 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 13.3R2.7 built 2014-04-20 20:58:39 UTC
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# save ag3.1-mbh1.1-July-07.conf 
+Wrote 522 lines of configuration to 'ag3.1-mbh1.1-July-07.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s7> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-July-07/2016-4-5-v.02
+250 CWD successful. "/mbh1.1-July-07/2016-4-5-v.02" is current directory.
+ftp> put ag3.1-mbh1.1-July-07.conf ag3.1-mbh1.1-July-07.conf
+local: ag3.1-mbh1.1-July-07.conf remote: ag3.1-mbh1.1-July-07.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+100% |**********************************************************************************************************************************************************| 14291       00:00 ETAA
+226 Successfully transferred "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+14291 bytes sent in 0.11 seconds (130.80 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 13.3R2.7 built 2014-04-20 20:58:39 UTC
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# save ag3.1-mbh1.1-July-07.conf 
+Wrote 522 lines of configuration to 'ag3.1-mbh1.1-July-07.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s7> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-July-07/2016-4-5-v.02
+250 CWD successful. "/mbh1.1-July-07/2016-4-5-v.02" is current directory.
+ftp> put ag3.1-mbh1.1-July-07.conf ag3.1-mbh1.1-July-07.conf
+local: ag3.1-mbh1.1-July-07.conf remote: ag3.1-mbh1.1-July-07.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+100% |**********************************************************************************************************************************************************| 14291       00:00 ETAA
+226 Successfully transferred "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+14291 bytes sent in 0.09 seconds (158.78 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 13.3R2.7 built 2014-04-20 20:58:39 UTC
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> 
+
+vmukhin@eabu-sol-eng-dc-s7> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# save ag3.1-mbh1.1-July-07.conf 
+Wrote 522 lines of configuration to 'ag3.1-mbh1.1-July-07.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s7# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s7> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-July-07/2016-4-5-v.02
+250 CWD successful. "/mbh1.1-July-07/2016-4-5-v.02" is current directory.
+ftp> put ag3.1-mbh1.1-July-07.conf ag3.1-mbh1.1-July-07.conf
+local: ag3.1-mbh1.1-July-07.conf remote: ag3.1-mbh1.1-July-07.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+100% |**********************************************************************************************************************************************************| 14291       00:00 ETAA
+226 Successfully transferred "/mbh1.1-July-07/2016-4-5-v.02/ag3.1-mbh1.1-July-07.conf"
+14291 bytes sent in 0.09 seconds (157.82 KB/s)
+ftp> quit
+221 Goodbye
+

@@ -1,0 +1,216 @@
+﻿--- JUNOS 15.1X54-D50.10 built 2016-04-18 12:20:17 UTC
+
+{master:0}
+vmukhin@t-quark> 
+
+{master:0}
+vmukhin@t-quark> 
+
+{master:0}
+vmukhin@t-quark> show version 
+fpc0:
+--------------------------------------------------------------------------
+Hostname: t-quark
+Model: acx5096
+Junos: 15.1X54-D50.10
+JUNOS Base OS boot [15.1X54-D50.10]
+JUNOS Online Documentation [15.1X54-D50.10]
+JUNOS Crypto Software Suite [15.1X54-D50.10]
+JUNOS Base OS Software Suite [15.1X54-D50.10]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D50.10]
+JUNOS Kernel Software Suite [15.1X54-D50.10]
+JUNOS Routing Software Suite [15.1X54-D50.10]
+JUNOS Enterprise Software Suite [15.1X54-D50.10]
+JUNOS py-base-i386 [15.1X54-D50.10]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin@t-quark> 
+
+{master:0}
+vmukhin@t-quark> edit 
+Entering configuration mode
+The configuration has been changed but not committed
+
+{master:0}[edit]
+vmukhin@t-quark# edit groups global 
+
+{master:0}[edit groups global]
+vmukhin@t-quark# save grp-global-original.conf 
+Wrote 336 lines of configuration to 'grp-global-original.conf'
+
+{master:0}[edit groups global]
+vmukhin@t-quark# exit 
+
+{master:0}[edit]
+vmukhin@t-quark# edit groups member0 
+
+{master:0}[edit groups member0]
+vmukhin@t-quark# show 
+system {
+    host-name t-quark;
+}
+interfaces {
+    em0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.146/23;
+            }
+        }
+    }
+}
+
+{master:0}[edit groups member0]
+vmukhin@t-quark# save grp-member0.conf 
+Wrote 18 lines of configuration to 'grp-member0.conf'
+
+{master:0}[edit groups member0]
+vmukhin@t-quark# exit 
+
+{master:0}[edit]
+vmukhin@t-quark# exit 
+The configuration has been changed but not committed
+Exit with uncommitted changes? [yes,no] (yes) yes 
+
+Exiting configuration mode
+
+{master:0}
+vmukhin@t-quark> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./GVTC-Services-All-Hairpinning-ACX5k-2016/2016-4-25-v.01/csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf
+local: csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf remote: ./GVTC-Services-All-Hairpinning-ACX5k-2016/2016-4-25-v.01/csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/GVTC-Services-All-Hairpinning-ACX5k-2016/2016-4-25-v.01/csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf"
+100% |**********************************************************************************************************************************************************| 36893       00:00 ETAA
+226 Successfully transferred "/GVTC-Services-All-Hairpinning-ACX5k-2016/2016-4-25-v.01/csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf"
+36893 bytes received in 0.14 seconds (266.80 KB/s)
+ftp> quit
+221 Goodbye
+
+{master:0}
+vmukhin@t-quark> edit 
+Entering configuration mode
+The configuration has been changed but not committed
+
+{master:0}[edit]
+vmukhin@t-quark# delete access 
+warning: statement not found
+
+{master:0}[edit]
+vmukhin@t-quark# delete services 
+warning: statement not found
+
+{master:0}[edit]
+vmukhin@t-quark# delete routing-instances 
+
+{master:0}[edit]
+vmukhin@t-quark# delete protocols 
+
+{master:0}[edit]
+vmukhin@t-quark# delete interfaces 
+
+{master:0}[edit]
+vmukhin@t-quark# delete routing-options 
+
+{master:0}[edit]
+vmukhin@t-quark# commit 
+configuration check succeeds
+commit complete
+
+{master:0}[edit]
+vmukhin@t-quark# load update csr1.6-GVTC-Services-All-Hairpinning-ACX5k-2016.conf 
+load complete
+
+{master:0}[edit]
+vmukhin@t-quark# edit groups global 
+
+{master:0}[edit groups global]
+vmukhin@t-quark# load replace grp-global-original.conf 
+exit
+load complete
+
+{master:0}[edit groups global]
+vmukhin@t-quark# exit 
+
+{master:0}[edit]
+vmukhin@t-quark# set apply-groups global 
+
+{master:0}[edit]
+vmukhin@t-quark# edit groups member0 
+
+{master:0}[edit groups member0]
+vmukhin@t-quark# load replace grp-member0.conf 
+exit
+load complete
+
+{master:0}[edit groups member0]
+vmukhin@t-quark# exit 
+
+{master:0}[edit]
+vmukhin@t-quark# set apply-groups member0 
+
+{master:0}[edit]
+vmukhin@t-quark# commit 
+configuration check succeeds
+commit complete
+
+{master:0}[edit]
+--- JUNOS 15.1X54-D50.10 built 2016-04-18 12:20:17 UTC
+
+{master:0}
+vmukhin@t-quark> 
+
+{master:0}
+vmukhin@t-quark> 
+
+{master:0}
+vmukhin@t-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 56934) on since 2016-06-06 22:37:13 PDT, idle 00:10:48
+      {master:0}[edit]
+
+{master:0}[edit]
+vmukhin@t-quark# save csr1.6-PWHT-GE-to-PS-2016.conf 
+Wrote 1171 lines of configuration to 'csr1.6-PWHT-GE-to-PS-2016.conf'
+
+{master:0}[edit]
+vmukhin@t-quark# exit 
+Exiting configuration mode
+
+{master:0}
+vmukhin@t-quark> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./PWHT-GE-to-PS-2016/2016-6-6-v.01
+250 CWD successful. "/PWHT-GE-to-PS-2016/2016-6-6-v.01" is current directory.
+ftp> put csr1.6-PWHT-GE-to-PS-2016.conf csr1.6-PWHT-GE-to-PS-2016.conf
+local: csr1.6-PWHT-GE-to-PS-2016.conf remote: csr1.6-PWHT-GE-to-PS-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/PWHT-GE-to-PS-2016/2016-6-6-v.01/csr1.6-PWHT-GE-to-PS-2016.conf"
+100% |**********************************************************************************************************************************************************| 32972       00:00 ETAA
+226 Successfully transferred "/PWHT-GE-to-PS-2016/2016-6-6-v.01/csr1.6-PWHT-GE-to-PS-2016.conf"
+32972 bytes sent in 0.16 seconds (197.58 KB/s)
+ftp> quit
+221 Goodbye
+
+{master:0}

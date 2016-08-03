@@ -1,0 +1,101 @@
+﻿--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+iometrix@node-r> 
+
+iometrix@node-r> 
+
+iometrix@node-r> edit 
+Entering configuration mode
+
+[edit]
+iometrix@node-r# edit groups global 
+
+[edit groups global]
+iometrix@node-r# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@node-r# exit 
+
+[edit]
+iometrix@node-r# exit 
+Exiting configuration mode
+
+iometrix@node-r> ftp 172.29.96.117 
+Connected to 172.29.96.117.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.96.117:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-r.conf group-global-acx-r.conf
+local: group-global-acx-r.conf remote: ./group-global-acx-r.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-r.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-r.conf"
+986 bytes received in 0.06 seconds (15.24 KB/s)
+ftp> get  ./group-member0-acx-r.conf group-member0-acx-r.conf
+local: group-member0-acx-r.conf remote: ./group-member0-acx-r.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-r.conf"
+100% |****************************************|   188       00:00 ETA
+226 Successfully transferred "/group-member0-acx-r.conf"
+188 bytes received in 0.06 seconds (2.93 KB/s)
+ftp> get ./E-Access/aevpl-1-acx-r.conf aevpl-1-acx-r.conf
+local: aevpl-1-acx-r.conf remote: ./E-Access/aevpl-1-acx-r.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Access/aevpl-1-acx-r.conf"
+100% |****************************************| 12899       00:00 ETA
+226 Successfully transferred "/E-Access/aevpl-1-acx-r.conf"
+12899 bytes received in 0.09 seconds (139.93 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@node-r> edit 
+Entering configuration mode
+
+[edit]
+iometrix@node-r# load update aevpl-1-acx-r.conf 
+load complete
+
+[edit]
+iometrix@node-r# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@node-r# edit groups global 
+
+[edit groups global]
+iometrix@node-r# load merge relative group-global-acx-r.conf 
+load complete
+
+[edit groups global]
+iometrix@node-r# exit 
+
+[edit]
+iometrix@node-r# edit groups re0 
+
+[edit groups re0]
+iometrix@node-r# load update relative group-member0-acx-r.conf 
+load complete
+
+[edit groups re0]
+iometrix@node-r# exit 
+
+[edit]
+iometrix@node-r# set apply-groups global 
+
+[edit]
+iometrix@node-r# set apply-groups re0 
+
+[edit]
+iometrix@node-r# commit 
+commit complete
+
+[edit]

@@ -1,0 +1,461 @@
+﻿--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+root@csr1% 
+root@csr1% cli
+root@csr1.2-a-quark> show version |no-more 
+Hostname: csr1.2-a-quark
+Model: acx2100
+JUNOS Crypto Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Kernel Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS boot [12.3-20150325_acx_x54_s4.0]
+JUNOS Packet Forwarding Engine Support (ACX) [12.3-20150325_acx_x54_s4.0]
+JUNOS Online Documentation [12.3-20150325_acx_x54_s4.0]
+JUNOS Routing Software Suite [12.3-20150325_acx_x54_s4.0]
+
+--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+root@csr1% 
+root@csr1% cli
+root@csr1.2-a-quark> show version |no-more 
+Hostname: csr1.2-a-quark
+Model: acx2100
+JUNOS Crypto Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Kernel Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS boot [12.3-20150325_acx_x54_s4.0]
+JUNOS Packet Forwarding Engine Support (ACX) [12.3-20150325_acx_x54_s4.0]
+JUNOS Online Documentation [12.3-20150325_acx_x54_s4.0]
+JUNOS Routing Software Suite [12.3-20150325_acx_x54_s4.0]
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                       
+The authenticity of host 'svl-jtac-tool01 (172.17.31.80)' can't be established.
+DSA key fingerprint is d1:dc:63:f7:17:6b:98:59:2b:4b:ae:e5:91:29:ed:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svl-jtac-tool01,172.17.31.80' (DSA) to the list of known hosts.
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                                                                                                    100%  143MB   6.2MB/s   00:23    
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                               
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                                                                                                                100%   33     0.0KB/s   00:00    
+
+root@csr1.2-a-quark> file checksum md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz 
+MD5 (/var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz) = f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> file show /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 
+f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> request system software add /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz re0 force 
+error: command is not valid on the acx2100
+
+root@csr1.2-a-quark> request system reboot 
+Reboot the system ? [yes,no] (no) yes 
+
+Shutdown NOW!
+[pid 3826]
+
+--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+root@csr1% 
+root@csr1% cli
+root@csr1.2-a-quark> show version |no-more 
+Hostname: csr1.2-a-quark
+Model: acx2100
+JUNOS Crypto Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Kernel Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS boot [12.3-20150325_acx_x54_s4.0]
+JUNOS Packet Forwarding Engine Support (ACX) [12.3-20150325_acx_x54_s4.0]
+JUNOS Online Documentation [12.3-20150325_acx_x54_s4.0]
+JUNOS Routing Software Suite [12.3-20150325_acx_x54_s4.0]
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                       
+The authenticity of host 'svl-jtac-tool01 (172.17.31.80)' can't be established.
+DSA key fingerprint is d1:dc:63:f7:17:6b:98:59:2b:4b:ae:e5:91:29:ed:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svl-jtac-tool01,172.17.31.80' (DSA) to the list of known hosts.
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                                                                                                    100%  143MB   6.0MB/s   00:24    
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                               
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                                                                                                                100%   33     0.0KB/s   00:00    
+
+root@csr1.2-a-quark> file checksum md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz 
+MD5 (/var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz) = f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> file show /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 
+f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> request system software add /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz re0 force 
+error: command is not valid on the acx2100
+
+root@csr1.2-a-quark> request system reboot 
+Reboot the system ? [yes,no] (no) yes 
+
+                                                                               
+*** FINAL System shutdown message from root@csr1.2-a-quark ***               
+
+System going down IMMEDIATELY                                                  
+
+                                                                               
+Shutdown NOW!
+[pid 2554]
+
+--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+root@csr1% 
+root@csr1% cli
+root@csr1.2-a-quark> show version |no-more 
+Hostname: csr1.2-a-quark
+Model: acx2100
+JUNOS Crypto Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Kernel Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS boot [12.3-20150325_acx_x54_s4.0]
+JUNOS Packet Forwarding Engine Support (ACX) [12.3-20150325_acx_x54_s4.0]
+JUNOS Online Documentation [12.3-20150325_acx_x54_s4.0]
+JUNOS Routing Software Suite [12.3-20150325_acx_x54_s4.0]
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                       
+The authenticity of host 'svl-jtac-tool01 (172.17.31.80)' can't be established.
+DSA key fingerprint is d1:dc:63:f7:17:6b:98:59:2b:4b:ae:e5:91:29:ed:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svl-jtac-tool01,172.17.31.80' (DSA) to the list of known hosts.
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz                                                                                                                                    100%  143MB   6.2MB/s   00:23    
+
+root@csr1.2-a-quark> ...12.3/service/12.3X54-D28/ship/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                               
+Password:
+jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5                                                                                                                                100%   33     0.0KB/s   00:00    
+
+root@csr1.2-a-quark> file checksum md5 /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz 
+MD5 (/var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz) = f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> file show /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz.md5 
+f9bfa148bdf186fcccbe3fb8a874d298
+
+root@csr1.2-a-quark> request system software add /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz force 
+NOTICE: Validating configuration against jinstall-ppc-12.3X54-D28-domestic-signed.tgz.
+NOTICE: Use the 'no-validate' option to skip this if desired.
+Checking compatibility with configuration
+Initializing...
+Using /packages1/jbase-ppc-12.3-20150325_acx_x54_s4.0
+Verified manifest signed by PackageDevelopment_12_3_0
+Using /var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz
+tar: +CONTENTS: time stamp Apr 17 10:27 2016 is 5219957 s in the future
+tar: +COMMENT: time stamp Apr 17 10:27 2016 is 5219957 s in the future
+tar: +DESC: time stamp Apr 17 10:27 2016 is 5219957 s in the future
+tar: +INSTALL: time stamp Apr 17 10:27 2016 is 5219957 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz: time stamp Apr 17 10:27 2016 is 5219936 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.md5: time stamp Apr 17 10:27 2016 is 5219938 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.sha1: time stamp Apr 17 10:27 2016 is 5219937 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.sig: time stamp Apr 17 10:27 2016 is 5219939 s in the future
+tar: certs.pem: time stamp Apr 17 09:38 2016 is 5217007 s in the future
+Verified jinstall-ppc-12.3X54-D28-domestic.tgz signed by PackageProduction_12_3_0
+Using jinstall-ppc-12.3X54-D28-domestic.tgz
+tar: +CONTENTS: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: +COMMENT: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: +DESC: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: +INSTALL: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:26 2016 is 5219921 s in the future
+tar: bootstrap-install-ppc-12.3X54-D28.tar: time stamp Apr 17 10:15 2016 is 5219213 s in the future
+tar: jbundle-ppc-12.3X54-D28-domestic.tgz: time stamp Apr 17 10:26 2016 is 5219890 s in the future
+Using jbundle-ppc-12.3X54-D28-domestic.tgz
+tar: +CONTENTS: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: +COMMENT: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: +DESC: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: +INSTALL: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:26 2016 is 5219881 s in the future
+tar: jboot-ppc-12.3X54-D28.tgz: time stamp Apr 17 09:58 2016 is 5218188 s in the future
+tar: jboot-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 09:58 2016 is 5218188 s in the future
+tar: jboot-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 09:58 2016 is 5218188 s in the future
+tar: jbase-ppc-12.3X54-D28.tgz: time stamp Apr 17 10:14 2016 is 5219188 s in the future
+tar: jbase-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 10:15 2016 is 5219189 s in the future
+tar: jbase-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:14 2016 is 5219188 s in the future
+tar: jcrypto-ppc-12.3X54-D28.tgz: time stamp Apr 17 10:15 2016 is 5219215 s in the future
+tar: jcrypto-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 10:15 2016 is 5219215 s in the future
+tar: jcrypto-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:15 2016 is 5219215 s in the future
+tar: jpfe-ppc-12.3X54-D28.tgz: time stamp Apr 17 10:01 2016 is 5218363 s in the future
+tar: jpfe-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 10:01 2016 is 5218364 s in the future
+tar: jpfe-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:01 2016 is 5218364 s in the future
+tar: jroute-ppc-12.3X54-D28.tgz: time stamp Apr 17 10:25 2016 is 5219825 s in the future
+tar: jroute-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 10:25 2016 is 5219826 s in the future
+tar: jroute-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:25 2016 is 5219825 s in the future
+tar: jdocs-12.3X54-D28.tgz: time stamp Apr 17 09:58 2016 is 5218216 s in the future
+tar: jdocs-12.3X54-D28.tgz.md5: time stamp Apr 17 09:58 2016 is 5218217 s in the future
+tar: jdocs-12.3X54-D28.tgz.sha1: time stamp Apr 17 09:58 2016 is 5218216 s in the future
+tar: +require.jboot: time stamp Apr 17 10:26 2016 is 5219872 s in the future
+tar: +install.jboot: time stamp Apr 17 10:26 2016 is 5219872 s in the future
+tar: +clean.jboot: time stamp Apr 17 10:26 2016 is 5219872 s in the future
+tar: jkernel-ppc-12.3X54-D28.tgz: time stamp Apr 17 10:25 2016 is 5219835 s in the future
+tar: jkernel-ppc-12.3X54-D28.tgz.md5: time stamp Apr 17 10:25 2016 is 5219835 s in the future
+tar: jkernel-ppc-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:25 2016 is 5219835 s in the future
+Checking jbundle-ppc requirements on /
+Using jbase-ppc-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: +COMMENT: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: +DESC: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: +INSTALL: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:14 2016 is 5219173 s in the future
+tar: packages/jbase-ppc-12.3X54-D28: time stamp Apr 17 10:14 2016 is 5219170 s in the future
+tar: packages/jbase-ppc-12.3X54-D28.sha1: time stamp Apr 17 10:14 2016 is 5219170 s in the future
+tar: packages/jbase-ppc-12.3X54-D28.sig: time stamp Apr 17 10:14 2016 is 5219171 s in the future
+tar: packages/jbase-ppc-12.3X54-D28.certs: time stamp Apr 17 09:38 2016 is 5216971 s in the future
+tar: jbase.symlinks: time stamp Apr 17 10:14 2016 is 5219162 s in the future
+Verified manifest signed by PackageProduction_12_3_0
+Verified jbase-ppc-12.3X54-D28 signed by PackageProduction_12_3_0
+Using /var/validate/chroot/tmp/jbundle-ppc/jboot-ppc-12.3X54-D28.tgz
+tar: etc/db/manifest/jboot: time stamp Apr 17 09:58 2016 is 5218146 s in the future
+tar: etc/db/manifest/jboot.certs: time stamp Apr 17 09:38 2016 is 5216952 s in the future
+tar: altconfig: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: altroot: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: data: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: opt/lib: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: usr/share/help: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: usr/lib/dd: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: usr/lib/render: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: usr/libdata/msdosfs: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: usr/share/pfe: time stamp Apr 17 09:58 2016 is 5218152 s in the future
+tar: etc/db/pkg/junos/+COMMENT: time stamp Apr 17 09:38 2016 is 5216953 s in the future
+tar: mfsbin/mdconfig: time stamp Apr 17 09:53 2016 is 5217894 s in the future
+tar: mfsbin/sh: time stamp Apr 17 09:53 2016 is 5217895 s in the future
+tar: mfsbin/cp: time stamp Apr 17 09:52 2016 is 5217817 s in the future
+tar: mfsbin/echo: time stamp Apr 17 09:54 2016 is 5217924 s in the future
+tar: mfsbin/ln: time stamp Apr 17 09:53 2016 is 5217862 s in the future
+tar: mfsbin/ls: time stamp Apr 17 09:53 2016 is 5217866 s in the future
+tar: mfsbin/rm: time stamp Apr 17 09:53 2016 is 5217872 s in the future
+tar: mfsbin/mkdir: time stamp Apr 17 09:53 2016 is 5217872 s in the future
+tar: mfsbin/ld-elf.so.1: time stamp Apr 17 09:53 2016 is 5217885 s in the future
+tar: mfsbin/libc.so.6: time stamp Apr 17 09:51 2016 is 5217769 s in the future
+tar: mfsbin/libedit.so.7: time stamp Apr 17 09:50 2016 is 5217662 s in the future
+tar: mfsbin/libutil.so.5: time stamp Apr 17 09:46 2016 is 5217440 s in the future
+tar: mfsbin/libkvm.so.3: time stamp Apr 17 09:46 2016 is 5217440 s in the future
+tar: mfsbin/libncurses.so.6: time stamp Apr 17 09:47 2016 is 5217477 s in the future
+tar: mfsbin/libufs.so.3: time stamp Apr 17 09:46 2016 is 5217454 s in the future
+tar: mfsbin/newfs: time stamp Apr 17 09:54 2016 is 5217907 s in the future
+tar: mfsbin/mount: time stamp Apr 17 09:54 2016 is 5217897 s in the future
+tar: mfsbin/mount_nullfs: time stamp Apr 17 09:54 2016 is 5217901 s in the future
+tar: mfsbin/mount_std: time stamp Apr 17 09:54 2016 is 5217905 s in the future
+tar: mfsbin/umount: time stamp Apr 17 09:54 2016 is 5217909 s in the future
+tar: mfsbin/chroot: time stamp Apr 17 09:54 2016 is 5217918 s in the future
+tar: mfsbin/sed: time stamp Apr 17 09:54 2016 is 5217916 s in the future
+tar: mfsbin/libgcc.so.1: time stamp Apr 17 09:46 2016 is 5217434 s in the future
+tar: etc/db/pkg/junos/+CONTENTS: time stamp Apr 17 09:38 2016 is 5216953 s in the future
+tar: etc/db/pkg/junos/+DESC: time stamp Apr 17 09:38 2016 is 5216953 s in the future
+tar: etc/db/pkg/junos/+REQUIRE: time stamp Apr 17 09:38 2016 is 5216953 s in the future
+tar: sbin/preinit: time stamp Apr 17 09:55 2016 is 5218006 s in the future
+tar: sbin/mfspreinit: time stamp Apr 17 09:55 2016 is 5218005 s in the future
+tar: mfsbin/settty: time stamp Apr 17 09:54 2016 is 5217921 s in the future
+tar: etc/db/manifest/jboot.sha1: time stamp Apr 17 09:58 2016 is 5218150 s in the future
+tar: etc/db/manifest/jboot.sig: time stamp Apr 17 09:58 2016 is 5218150 s in the future
+tar: COPYRIGHT: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/master.passwd.sys: time stamp Apr 17 09:58 2016 is 5218141 s in the future
+tar: etc/crontab.sys: time stamp Apr 17 09:58 2016 is 5218142 s in the future
+tar: boot/loader.rc: time stamp Apr 17 09:58 2016 is 5218147 s in the future
+tar: boot/loader.conf: time stamp Apr 17 09:58 2016 is 5218147 s in the future
+tar: etc/group.sys: time stamp Apr 17 09:58 2016 is 5218142 s in the future
+tar: etc/login.conf.sys: time stamp Apr 17 09:58 2016 is 5218142 s in the future
+tar: etc/newsyslog.conf.sys: time stamp Apr 17 09:58 2016 is 5218143 s in the future
+tar: root/.cshrc: time stamp Apr 17 09:58 2016 is 5218145 s in the future
+tar: mfsbin/mount_devfs: time stamp Apr 17 09:58 2016 is 5218148 s in the future
+tar: root/.login: time stamp Apr 17 09:58 2016 is 5218146 s in the future
+tar: root/.profile: time stamp Apr 17 09:58 2016 is 5218147 s in the future
+tar: var/crash/minfree: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/amd.map: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/auth.conf: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/csh.cshrc: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/csh.login: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/csh.logout: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/ftpusers: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/gettytab: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/host.conf: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/hosts.equiv: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/login.access: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/netstart: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/modems: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/networks: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/pam.conf.sys: time stamp Apr 17 09:27 2016 is 5216318 s in the future
+tar: etc/profile: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/rc.conf: time stamp Apr 17 09:31 2016 is 5216524 s in the future
+tar: etc/remote: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/rpc: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/services: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/shells: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/termcap.small: time stamp Apr 17 09:31 2016 is 5216525 s in the future
+tar: etc/devfs: time stamp Apr 17 09:27 2016 is 5216318 s in the future
+tar: boot/loader.4th: time stamp Apr 17 09:27 2016 is 5216299 s in the future
+tar: boot/support.4th: time stamp Apr 17 09:27 2016 is 5216299 s in the future
+tar: boot/defaults/loader.conf: time stamp Apr 17 09:27 2016 is 5216299 s in the future
+tar: etc/rc.local: time stamp Apr 17 09:27 2016 is 5216318 s in the future
+tar: etc/rc.jsubr: time stamp Apr 17 09:27 2016 is 5216318 s in the future
+tar: etc/rc.serial: time stamp Apr 17 09:27 2016 is 5216318 s in the future
+tar: etc/security: time stamp Apr 17 09:27 2016 is 5216319 s in the future
+tar: sbin/init-mfs-root: time stamp Apr 17 09:26 2016 is 5216233 s in the future
+Using jcrypto-ppc-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: +COMMENT: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: +DESC: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: +INSTALL: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: packages/jcrypto-ppc-12.3X54-D28: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: packages/jcrypto-ppc-12.3X54-D28.sha1: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: packages/jcrypto-ppc-12.3X54-D28.sig: time stamp Apr 17 10:15 2016 is 5219180 s in the future
+tar: packages/jcrypto-ppc-12.3X54-D28.certs: time stamp Apr 17 09:38 2016 is 5216951 s in the future
+tar: jcrypto.symlinks: time stamp Apr 17 10:15 2016 is 5219178 s in the future
+Verified manifest signed by PackageProduction_12_3_0
+Verified jcrypto-ppc-12.3X54-D28 signed by PackageProduction_12_3_0
+Using jdocs-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: +COMMENT: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: +DESC: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: +INSTALL: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: +DEINSTALL: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: +REQUIRE: time stamp Apr 17 09:58 2016 is 5218185 s in the future
+tar: packages/jdocs-12.3X54-D28: time stamp Apr 17 09:58 2016 is 5218184 s in the future
+tar: packages/jdocs-12.3X54-D28.sha1: time stamp Apr 17 09:58 2016 is 5218184 s in the future
+tar: packages/jdocs-12.3X54-D28.sig: time stamp Apr 17 09:58 2016 is 5218184 s in the future
+tar: packages/jdocs-12.3X54-D28.certs: time stamp Apr 17 09:38 2016 is 5216948 s in the future
+tar: jdocs.symlinks: time stamp Apr 17 09:58 2016 is 5218182 s in the future
+Verified manifest signed by PackageProduction_12_3_0
+Verified jdocs-12.3X54-D28 signed by PackageProduction_12_3_0
+Using jkernel-ppc-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: +COMMENT: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: +DESC: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: +INSTALL: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:25 2016 is 5219802 s in the future
+tar: packages/jkernel-ppc-12.3X54-D28: time stamp Apr 17 10:25 2016 is 5219794 s in the future
+tar: packages/jkernel-ppc-12.3X54-D28.sha1: time stamp Apr 17 10:25 2016 is 5219795 s in the future
+tar: packages/jkernel-ppc-12.3X54-D28.sig: time stamp Apr 17 10:25 2016 is 5219795 s in the future
+tar: packages/jkernel-ppc-12.3X54-D28.certs: time stamp Apr 17 09:38 2016 is 5216942 s in the future
+tar: jkernel.symlinks: time stamp Apr 17 10:25 2016 is 5219779 s in the future
+Verified manifest signed by PackageProduction_12_3_0
+Verified jkernel-ppc-12.3X54-D28 signed by PackageProduction_12_3_0
+Using jpfe-ppc-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: +COMMENT: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: +DESC: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: +INSTALL: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:01 2016 is 5218309 s in the future
+tar: jpfe-MX80-12.3X54-D28.tgz: time stamp Apr 17 10:01 2016 is 5218304 s in the future
+tar: jpfe-MX80-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:01 2016 is 5218304 s in the future
+tar: jpfe-ACX-12.3X54-D28.tgz: time stamp Apr 17 10:00 2016 is 5218286 s in the future
+tar: jpfe-ACX-12.3X54-D28.tgz.sha1: time stamp Apr 17 10:00 2016 is 5218287 s in the future
+tar: +check.jpfe: time stamp Apr 17 10:01 2016 is 5218305 s in the future
+tar: +CONTENTS: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: +COMMENT: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: +DESC: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: +INSTALL: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: +DEINSTALL: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: +REQUIRE: time stamp Apr 17 17:01 2016 is 5218305 s in the future
+tar: jpfe-MX80-12.3X54-D28.tgz: time stamp Apr 17 17:01 2016 is 5218301 s in the future
+tar: jpfe-MX80-12.3X54-D28.tgz.sha1: time stamp Apr 17 17:01 2016 is 5218301 s in the future
+tar: jpfe-ACX-12.3X54-D28.tgz: time stamp Apr 17 17:00 2016 is 5218283 s in the future
+tar: jpfe-ACX-12.3X54-D28.tgz.sha1: time stamp Apr 17 17:00 2016 is 5218284 s in the future
+tar: +check.jpfe: time stamp Apr 17 17:01 2016 is 5218302 s in the future
+WARNING: jpfe-ppc-12.3X54-D28.tgz: not a signed package
+tar: +CONTENTS: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: +COMMENT: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: +DESC: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: +INSTALL: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: +DEINSTALL: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: +REQUIRE: time stamp Apr 17 17:00 2016 is 5218281 s in the future
+tar: packages/jpfe-ACX-12.3X54-D28: time stamp Apr 17 17:00 2016 is 5218279 s in the future
+tar: packages/jpfe-ACX-12.3X54-D28.sha1: time stamp Apr 17 17:00 2016 is 5218279 s in the future
+tar: packages/jpfe-ACX-12.3X54-D28.sig: time stamp Apr 17 17:00 2016 is 5218279 s in the future
+tar: packages/jpfe-ACX-12.3X54-D28.certs: time stamp Apr 17 16:38 2016 is 5216920 s in the future
+tar: jpfe.symlinks: time stamp Apr 17 17:00 2016 is 5218276 s in the future
+WARNING: jpfe-ACX-12.3X54-D28.tgz: not a signed package
+Verified jpfe-ACX-12.3X54-D28 signed by PackageProduction_12_3_0
+Using jroute-ppc-12.3X54-D28.tgz
+tar: +CONTENTS: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: +COMMENT: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: +DESC: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: +INSTALL: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:25 2016 is 5219760 s in the future
+tar: packages/jroute-ppc-12.3X54-D28: time stamp Apr 17 10:25 2016 is 5219757 s in the future
+tar: packages/jroute-ppc-12.3X54-D28.sha1: time stamp Apr 17 10:25 2016 is 5219757 s in the future
+tar: packages/jroute-ppc-12.3X54-D28.sig: time stamp Apr 17 10:25 2016 is 5219757 s in the future
+tar: packages/jroute-ppc-12.3X54-D28.certs: time stamp Apr 17 09:38 2016 is 5216914 s in the future
+tar: jroute.symlinks: time stamp Apr 17 10:25 2016 is 5219752 s in the future
+Verified manifest signed by PackageProduction_12_3_0
+Verified jroute-ppc-12.3X54-D28 signed by PackageProduction_12_3_0
+Hardware Database regeneration succeeded
+Validating against /config/juniper.conf.gz
+mgd: commit complete
+Validation succeeded
+Installing package '/var/tmp/jinstall-ppc-12.3X54-D28-domestic-signed.tgz' ...
+tar: +CONTENTS: time stamp Apr 17 10:27 2016 is 5219784 s in the future
+tar: +COMMENT: time stamp Apr 17 10:27 2016 is 5219784 s in the future
+tar: +DESC: time stamp Apr 17 10:27 2016 is 5219784 s in the future
+tar: +INSTALL: time stamp Apr 17 10:27 2016 is 5219784 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz: time stamp Apr 17 10:27 2016 is 5219756 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.md5: time stamp Apr 17 10:27 2016 is 5219758 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.sha1: time stamp Apr 17 10:27 2016 is 5219757 s in the future
+tar: jinstall-ppc-12.3X54-D28-domestic.tgz.sig: time stamp Apr 17 10:27 2016 is 5219759 s in the future
+tar: certs.pem: time stamp Apr 17 09:38 2016 is 5216827 s in the future
+Verified jinstall-ppc-12.3X54-D28-domestic.tgz signed by PackageProduction_12_3_0
+tar: +CONTENTS: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: +COMMENT: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: +DESC: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: +INSTALL: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: +DEINSTALL: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: +REQUIRE: time stamp Apr 17 10:26 2016 is 5219741 s in the future
+tar: bootstrap-install-ppc-12.3X54-D28.tar: time stamp Apr 17 10:15 2016 is 5219032 s in the future
+tar: jbundle-ppc-12.3X54-D28-domestic.tgz: time stamp Apr 17 10:26 2016 is 5219708 s in the future
+Adding jinstall-ppc...
+
+WARNING:     This package will load JUNOS 12.3X54-D28 software.
+WARNING:     It will save JUNOS configuration files, and SSH keys
+WARNING:     (if configured), but erase all other files and information
+WARNING:     stored on this machine.  It will attempt to preserve dumps
+WARNING:     and log files, but this can not be guaranteed.  This is the
+WARNING:     pre-installation stage and all the software is loaded when
+WARNING:     you reboot the system.
+
+Saving the config files ...
+NOTICE: uncommitted changes have been saved in /var/db/config/juniper.conf.pre-install
+tar: jboot-ppc-12.3X54-D28.tgz: time stamp Apr 17 09:58 2016 is 5217984 s in the future
+Installing the bootstrap installer ...
+copying files to /altroot
+tar: boot/loader.conf: time stamp Apr 17 09:38 2016 is 5216778 s in the future
+tar: boot/installer: time stamp Apr 17 10:00 2016 is 5218095 s in the future
+tar: boot/loader.rc: time stamp Apr 17 09:27 2016 is 5216126 s in the future
+tar: boot/loader.4th: time stamp Apr 17 09:27 2016 is 5216126 s in the future
+tar: boot/modules/mdimg.gz: time stamp Apr 17 10:07 2016 is 5218540 s in the future
+tar: boot/defaults/loader.conf: time stamp Apr 17 09:27 2016 is 5216125 s in the future
+tar: boot/support.4th: time stamp Apr 17 09:27 2016 is 5216125 s in the future
+
+WARNING:     A REBOOT IS REQUIRED TO LOAD THIS SOFTWARE CORRECTLY. Use the
+WARNING:     'request system reboot' command when software installation is
+WARNING:     complete. To abort the installation, do not reboot your system,
+WARNING:     instead use the 'request system software delete jinstall'
+WARNING:     command as soon as this operation completes.
+
+Saving package file in /var/sw/pkg/jinstall-ppc-12.3X54-D28-domestic-signed.tgz ...
+Saving state for rollback ...
+Setting active slice alternate
+
+root@csr1.2-a-quark> request system reboot 
+Reboot the system ? [yes,no] (no) yes 
+
+Shutdown NOW!
+[pid 7187]
+

@@ -1,0 +1,165 @@
+﻿--- JUNOS 14.1R2.12 built 2014-08-06 10:01:16 UTC
+--- JUNOS 14.1R2.12 built 2014-08-06 10:01:16 UTC
+
+root@meson% 
+root@meson% cli
+root@meson> show version |no-more 
+Hostname: meson
+Model: mx80-p
+Junos: 14.1R2.12
+JUNOS Base OS boot [14.1R2.12]
+JUNOS Base OS Software Suite [14.1R2.12]
+JUNOS Kernel Software Suite [14.1R2.12]
+JUNOS Crypto Software Suite [14.1R2.12]
+JUNOS Packet Forwarding Engine Support (MX80) [14.1R2.12]
+JUNOS Online Documentation [14.1R2.12]
+JUNOS Services Application Level Gateways [14.1R2.12]
+JUNOS Services Jflow Container package [14.1R2.12]
+JUNOS Services Stateful Firewall [14.1R2.12]
+JUNOS Services NAT [14.1R2.12]
+JUNOS Services RPM [14.1R2.12]
+JUNOS Services Crypto [14.1R2.12]
+JUNOS Services SSL [14.1R2.12]
+JUNOS Services IPSec [14.1R2.12]
+JUNOS Routing Software Suite [14.1R2.12]
+
+root@meson> ...3.6/ship/jinstall-ppc-15.1R3.6-domestic-signed.tgz /user/jinstall-ppc-15.1R3.6-domestic-signed.tgz                         
+The authenticity of host 'svl-jtac-tool01 (172.17.31.80)' can't be established.
+DSA key fingerprint is d1:dc:63:f7:17:6b:98:59:2b:4b:ae:e5:91:29:ed:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svl-jtac-tool01,172.17.31.80' (DSA) to the list of known hosts.
+Password:
+jinstall-ppc-15.1R3.6-domestic-signed.tgz                                                                  100%  284MB   6.2MB/s   00:46    
+cp: /user/jinstall-ppc-15.1R3.6-domestic-signed.tgz: No such file or directory
+error: put-file failed
+error: could not send local copy of file
+
+root@meson> ...3.6/ship/jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5 /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5              
+Password:
+jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5                                                              100%   33     0.0KB/s   00:00    
+
+root@meson> file checksum md5 /user/jinstall-ppc-15.1R3.6-domestic-signed.tgz 
+error: md5: /user/jinstall-ppc-15.1R3.6-domestic-signed.tgz: No such file or directory
+
+--- JUNOS 14.1R2.12 built 2014-08-06 10:01:16 UTC
+
+root@meson% 
+root@meson% cli
+root@meson> show version |no-more 
+Hostname: meson
+Model: mx80-p
+Junos: 14.1R2.12
+JUNOS Base OS boot [14.1R2.12]
+JUNOS Base OS Software Suite [14.1R2.12]
+JUNOS Kernel Software Suite [14.1R2.12]
+JUNOS Crypto Software Suite [14.1R2.12]
+JUNOS Packet Forwarding Engine Support (MX80) [14.1R2.12]
+JUNOS Online Documentation [14.1R2.12]
+JUNOS Services Application Level Gateways [14.1R2.12]
+JUNOS Services Jflow Container package [14.1R2.12]
+JUNOS Services Stateful Firewall [14.1R2.12]
+JUNOS Services NAT [14.1R2.12]
+JUNOS Services RPM [14.1R2.12]
+JUNOS Services Crypto [14.1R2.12]
+JUNOS Services SSL [14.1R2.12]
+JUNOS Services IPSec [14.1R2.12]
+JUNOS Routing Software Suite [14.1R2.12]
+
+root@meson> ...3.6/ship/jinstall-ppc-15.1R3.6-domestic-signed.tgz /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz                      
+Password:
+jinstall-ppc-15.1R3.6-domestic-signed.tgz                                                                  100%  284MB   6.2MB/s   00:46    
+
+root@meson> ...3.6/ship/jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5 /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5              
+Password:
+jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5                                                              100%   33     0.0KB/s   00:00    
+
+root@meson> file checksum md5 /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz 
+MD5 (/var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz) = 39ca5fe14bd66c6821d159c345d25e29
+
+root@meson> file show /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz.md5 
+39ca5fe14bd66c6821d159c345d25e29
+
+root@meson> request system software add /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz re0 force 
+NOTICE: Validating configuration against jinstall-ppc-15.1R3.6-domestic-signed.tgz.
+NOTICE: Use the 'no-validate' option to skip this if desired.
+Checking compatibility with configuration
+Initializing...
+Using jbase-ppc-14.1R2.12
+Verified manifest signed by PackageProductionEc_2014
+Using /var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz
+Verified jinstall-ppc-15.1R3.6-domestic.tgz signed by PackageProductionEc_2016
+Using jinstall-ppc-15.1R3.6-domestic.tgz
+Using jbundle-ppc-15.1R3.6-domestic.tgz
+Checking jbundle-ppc requirements on /
+Using jbase-ppc-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jbase-ppc-15.1R3.6 signed by PackageProductionEc_2016
+Using /var/v/c/tmp/jbundle-ppc/jboot-ppc-15.1R3.6.tgz
+Using jcrypto-ppc-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jcrypto-ppc-15.1R3.6 signed by PackageProductionEc_2016
+Using jdocs-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jdocs-15.1R3.6 signed by PackageProductionEc_2016
+Using jkernel-ppc-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jkernel-ppc-15.1R3.6 signed by PackageProductionEc_2016
+Using jmacsec-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jmacsec-15.1R3.6 signed by PackageProductionEc_2016
+Using jpfe-ppc-15.1R3.6.tgz
+Verified SHA1 checksum of jpfe-ACX-15.1R3.6.tgz
+Verified SHA1 checksum of jpfe-MX104-15.1R3.6.tgz
+Verified SHA1 checksum of jpfe-MX80-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jpfe-MX80-15.1R3.6 signed by PackageProductionEc_2016
+Using jroute-ppc-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jroute-ppc-15.1R3.6 signed by PackageProductionEc_2016
+Using jservices-crypto-ppc-15.1R3.6.tgz
+Using jservices-ppc-15.1R3.6.tgz
+Using jweb-ppc-15.1R3.6.tgz
+Verified manifest signed by PackageProductionEc_2016
+Verified jweb-ppc-15.1R3.6 signed by PackageProductionEc_2016
+Hardware Database regeneration succeeded
+Validating against /config/juniper.conf.gz
+mgd: warning: schema: init: 'logical-systems-vlans' contains-node 'juniper-config vlans': not found
+mgd: commit complete
+Validation succeeded
+Installing package '/var/tmp/jinstall-ppc-15.1R3.6-domestic-signed.tgz' ...
+Verified jinstall-ppc-15.1R3.6-domestic.tgz signed by PackageProductionEc_2016
+Verified jinstall-ppc-15.1R3.6-domestic.tgz signed by PackageProductionRSA_2016
+Adding jinstall-ppc...
+
+WARNING: The /var filesystem is low on free disk space.
+WARNING: This package requires 428874k more space free.
+WARNING: You have chosen to copy the image. You may opt not to copy it.
+
+
+WARNING:     This package will load JUNOS 15.1R3.6 software.
+WARNING:     It will save JUNOS configuration files, and SSH keys
+WARNING:     (if configured), but erase all other files and information
+WARNING:     stored on this machine.  It will attempt to preserve dumps
+WARNING:     and log files, but this can not be guaranteed.  This is the
+WARNING:     pre-installation stage and all the software is loaded when
+WARNING:     you reboot the system.
+
+Saving the config files ...
+NOTICE: uncommitted changes have been saved in /var/db/config/juniper.conf.pre-install
+Installing the bootstrap installer ...
+
+WARNING:     A REBOOT IS REQUIRED TO LOAD THIS SOFTWARE CORRECTLY. Use the
+WARNING:     'request system reboot' command when software installation is
+WARNING:     complete. To abort the installation, do not reboot your system,
+WARNING:     instead use the 'request system software delete jinstall'
+WARNING:     command as soon as this operation completes.
+
+Saving package file in /var/sw/pkg/jinstall-ppc-15.1R3.6-domestic-signed.tgz ...
+Saving state for rollback ...
+
+root@meson> request system reboot 
+Reboot the system ? [yes,no] (no) yes 
+
+Shutdown NOW!
+[pid 45593]
+

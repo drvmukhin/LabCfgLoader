@@ -1,0 +1,535 @@
+﻿--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 00:53:09
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+     host-name acx2k-l;
+}
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit groups re0]
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 00:59:22
+      [edit]
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+iometrix@acx2k-l> ftp 172.29.101.168 
+Connected to 172.29.101.168.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.168:iometrix): juniper
+331 Password required for juniper
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   986       00:00 ETAA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.69 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   189       00:00 ETAA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.27 KB/s)
+ftp> get ./E-Line/epl-1-acx-l.conf epl-1-acx-l.conf
+local: epl-1-acx-l.conf remote: ./E-Line/epl-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Line/epl-1-acx-l.conf"
+100% |**********************************************************************************************************************************************************|  6066       00:00 ETAA
+226 Successfully transferred "/E-Line/epl-1-acx-l.conf"
+6066 bytes received in 0.07 seconds (84.91 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 00:59:24
+      [edit]
+
+[edit]
+iometrix@acx2k-l# load update epl-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx2k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# set apply-groups global 
+
+[edit]
+iometrix@acx2k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx2k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx2k-l> 
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:05:07
+      [edit]
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+iometrix@acx2k-l> ftp 172.29.101.168 
+Connected to 172.29.101.168.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.168:iometrix): juniper
+331 Password required for juniper
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   986       00:00 ETAA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.79 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   189       00:00 ETAA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.52 KB/s)
+ftp> get ./E-Line/epl-1-acx-l.conf epl-1-acx-l.conf
+local: epl-1-acx-l.conf remote: ./E-Line/epl-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Line/epl-1-acx-l.conf"
+100% |**********************************************************************************************************************************************************|  6066       00:00 ETAA
+226 Successfully transferred "/E-Line/epl-1-acx-l.conf"
+6066 bytes received in 0.08 seconds (74.38 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:05:08
+      [edit]
+
+[edit]
+iometrix@acx2k-l# load update epl-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx2k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# set apply-groups global 
+
+[edit]
+iometrix@acx2k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx2k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:07:57
+      [edit]
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+iometrix@acx2k-l> ftp 172.29.101.168 
+Connected to 172.29.101.168.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.168:iometrix): juniper
+331 Password required for juniper
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   986       00:00 ETAA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.08 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   187       00:00 ETAA
+226 Successfully transferred "/group-member0-acx-l.conf"
+187 bytes received in 0.06 seconds (3.18 KB/s)
+ftp> get ./E-Line/epl-1-acx-l.conf epl-1-acx-l.conf
+local: epl-1-acx-l.conf remote: ./E-Line/epl-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Line/epl-1-acx-l.conf"
+100% |**********************************************************************************************************************************************************|  6066       00:00 ETAA
+226 Successfully transferred "/E-Line/epl-1-acx-l.conf"
+6066 bytes received in 0.08 seconds (72.91 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:07:58
+      [edit]
+
+[edit]
+iometrix@acx2k-l# load update epl-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx2k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx2k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx2k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx2k-l# exit 
+
+[edit]
+iometrix@acx2k-l# set apply-groups global 
+
+[edit]
+iometrix@acx2k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx2k-l# commit 
+commit complete
+
+[edit]
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx-l> 
+
+iometrix@acx-l> 
+
+iometrix@acx-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:12:27
+      [edit]
+
+[edit]
+iometrix@acx-l# edit groups global 
+
+[edit groups global]
+iometrix@acx-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx-l# exit 
+
+[edit]
+iometrix@acx-l# exit 
+Exiting configuration mode
+
+iometrix@acx-l> ftp 172.29.101.168 
+Connected to 172.29.101.168.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.168:iometrix): juniper
+331 Password required for juniper
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   986       00:00 ETAA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.54 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |**********************************************************************************************************************************************************|   189       00:00 ETAA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.41 KB/s)
+ftp> get ./E-Line/epl-1-acx-l.conf epl-1-acx-l.conf
+local: epl-1-acx-l.conf remote: ./E-Line/epl-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Line/epl-1-acx-l.conf"
+100% |**********************************************************************************************************************************************************|  6066       00:00 ETAA
+226 Successfully transferred "/E-Line/epl-1-acx-l.conf"
+6066 bytes received in 0.08 seconds (71.66 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 01:12:28
+      [edit]
+
+[edit]
+iometrix@acx-l# load update epl-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx-l# edit groups global 
+
+[edit groups global]
+iometrix@acx-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx-l# exit 
+
+[edit]
+iometrix@acx-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx-l# exit 
+
+[edit]
+iometrix@acx-l# set apply-groups global 
+
+[edit]
+iometrix@acx-l# set apply-groups re0 
+
+[edit]
+iometrix@acx-l# commit 
+commit complete
+
+[edit]
+iometrix@acx2k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx2k-l> 
+
+iometrix@acx2k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 02:35:20
+      [edit]
+
+[edit]
+iometrix@acx2k-l# rollback ?
+Possible completions:
+  <[Enter]>            Execute this command
+  0                    2015-10-18 22:08:45 PDT by iometrix via cli 
+  1                    2015-10-18 22:04:15 PDT by iometrix via cli 
+  2                    2015-10-18 22:01:25 PDT by iometrix via cli 
+  3                    2015-10-18 21:55:40 PDT by iometrix via cli 
+  4                    2015-10-18 21:49:46 PDT by iometrix via cli 
+  5                    2015-10-18 21:04:34 PDT by iometrix via cli 
+  6                    2015-10-18 21:01:11 PDT by iometrix via cli 
+  7                    2015-10-18 20:59:28 PDT by iometrix via cli 
+  8                    2015-10-18 20:56:05 PDT by root via cli 
+  9                    2015-10-18 20:18:02 PDT by iometrix via cli 
+  10                   2015-10-18 20:13:28 PDT by iometrix via cli 
+  11                   2015-10-18 20:07:55 PDT by root via cli 
+  12                   2015-10-09 18:31:35 PDT by regress via netconf 
+  13                   2015-10-08 00:43:03 PDT by root via junoscript 
+  14                   2015-10-08 00:42:53 PDT by root via junoscript commit synchronize
+  15                   2015-10-08 00:42:29 PDT by root via junoscript 
+  16                   2015-10-08 00:42:05 PDT by root via junoscript commit synchronize
+  17                   2015-10-08 00:41:35 PDT by root via junoscript 
+  18                   2015-10-08 00:41:18 PDT by root via junoscript 
+  19                   2015-10-08 00:41:03 PDT by regress via netconf 
+  20                   2015-10-08 00:39:26 PDT by regress via netconf 
+  21                   2015-10-08 00:39:19 PDT by regress via netconf 
+  22                   2015-10-08 00:39:00 PDT by root via junoscript commit synchronize
+  23                   2015-10-08 00:38:46 PDT by root via junoscript 
+  24                   2015-10-08 00:38:24 PDT by root via junoscript 
+  25                   2015-10-08 00:38:07 PDT by root via junoscript 
+  26                   2015-10-08 00:38:02 PDT by root via junoscript 
+  27                   2015-10-08 00:37:50 PDT by root via junoscript 
+  28                   2015-10-08 00:37:12 PDT by root via junoscript 
+  29                   2015-10-08 00:36:57 PDT by root via junoscript commit synchronize
+  30                   2015-10-08 00:35:05 PDT by root via autoinstall 
+  31                   2015-10-08 00:34:43 PDT by vmukhin via cli 
+  32                   2015-10-07 23:54:59 PDT by regress via netconf 
+  33                   2015-10-07 23:16:41 PDT by root via junoscript 
+  34                   2015-10-07 23:16:31 PDT by root via junoscript commit synchronize
+  35                   2015-10-07 23:16:07 PDT by root via junoscript 
+  36                   2015-10-07 23:15:41 PDT by root via junoscript commit synchronize
+  37                   2015-10-07 23:15:13 PDT by root via junoscript 
+  38                   2015-10-07 23:14:57 PDT by root via junoscript 
+  39                   2015-10-07 23:14:43 PDT by regress via netconf 
+  40                   2015-10-07 23:12:16 PDT by regress via netconf 
+  41                   2015-10-07 23:12:09 PDT by regress via netconf 
+  42                   2015-10-07 22:55:54 PDT by root via junoscript commit synchronize
+  43                   2015-10-07 22:55:39 PDT by root via junoscript 
+  44                   2015-10-07 22:55:17 PDT by root via junoscript 
+  45                   2015-10-07 22:55:01 PDT by root via junoscript 
+  46                   2015-10-07 22:54:56 PDT by root via junoscript 
+  47                   2015-10-07 22:54:45 PDT by root via junoscript 
+  48                   2015-10-07 22:54:04 PDT by root via junoscript 
+  49                   2015-10-07 22:53:50 PDT by root via junoscript commit synchronize
+  |                    Pipe through a command
+[edit]

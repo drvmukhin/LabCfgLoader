@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------
+                   START UPDATING JUNOS IMAGE ON CSR1.2 
+----------------------------------------------------------------------------
+  Hostname: csr1.2-a-quark                                                 
+  Model: acx2100                                                           
+  Current Junos: N/A                                                       
+  Host csr1.2 was qualified as: (acx) ACX2100                              
+  CONNECTING TO CATALOGUE AT JTAC-TOOL/svl-jtac-tool01                     
+  TARGET IMAGE FILE: jinstall-ppc-12.3X54-D28-domestic-signed.tgz     FOUND
+  New Image Copied to the Node: csr1.2                                   OK
+  MD5 File Copied to the Node: csr1.2                                    OK
+  Calculate MD5 Check Sum: f9bfa148bdf186fcccbe3fb8a874d298                
+  Read MD5 From Catalogue: f9bfa148bdf186fcccbe3fb8a874d298                
+  MD5 Check                                                              OK
+  UPDATE csr1.2                                                          OK
+  REBOOT NODE csr1.2                                              REBOOTING
+----------------------------------------------------------------------------
+                                JOB DONE  
+----------------------------------------------------------------------------

@@ -1,0 +1,253 @@
+﻿--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p1 (pid 26153) on since 2016-02-08 21:10:10 PST, idle 00:04:39
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# save csr1.2-GVTC-Hear-Pinning-2016.conf 
+Wrote 1267 lines of configuration to 'csr1.2-GVTC-Hear-Pinning-2016.conf'
+
+[edit]
+vmukhin@csr1.2-a-quark# exit 
+Exiting configuration mode
+
+vmukhin@csr1.2-a-quark> ftp 172.29.101.59 
+Connected to 172.29.101.59.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.59:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./GVTC-Hear-Pinning-2016/2016-4-21-v.01
+250 CWD successful. "/GVTC-Hear-Pinning-2016/2016-4-21-v.01" is current directory.
+ftp> put csr1.2-GVTC-Hear-Pinning-2016.conf csr1.2-GVTC-Hear-Pinning-2016.conf
+local: csr1.2-GVTC-Hear-Pinning-2016.conf remote: csr1.2-GVTC-Hear-Pinning-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf"
+100% |****************************************| 36128       00:00 ETA
+226 Successfully transferred "/GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf"
+36128 bytes sent in 0.14 seconds (260.16 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p1 (pid 26153) on since 2016-02-08 21:10:10 PST, idle 00:01:16
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# save csr1.2-GVTC-Hear-Pinning-2016.conf 
+Wrote 1267 lines of configuration to 'csr1.2-GVTC-Hear-Pinning-2016.conf'
+
+[edit]
+vmukhin@csr1.2-a-quark# exit 
+Exiting configuration mode
+
+vmukhin@csr1.2-a-quark> ftp 172.29.101.59 
+Connected to 172.29.101.59.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.59:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./GVTC-Hear-Pinning-2016/2016-4-21-v.02
+250 CWD successful. "/GVTC-Hear-Pinning-2016/2016-4-21-v.02" is current directory.
+ftp> put csr1.2-GVTC-Hear-Pinning-2016.conf csr1.2-GVTC-Hear-Pinning-2016.conf
+local: csr1.2-GVTC-Hear-Pinning-2016.conf remote: csr1.2-GVTC-Hear-Pinning-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/GVTC-Hear-Pinning-2016/2016-4-21-v.02/csr1.2-GVTC-Hear-Pinning-2016.conf"
+100% |****************************************| 36128       00:00 ETA
+226 Successfully transferred "/GVTC-Hear-Pinning-2016/2016-4-21-v.02/csr1.2-GVTC-Hear-Pinning-2016.conf"
+36128 bytes sent in 0.23 seconds (150.60 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3-20150325_acx_x54_s4.0 built 2015-03-25 18:37:00 UTC
+At least one package installed on this device has limited support.
+Run 'file show /etc/notices/unsupported.txt' for details.
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> show version 
+Hostname: csr1.2-a-quark
+Model: acx2100
+JUNOS Crypto Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Kernel Software Suite [12.3-20150325_acx_x54_s4.0]
+JUNOS Base OS boot [12.3-20150325_acx_x54_s4.0]
+JUNOS Packet Forwarding Engine Support (ACX) [12.3-20150325_acx_x54_s4.0]
+JUNOS Online Documentation [12.3-20150325_acx_x54_s4.0]
+JUNOS Routing Software Suite [12.3-20150325_acx_x54_s4.0]
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 26425) on since 2016-02-09 00:14:06 PST, idle 00:06:42
+      [edit]
+  vmukhin terminal p1 (pid 26153) on since 2016-02-08 21:10:10 PST, idle 00:58:45
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# edit groups global 
+
+[edit groups global]
+vmukhin@csr1.2-a-quark# save grp-global-original.conf 
+Wrote 336 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+vmukhin@csr1.2-a-quark# exit 
+
+[edit]
+vmukhin@csr1.2-a-quark# edit groups re0 
+
+[edit groups re0]
+vmukhin@csr1.2-a-quark# show 
+system {
+    host-name csr1.2-a-quark;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.141/23;
+            }
+        }
+    }
+}
+
+[edit groups re0]
+vmukhin@csr1.2-a-quark# save grp-re0.conf 
+Wrote 18 lines of configuration to 'grp-re0.conf'
+
+[edit groups re0]
+vmukhin@csr1.2-a-quark# exit 
+
+[edit]
+vmukhin@csr1.2-a-quark# exit 
+Exiting configuration mode
+
+vmukhin@csr1.2-a-quark> ftp 172.29.101.59 
+Connected to 172.29.101.59.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.59:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf csr1.2-GVTC-Hear-Pinning-2016.conf
+local: csr1.2-GVTC-Hear-Pinning-2016.conf remote: ./GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf"
+100% |****************************************| 36128       00:00 ETA
+226 Successfully transferred "/GVTC-Hear-Pinning-2016/2016-4-21-v.01/csr1.2-GVTC-Hear-Pinning-2016.conf"
+36128 bytes received in 0.11 seconds (310.49 KB/s)
+ftp> quit
+221 Goodbye
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 26425) on since 2016-02-09 00:14:06 PST, idle 00:06:43
+      [edit]
+  vmukhin terminal p1 (pid 26153) on since 2016-02-08 21:10:10 PST, idle 00:58:46
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# delete access 
+warning: statement not found
+
+[edit]
+vmukhin@csr1.2-a-quark# delete services 
+warning: statement not found
+
+[edit]
+vmukhin@csr1.2-a-quark# delete routing-instances 
+
+[edit]
+vmukhin@csr1.2-a-quark# delete protocols 
+
+[edit]
+vmukhin@csr1.2-a-quark# delete interfaces 
+
+[edit]
+vmukhin@csr1.2-a-quark# delete routing-options 
+
+[edit]
+vmukhin@csr1.2-a-quark# commit 
+commit complete
+
+[edit]
+vmukhin@csr1.2-a-quark# ...VTC-Hear-Pinning-2016.conf              
+edit groups global
+load replace grp-global-original.conf
+load complete
+
+[edit]
+vmukhin@csr1.2-a-quark# edit groups global 
+
+[edit groups global]
+vmukhin@csr1.2-a-quark# load replace grp-global-original.conf 
+load complete
+
+[edit groups global]
+vmukhin@csr1.2-a-quark# exit 
+
+[edit]
+vmukhin@csr1.2-a-quark# set apply-groups global 
+
+[edit]
+vmukhin@csr1.2-a-quark# edit groups re0 
+
+[edit groups re0]
+vmukhin@csr1.2-a-quark# load replace grp-re0.conf 
+exit
+set apply-groups re0
+load complete
+
+[edit groups re0]
+vmukhin@csr1.2-a-quark# exit 
+
+[edit]
+vmukhin@csr1.2-a-quark# set apply-groups re0 
+
+[edit]
+vmukhin@csr1.2-a-quark# commit 
+commit complete
+
+[edit]

@@ -1,0 +1,808 @@
+﻿.reachJoinHtml
+{
+    height: 100%; 
+    overflow: hidden;
+    width: 100%;
+}
+.reachClientHtml
+{
+    height: 100%; 
+    overflow: hidden; 
+    width: 100%;
+}
+
+.helpImage {
+    vertical-align:middle; 
+    border:0;
+}
+
+.helpImageFlip {
+    vertical-align: middle; 
+    border: 0;
+    -ms-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.reachJoinBody 
+{
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+    width: 100%; 
+    font-family: Segoe UI; 
+    font-size: medium;
+    overflow: hidden;
+}
+.reachClientBody 
+{
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+    width: 100%;
+    font-family: Segoe UI; 
+    font-size: medium;
+}
+
+select.expand 
+{
+   width:150px;
+}
+
+.mainTable 
+{
+    margin-top: 35px; 
+    padding: 0px;
+    text-align:-moz-center;
+}
+.headerLogoTable
+{
+    padding: 0px; 
+    margin: 0px; 
+    border-collapse: collapse;
+    width: 100%;
+}
+.leftBorderCell
+{
+    background: url('lgnleft.gif') repeat-y; 
+    width: 15px;
+}
+.rightBorderCell
+{
+    background: url('lgnright.gif') repeat-y; 
+    width: 15px;
+}
+.mainContentCellMobile
+{
+    background: #0A92B9; 
+    vertical-align: top; 
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.mainContentCell
+{
+    background: #ffffff; 
+    vertical-align: top; 
+    text-align: left; 
+    padding: 0px;
+}
+.mainContentTableMobile
+{
+    border-collapse: collapse; 
+    color: #ffffff;
+    text-align: center; 
+}
+.mainContentTable
+{
+    width: 474px; 
+    border-collapse: collapse; 
+    padding: 0px; 
+    color: #444444;
+}
+.topLogoCell
+{
+    padding-top: 37px; 
+    padding-left: 40px; 
+    padding-right: 38px;
+}
+
+.topLogoCellMobile
+{
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+
+}
+
+.errorbold
+{
+    font-family: "Segoe UI Light","Segoe UI";
+    font-weight: 300;
+    font-size: 19pt;
+    color: #09AEED;  
+}
+
+.errorregular
+{
+    font-family: Segoe UI; 
+    font-size: 18px; 
+    color: #666666;
+}
+
+.errorregularMobile
+{
+    font-family: Segoe UI; 
+    font-size: 18px; 
+    color: #09AEED;
+}
+
+.errorlowMobile
+{
+    font-family: Segoe UI; 
+    font-size: 14px; 
+    color: #666666;
+}
+
+.errorverylowMobile
+{
+    font-family: Segoe UI; 
+    font-size: 11px; 
+    color: #666666;
+}
+
+.errorlow
+{
+    font-family: Segoe UI; 
+    font-size: 16px; 
+    color: #666666;
+}
+
+.bulletpointMobile
+{
+    font-family: Segoe UI; 
+    font-size: 14px;
+    color: #49B0EA;
+    
+}
+
+.bulletimagemobile
+{
+    padding-top:25px; 
+    padding-right:14px; 
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;
+}
+
+
+.bulletimage
+{
+    padding-top:72px; 
+    padding-right:14px; 
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;
+}
+
+.bulletimageFlip
+{
+    padding-top:72px; 
+    padding-right:14px; 
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);     
+    -o-transform: scaleX(-1);     
+    transform: scaleX(-1);      
+    -ms-filter: fliph; /*IE*/     
+    filter: fliph; /*IE*/ 
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+
+.landingPageTextContentCell
+{
+    padding-top: 26px; 
+    padding-left: 40px; 
+    padding-right: 30px;
+    padding-bottom: 24px; 
+}
+.footerTable
+{
+    padding: 0px;
+    margin-left: 2px; 
+    border-collapse: collapse; 
+    width: 501px; 
+    background-image: url('Mainbg_bottom.png') ;
+    background-repeat:no-repeat;
+    height: 88px;    
+}
+.footerTableMobile
+{
+    padding: 0px;
+    border-collapse: collapse; 
+    background-repeat:no-repeat;
+}
+.footerTableCell
+{
+    padding-top: 0px;
+    padding-left: 24px; 
+    padding-right: 38px;
+    padding-bottom: 16px;
+    vertical-align: bottom;
+}
+.footerTableCellMobile
+{
+    vertical-align: bottom;
+}
+
+.headerTextMobile
+{
+    font-family: arial; 
+    font-size: 17px; 
+    color: #ffffff;
+}
+.headerText
+{
+    font-family: Segoe UI; 
+    font-size: 17px; 
+    color: #000000;
+}
+.bodyTextMobile
+{
+    font-family: arial; 
+    font-size: 17px; 
+    color: #ffffff;
+}
+.bodyText
+{
+    font-family: Segoe UI; 
+    font-size: 13px; 
+    color: #000000;
+}
+.bodyBoldTextMobile
+{
+    font-family: arial; 
+    font-size: 17px; 
+    font-weight:bold;
+    color: #FFFFFF;
+}
+.bodyBoldText
+{
+    font-family: Segoe UI; 
+    font-size: 13px; 
+    font-weight:bold;
+    color: #000000;
+}
+.bodyBlurredText
+{
+    font-family: Segoe UI; 
+    font-size: 13px; 
+    color: #555555;
+}
+.bodyLinkText
+{
+    font-family: Segoe UI; 
+    font-size: 13px; 
+    color: #0d95bd;
+    text-decoration:none;
+}
+.bodyLinkBoldText
+{
+    font-family: Segoe UI; 
+    font-size: 13px; 
+    font-weight:bold;
+    color: #0d95bd;
+    text-decoration:none;
+}
+
+.smallerBodyTextMobile
+{
+    font-family: arial; 
+    font-size: 11px; 
+    color: #ffffff;
+}
+.smallerBodyText
+{
+    font-family: Segoe UI; 
+    font-size: 11px; 
+    color: #000000;
+}
+.smallerBlurredBodyText
+{
+    font-family: Segoe UI; 
+    font-size: 11px; 
+    color: #555555;
+}
+
+.smallerBlurredBodyText15
+{
+    font-family: Segoe UI; 
+    font-size: 11px; 
+    color: #444444;
+}
+
+.contentHeaderTable
+{
+    background-color:#fff6bd; 
+    padding-bottom:10px;
+    border:1px solid #b4a555;
+    width:400px;    
+}
+
+.contentHeaderTableMobile
+{
+    padding-bottom:10px;
+    font-family: arial; 
+    font-size: 11px; 
+    color: #ffffff;
+
+}
+
+.contentHeaderTableCell
+{
+    padding:10px 25px 10px 10px;
+}
+.reachButtonContentCell
+{
+    padding-left: 15px; 
+    padding-right: 15px;
+    padding-top:4px;
+    padding-bottom: 4px;
+    width: 380px;    
+}
+
+.leftNormalButtonCell
+{
+    background: url('Button_normal_left.png') repeat-y; 
+    width:14px;
+}
+.rightNormalButtonCell
+{
+    background: url('Button_normal_right.png') repeat-y;     
+    width:7px;
+}
+.leftHoverButtonCell
+{
+    background: url('Button_hover_left.png') repeat-y; 
+    width:14px;
+}
+.rightHoverButtonCell
+{
+    background: url('Button_hover_right.png') repeat-y; 
+    width:7px;
+}
+.launchReachDiv
+{
+    width:100%;
+    height:100%;
+}
+
+/* Office 2013 UI */
+
+.maintable15
+{
+    background-color: #000000;
+}
+.officelogoColumnSuccess
+{
+    position:absolute;
+    width:441px;
+    height:100%;
+    background-color: #49B0EA;
+    z-index: 99;
+}
+.officelogoColumnError
+{
+    position:absolute;
+    width:441px;
+    height:100%;
+    background-color: #49B0EA;
+    z-index: 99;
+}
+.officelogoColumnSuccessMobile
+{
+    position:absolute;
+    width:85px;
+    height:100%;
+    background-color: #49B0EA;
+    z-index: 99;
+}
+.officelogoColumnSuccessMobileFlip
+{
+    position:absolute;
+    width:85px;
+    height:100%;
+    background-color: #49B0EA;
+    z-index: 99;
+    right: 0; /*Specify 0 here, otherwise the first column doesn't shows from left in mobile device for RTL*/ 
+}
+.officelogoColumnErrorMobile
+{
+    position:absolute;
+    width:85px;
+    height:100%;
+    background-color: #49B0EA;
+    z-index: 99;
+}        
+.contentClassSuccess
+{
+    position:absolute;
+    top: 240px;
+    left:620px;
+    width:60%;
+}
+
+.contentClassSuccessFlip
+{
+    position:absolute;
+    top: 220px;
+    right:620px;
+    width:60%;
+}
+
+.contentClassSuccessMobile
+{
+    position:absolute;
+    top: 122px;
+    left:108px;
+    width:60%;
+    right: 20px;
+}
+
+.contentClassSuccessMobileFlip
+{
+    position:absolute;
+    top: 122px;
+    right:108px;
+    width:60%;
+    left: 20px;
+}
+
+.contentClassError
+{
+    position:absolute;
+    top: 240px;
+    left:620px;
+    width:50%;
+}
+
+.contentClassErrorFlip
+{
+    position:absolute;
+    top: 240px;
+    right:620px;
+    width:50%;
+
+}
+
+.contentClassErrorMobile
+{
+    position:absolute;
+    top: 70px;
+    left:108px;
+    width:60%;
+    right: 20px;
+}
+
+.contentClassErrorMobileFlip
+{
+    position: absolute;
+    top: 70px;
+    right: 108px;
+    width: 60%;
+    left: 20px;
+}
+
+.helpSuccessMobile {
+    position:absolute;
+    left: 108px;
+    width: 60%;
+    right: 20px;
+}
+
+.helpSuccessMobileFlip {
+    position:absolute;
+    right: 108px;
+    width: 60%;
+    left: 20px;
+}
+
+.helpErrorMobile {
+    position:absolute;
+    left: 75px;
+    width: 70%;
+    right: 20px;
+}
+
+.helpErrorMobileFlip {
+    position:absolute;
+    right: 75px;
+    width: 70%;
+    left: 20px;
+}
+
+.help {
+    position:absolute;
+    top:6px;
+    left:70%;
+    width: 20%;
+}
+
+.helpFlip {
+    position:absolute;
+    top:6px;
+    right:70%;
+    width: 20%;
+}
+
+
+.languageHelp {
+    position:absolute;
+    right: 0px;
+    display: none;
+}
+.logospace {
+    position:absolute;
+    display: none;
+    left:620px;
+    top: 174px;
+    width: 60%;
+}
+
+.logospaceFlip {
+    position:absolute;
+    display: none;
+    right:620px;
+    top: 174px;
+    width: 60%;
+}
+
+.logospaceMobile {
+    position:absolute;
+    display: none;
+    left:108px;
+    top:70px;
+}
+
+.logospaceMobileFlip {
+    position: absolute;
+    display: none;
+    right: 108px;
+    top: 70px;
+}
+
+.errorHeader {            
+    padding-top: 0px;
+    font-family: Segoe UI Light; 
+    font-size: 20pt; 
+    color: #0072C5;                
+}
+.errorHeader2 {
+    padding-top: 36px;
+    font-family: Segoe UI Light; 
+    font-size: 18pt;
+    color: #0072C5;            
+}
+
+.errorHeader2Mobile {
+    padding-top: 10px;
+    font-family: Segoe UI Light; 
+    font-size: 18pt;
+    color: #0072C5;            
+}
+
+.bulletpoint
+{
+    cursor:pointer; 
+    text-decoration:none;
+    font-family: "Segoe UI","Segoe UI";
+    font-size: 13pt;
+    overflow: hidden;
+    color: #09AEED;
+}
+
+.bulletImageError {
+    padding-top:19%;
+    padding-right:14px;
+    cursor:pointer;
+    vertical-align:top; 
+    width:23px;
+}
+
+.bulletImageErrorFlip {
+    padding-top:19%;
+    padding-right:14px;
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);     
+    -o-transform: scaleX(-1);     
+    transform: scaleX(-1);      
+    -ms-filter: fliph; /*IE*/     
+    filter: fliph; /*IE*/ 
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);    
+}
+
+
+.bulletImageErrorMobile {
+    padding-top:4%; 
+    padding-right:14px;
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;            
+}
+
+.bulletImageErrorMobileFlip {
+    padding-top:4%; 
+    padding-right:14px;
+    vertical-align:top; 
+    cursor:pointer;
+    width:23px;            
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);     
+    -o-transform: scaleX(-1);     
+    transform: scaleX(-1);      
+    -ms-filter: fliph; /*IE*/     
+    filter: fliph; /*IE*/ 
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+
+.bulletTextError {
+    padding-top: 19%;
+    vertical-align:bottom;
+}
+
+.bulletTextErrorMobile {
+    padding-top: 4%;
+}
+
+.centeredImageSuccess
+{
+    position:absolute;
+    top:213px;
+    left:0px;
+    width: 441px;
+}
+.centeredImageError
+{
+    position:absolute;
+    top:213px;
+    left:0px;
+    width: 441px;
+}
+.centeredImageSuccessMobile
+{
+    position:absolute;
+    top:106px;
+    left:15px;
+}
+.centeredImageErrorMobile
+{
+    position:absolute;
+    top:106px;
+    left:15px;
+}
+.officeImageMobile {
+    border:0; 
+    position:absolute;
+    display:none;
+    right: 15px;
+    bottom: 5%;
+}
+.officeImage {
+    border:0; 
+    position:absolute;
+    right: 44px;
+    bottom: 32px;
+}
+
+.officeImageFlip {
+    border:0; 
+    position:absolute;
+    left: 44px;
+    bottom: 32px;
+}
+
+.footerSuccessMobile {
+    height:14%; 
+    background-color: #FFFFFF;
+    position: absolute;
+    margin-top:-14%;
+    bottom: 0;
+    width:100%;
+}
+
+.footerSuccess1280 {
+    height:14%; 
+    background-color: #FFFFFF;
+    position: absolute;
+    margin-top:-14%;
+    bottom: 0;
+    width:100%
+}
+
+.footerSuccess1280Flip {
+    height:14%; 
+    background-color: #FFFFFF;
+    position: absolute;
+    margin-top:-14%;
+    bottom: 0;
+    width:100%;
+
+}
+
+
+.footerErrorMobile {
+    height:14%; 
+    position: absolute;
+    background-color: #FFFFFF;
+    margin-top:-14%;
+    bottom: 0;
+    width:100%;           
+}        
+.footerError {
+    height:14%; 
+    position: absolute;
+    background-color: #FFFFFF;
+    margin-top:-14%;
+    bottom: 0;
+    width:100%;           
+}        
+
+.copyright {
+    position:absolute;
+    font-family: Segoe UI;
+    font-size: 11pt;
+    color: #666666; 
+    bottom:32px;
+    display:none;
+    width: 30%;
+    left: 480px;
+}
+
+.copyrightFlip {
+    position:absolute;
+    font-family: Segoe UI Light; 
+    font-size: 11pt;
+    color: #666666; 
+    bottom:32px;
+    display:none;
+    width: 30%;
+    right: 464px;
+
+}
+
+.copyrightMobile {
+    position:absolute;
+    font-family: Segoe UI Light; 
+    font-size: 10pt;
+    color: #666666; 
+    bottom:9px;
+    display:none;
+    left: 108px;
+    width: 45%;
+}
+
+.copyrightMobileFlip {
+    position:absolute;
+    font-family: Segoe UI Light; 
+    font-size: 10pt;
+    color: #666666; 
+    bottom:9px;
+    display:none;
+    right: 108px;
+    width: 45%;
+}
+
+.sfbBrandUnderLogo
+{
+    font-family: Segoe UI;
+    font-size: 33pt;
+    color: #FFFFFF;
+    line-height: 115%;
+}

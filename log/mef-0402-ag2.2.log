@@ -1,0 +1,41 @@
+﻿--- JUNOS 14.1B3 built 2014-04-01 21:49:53 UTC
+
+vmukhin@eabu-sol-eng-dc-core-01> 
+
+vmukhin@eabu-sol-eng-dc-core-01> 
+
+vmukhin@eabu-sol-eng-dc-core-01> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# save ag2.2-New-Lab-test.conf 
+Wrote 981 lines of configuration to 'ag2.2-New-Lab-test.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-core-01> ftp 172.29.100.19 
+Connected to 172.29.100.19.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.19:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./New-Lab-test/2016-4-2-v.01
+250 CWD successful. "/New-Lab-test/2016-4-2-v.01" is current directory.
+ftp> put ag2.2-New-Lab-test.conf ag2.2-New-Lab-test.conf
+local: ag2.2-New-Lab-test.conf remote: ag2.2-New-Lab-test.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/New-Lab-test/2016-4-2-v.01/ag2.2-New-Lab-test.conf"
+100% |**********************************************************************************************************************************************************| 27889       00:00 ETAA
+226 Successfully transferred "/New-Lab-test/2016-4-2-v.01/ag2.2-New-Lab-test.conf"
+27889 bytes sent in 0.15 seconds (187.54 KB/s)
+ftp> quit
+221 Goodbye
+

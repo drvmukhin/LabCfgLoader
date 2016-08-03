@@ -1,0 +1,27 @@
+﻿--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-0000-backup.conf 
+Wrote 259 lines of configuration to 'switch-0000-backup.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# 
+
+[edit]

@@ -1,0 +1,32 @@
+﻿--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@node-l> show file
+                      ^
+syntax error, expecting <command>.
+iometrix@node-l> show file   
+                      ^
+syntax error, expecting <command>.
+
+iometrix@node-l> file list  
+
+/var/home/iometrix/:
+aevpl-1-acx-l.conf
+aevpl-dei-2-acx-l.conf
+epl-1-acx-l.conf
+epl-3-acx-l.conf
+epl-4-acx-l.conf
+epl-5-acx-l.conf
+epl-6-acx-l.conf
+eplan-1-acx-l.conf
+eplan-15-acx-l.conf
+eplan-2-acx-l.conf
+eplan-3-acx-l.conf
+eplan-4-acx-l.conf
+eplan-5-acx-l.conf
+eplan-6-acx-l.conf
+evpl-10-acx-l.conf
+evplan-1-acx-l.conf
+group-global-acx-l.conf
+group-member0-acx-l.conf
+grp-global-original.conf
+tr
+

@@ -1,0 +1,46 @@
+﻿Last login: Tue Jun 14 18:17:48 2016 from 172.29.102.242
+--- JUNOS 15.1R4.2 built 2016-06-03 13:17:00 UTC
+
+vmukhin@meson> 
+
+vmukhin@meson> 
+
+vmukhin@meson> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 15038) on since 2016-06-14 18:19:02 PDT, idle 00:03:11
+      [edit]
+
+[edit]
+vmukhin@meson# ...IA-and-CLT-drated-configs-2106.conf              
+exit
+Wrote 1742 lines of configuration to 'ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf'
+
+[edit]
+vmukhin@meson# exit 
+Exiting configuration mode
+
+vmukhin@meson> ftp 172.29.102.242 
+Connected to 172.29.102.242.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.102.242:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./Metro-PAXIA-and-CLT-drated-configs-2106/2016-6-14-v.01
+250 CWD successful. "/Metro-PAXIA-and-CLT-drated-configs-2106/2016-6-14-v.01" is current directory.
+ftp> put ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf
+local: ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf remote: ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/Metro-PAXIA-and-CLT-drated-configs-2106/2016-6-14-v.01/ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf"
+100% |****************************************| 48656       00:00 ETA
+226 Successfully transferred "/Metro-PAXIA-and-CLT-drated-configs-2106/2016-6-14-v.01/ag1.1-Metro-PAXIA-and-CLT-drated-configs-2106.conf"
+48656 bytes sent in 0.16 seconds (289.96 KB/s)
+ftp> quit
+221 Goodbye
+

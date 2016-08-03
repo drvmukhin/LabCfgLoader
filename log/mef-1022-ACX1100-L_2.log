@@ -1,0 +1,27 @@
+﻿--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 3d 23:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 10.0.0.196 

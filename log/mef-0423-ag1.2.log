@@ -1,0 +1,42 @@
+﻿Last login: Fri Apr 22 20:03:21 2016 from 172.29.101.59
+--- JUNOS 15.1R3.6 built 2016-03-24 18:41:47 UTC
+
+vmukhin@boson> 
+
+vmukhin@boson> 
+
+vmukhin@boson> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@boson# save ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf 
+Wrote 1897 lines of configuration to 'ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf'
+
+[edit]
+vmukhin@boson# exit 
+Exiting configuration mode
+
+vmukhin@boson> ftp 172.29.101.59 
+Connected to 172.29.101.59.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.59:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./GVTC-Services-all-ACX5k-hairpinning-2016/2016-4-23-v.01
+250 CWD successful. "/GVTC-Services-all-ACX5k-hairpinning-2016/2016-4-23-v.01" is current directory.
+ftp> put ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf
+local: ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf remote: ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/GVTC-Services-all-ACX5k-hairpinning-2016/2016-4-23-v.01/ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf"
+100% |**********************************************************************************************************************************************************| 53697       00:00 ETAA
+226 Successfully transferred "/GVTC-Services-all-ACX5k-hairpinning-2016/2016-4-23-v.01/ag1.2-GVTC-Services-all-ACX5k-hairpinning-2016.conf"
+53697 bytes sent in 0.16 seconds (323.15 KB/s)
+ftp> quit
+221 Goodbye
+

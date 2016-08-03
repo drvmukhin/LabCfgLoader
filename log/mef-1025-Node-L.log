@@ -1,0 +1,283 @@
+﻿--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 6d 04:23
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.130 
+Connected to 172.29.97.130.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.130:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.06 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   188       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+188 bytes received in 0.05 seconds (3.44 KB/s)
+ftp> get ./E-LAN/evplan-1-acx-l.conf evplan-1-acx-l.conf
+local: evplan-1-acx-l.conf remote: ./E-LAN/evplan-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/evplan-1-acx-l.conf"
+100% |****************************************|  9161       00:00 ETA
+226 Successfully transferred "/E-LAN/evplan-1-acx-l.conf"
+9161 bytes received in 0.08 seconds (107.33 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 6d 04:23
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update evplan-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@node-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@node-l> edit  
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 6d 17:27
+      [edit]
+
+[edit]
+iometrix@node-l# set groups re0 system host-name acx2100-1 
+
+[edit]
+iometrix@node-l# commit 
+commit complete
+
+[edit]
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx2100-1> 
+
+iometrix@acx2100-1> 
+
+iometrix@acx2100-1> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 6d 18:41
+      [edit]
+
+[edit]
+iometrix@acx2100-1# edit groups global 
+
+[edit groups global]
+iometrix@acx2100-1# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx2100-1# exit 
+
+[edit]
+iometrix@acx2100-1# edit groups re0 
+
+[edit groups re0]
+iometrix@acx2100-1# load update terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+     host-name node-l;
+
+}
+
+interfaces {
+
+    fxp0 {
+
+        unit 0 {
+
+            family inet {
+
+                address 10.161.211.140/24;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+load complete
+
+[edit groups re0]
+iometrix@acx2100-1# exit 
+
+[edit]
+iometrix@acx2100-1# set apply-groups global 
+
+[edit]
+iometrix@acx2100-1# set apply-groups re0 
+
+[edit]
+iometrix@acx2100-1# commit 
+commit complete
+
+[edit]
+iometrix@node-l# exit 
+Exiting configuration mode
+
+iometrix@node-l> exit 
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC

@@ -1,0 +1,220 @@
+﻿Last login: Thu Apr 21 14:31:12 2016 from 172.29.101.59
+--- JUNOS 15.1R3.6 built 2016-03-24 18:41:47 UTC
+
+vmukhin@boson> 
+
+vmukhin@boson> 
+
+vmukhin@boson> show version 
+Hostname: boson
+Model: mx480
+Junos: 15.1R3.6
+JUNOS Base OS boot [15.1R3.6]
+JUNOS Base OS Software Suite [15.1R3.6]
+JUNOS platform Software Suite [15.1R3.6]
+JUNOS Web Management [15.1R3.6]
+JUNOS Runtime Software Suite [15.1R3.6]
+JUNOS Online Documentation [15.1R3.6]
+JUNOS Services AACL Container package [15.1R3.6]
+JUNOS Services Application Level Gateways [15.1R3.6]
+JUNOS AppId Services [15.1R3.6]
+JUNOS Border Gateway Function package [15.1R3.6]
+JUNOS Services HTTP Content Management package [15.1R3.6]
+JUNOS Services Captive Portal and Content Delivery Container package [15.1R3.6]
+JUNOS IDP Services [15.1R3.6]
+JUNOS Services Jflow Container package [15.1R3.6]
+JUNOS Services LL-PDF Container package [15.1R3.6]
+JUNOS Services MobileNext Software package [15.1R3.6]
+JUNOS Services Mobile Subscriber Service Container package [15.1R3.6]
+JUNOS Services PTSP Container package [15.1R3.6]
+JUNOS Services NAT [15.1R3.6]
+JUNOS Services RPM [15.1R3.6]
+JUNOS Services Stateful Firewall [15.1R3.6]
+JUNOS Voice Services Container package [15.1R3.6]
+JUNOS Macsec Software Suite [15.1R3.6]
+JUNOS Services Crypto [15.1R3.6]
+JUNOS Services SSL [15.1R3.6]
+JUNOS Services IPSec [15.1R3.6]
+JUNOS py-base-i386 [15.1R3.6]
+JUNOS 64-bit Kernel Software Suite [15.1R3.6]
+JUNOS Crypto Software Suite [15.1R3.6]
+
+JUNOS 64-bit Runtime Software Suite [15.1R3.6]
+JUNOS Packet Forwarding Engine Support (M/T/EX Common) [15.1R3.6]
+JUNOS Packet Forwarding Engine Support (MX Common) [15.1R3.6]
+JUNOS Routing Software Suite [15.1R3.6]
+
+vmukhin@boson> 
+
+vmukhin@boson> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@boson# edit groups global 
+
+[edit groups global]
+vmukhin@boson# save grp-global-original.conf 
+Wrote 308 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# edit groups re0 
+
+[edit groups re0]
+vmukhin@boson# show 
+system {
+    host-name boson;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.132/23;
+            }
+        }
+    }
+}
+
+[edit groups re0]
+vmukhin@boson# save grp-re0.conf 
+Wrote 18 lines of configuration to 'grp-re0.conf'
+
+[edit groups re0]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# edit groups re1 
+
+[edit groups re1]
+vmukhin@boson# show 
+system {
+    host-name eabu-sol-eng-dc-core-02-1;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.133/23;
+            }
+        }
+    }
+}
+
+[edit groups re1]
+vmukhin@boson# save grp-re1.conf 
+Wrote 18 lines of configuration to 'grp-re1.conf'
+
+[edit groups re1]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# exit 
+Exiting configuration mode
+
+vmukhin@boson> ftp 172.29.101.59 
+Connected to 172.29.101.59.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.101.59:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./gvtc-service-all-ACX5K-Nov-13-2015/2015-11-13-v.01/ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf
+local: ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf remote: ./gvtc-service-all-ACX5K-Nov-13-2015/2015-11-13-v.01/ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/gvtc-service-all-ACX5K-Nov-13-2015/2015-11-13-v.01/ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf"
+100% |****************************************| 53012       00:00 ETA
+226 Successfully transferred "/gvtc-service-all-ACX5K-Nov-13-2015/2015-11-13-v.01/ag1.2-gvtc-service-all-ACX5K-Nov-13-2015.conf"
+53012 bytes received in 0.12 seconds (418.58 KB/s)
+ftp> quit
+221 Goodbye
+
+vmukhin@boson> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@boson# delete access 
+warning: statement not found
+
+[edit]
+vmukhin@boson# delete services 
+warning: statement not found
+
+[edit]
+vmukhin@boson# delete routing-instances 
+
+[edit]
+vmukhin@boson# delete protocols 
+
+[edit]
+vmukhin@boson# delete interfaces 
+
+[edit]
+vmukhin@boson# delete routing-options 
+
+[edit]
+vmukhin@boson# commit 
+commit complete
+
+[edit]
+vmukhin@boson# ...tc-service-all-ACX5K-Nov-13-2015.conf            
+edit groups global
+load replace grp-global-original.conf
+load complete
+
+[edit]
+vmukhin@boson# edit groups global 
+
+[edit groups global]
+vmukhin@boson# load replace grp-global-original.conf 
+exit
+set apply-groups global
+load complete
+
+[edit groups global]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# set apply-groups global 
+
+[edit]
+vmukhin@boson# edit groups re0 
+
+[edit groups re0]
+vmukhin@boson# load replace grp-re0.conf 
+exit
+set apply-groups re0
+load complete
+
+[edit groups re0]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# set apply-groups re0 
+
+[edit]
+vmukhin@boson# edit groups re1 
+
+[edit groups re1]
+vmukhin@boson# load replace grp-re1.conf 
+exit
+set apply-groups re1
+load complete
+
+[edit groups re1]
+vmukhin@boson# exit 
+
+[edit]
+vmukhin@boson# set apply-groups re1 
+
+[edit]
+vmukhin@boson# commit 
+commit complete
+
+[edit]

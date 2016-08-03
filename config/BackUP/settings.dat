@@ -1,0 +1,43 @@
+[Version]
+VERSION=00.1
+
+[Templates]
+Template=CE2.0_E-LINE_TCG_v3.5.xlsx
+Template=CE2.0_E-LAN_TCG_v3.5.xlsx
+Template=CE2.0_E-Access_TCG_v3.5.xlsx
+Template=CE2.0_E-TREE_TCG_v3.5.xlsx
+Original Templates Folder     = C:\Users\vmukhin\Documents\Products\Juniper\_SOLUTION_TEAM_ALL_\A&A\Fortius\MEF-Certification\ACX5K\Req
+Exported Templates Folder     = C:\Users\vmukhin\Documents\Products\Juniper\_SOLUTION_TEAM_ALL_\A&A\Fortius\MEF-Certification\ACX5K\Result
+WorkBookPrefix=EPL,EVPL,
+WorkBookPrefix=EP-LAN,EVP-LAN,
+WorkBookPrefix=AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+
+
+[Sessions]
+Left Node Session             = Solution-Lab/, ACX5048-1, acx5k-l, vmukhin
+Right Node Session            = Solution-Lab/, ACX5048-2, acx5k-r, vmukhin
+
+
+[Settings]
+
+SecureCRT Folder              = C:\Program Files\VanDyke Software\SecureCRT
+Work Folder                   = C:\Users\vmukhin\Documents\Products\Juniper\_SOLUTION_TEAM_ALL_\A&A\Fortius\MEF-Certification\ACX5K\MefCfgLoader
+Configuration Files Folder    = C:\Users\vmukhin\Documents\Products\Juniper\_SOLUTION_TEAM_ALL_\A&A\Fortius\MEF-Certification\ACX5K\MEF_ACX5K_Configs
+MEF Service Parameters        = service_parameters.dat
+CONFIGS_GLOBAL             = group-global
+CONFIGS_RE0                = group-member0
+# CONFIGS_RE1 = 
+
+Left Node IP                  = 10.161.210.18
+Right Node IP                 = 10.161.210.19
+FTP IP                        = 172.29.108.39
+FTP User                      = iometrix
+FTP Password                  = jnpr1234
+
+
+[Scripts]
+
+UPLOAD=script\Loader_upld_configs_ed00.vbs
+DOWNLOAD=script\Loader_dnld-configs_ed00.vbs
+FWFILTER=script\Loader_fwf-apply_ed00.vbs
+

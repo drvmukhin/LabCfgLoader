@@ -1,0 +1,88 @@
+﻿--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 46818) on since 2016-06-07 06:00:52 UTC, idle 00:03:25
+      [edit]
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-PWHT-VPLS-to-PS-2016.conf 
+Wrote 364 lines of configuration to 'switch-PWHT-VPLS-to-PS-2016.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./PWHT-VPLS-to-PS-2016/2016-6-7-v.01
+250 CWD successful. "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01" is current directory.
+ftp> put switch-PWHT-VPLS-to-PS-2016.conf switch-PWHT-VPLS-to-PS-2016.conf
+local: switch-PWHT-VPLS-to-PS-2016.conf remote: switch-PWHT-VPLS-to-PS-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01/switch-PWHT-VPLS-to-PS-2016.conf"
+100% |**********************************************************************************************************************************************************| 10002       00:00 ETAA
+226 Successfully transferred "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01/switch-PWHT-VPLS-to-PS-2016.conf"
+10002 bytes sent in 0.10 seconds (102.15 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 48313) on since 2016-06-07 21:40:34 UTC, idle 00:02:05
+      [edit]
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-PWHT-VPLS-to-PS-2016.conf 
+Wrote 364 lines of configuration to 'switch-PWHT-VPLS-to-PS-2016.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./PWHT-VPLS-to-PS-2016/2016-6-7-v.02
+250 CWD successful. "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02" is current directory.
+ftp> put switch-PWHT-VPLS-to-PS-2016.conf switch-PWHT-VPLS-to-PS-2016.conf
+local: switch-PWHT-VPLS-to-PS-2016.conf remote: switch-PWHT-VPLS-to-PS-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02/switch-PWHT-VPLS-to-PS-2016.conf"
+100% |**********************************************************************************************************************************************************| 10002       00:00 ETAA
+226 Successfully transferred "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02/switch-PWHT-VPLS-to-PS-2016.conf"
+10002 bytes sent in 0.10 seconds (101.72 KB/s)
+ftp> quit
+221 Goodbye
+

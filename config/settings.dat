@@ -1,0 +1,95 @@
+[Version]
+VERSION=01.1
+
+[Templates]
+# XLS TEMPLATE variables won't be used by loader version 01.1 or later
+XLS TEMPLATE=NULL
+XLS TEMPLATE=NULL
+XLS TEMPLATE=NULL
+XLS TEMPLATE=NULL 
+Original TCG Templates        = C:\MEF\TCG\Original
+Exported TCG Templates        = C:\MEF\TCG\Result
+WorkBookPrefix=EPL,EVPL,
+WorkBookPrefix=EP-LAN,EVP-LAN,
+WorkBookPrefix=AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+
+
+[Sessions]
+Node Session 1                = 10.164.1.144, LabCfgLoader, csr1.1, acx5048, vmukhin
+Node Session 2                = 10.164.1.141, LabCfgLoader, csr1.2, acx2100, vmukhin
+Node Session 3                = 10.164.1.137, LabCfgLoader, csr1.3, acx4000, vmukhin
+Node Session 4                = 10.164.1.140, LabCfgLoader, csr1.4, acx2100, vmukhin
+Node Session 5                = 10.164.1.142, LabCfgLoader, csr1.5, acx2100, vmukhin
+Node Session 6                = 10.164.1.143, LabCfgLoader, ag1.1, mx80-p, vmukhin
+Node Session 7                = 10.164.1.132, LabCfgLoader, ag1.2, mx480, vmukhin
+Node Session 8                = 10.164.1.135, LabCfgLoader, ag2.1, mx80, vmukhin
+Node Session 9                = 10.164.1.130, LabCfgLoader, ag2.2, mx80, vmukhin
+Node Session 10               = 10.164.1.134, LabCfgLoader, ag3.1, mx80, vmukhin
+Node Session 11               = 10.164.1.136, LabCfgLoader, switch, mx80, vmukhin
+Node Session 12               = 10.164.1.146, LabCfgLoader, csr1.6, acx5096, vmukhin
+
+[Active_Sessions]
+Status 1=Enabled
+Status 2=Enabled
+Status 3=Enabled
+Status 4=Enabled
+Status 5=Disabled
+Status 6=Enabled
+Status 7=Disabled
+Status 8=Enabled
+Status 9=Enabled
+Status 10=Enabled
+Status 11=Enabled
+Status 12=Enabled
+
+[Settings]
+
+SecureCRT Folder              = C:\Program Files\VanDyke Software\SecureCRT
+Work Folder                   = C:\LabCfgLoader
+Configuration Files Folder    = C:\Users\vmukhin\Documents\LAB_CONFIGS
+MEF Service Parameters        = service_parameters.dat
+CONFIGS_GLOBAL                = group-global
+CONFIGS_RE0                   = group-member0
+# CONFIGS_RE1                 = 
+Platform Name                 = Access and Aggregation v2.0
+Node Name Prefix              = acx
+Hide Terminal Session         = 0
+Network Adapter               = Juniper Networks Virtual Adapter
+Right Node IP                 = 10.164.1.142/24
+FTP IP                        = 172.29.102.242
+FTP User                      = mamba
+FTP Password                  = jnpr1234
+Blk Config File Folder        = C:\Users\vmukhin\Documents\LAB_CONFIGS\MissedCfgList.txt
+
+[Scripts]
+
+UPLOAD=script\Loader_upld_configs.vbs
+DOWNLOAD=script\Loader_dnld-configs.vbs
+DNLD_EXISTED=script\Loader_dnld-existed-configs.vbs
+FWFILTER=script\Loader_fwf-apply.vbs
+FTPUSER=script\Loader_Create_Ftp_User.vbs
+SETNODE=script\Loader_set_node.vbs
+UPDATE_CATALOG=script\Loader_update-catalog.vbs
+UPDATE_JUNOS=script\Loader_upld_junos.vbs
+
+[Supported_Platforms]
+acx,acx,1,re0
+acx5k,acx5k,1,member 0
+acx4000,acx,1,re0
+acx4k,acx,1,re0
+acx500,acx,1,re0
+acx1000,acx,1,re0
+acx1100,acx,1,re0
+acx2100,acx,1,re0
+acx2200,acx,1,re0
+acx5048,acx5k,1,member 0
+acx5096,acx5k,1,member 0
+mx80,mx80,1,re0
+mx80-p,mx80,1,re0
+mx480,mx,2,re0,re1
+mx960,mx,2,re0,re1
+mx240,mx,2,re0,re1
+mx240,mx,2,re0,re1
+mx480,mx,2,re0,re1
+mx960,mx,2,re0,re1
+mx104,mx104,2,re0,re1

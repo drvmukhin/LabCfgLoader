@@ -1,0 +1,136 @@
+10/24/2015 5:15:29 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:15:29 PM:                    EXPORT CFG: OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-LINE_TCG_v3.5.xlsx 
+10/24/2015 5:15:29 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:15:31 PM:  EXPORT CFG: E-Line\epl-1-acx-l.conf                                                                         OK
+10/24/2015 5:15:31 PM:  EXPORT CFG: E-Line\epl-1-acx-r.conf                                                                         OK
+10/24/2015 5:15:31 PM:  EXPORT CFG: E-Line\epl-2-acx-l.conf                                                                         OK
+10/24/2015 5:15:31 PM:  EXPORT CFG: E-Line\epl-2-acx-r.conf                                                                         OK
+10/24/2015 5:15:32 PM:  EXPORT CFG: E-Line\epl-3-acx-l.conf                                                                         OK
+10/24/2015 5:15:32 PM:  EXPORT CFG: E-Line\epl-3-acx-r.conf                                                                         OK
+10/24/2015 5:15:32 PM:  EXPORT CFG: E-Line\epl-4-acx-l.conf                                                                         OK
+10/24/2015 5:15:32 PM:  EXPORT CFG: E-Line\epl-4-acx-r.conf                                                                         OK
+10/24/2015 5:15:33 PM:  EXPORT CFG: E-Line\epl-5-acx-l.conf                                                                         OK
+10/24/2015 5:15:33 PM:  EXPORT CFG: E-Line\epl-5-acx-r.conf                                                                         OK
+10/24/2015 5:15:33 PM:  EXPORT CFG: E-Line\epl-6-acx-l.conf                                                                         OK
+10/24/2015 5:15:33 PM:  EXPORT CFG: E-Line\epl-6-acx-r.conf                                                                         OK
+10/24/2015 5:15:34 PM:  EXPORT CFG: E-Line\epl-7-acx-l.conf                                                                         OK
+10/24/2015 5:15:34 PM:  EXPORT CFG: E-Line\epl-7-acx-r.conf                                                                         OK
+10/24/2015 5:15:34 PM:  EXPORT CFG: E-Line\epl-8-acx-l.conf                                                                         OK
+10/24/2015 5:15:34 PM:  EXPORT CFG: E-Line\epl-8-acx-r.conf                                                                         OK
+10/24/2015 5:15:34 PM:  EXPORT CFG: E-Line\evpl-1-acx-l.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-1-acx-r.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-2-acx-l.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-2-acx-r.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-3-acx-l.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-3-acx-r.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-4-acx-l.conf                                                                        OK
+10/24/2015 5:15:35 PM:  EXPORT CFG: E-Line\evpl-4-acx-r.conf                                                                        OK
+10/24/2015 5:15:36 PM:  EXPORT CFG: E-Line\evpl-5-acx-l.conf                                                                        OK
+10/24/2015 5:15:36 PM:  EXPORT CFG: E-Line\evpl-5-acx-r.conf                                                                        OK
+10/24/2015 5:15:36 PM:  EXPORT CFG: E-Line\evpl-6-acx-l.conf                                                                        OK
+10/24/2015 5:15:36 PM:  EXPORT CFG: E-Line\evpl-6-acx-r.conf                                                                        OK
+10/24/2015 5:15:36 PM:  EXPORT CFG: E-Line\evpl-7-acx-l.conf                                                                        OK
+10/24/2015 5:15:37 PM:  EXPORT CFG: E-Line\evpl-7-acx-r.conf                                                                        OK
+10/24/2015 5:15:37 PM:  EXPORT CFG: E-Line\evpl-8-acx-l.conf                                                                        OK
+10/24/2015 5:15:38 PM:  EXPORT CFG: E-Line\evpl-8-acx-r.conf                                                                        OK
+10/24/2015 5:15:42 PM:  EXPORT CFG: E-Line\evpl-9-acx-l.conf                                                                        OK
+10/24/2015 5:15:47 PM:  EXPORT CFG: E-Line\evpl-9-acx-r.conf                                                                        OK
+10/24/2015 5:15:47 PM:  EXPORT CFG: E-Line\evpl-10-acx-l.conf                                                                       OK
+10/24/2015 5:15:47 PM:  EXPORT CFG: E-Line\evpl-10-acx-r.conf                                                                       OK
+10/24/2015 5:15:47 PM:  EXPORT CFG: E-Line\evpl-11-acx-l.conf                                                                       OK
+10/24/2015 5:15:48 PM:  EXPORT CFG: E-Line\evpl-11-acx-r.conf                                                                       OK
+10/24/2015 5:15:48 PM:  EXPORT CFG: E-Line\evpl-12-acx-l.conf                                                                       OK
+10/24/2015 5:15:48 PM:  EXPORT CFG: E-Line\evpl-12-acx-r.conf                                                                       OK
+10/24/2015 5:15:48 PM:  EXPORT CFG: E-Line\evpl-13-acx-l.conf                                                                       OK
+10/24/2015 5:15:49 PM:  EXPORT CFG: E-Line\evpl-13-acx-r.conf                                                                       OK
+10/24/2015 5:15:49 PM:  EXPORT CFG: E-Line\evpl-14-acx-l.conf                                                                       OK
+10/24/2015 5:15:49 PM:  EXPORT CFG: E-Line\evpl-14-acx-r.conf                                                                       OK
+10/24/2015 5:15:50 PM:  EXPORT CFG: E-Line\evpl-15-acx-l.conf                                                                       OK
+10/24/2015 5:15:50 PM:  EXPORT CFG: E-Line\evpl-15-acx-r.conf                                                                       OK
+10/24/2015 5:15:50 PM:  EXPORT CFG: E-Line\evpl-16-acx-l.conf                                                                       OK
+10/24/2015 5:15:50 PM:  EXPORT CFG: E-Line\evpl-16-acx-r.conf                                                                       OK
+10/24/2015 5:15:51 PM:  EXPORT CFG: E-Line\evpl-17-acx-l.conf                                                                       OK
+10/24/2015 5:15:51 PM:  EXPORT CFG: E-Line\evpl-17-acx-r.conf                                                                       OK
+10/24/2015 5:15:51 PM:  EXPORT CFG: E-Line\evpl-18-acx-l.conf                                                                       OK
+10/24/2015 5:15:51 PM:  EXPORT CFG: E-Line\evpl-18-acx-r.conf                                                                       OK
+10/24/2015 5:15:52 PM:  EXPORT CFG: E-Line\evpl-21-acx-l.conf                                                                       OK
+10/24/2015 5:15:52 PM:  EXPORT CFG: E-Line\evpl-21-acx-r.conf                                                                       OK
+10/24/2015 5:15:53 PM:  EXPORT CFG: Saving WorkBook As: C:\MEF\TCG\Result\CE2.0_E-LINE_TCG_v3.5.xlsx                                OK
+10/24/2015 5:15:53 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:15:53 PM:                    EXPORT CFG: OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-LAN_TCG_v3.5.xlsx 
+10/24/2015 5:15:53 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:15:54 PM:  EXPORT CFG: E-LAN\eplan-1-acx-l.conf                                                                        OK
+10/24/2015 5:15:54 PM:  EXPORT CFG: E-LAN\eplan-1-acx-r.conf                                                                        OK
+10/24/2015 5:15:54 PM:  EXPORT CFG: E-LAN\eplan-2-acx-l.conf                                                                        OK
+10/24/2015 5:15:54 PM:  EXPORT CFG: E-LAN\eplan-2-acx-r.conf                                                                        OK
+10/24/2015 5:15:55 PM:  EXPORT CFG: E-LAN\eplan-3-acx-l.conf                                                                        OK
+10/24/2015 5:15:55 PM:  EXPORT CFG: E-LAN\eplan-3-acx-r.conf                                                                        OK
+10/24/2015 5:15:55 PM:  EXPORT CFG: E-LAN\eplan-4-acx-l.conf                                                                        OK
+10/24/2015 5:15:56 PM:  EXPORT CFG: E-LAN\eplan-4-acx-r.conf                                                                        OK
+10/24/2015 5:15:56 PM:  EXPORT CFG: E-LAN\eplan-5-acx-l.conf                                                                        OK
+10/24/2015 5:15:56 PM:  EXPORT CFG: E-LAN\eplan-5-acx-r.conf                                                                        OK
+10/24/2015 5:15:56 PM:  EXPORT CFG: E-LAN\eplan-6-acx-l.conf                                                                        OK
+10/24/2015 5:15:56 PM:  EXPORT CFG: E-LAN\eplan-6-acx-r.conf                                                                        OK
+10/24/2015 5:15:57 PM:  EXPORT CFG: E-LAN\eplan-7-acx-l.conf                                                                        OK
+10/24/2015 5:15:57 PM:  EXPORT CFG: E-LAN\eplan-7-acx-r.conf                                                                        OK
+10/24/2015 5:15:57 PM:  EXPORT CFG: E-LAN\eplan-8-acx-l.conf                                                                        OK
+10/24/2015 5:15:57 PM:  EXPORT CFG: E-LAN\eplan-8-acx-r.conf                                                                        OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\eplan-15-acx-l.conf                                                                       OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\eplan-15-acx-r.conf                                                                       OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\evplan-1-acx-l.conf                                                                       OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\evplan-1-acx-r.conf                                                                       OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\evplan-2-acx-l.conf                                                                       OK
+10/24/2015 5:15:58 PM:  EXPORT CFG: E-LAN\evplan-2-acx-r.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-3-acx-l.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-3-acx-r.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-4-acx-l.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-4-acx-r.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-5-acx-l.conf                                                                       OK
+10/24/2015 5:15:59 PM:  EXPORT CFG: E-LAN\evplan-5-acx-r.conf                                                                       OK
+10/24/2015 5:16:00 PM:  EXPORT CFG: E-LAN\evplan-6-acx-l.conf                                                                       OK
+10/24/2015 5:16:00 PM:  EXPORT CFG: E-LAN\evplan-6-acx-r.conf                                                                       OK
+10/24/2015 5:16:00 PM:  EXPORT CFG: E-LAN\evplan-7-acx-l.conf                                                                       OK
+10/24/2015 5:16:00 PM:  EXPORT CFG: E-LAN\evplan-7-acx-r.conf                                                                       OK
+10/24/2015 5:16:00 PM:  EXPORT CFG: E-LAN\evplan-8-acx-l.conf                                                                       OK
+10/24/2015 5:16:01 PM:  EXPORT CFG: E-LAN\evplan-8-acx-r.conf                                                                       OK
+10/24/2015 5:16:01 PM:  EXPORT CFG: E-LAN\evplan-9-acx-l.conf                                                                       OK
+10/24/2015 5:16:02 PM:  EXPORT CFG: E-LAN\evplan-9-acx-r.conf                                                                       OK
+10/24/2015 5:16:02 PM:  EXPORT CFG: E-LAN\evplan-10-acx-l.conf                                                               NOT FOUND
+10/24/2015 5:16:02 PM:  EXPORT CFG: E-LAN\evplan-10-acx-r.conf                                                               NOT FOUND
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-11-acx-l.conf                                                                      OK
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-11-acx-r.conf                                                                      OK
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-12-acx-l.conf                                                                      OK
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-12-acx-r.conf                                                                      OK
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-13-acx-l.conf                                                               NOT FOUND
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-13-acx-r.conf                                                               NOT FOUND
+10/24/2015 5:16:03 PM:  EXPORT CFG: E-LAN\evplan-14-acx-l.conf                                                                      OK
+10/24/2015 5:16:04 PM:  EXPORT CFG: E-LAN\evplan-14-acx-r.conf                                                                      OK
+10/24/2015 5:16:04 PM:  EXPORT CFG: E-LAN\evplan-15-acx-l.conf                                                                      OK
+10/24/2015 5:16:04 PM:  EXPORT CFG: E-LAN\evplan-15-acx-r.conf                                                                      OK
+10/24/2015 5:16:05 PM:  EXPORT CFG: E-LAN\evplan-16-acx-l.conf                                                                      OK
+10/24/2015 5:16:05 PM:  EXPORT CFG: E-LAN\evplan-16-acx-r.conf                                                                      OK
+10/24/2015 5:16:05 PM:  EXPORT CFG: E-LAN\evplan-17-acx-l.conf                                                                      OK
+10/24/2015 5:16:05 PM:  EXPORT CFG: E-LAN\evplan-17-acx-r.conf                                                                      OK
+10/24/2015 5:16:06 PM:  EXPORT CFG: E-LAN\evplan-18-acx-l.conf                                                                      OK
+10/24/2015 5:16:06 PM:  EXPORT CFG: E-LAN\evplan-18-acx-r.conf                                                                      OK
+10/24/2015 5:16:06 PM:  EXPORT CFG: E-LAN\evplan-19-acx-l.conf                                                                      OK
+10/24/2015 5:16:06 PM:  EXPORT CFG: E-LAN\evplan-19-acx-r.conf                                                                      OK
+10/24/2015 5:16:07 PM:  EXPORT CFG: E-LAN\evplan-25-acx-l.conf                                                                      OK
+10/24/2015 5:16:07 PM:  EXPORT CFG: E-LAN\evplan-25-acx-r.conf                                                                      OK
+10/24/2015 5:16:08 PM:  EXPORT CFG: Saving WorkBook As: C:\MEF\TCG\Result\CE2.0_E-LAN_TCG_v3.5.xlsx                                 OK
+10/24/2015 5:16:08 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:16:08 PM:                   EXPORT CFG: OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-Access_TCG_v3.5.xlsx 
+10/24/2015 5:16:08 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 5:16:09 PM:  EXPORT CFG: E-Access\aepl-1-acx-l.conf                                                                      OK
+10/24/2015 5:16:09 PM:  EXPORT CFG: E-Access\aepl-1-acx-r.conf                                                                      OK
+10/24/2015 5:16:09 PM:  EXPORT CFG: E-Access\aepl-dei-2-acx-l.conf                                                                  OK
+10/24/2015 5:16:10 PM:  EXPORT CFG: E-Access\aepl-dei-2-acx-r.conf                                                                  OK
+10/24/2015 5:16:10 PM:  EXPORT CFG: E-Access\aepl-pcp-2-acx-l.conf                                                                  OK
+10/24/2015 5:16:10 PM:  EXPORT CFG: E-Access\aepl-pcp-2-acx-r.conf                                                                  OK
+10/24/2015 5:16:10 PM:  EXPORT CFG: E-Access\aevpl-1-acx-l.conf                                                                     OK
+10/24/2015 5:16:11 PM:  EXPORT CFG: E-Access\aevpl-1-acx-r.conf                                                                     OK
+10/24/2015 5:16:11 PM:  EXPORT CFG: E-Access\aevpl-dei-2-acx-l.conf                                                                 OK
+10/24/2015 5:16:11 PM:  EXPORT CFG: E-Access\aevpl-dei-2-acx-r.conf                                                                 OK
+10/24/2015 5:16:12 PM:  EXPORT CFG: E-Access\aevpl-pcp-2-acx-l.conf                                                                 OK
+10/24/2015 5:16:12 PM:  EXPORT CFG: E-Access\aevpl-pcp-2-acx-r.conf                                                                 OK
+10/24/2015 5:16:13 PM:  EXPORT CFG: Saving WorkBook As: C:\MEF\TCG\Result\CE2.0_E-Access_TCG_v3.5.xlsx                              OK

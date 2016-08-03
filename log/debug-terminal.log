@@ -1,0 +1,103 @@
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD CSR1.1 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 1 = csr1.1"                         OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD CSR1.2 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 2 = csr1.2"                         OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD CSR1.3 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 3 = csr1.3"                         OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD CSR1.4 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 4 = csr1.4"                         OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                          DOWNLOAD AG1.1 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 5 = ag1.1"                          OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                          DOWNLOAD AG2.1 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 6 = ag2.1"                          OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                          DOWNLOAD AG2.2 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 7 = ag2.2"                          OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                          DOWNLOAD AG3.1 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 8 = ag3.1"                          OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD SWITCH SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 9 = switch"                         OK
+----------------------------------------------------------------------------
+                  START DOWNLOADING CONFIGURATION FILES  
+----------------------------------------------------------------------------
+  Saving configuration to file on router                                 OK
+  CONNECTING TO FTP                                                      OK
+  FTP Downloading configuration file:                                    OK
+----------------------------------------------------------------------------
+                         DOWNLOAD CSR1.6 SUCCESS 
+----------------------------------------------------------------------------
+  Adding record to Cfg_List "Session 10 = csr1.6"                        OK
+----------------------------------------------------------------------------
+                                JOB DONE  
+----------------------------------------------------------------------------

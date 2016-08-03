@@ -1,0 +1,5946 @@
+﻿--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 04:13
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+^C[abort]
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 05:27
+      [edit]
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 05:33
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit  
+
+[edit]
+iometrix@acx1k-l#     
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+     host-name acx1k-l;
+
+}
+
+interfaces {
+
+    fxp0 {
+
+        unit 0 {
+
+            family inet {
+
+                address 10.161.211.140/24;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+     host-name acx1k-l;
+
+}
+
+interfaces {
+
+    fxp0 {
+
+        unit 0 {
+
+            family inet {
+
+                address 10.161.211.140/24;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# 
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+     host-name acx1k-l;
+
+}
+
+interfaces {
+
+    fxp0 {
+
+        unit 0 {
+
+            family inet {
+
+                address 10.161.211.140/24;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> exit 
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 05:42
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+    login {
+
+        user regress {
+
+            uid 928;
+
+            class superuser;
+
+            shell csh;
+
+            authentication {
+
+                encrypted-password "$1$kPU..$w.4FGRAGanJ8U4Yq6sbj7."; ## SECRET-DATA
+
+            }
+
+        }
+
+        user vmukhin {
+
+            uid 929;
+
+            class super-user;
+
+            authentication {
+
+                encrypted-password "$1$.neRl71A$i3Kvqps7lkXQsQO9uVhHa/"; ## SECRET-DATA
+
+            }
+
+        }
+
+                user iometrix {
+
+                        class super-user;
+
+                        authentication {
+
+                                encrypted-password "$1$LYJOOY7z$2mZ4usEMzxFGzZL6nRAT7/"; ## SECRET-DATA
+
+                        }
+
+                }
+
+    }
+
+    services {
+
+        ftp;
+
+        rlogin;
+
+        rsh;
+
+        ssh;
+
+        telnet;
+
+    }
+
+    processes {
+
+        routing enable;
+
+        ntp enable;
+
+        management enable;
+
+        watchdog enable;
+
+        snmp enable;
+
+        inet-process enable;
+
+        mib-process enable;
+
+    }                                   
+
+}
+
+
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update terminal relative 
+[Type ^D at a new line to end input]
+system {
+
+     host-name acx1k-l;
+
+}
+
+interfaces {
+
+    fxp0 {
+
+        unit 0 {
+
+            family inet {
+
+                address 10.161.211.140/24;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> exit 
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 14:49
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.103.204 
+Connected to 172.29.103.204.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.204:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.23 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.29 KB/s)
+ftp> get ./E-LAN/eplan-3-acx-l.conf eplan-3-acx-l.conf
+local: eplan-3-acx-l.conf remote: ./E-LAN/eplan-3-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-3-acx-l.conf"
+100% |****************************************| 22743       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-3-acx-l.conf"
+22743 bytes received in 0.14 seconds (159.02 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 14:49
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-3-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 20:54
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (19.18 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.58 KB/s)
+ftp> get ./E-LAN/eplan-3-acx-l.conf eplan-3-acx-l.conf
+local: eplan-3-acx-l.conf remote: ./E-LAN/eplan-3-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-3-acx-l.conf"
+100% |****************************************| 22743       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-3-acx-l.conf"
+22743 bytes received in 0.12 seconds (178.81 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 20:54
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-3-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 20:56
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-3-acx-l.conf 
+Wrote 947 lines of configuration to 'eplan-3-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-3-acx-l.conf eplan-3-acx-l.conf
+local: eplan-3-acx-l.conf remote: eplan-3-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-3-acx-l.conf"
+100% |****************************************| 27111       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-3-acx-l.conf"
+27111 bytes sent in 0.13 seconds (203.11 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 20:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.62 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.86 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.09 seconds (144.51 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 20:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 21:00
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.14 seconds (120.97 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:09
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.37 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.42 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (128.17 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:09
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:10
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.12 seconds (136.89 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:37
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.40 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.03 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.09 seconds (146.34 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:37
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.12 seconds (137.29 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (19.45 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (2.92 KB/s)
+ftp> get ./E-LAN/eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: ./E-LAN/eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 12996       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-5-acx-l.conf"
+12996 bytes received in 0.10 seconds (126.40 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-5-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:39
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (19.21 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.46 KB/s)
+ftp> get ./E-LAN/eplan-6-acx-l.conf eplan-6-acx-l.conf
+local: eplan-6-acx-l.conf remote: ./E-LAN/eplan-6-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-6-acx-l.conf"
+100% |****************************************| 14370       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-6-acx-l.conf"
+14370 bytes received in 0.09 seconds (153.31 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:39
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-6-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:42
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit interfaces 
+
+[edit interfaces]
+iometrix@acx1k-l# show |no-more 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input-list [ f-tc-12-2-1 f-tc-12-2-3 f-tc-12-2-5 ];
+            }
+        }
+    }
+}
+lo0 {
+    unit 0 {
+        family inet {
+            address 1.1.1.1/32;
+        }
+    }
+}
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# replace pattern f-tc-12-2-1 with f-tc-12-2-1 
+error: target statement 'f-tc-12-2-1' already exists
+[edit interfaces ge-0/1/2 unit 0 family bridge filter]
+  'input-list f-tc-12-2-1'
+    could not rename to 'input-list f-tc-12-2-1'
+
+[edit interfaces]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:42
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit interfaces 
+
+[edit interfaces]
+iometrix@acx1k-l# show |no-more 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input-list [ f-tc-12-2-1 f-tc-12-2-3 f-tc-12-2-5 ];
+            }
+        }
+    }
+}
+lo0 {
+    unit 0 {
+        family inet {
+            address 1.1.1.1/32;
+        }
+    }
+}
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# replace pattern f-tc-12-2-1 with f-tc-12-2-3 
+error: target statement 'f-tc-12-2-3' already exists
+[edit interfaces ge-0/1/2 unit 0 family bridge filter]
+  'input-list f-tc-12-2-1'
+    could not rename to 'input-list f-tc-12-2-3'
+
+[edit interfaces]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:43
+      [edit]
+
+[edit]
+iometrix@acx1k-l# showint
+                  ^
+unknown command.
+iometrix@acx1k-l# showint   
+                  ^
+unknown command.
+
+[edit]
+iometrix@acx1k-l# show interfaces 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input-list [ f-tc-12-2-1 f-tc-12-2-3 f-tc-12-2-5 ];
+            }
+        }
+    }
+}
+lo0 {
+    unit 0 {
+        family inet {
+            address 1.1.1.1/32;
+        }
+    }
+}
+
+[edit]
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:58
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit interfaces 
+
+[edit interfaces]
+iometrix@acx1k-l# show |no-more 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input-list [ f-tc-12-2-1 f-tc-12-2-3 f-tc-12-2-5 ];
+            }
+        }
+    }
+}
+lo0 {
+    unit 0 {
+        family inet {
+            address 1.1.1.1/32;
+        }
+    }
+}
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# rollback 
+load complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.64 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.42 KB/s)
+ftp> get ./E-LAN/eplan-15-acx-l.conf eplan-15-acx-l.conf
+local: eplan-15-acx-l.conf remote: ./E-LAN/eplan-15-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-15-acx-l.conf"
+100% |****************************************| 13678       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-15-acx-l.conf"
+13678 bytes received in 0.09 seconds (143.32 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-15-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 22:59
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit interfaces 
+
+[edit interfaces]
+iometrix@acx1k-l# show |no-more 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+    unit 33 {
+        encapsulation vlan-bridge;
+        vlan-id 33;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input f-tc-11-2-3;
+            }
+        }
+    }
+}
+ge-0/1/3 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 33;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input f-tc-11-2-3;
+            }
+        }
+    }
+}
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# rollback 
+load complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:37
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.75 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (2.87 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.12 seconds (106.04 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.13 seconds (129.50 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.18 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.48 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (125.87 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:38
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.96 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.49 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.11 seconds (114.04 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:49
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.27 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.40 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.09 seconds (139.36 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:49
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:54
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.44 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.29 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.11 seconds (118.62 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:54
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:57
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.86 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.23 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (122.54 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 4d 23:57
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:30
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.14 seconds (118.16 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:31
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.82 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.60 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (120.90 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:31
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:40
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.88 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.55 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.14 seconds (90.90 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:40
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:41
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.07 seconds (13.57 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.07 seconds (2.71 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.11 seconds (117.42 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:41
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:42
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.18 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.63 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (128.09 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:42
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:44
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.07 seconds (14.63 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (2.96 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.11 seconds (120.83 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:44
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:44
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.16 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (2.95 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.11 seconds (117.32 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:45
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.14 seconds (121.51 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (18.26 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.57 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (126.28 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 00:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:09
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.12 seconds (143.08 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:10
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.66 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.60 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.12 seconds (102.65 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:10
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:21
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.07 seconds (14.16 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.08 seconds (2.42 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (124.80 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:21
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:22
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.05 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.54 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (128.83 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:22
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:29
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.54 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.54 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (131.46 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:29
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:29
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.14 seconds (117.15 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:30
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (17.06 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.47 KB/s)
+ftp> get ./E-LAN/eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: ./E-LAN/eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 12996       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-5-acx-l.conf"
+12996 bytes received in 0.10 seconds (127.16 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:30
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-5-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:31
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-5-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-5-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-5-acx-l.conf"
+17361 bytes sent in 0.13 seconds (133.56 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:32
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-6-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-6-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-6-acx-l.conf eplan-6-acx-l.conf
+local: eplan-6-acx-l.conf remote: eplan-6-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-6-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-6-acx-l.conf"
+17361 bytes sent in 0.12 seconds (143.06 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.70 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.61 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (133.09 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:46
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:47
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-5-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-5-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-5-acx-l.conf"
+17361 bytes sent in 0.13 seconds (134.42 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:48
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.90 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.65 KB/s)
+ftp> get ./E-LAN/eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: ./E-LAN/eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 12996       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-5-acx-l.conf"
+12996 bytes received in 0.10 seconds (133.46 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:48
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-5-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:52
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.85 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.05 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (123.89 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:52
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:53
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.11 seconds (149.22 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:53
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (15.76 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.47 KB/s)
+ftp> get ./E-LAN/eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: ./E-LAN/eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 12996       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-5-acx-l.conf"
+12996 bytes received in 0.10 seconds (124.15 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:53
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-5-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 01:55
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-5-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-5-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-5-acx-l.conf"
+17361 bytes sent in 0.11 seconds (152.43 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:05
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.51 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.10 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (125.81 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:05
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:06
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.15 seconds (116.84 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:07
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.12 seconds (140.71 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:07
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.53 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.29 KB/s)
+ftp> get ./E-LAN/eplan-5-acx-l.conf eplan-5-acx-l.conf
+local: eplan-5-acx-l.conf remote: ./E-LAN/eplan-5-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-5-acx-l.conf"
+100% |****************************************| 12996       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-5-acx-l.conf"
+12996 bytes received in 0.10 seconds (131.80 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:07
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-5-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:11
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.07 seconds (14.01 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.01 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (126.86 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:11
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:14
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.14 seconds (125.25 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:14
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.72 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.57 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (129.51 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:14
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:15
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit interfaces 
+
+[edit interfaces]
+iometrix@acx1k-l# show |no-more 
+ge-0/0/7 {
+    apply-groups core-intf;
+    flexible-vlan-tagging;
+    encapsulation flexible-ethernet-services;
+    unit 3 {
+        encapsulation vlan-bridge;
+        vlan-id 3;
+    }
+}
+ge-0/1/2 {
+    apply-groups access-intf;
+    encapsulation ethernet-bridge;
+    unit 0 {
+        input-vlan-map {
+            push;
+            vlan-id 3;
+        }
+        output-vlan-map pop;
+        family bridge {
+            filter {
+                input f-tc-10-2-1;
+            }
+        }
+    }
+}
+lo0 {
+    unit 0 {
+        family inet {
+            address 1.1.1.1/32;
+        }
+    }
+}
+
+[edit interfaces]
+iometrix@acx1k-l# 
+
+[edit interfaces]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# rollback 
+load complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:18
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.05 seconds (17.93 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.06 seconds (3.16 KB/s)
+ftp> get ./E-LAN/eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: ./E-LAN/eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 12994       00:00 ETA
+226 Successfully transferred "/E-LAN/eplan-4-acx-l.conf"
+12994 bytes received in 0.10 seconds (121.79 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:18
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update eplan-4-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:19
+      [edit]
+
+[edit]
+iometrix@acx1k-l# save eplan-4-acx-l.conf 
+Wrote 581 lines of configuration to 'eplan-4-acx-l.conf'
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd  ./tested/E-LAN
+250 CWD successful. "/tested/E-LAN" is current directory.
+ftp> put eplan-4-acx-l.conf eplan-4-acx-l.conf
+local: eplan-4-acx-l.conf remote: eplan-4-acx-l.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/tested/E-LAN/eplan-4-acx-l.conf"
+100% |****************************************| 17361       00:00 ETA
+226 Successfully transferred "/tested/E-LAN/eplan-4-acx-l.conf"
+17361 bytes sent in 0.11 seconds (147.76 KB/s)
+--- JUNOS 12.3-20140528_acx_x54_s4.0 built 2014-05-28 18:14:01 UTC
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> 
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:20
+      [edit]
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# save grp-global-original.conf 
+Wrote 335 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+
+iometrix@acx1k-l> ftp 172.29.97.135 
+Connected to 172.29.97.135.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.97.135:iometrix): iometrix
+331 Password required for iometrix
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get  ./group-global-acx-l.conf group-global-acx-l.conf
+local: group-global-acx-l.conf remote: ./group-global-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-global-acx-l.conf"
+100% |****************************************|   986       00:00 ETA
+226 Successfully transferred "/group-global-acx-l.conf"
+986 bytes received in 0.06 seconds (16.93 KB/s)
+ftp> get  ./group-member0-acx-l.conf group-member0-acx-l.conf
+local: group-member0-acx-l.conf remote: ./group-member0-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/group-member0-acx-l.conf"
+100% |****************************************|   189       00:00 ETA
+226 Successfully transferred "/group-member0-acx-l.conf"
+189 bytes received in 0.05 seconds (3.43 KB/s)
+ftp> get ./E-Line/epl-1-acx-l.conf epl-1-acx-l.conf
+local: epl-1-acx-l.conf remote: ./E-Line/epl-1-acx-l.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/E-Line/epl-1-acx-l.conf"
+100% |****************************************|  9479       00:00 ETA
+226 Successfully transferred "/E-Line/epl-1-acx-l.conf"
+9479 bytes received in 0.09 seconds (103.16 KB/s)
+ftp> quit
+221 Goodbye
+
+iometrix@acx1k-l> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  root terminal u0 (pid 30756) on since 2015-10-18 20:07:13 PDT, idle 5d 02:20
+      [edit]
+
+[edit]
+iometrix@acx1k-l# load update epl-1-acx-l.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# load replace grp-global-original.conf 
+load complete
+
+[edit]
+iometrix@acx1k-l# edit groups global 
+
+[edit groups global]
+iometrix@acx1k-l# load merge relative group-global-acx-l.conf 
+load complete
+
+[edit groups global]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# edit groups re0 
+
+[edit groups re0]
+iometrix@acx1k-l# load update relative group-member0-acx-l.conf 
+load complete
+
+[edit groups re0]
+iometrix@acx1k-l# exit 
+
+[edit]
+iometrix@acx1k-l# set apply-groups global 
+
+[edit]
+iometrix@acx1k-l# set apply-groups re0 
+
+[edit]
+iometrix@acx1k-l# commit 
+commit complete
+
+[edit]
+iometrix@acx1k-l# exit 
+Exiting configuration mode
+

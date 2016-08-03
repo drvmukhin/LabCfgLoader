@@ -1,0 +1,70 @@
+﻿--- JUNOS 14.1R2.12 built 2014-08-06 10:01:16 UTC
+vmukhin@meson> request u?
+No valid completions
+vmukhin@meson> request system u?
+No valid completions
+vmukhin@meson> request system ?   
+Possible completions:
+  certificate          Manage X509 certificates
+  commit               Perform commit related operations
+  configuration        Request operation on system configuration
+  halt                 Halt the system
+  license              Manage feature licenses
+  logout               Forcibly end user's CLI login session
+  partition            Partition storage media
+  power-off            Power off the system
+  power-on             Power on the system
+  process              Request operation on system process
+  reboot               Reboot the system
+  scripts              Manage scripts (commit, op, event)
+  snapshot             Archive data and executable areas
+  software             Perform system software extension or upgrade
+  storage              Request operation on system storage
+  zeroize              Erase all data, including configuration and log files
+vmukhin@meson> request ?         
+Possible completions:
+  ancp                 Request ANCP operation
+  app-engine           Request App-engine actions
+  chassis              Perform chassis-specific operations
+  dhcp                 Perform DHCP operations
+  dhcpv6               Perform DHCPv6 operations
+  interface            Perform interface tasks
+  ipsec                Perform IP Security operations
+  jdaf                 Request JDAF operation
+  l2circuit-switchover  Perform l2circuit switchover
+  lacp                 Request LACP actions
+  message              Send text message to other users
+  mpls                 Perform Multiprotocol Label Switching operations
+  network-access       Request network-access related information
+  pim                  Perform PIM operations
+  protection-group     Request protection group related operations
+  routing-engine       Routing Engine
+  security             Perform security-level operations
+  services             Services-related requests
+  snmp                 Request actions from the Simple Network Management Protocol daemon
+  support              Perform JUNOS support tasks
+  system               Perform system-level operations
+  validation           Request route validation actions
+  vpls-switchover      Perform LDP VPLS pseudowire switchover
+vmukhin@meson> ?                
+Possible completions:
+  clear                Clear information in the system
+  configure            Manipulate software configuration information
+  file                 Perform file operations
+  help                 Provide help information
+  load                 Load information from file
+  monitor              Show real-time debugging information
+  mtrace               Trace multicast path from source to receiver
+  op                   Invoke an operation script
+  ping                 Ping remote target
+  quit                 Exit the management session
+  request              Make system-level requests
+  restart              Restart software process
+  save                 Save information to file
+  set                  Set CLI properties, date/time, craft interface message
+  show                 Show system information
+  ssh                  Start secure shell on another host
+  start                Start shell
+  telnet               Telnet to another host
+  test                 Perform diagnostic debugging
+  traceroute           Trace route to remote host

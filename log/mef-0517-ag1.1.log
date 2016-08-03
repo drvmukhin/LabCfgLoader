@@ -1,0 +1,168 @@
+﻿--- JUNOS 14.1R2.12 built 2014-08-06 10:01:16 UTC
+
+vmukhin@meson> 
+
+vmukhin@meson> 
+
+vmukhin@meson> show version 
+Hostname: meson
+Model: mx80-p
+Junos: 14.1R2.12
+JUNOS Base OS boot [14.1R2.12]
+JUNOS Base OS Software Suite [14.1R2.12]
+JUNOS Kernel Software Suite [14.1R2.12]
+JUNOS Crypto Software Suite [14.1R2.12]
+JUNOS Packet Forwarding Engine Support (MX80) [14.1R2.12]
+JUNOS Online Documentation [14.1R2.12]
+JUNOS Services Application Level Gateways [14.1R2.12]
+JUNOS Services Jflow Container package [14.1R2.12]
+JUNOS Services Stateful Firewall [14.1R2.12]
+JUNOS Services NAT [14.1R2.12]
+JUNOS Services RPM [14.1R2.12]
+JUNOS Services Crypto [14.1R2.12]
+JUNOS Services SSL [14.1R2.12]
+JUNOS Services IPSec [14.1R2.12]
+JUNOS Routing Software Suite [14.1R2.12]
+
+vmukhin@meson> 
+
+vmukhin@meson> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 25304) on since 2016-05-17 11:40:37 PDT, idle 00:02:34
+      [edit]
+
+[edit]
+vmukhin@meson# edit groups global 
+
+[edit groups global]
+vmukhin@meson# save grp-global-original.conf 
+Wrote 308 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+vmukhin@meson# exit 
+
+[edit]
+vmukhin@meson# edit groups re0 
+
+[edit groups re0]
+vmukhin@meson# show 
+system {
+    host-name meson;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.143/23;
+            }
+        }
+    }
+}
+
+[edit groups re0]
+vmukhin@meson# save grp-re0.conf 
+Wrote 18 lines of configuration to 'grp-re0.conf'
+
+[edit groups re0]
+vmukhin@meson# exit 
+
+[edit]
+vmukhin@meson# exit 
+Exiting configuration mode
+
+vmukhin@meson> ftp 172.29.102.49 
+Connected to 172.29.102.49.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.102.49:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24/2013-08-25-v.01/ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf
+local: ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf remote: ./ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24/2013-08-25-v.01/ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24/2013-08-25-v.01/ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf"
+100% |**********************************************************************************************************************************************************| 55414       00:00 ETAA
+226 Successfully transferred "/ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24/2013-08-25-v.01/ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf"
+55414 bytes received in 0.13 seconds (416.91 KB/s)
+ftp> quit
+221 Goodbye
+
+vmukhin@meson> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 25304) on since 2016-05-17 11:40:37 PDT, idle 00:02:36
+      [edit]
+
+[edit]
+vmukhin@meson# delete access 
+warning: statement not found
+
+[edit]
+vmukhin@meson# delete services 
+warning: statement not found
+
+[edit]
+vmukhin@meson# delete routing-instances 
+
+[edit]
+vmukhin@meson# delete protocols 
+
+[edit]
+vmukhin@meson# delete interfaces 
+
+[edit]
+vmukhin@meson# delete routing-options 
+
+[edit]
+vmukhin@meson# commit 
+[edit policy-options condition CON-CSR12-UP if-route-exists table]
+  'table OAM-ACCESS-PROBE.inet.0'
+    Policy: Instance OAM-ACCESS-PROBE does not exist
+commit complete
+load update ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf
+
+[edit]
+vmukhin@meson# load update ag1.1-ce20-service-all-plus-ce-and-mbh-mng-good-Aug-24.conf 
+edit groups global
+load complete
+
+[edit]
+vmukhin@meson# edit groups global 
+
+[edit groups global]
+vmukhin@meson# load replace grp-global-original.conf 
+exit
+load complete
+
+[edit groups global]
+vmukhin@meson# exit 
+
+[edit]
+vmukhin@meson# set apply-groups global 
+
+[edit]
+vmukhin@meson# edit groups re0 
+
+[edit groups re0]
+vmukhin@meson# load replace grp-re0.conf 
+exit
+load complete
+
+[edit groups re0]
+vmukhin@meson# exit 
+
+[edit]
+vmukhin@meson# set apply-groups re0 
+
+[edit]
+vmukhin@meson# commit 
+
+commit complete
+
+[edit]

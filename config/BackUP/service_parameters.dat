@@ -1,0 +1,85 @@
+
+[Platform]
+
+PLATFORM = ACX5048-AC
+PLATFORM_INDEX = acx
+
+[Node-Left]
+
+UNI-A=xe-0/0/24
+UNI-B=xe-0/0/25
+NNI=xe-0/0/33
+
+[Node-Right]
+
+UNI-C=xe-0/0/24
+UNI-D=xe-0/0/25
+UNI-CC=xe-0/0/34
+UNI-DD=xe-0/0/35
+NNI=xe-0/0/33
+
+
+[Service]
+E-Line
+E-LAN
+E-Access
+
+[E-Line]
+epl:1,2,3,4,5,6,7,8
+evpl:1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21
+
+[E-LAN]
+eplan:1,2,3,4,5,6,7,8,15
+evplan:1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,25
+
+[E-Access]
+aepl:1
+aepl-dei:2
+aepl-pcp:2
+aevpl:1
+aevpl-dei:2
+aevpl-pcp:2
+
+
+[epl-3]
+UNI:1,0,1,0,0,0
+FILTERS: f-tc-6-1-1, f-tc-6-1-2, f-tc-6-1-3,f-tc-6-1-4, f-tc-6-1-5, f-tc-6-1-6, f-tc-6-1-7, f-tc-6-1-8,f-tc-8-1-1, f-tc-8-1-2, f-tc-8-1-3,f-tc-8-1-4, f-tc-8-1-5, f-tc-8-1-6, f-tc-8-1-7, f-tc-8-1-8
+POLICERS:CIR=3m EIR=0,p-9m,p-15m,p-90m,p-150m,p-900m,p-1500m,p-9000m,p-3m,p-9m-eir,p-15m-eir,p-90m-eir,p-150m-eir,p-900m-eir,p-1500m-eir,p-9000m-eir
+
+[evpl-13]
+UNI:1,0,1,0,0,0
+FILTERS: f-tc-6-1-1, f-tc-6-1-2, f-tc-6-1-3,f-tc-6-1-4, f-tc-6-1-5, f-tc-6-1-6, f-tc-6-1-7, f-tc-6-1-8,f-tc-8-1-1, f-tc-8-1-2,f-tc-8-1-3, f-tc-8-1-4, f-tc-8-1-5, f-tc-8-1-6, f-tc-8-1-7, f-tc-8-1-8
+POLICERS:p-3m,p-9m,p-15m,p-90m,p-150m,p-900m,p-1500m,p-9000m,p-3m,p-9m-eir,p-15m-eir,p-90m-eir,p-150m-eir,p-900m-eir,p-1500m-eir,p-9000m-eir
+
+[eplan-3]
+UNI:1,0,1,1,0,0
+FILTERS: f-tc-6-2-1, f-tc-6-2-2, f-tc-6-2-4, f-tc-6-2-5, f-tc-6-2-6, f-tc-6-2-7, f-tc-6-2-8,f-tc-8-2-1, f-tc-8-2-2,f-tc-8-2-3,f-tc-8-2-4, f-tc-8-2-5, f-tc-8-2-6, f-tc-8-2-7, f-tc-8-2-8
+POLICERS:p-3m,p-9m,p-15m,p-90m,p-150m,p-900m,p-1500m,p-9000m,p-3m,p-9m-eir,p-15m-eir,p-90m-eir,p-150m-eir,p-900m-eir,p-1500m-eir,p-9000m-eir
+
+
+[evplan-14]
+UNI:1,0,1,1,0,0
+FILTERS:f-tc-6-2-1, f-tc-6-2-2, f-tc-6-2-4, f-tc-6-2-5, f-tc-6-2-6, f-tc-6-2-7, f-tc-6-2-8,f-tc-8-2-1, f-tc-8-2-2,f-tc-8-2-3,f-tc-8-2-4, f-tc-8-2-5, f-tc-8-2-6, f-tc-8-2-7, f-tc-8-2-8
+POLICERS:p-3m,p-9m,p-15m,p-90m,p-150m,p-900m,p-1500m,p-9000m,p-3m,p-9m-eir,p-15m-eir,p-90m-eir,p-150m-eir,p-900m-eir,p-1500m-eir,p-9000m-eir
+
+
+
+[aepl-dei-2]
+UNI:1,1,1,0,0,0
+FILTERS:f-tc-1-4-1,f-tc-1-4-2,f-tc-1-4-3,f-tc-1-4-4,f-tc-1-4-5,f-tc-1-4-6,f-tc-1-4-7,f-tc-1-4-8,f-tc-7-4-1,f-tc-7-4-2,f-tc-7-4-3,f-tc-7-4-4
+POLICERS:p-3m,p-9m,p-30m,p-90m,p-300m,p-900m,p-300m,p-9000m
+
+[aepl-pcp-2]
+UNI:1,1,1,0,0,0
+FILTERS:f-tc-1-4-1,f-tc-1-4-2,f-tc-1-4-3,f-tc-1-4-4,f-tc-1-4-5,f-tc-1-4-6,f-tc-1-4-7,f-tc-1-4-8,f-tc-7-4-1,f-tc-7-4-2,f-tc-7-4-3,f-tc-7-4-4
+POLICERS:p-3m,p-9m,p-30m,p-90m,p-300m,p-900m,p-300m,p-9000m
+
+[aevpl-dei-2]
+UNI:1,1,1,0,0,0
+FILTERS:f-tc-1-4-1,f-tc-1-4-2,f-tc-1-4-3,f-tc-1-4-4,f-tc-1-4-5,f-tc-1-4-6,f-tc-1-4-7,f-tc-1-4-8,f-tc-7-4-1,f-tc-7-4-2,f-tc-7-4-3,f-tc-7-4-4
+POLICERS:p-3m,p-9m,p-30m,p-90m,p-300m,p-900m,p-300m,p-9000m
+
+[avepl-pcp-2]
+UNI:1,1,1,0,0,0
+FILTERS:f-tc-1-4-1,f-tc-1-4-2,f-tc-1-4-3,f-tc-1-4-4,f-tc-1-4-5,f-tc-1-4-6,f-tc-1-4-7,f-tc-1-4-8,f-tc-7-4-1,f-tc-7-4-2,f-tc-7-4-3,f-tc-7-4-4
+POLICERS:p-3m,p-9m,p-30m,p-90m,p-300m,p-900m,p-300m,p-9000m

@@ -1,0 +1,480 @@
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: -------------- GET FILE SIZE FIRST-----------
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: -------------- NOW READ TO ARRAY -----------
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(0): XLS TEMPLATE=NULL
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(1): XLS TEMPLATE=NULL
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(2): XLS TEMPLATE=NULL
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(3): XLS TEMPLATE=NULL
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(4): Original TCG Templates=C:\MEF\TCG\Original
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(5): Exported TCG Templates=C:\MEF\TCG\Result
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(6): WorkBookPrefix=EPL,EVPL,
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(7): WorkBookPrefix=EP-LAN,EVP-LAN,
+10/24/2015 3:14:07 PM: GetFileLineCountByGroup: vFileLines(8): WorkBookPrefix=AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                             NULL
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                             NULL
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                             NULL
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                             NULL
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                              C:\MEF\TCG\Original
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                C:\MEF\TCG\Result
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                        EPL,EVPL,
+10/24/2015 3:14:07 PM:  GetTemplates:                                                                                  EP-LAN,EVP-LAN,
+10/24/2015 3:14:07 PM:  GetTemplates:                                                AEPL,AEPL-DEI,AEPL-PCP,AEVPL,AEVPL-DEI,AEVPL-PCP,
+10/24/2015 3:14:07 PM:  GetTestSeries: TOTAL TASKS IN CATEGORY: E-Line                                                               2
+10/24/2015 3:14:07 PM:  GetTestSeries: TOTAL TASKS IN CATEGORY: E-LAN                                                                2
+10/24/2015 3:14:07 PM:  GetTestSeries: TOTAL TASKS IN CATEGORY: E-Access                                                             6
+10/24/2015 3:14:07 PM:  GetTestSeries: nMaxFlavor = 6                                                                                 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                                   GetTestSeries: LOAD PROPERTIES FOR [E-Line] 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:  GetTestSeries:epl:1,2,3,4,5,6,7,8                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(0,0,0) = epl                                                                           
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(0,0,1) = 1,2,3,4,5,6,7,8                                                               
+10/24/2015 3:14:07 PM:  GetTestSeries:evpl:1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21                                            
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(0,1,0) = evpl                                                                          
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(0,1,1) = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21                               
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                                   GetTestSeries: LOAD PROPERTIES FOR [E-LAN] 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:  GetTestSeries:eplan:1,2,3,4,5,6,7,8,15                                                                        
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(1,0,0) = eplan                                                                         
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(1,0,1) = 1,2,3,4,5,6,7,8,15                                                            
+10/24/2015 3:14:07 PM:  GetTestSeries:evplan:1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,25                                       
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(1,1,0) = evplan                                                                        
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(1,1,1) = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,25                            
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                                  GetTestSeries: LOAD PROPERTIES FOR [E-Access] 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:  GetTestSeries:aepl:1                                                                                          
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,0,0) = aepl                                                                          
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,0,1) = 1                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries:aepl-dei:2                                                                                      
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,1,0) = aepl-dei                                                                      
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,1,1) = 2                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries:aepl-pcp:2                                                                                      
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,2,0) = aepl-pcp                                                                      
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,2,1) = 2                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries:aevpl:1                                                                                         
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,3,0) = aevpl                                                                         
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,3,1) = 1                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries:aevpl-dei:2                                                                                     
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,4,0) = aevpl-dei                                                                     
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,4,1) = 2                                                                             
+10/24/2015 3:14:07 PM:  GetTestSeries:aevpl-pcp:2                                                                                     
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,5,0) = aevpl-pcp                                                                     
+10/24/2015 3:14:07 PM:  GetTestSeries: Flavors(2,5,1) = 2                                                                             
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                                    GetTestSeries: LAST LOADED SESSION: 1-0-3 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                            IE_PromptForInputPullDown: OPEN MAIN CONFIG LOADER FORM  
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:07 PM:                                   IE_PromptForInputPullDown: nMaxFlavors = 6 
+10/24/2015 3:14:07 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:08 PM:  MAIN FORM:                                                                                               eplan
+10/24/2015 3:14:08 PM:  MAIN FORM:                                                                                              evplan
+10/24/2015 3:14:08 PM:  GetFilterList: FOUND FILTER:                                                                       f-tc-10-2-1
+10/24/2015 3:14:08 PM:  GetFilterList: FOUND POLICER (key "-rate"):                                                               p-3m
+10/24/2015 3:14:08 PM:  GetFilterList: FOUND SETTINGS FOR POLICER:                                                                p-3m
+10/24/2015 3:14:08 PM:  COMMAND:  tasklist /fo csv /fi "Windowtitle eq Juniper Networks MEF Configuration Loader - Windows Internet Explorer provided by Juniper Networks" >C:\Users\vmukhin\svc-646557.dat
+10/24/2015 3:14:08 PM:  BATCH FILE EXECUTED:  C:\Users\vmukhin\run-646557.bat
+           GETTING SIZE OF THE FILE FIRST        
+GetFileLineCountSelect:    "Image Name","PID","Session Name","Session#","Mem Usage"
+GetFileLineCountSelect:    "iexplore.exe","8708","Console","1","33,648 K"
+File Size: 2 Array Size: 2
+           NOW TRYING TO RIGHT INTO AN ARRAY        
+GetFileLineCountSelect: vFileLines(0)="Image Name","PID","Session Name","Session#","Mem Usage"
+GetFileLineCountSelect: vFileLines(1)="iexplore.exe","8708","Console","1","33,648 K"
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Left cfg: ge-0/1/2                                              OK (266)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Left cfg:ge-0/1/3                                               NONE (0)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Left cfg: ge-0/0/7                                              OK (257)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Right cfg: ge-0/0/7                                             OK (257)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Right cfg: ge-0/1/1                                             OK (266)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Right cfg: ge-0/1/3                                             OK (282)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Right cfg:ge-0/1/0                                              NONE (0)
+10/24/2015 3:14:08 PM:  IE_PromptForInput: Looking for UNI in Right cfg:ge-0/1/2                                              NONE (0)
+10/24/2015 3:14:23 PM:  COMMAND:  tasklist /fo csv /fi "Windowtitle eq DownLoad configurations? - Windows Internet Explorer provided by Juniper Networks" >C:\Users\vmukhin\svc-181007.dat
+10/24/2015 3:14:23 PM:  BATCH FILE EXECUTED:  C:\Users\vmukhin\run-181007.bat
+           GETTING SIZE OF THE FILE FIRST        
+GetFileLineCountSelect:    "Image Name","PID","Session Name","Session#","Mem Usage"
+GetFileLineCountSelect:    "iexplore.exe","8708","Console","1","34,064 K"
+File Size: 2 Array Size: 2
+           NOW TRYING TO RIGHT INTO AN ARRAY        
+GetFileLineCountSelect: vFileLines(0)="Image Name","PID","Session Name","Session#","Mem Usage"
+GetFileLineCountSelect: vFileLines(1)="iexplore.exe","8708","Console","1","34,064 K"
+10/24/2015 3:14:26 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:26 PM:           IE_PromptForInput: TRYING TO OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-LINE_TCG_v3.5.xlsx 
+10/24/2015 3:14:26 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:27 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 1                                                          
+10/24/2015 3:14:27 PM:  IE_PromptForInput: LOOKING FOR Start Row: 251                                                                 
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-1-acx-l.conf                                                            FOUND
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-1-acx-r.conf                                                            FOUND
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-1-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-1-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:27 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 2                                                          
+10/24/2015 3:14:27 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-2-acx-l.conf                                                            FOUND
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-2-acx-r.conf                                                            FOUND
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-2-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:27 PM:  EXPORT CONFIGURATION: E-Line\epl-2-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:27 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 3                                                          
+10/24/2015 3:14:28 PM:  IE_PromptForInput: LOOKING FOR Start Row: 125                                                                 
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-3-acx-l.conf                                                            FOUND
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-3-acx-r.conf                                                            FOUND
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-3-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-3-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:28 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 4                                                          
+10/24/2015 3:14:28 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-4-acx-l.conf                                                            FOUND
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-4-acx-r.conf                                                            FOUND
+10/24/2015 3:14:28 PM:  EXPORT CONFIGURATION: E-Line\epl-4-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-4-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:29 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 5                                                          
+10/24/2015 3:14:29 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-5-acx-l.conf                                                            FOUND
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-5-acx-r.conf                                                            FOUND
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-5-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-5-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:29 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 6                                                          
+10/24/2015 3:14:29 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-6-acx-l.conf                                                            FOUND
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-6-acx-r.conf                                                            FOUND
+10/24/2015 3:14:29 PM:  EXPORT CONFIGURATION: E-Line\epl-6-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-6-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:30 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 7                                                          
+10/24/2015 3:14:30 PM:  IE_PromptForInput: LOOKING FOR Start Row: 39                                                                  
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-7-acx-l.conf                                                            FOUND
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-7-acx-r.conf                                                            FOUND
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-7-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-7-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:30 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EPL CFG 8                                                          
+10/24/2015 3:14:30 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-8-acx-l.conf                                                            FOUND
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-8-acx-r.conf                                                            FOUND
+10/24/2015 3:14:30 PM:  EXPORT CONFIGURATION: E-Line\epl-8-acx-l.conf                                                        POPULATED
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\epl-8-acx-r.conf                                                        POPULATED
+10/24/2015 3:14:31 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 1                                                         
+10/24/2015 3:14:31 PM:  IE_PromptForInput: LOOKING FOR Start Row: 176                                                                 
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-1-acx-l.conf                                                           FOUND
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-1-acx-r.conf                                                           FOUND
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-1-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-1-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:31 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 2                                                         
+10/24/2015 3:14:31 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-2-acx-l.conf                                                           FOUND
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-2-acx-r.conf                                                           FOUND
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-2-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-2-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:31 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 3                                                         
+10/24/2015 3:14:31 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-3-acx-l.conf                                                           FOUND
+10/24/2015 3:14:31 PM:  EXPORT CONFIGURATION: E-Line\evpl-3-acx-r.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-3-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-3-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 4                                                         
+10/24/2015 3:14:32 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-4-acx-l.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-4-acx-r.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-4-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-4-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 5                                                         
+10/24/2015 3:14:32 PM:  IE_PromptForInput: LOOKING FOR Start Row: 51                                                                  
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-5-acx-l.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-5-acx-r.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-5-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-5-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:32 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 6                                                         
+10/24/2015 3:14:32 PM:  IE_PromptForInput: LOOKING FOR Start Row: 37                                                                  
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-6-acx-l.conf                                                           FOUND
+10/24/2015 3:14:32 PM:  EXPORT CONFIGURATION: E-Line\evpl-6-acx-r.conf                                                           FOUND
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-6-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-6-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:33 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 7                                                         
+10/24/2015 3:14:33 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-7-acx-l.conf                                                           FOUND
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-7-acx-r.conf                                                           FOUND
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-7-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-7-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:33 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 8                                                         
+10/24/2015 3:14:33 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-8-acx-l.conf                                                           FOUND
+10/24/2015 3:14:33 PM:  EXPORT CONFIGURATION: E-Line\evpl-8-acx-r.conf                                                           FOUND
+10/24/2015 3:14:34 PM:  EXPORT CONFIGURATION: E-Line\evpl-8-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:35 PM:  EXPORT CONFIGURATION: E-Line\evpl-8-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:35 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 9                                                         
+10/24/2015 3:14:35 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:35 PM:  EXPORT CONFIGURATION: E-Line\evpl-9-acx-l.conf                                                           FOUND
+10/24/2015 3:14:35 PM:  EXPORT CONFIGURATION: E-Line\evpl-9-acx-r.conf                                                           FOUND
+10/24/2015 3:14:40 PM:  EXPORT CONFIGURATION: E-Line\evpl-9-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-9-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:45 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 10                                                        
+10/24/2015 3:14:45 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-10-acx-l.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-10-acx-r.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-10-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-10-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:45 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 11                                                        
+10/24/2015 3:14:45 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-11-acx-l.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-11-acx-r.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-11-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-11-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:45 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 12                                                        
+10/24/2015 3:14:45 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-12-acx-l.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-12-acx-r.conf                                                          FOUND
+10/24/2015 3:14:45 PM:  EXPORT CONFIGURATION: E-Line\evpl-12-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-12-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:46 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 13                                                        
+10/24/2015 3:14:46 PM:  IE_PromptForInput: LOOKING FOR Start Row: 166                                                                 
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-13-acx-l.conf                                                          FOUND
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-13-acx-r.conf                                                          FOUND
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-13-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-13-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:46 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 14                                                        
+10/24/2015 3:14:46 PM:  IE_PromptForInput: LOOKING FOR Start Row: 39                                                                  
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-14-acx-l.conf                                                          FOUND
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-14-acx-r.conf                                                          FOUND
+10/24/2015 3:14:46 PM:  EXPORT CONFIGURATION: E-Line\evpl-14-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:47 PM:  EXPORT CONFIGURATION: E-Line\evpl-14-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:47 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 15                                                        
+10/24/2015 3:14:47 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:47 PM:  EXPORT CONFIGURATION: E-Line\evpl-15-acx-l.conf                                                          FOUND
+10/24/2015 3:14:47 PM:  EXPORT CONFIGURATION: E-Line\evpl-15-acx-r.conf                                                          FOUND
+10/24/2015 3:14:47 PM:  EXPORT CONFIGURATION: E-Line\evpl-15-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:47 PM:  EXPORT CONFIGURATION: E-Line\evpl-15-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:47 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 16                                                        
+10/24/2015 3:14:48 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-16-acx-l.conf                                                          FOUND
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-16-acx-r.conf                                                          FOUND
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-16-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-16-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:48 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 17                                                        
+10/24/2015 3:14:48 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-17-acx-l.conf                                                          FOUND
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-17-acx-r.conf                                                          FOUND
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-17-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-17-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:48 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 18                                                        
+10/24/2015 3:14:48 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-18-acx-l.conf                                                          FOUND
+10/24/2015 3:14:48 PM:  EXPORT CONFIGURATION: E-Line\evpl-18-acx-r.conf                                                          FOUND
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-18-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-18-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:49 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVPL CFG 21                                                        
+10/24/2015 3:14:49 PM:  IE_PromptForInput: LOOKING FOR Start Row: 39                                                                  
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-21-acx-l.conf                                                          FOUND
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-21-acx-r.conf                                                          FOUND
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-21-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:49 PM:  EXPORT CONFIGURATION: E-Line\evpl-21-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:50 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:50 PM:            IE_PromptForInput: TRYING TO OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-LAN_TCG_v3.5.xlsx 
+10/24/2015 3:14:50 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:14:51 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 1                                                       
+10/24/2015 3:14:51 PM:  IE_PromptForInput: LOOKING FOR Start Row: 342                                                                 
+10/24/2015 3:14:51 PM:  EXPORT CONFIGURATION: E-LAN\eplan-1-acx-l.conf                                                           FOUND
+10/24/2015 3:14:51 PM:  EXPORT CONFIGURATION: E-LAN\eplan-1-acx-r.conf                                                           FOUND
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-1-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-1-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:52 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 2                                                       
+10/24/2015 3:14:52 PM:  IE_PromptForInput: LOOKING FOR Start Row: 49                                                                  
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-2-acx-l.conf                                                           FOUND
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-2-acx-r.conf                                                           FOUND
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-2-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-2-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:52 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 3                                                       
+10/24/2015 3:14:52 PM:  IE_PromptForInput: LOOKING FOR Start Row: 101                                                                 
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-3-acx-l.conf                                                           FOUND
+10/24/2015 3:14:52 PM:  EXPORT CONFIGURATION: E-LAN\eplan-3-acx-r.conf                                                           FOUND
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-3-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-3-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:53 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 4                                                       
+10/24/2015 3:14:53 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-4-acx-l.conf                                                           FOUND
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-4-acx-r.conf                                                           FOUND
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-4-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-4-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:53 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 5                                                       
+10/24/2015 3:14:53 PM:  IE_PromptForInput: LOOKING FOR Start Row: 41                                                                  
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-5-acx-l.conf                                                           FOUND
+10/24/2015 3:14:53 PM:  EXPORT CONFIGURATION: E-LAN\eplan-5-acx-r.conf                                                           FOUND
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-5-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-5-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:54 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 6                                                       
+10/24/2015 3:14:54 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-6-acx-l.conf                                                           FOUND
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-6-acx-r.conf                                                           FOUND
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-6-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-6-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:54 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 7                                                       
+10/24/2015 3:14:54 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-7-acx-l.conf                                                           FOUND
+10/24/2015 3:14:54 PM:  EXPORT CONFIGURATION: E-LAN\eplan-7-acx-r.conf                                                           FOUND
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-7-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-7-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:55 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 8                                                       
+10/24/2015 3:14:55 PM:  IE_PromptForInput: LOOKING FOR Start Row: 42                                                                  
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-8-acx-l.conf                                                           FOUND
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-8-acx-r.conf                                                           FOUND
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-8-acx-l.conf                                                       POPULATED
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-8-acx-r.conf                                                       POPULATED
+10/24/2015 3:14:55 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EP-LAN CFG 15                                                      
+10/24/2015 3:14:55 PM:  IE_PromptForInput: LOOKING FOR Start Row: 43                                                                  
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-15-acx-l.conf                                                          FOUND
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-15-acx-r.conf                                                          FOUND
+10/24/2015 3:14:55 PM:  EXPORT CONFIGURATION: E-LAN\eplan-15-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\eplan-15-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 1                                                      
+10/24/2015 3:14:56 PM:  IE_PromptForInput: LOOKING FOR Start Row: 253                                                                 
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-1-acx-l.conf                                                          FOUND
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-1-acx-r.conf                                                          FOUND
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-1-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-1-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 2                                                      
+10/24/2015 3:14:56 PM:  IE_PromptForInput: LOOKING FOR Start Row: 52                                                                  
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-2-acx-l.conf                                                          FOUND
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-2-acx-r.conf                                                          FOUND
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-2-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-2-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:56 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 3                                                      
+10/24/2015 3:14:56 PM:  IE_PromptForInput: LOOKING FOR Start Row: 52                                                                  
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-3-acx-l.conf                                                          FOUND
+10/24/2015 3:14:56 PM:  EXPORT CONFIGURATION: E-LAN\evplan-3-acx-r.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-3-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-3-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 4                                                      
+10/24/2015 3:14:57 PM:  IE_PromptForInput: LOOKING FOR Start Row: 47                                                                  
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-4-acx-l.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-4-acx-r.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-4-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-4-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 5                                                      
+10/24/2015 3:14:57 PM:  IE_PromptForInput: LOOKING FOR Start Row: 58                                                                  
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-5-acx-l.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-5-acx-r.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-5-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-5-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:57 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 6                                                      
+10/24/2015 3:14:57 PM:  IE_PromptForInput: LOOKING FOR Start Row: 40                                                                  
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-6-acx-l.conf                                                          FOUND
+10/24/2015 3:14:57 PM:  EXPORT CONFIGURATION: E-LAN\evplan-6-acx-r.conf                                                          FOUND
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-6-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-6-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 7                                                      
+10/24/2015 3:14:58 PM:  IE_PromptForInput: LOOKING FOR Start Row: 39                                                                  
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-7-acx-l.conf                                                          FOUND
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-7-acx-r.conf                                                          FOUND
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-7-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-7-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 8                                                      
+10/24/2015 3:14:58 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-8-acx-l.conf                                                          FOUND
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-8-acx-r.conf                                                          FOUND
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-8-acx-l.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  EXPORT CONFIGURATION: E-LAN\evplan-8-acx-r.conf                                                      POPULATED
+10/24/2015 3:14:58 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 9                                                      
+10/24/2015 3:14:59 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:14:59 PM:  EXPORT CONFIGURATION: E-LAN\evplan-9-acx-l.conf                                                          FOUND
+10/24/2015 3:14:59 PM:  EXPORT CONFIGURATION: E-LAN\evplan-9-acx-r.conf                                                          FOUND
+10/24/2015 3:14:59 PM:  EXPORT CONFIGURATION: E-LAN\evplan-9-acx-l.conf                                                      POPULATED
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-9-acx-r.conf                                                      POPULATED
+10/24/2015 3:15:00 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 10                                                     
+10/24/2015 3:15:00 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-10-acx-l.conf                                                     NOT FOUND
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-10-acx-r.conf                                                     NOT FOUND
+10/24/2015 3:15:00 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 11                                                     
+10/24/2015 3:15:00 PM:  IE_PromptForInput: LOOKING FOR Start Row: 45                                                                  
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-11-acx-l.conf                                                         FOUND
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-11-acx-r.conf                                                         FOUND
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-11-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:00 PM:  EXPORT CONFIGURATION: E-LAN\evplan-11-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:00 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 12                                                     
+10/24/2015 3:15:01 PM:  IE_PromptForInput: LOOKING FOR Start Row: 45                                                                  
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-12-acx-l.conf                                                         FOUND
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-12-acx-r.conf                                                         FOUND
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-12-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-12-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:01 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 13                                                     
+10/24/2015 3:15:01 PM:  IE_PromptForInput: LOOKING FOR Start Row: 45                                                                  
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-13-acx-l.conf                                                     NOT FOUND
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-13-acx-r.conf                                                     NOT FOUND
+10/24/2015 3:15:01 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 14                                                     
+10/24/2015 3:15:01 PM:  IE_PromptForInput: LOOKING FOR Start Row: 99                                                                  
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-14-acx-l.conf                                                         FOUND
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-14-acx-r.conf                                                         FOUND
+10/24/2015 3:15:01 PM:  EXPORT CONFIGURATION: E-LAN\evplan-14-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-14-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:02 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 15                                                     
+10/24/2015 3:15:02 PM:  IE_PromptForInput: LOOKING FOR Start Row: 42                                                                  
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-15-acx-l.conf                                                         FOUND
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-15-acx-r.conf                                                         FOUND
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-15-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-15-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:02 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 16                                                     
+10/24/2015 3:15:02 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-16-acx-l.conf                                                         FOUND
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-16-acx-r.conf                                                         FOUND
+10/24/2015 3:15:02 PM:  EXPORT CONFIGURATION: E-LAN\evplan-16-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-16-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:03 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 17                                                     
+10/24/2015 3:15:03 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-17-acx-l.conf                                                         FOUND
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-17-acx-r.conf                                                         FOUND
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-17-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-17-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:03 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 18                                                     
+10/24/2015 3:15:03 PM:  IE_PromptForInput: LOOKING FOR Start Row: 44                                                                  
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-18-acx-l.conf                                                         FOUND
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-18-acx-r.conf                                                         FOUND
+10/24/2015 3:15:03 PM:  EXPORT CONFIGURATION: E-LAN\evplan-18-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-18-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:04 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 19                                                     
+10/24/2015 3:15:04 PM:  IE_PromptForInput: LOOKING FOR Start Row: 46                                                                  
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-19-acx-l.conf                                                         FOUND
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-19-acx-r.conf                                                         FOUND
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-19-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-19-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:04 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: EVP-LAN CFG 25                                                     
+10/24/2015 3:15:04 PM:  IE_PromptForInput: LOOKING FOR Start Row: 42                                                                  
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-25-acx-l.conf                                                         FOUND
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-25-acx-r.conf                                                         FOUND
+10/24/2015 3:15:04 PM:  EXPORT CONFIGURATION: E-LAN\evplan-25-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:05 PM:  EXPORT CONFIGURATION: E-LAN\evplan-25-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:06 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:15:06 PM:          IE_PromptForInput: TRYING TO OPEN WorkBook: C:\MEF\TCG\Original\CE2.0_E-Access_TCG_v3.5.xlsx 
+10/24/2015 3:15:06 PM:  ---------------------------------------------------------------------------------------------------------------
+10/24/2015 3:15:06 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEPL CFG 1                                                         
+10/24/2015 3:15:06 PM:  IE_PromptForInput: LOOKING FOR Start Row: 145                                                                 
+10/24/2015 3:15:06 PM:  EXPORT CONFIGURATION: E-Access\aepl-1-acx-l.conf                                                         FOUND
+10/24/2015 3:15:06 PM:  EXPORT CONFIGURATION: E-Access\aepl-1-acx-r.conf                                                         FOUND
+10/24/2015 3:15:06 PM:  EXPORT CONFIGURATION: E-Access\aepl-1-acx-l.conf                                                     POPULATED
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-1-acx-r.conf                                                     POPULATED
+10/24/2015 3:15:07 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEPL-DEI CFG 2                                                     
+10/24/2015 3:15:07 PM:  IE_PromptForInput: LOOKING FOR Start Row: 171                                                                 
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-dei-2-acx-l.conf                                                     FOUND
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-dei-2-acx-r.conf                                                     FOUND
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-dei-2-acx-l.conf                                                 POPULATED
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-dei-2-acx-r.conf                                                 POPULATED
+10/24/2015 3:15:07 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEPL-PCP CFG 2                                                     
+10/24/2015 3:15:07 PM:  IE_PromptForInput: LOOKING FOR Start Row: 171                                                                 
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-pcp-2-acx-l.conf                                                     FOUND
+10/24/2015 3:15:07 PM:  EXPORT CONFIGURATION: E-Access\aepl-pcp-2-acx-r.conf                                                     FOUND
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aepl-pcp-2-acx-l.conf                                                 POPULATED
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aepl-pcp-2-acx-r.conf                                                 POPULATED
+10/24/2015 3:15:08 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEVPL CFG 1                                                        
+10/24/2015 3:15:08 PM:  IE_PromptForInput: LOOKING FOR Start Row: 136                                                                 
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aevpl-1-acx-l.conf                                                        FOUND
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aevpl-1-acx-r.conf                                                        FOUND
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aevpl-1-acx-l.conf                                                    POPULATED
+10/24/2015 3:15:08 PM:  EXPORT CONFIGURATION: E-Access\aevpl-1-acx-r.conf                                                    POPULATED
+10/24/2015 3:15:08 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEVPL-DEI CFG 2                                                    
+10/24/2015 3:15:09 PM:  IE_PromptForInput: LOOKING FOR Start Row: 168                                                                 
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-dei-2-acx-l.conf                                                    FOUND
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-dei-2-acx-r.conf                                                    FOUND
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-dei-2-acx-l.conf                                                POPULATED
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-dei-2-acx-r.conf                                                POPULATED
+10/24/2015 3:15:09 PM:  IE_PromptForInput: TRYING TO OPEN XLSheet: AEVPL-PCP CFG 2                                                    
+10/24/2015 3:15:09 PM:  IE_PromptForInput: LOOKING FOR Start Row: 168                                                                 
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-pcp-2-acx-l.conf                                                    FOUND
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-pcp-2-acx-r.conf                                                    FOUND
+10/24/2015 3:15:09 PM:  EXPORT CONFIGURATION: E-Access\aevpl-pcp-2-acx-l.conf                                                POPULATED
+10/24/2015 3:15:10 PM:  EXPORT CONFIGURATION: E-Access\aevpl-pcp-2-acx-r.conf                                                POPULATED

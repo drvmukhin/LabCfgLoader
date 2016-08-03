@@ -1,0 +1,352 @@
+﻿--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-AAA-test-cfg.conf 
+Wrote 127 lines of configuration to 'switch-AAA-test-cfg.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./AAA-test-cfg/2016-3-9-v.02
+250 CWD successful. "/AAA-test-cfg/2016-3-9-v.02" is current directory.
+ftp> put switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/AAA-test-cfg/2016-3-9-v.02/switch-AAA-test-cfg.conf"
+100% |****************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.02/switch-AAA-test-cfg.conf"
+3700 bytes sent in 0.63 seconds (5.78 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-AAA-test-cfg.conf 
+Wrote 127 lines of configuration to 'switch-AAA-test-cfg.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./AAA-test-cfg/2016-3-9-v.03
+250 CWD successful. "/AAA-test-cfg/2016-3-9-v.03" is current directory.
+ftp> put switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+100% |****************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+3700 bytes sent in 0.63 seconds (5.70 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-AAA-test-cfg.conf 
+Wrote 127 lines of configuration to 'switch-AAA-test-cfg.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./AAA-test-cfg/2016-3-9-v.03
+250 CWD successful. "/AAA-test-cfg/2016-3-9-v.03" is current directory.
+ftp> put switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+100% |****************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+3700 bytes sent in 0.63 seconds (5.74 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-AAA-test-cfg.conf 
+Wrote 127 lines of configuration to 'switch-AAA-test-cfg.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./AAA-test-cfg/2016-3-9-v.03
+250 CWD successful. "/AAA-test-cfg/2016-3-9-v.03" is current directory.
+ftp> put switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+100% |****************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.03/switch-AAA-test-cfg.conf"
+3700 bytes sent in 0.63 seconds (5.76 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# save switch-AAA-test-cfg.conf 
+Wrote 127 lines of configuration to 'switch-AAA-test-cfg.conf'
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./AAA-test-cfg/2016-3-9-v.04
+250 CWD successful. "/AAA-test-cfg/2016-3-9-v.04" is current directory.
+ftp> put switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf"
+100% |***************************************************************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf"
+3700 bytes sent in 0.63 seconds (5.73 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3R6.6 built 2014-03-13 06:58:30 UTC
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> show version 
+Hostname: eabu-sol-eng-dc-s9
+Model: mx80-48t
+JUNOS Base OS boot [12.3R6.6]
+JUNOS Base OS Software Suite [12.3R6.6]
+JUNOS Kernel Software Suite [12.3R6.6]
+JUNOS Crypto Software Suite [12.3R6.6]
+JUNOS Packet Forwarding Engine Support (MX80) [12.3R6.6]
+JUNOS Online Documentation [12.3R6.6]
+JUNOS Routing Software Suite [12.3R6.6]
+
+vmukhin@eabu-sol-eng-dc-s9> 
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# edit groups global 
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-s9# save grp-global-original.conf 
+Wrote 100 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# edit groups re0 
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-s9# show 
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.136/23;
+            }
+        }
+    }
+}
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-s9# save grp-re0.conf 
+Wrote 15 lines of configuration to 'grp-re0.conf'
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-s9> ftp 172.29.65.79 
+Connected to 172.29.65.79.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.65.79:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf switch-AAA-test-cfg.conf
+local: switch-AAA-test-cfg.conf remote: ./AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf"
+100% |***************************************************************************************|  3700       00:00 ETA
+226 Successfully transferred "/AAA-test-cfg/2016-3-9-v.04/switch-AAA-test-cfg.conf"
+3700 bytes received in 0.62 seconds (5.84 KB/s)
+ftp> quit
+221 Goodbye
+
+vmukhin@eabu-sol-eng-dc-s9> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete access 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete services 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete routing-instances 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete protocols 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete interfaces 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# delete routing-options 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# commit 
+commit complete
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# load update switch-AAA-test-cfg.conf 
+edit groups global
+load complete
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# edit groups global 
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-s9# load replace grp-global-original.conf 
+exit
+load complete
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# set apply-groups global 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# edit groups re0 
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-s9# load replace grp-re0.conf 
+exit
+load complete
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-s9# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# set apply-groups re0 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-s9# commit 
+commit complete
+
+[edit]

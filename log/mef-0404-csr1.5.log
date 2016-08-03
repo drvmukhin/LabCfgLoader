@@ -1,0 +1,614 @@
+﻿--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf 
+
+vmukhin@node-r> file show csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf |match "Last change" 
+
+vmukhin@node-r> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6/None-v.01
+250 CWD successful. "/mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6/None-v.01" is current directory.
+ftp> put csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf
+local: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf remote: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf
+ftp: local: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf: No such file or directory
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf 
+
+vmukhin@node-r> file show csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf |match "Last change" 
+
+vmukhin@node-r> ftp 172.29.100.44 
+Connected to 172.29.100.44.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.100.44:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27/None-v.01
+250 CWD successful. "/mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27/None-v.01" is current directory.
+ftp> put csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf
+local: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf remote: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf
+ftp: local: csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf: No such file or directory
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.0-isis-areas-full.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.0-full.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-vlans-auto-mesh.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-6.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-june-27.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-with-mng-in-grt.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-july-01.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-rsvp-auto-mesh-bgp-lu-july-02-01.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-July-05.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-July-07.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-July-08.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-July-08.1.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-isis-ring-bgp-lu-rsvp-auto-mesh-july08.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-ospf-zero-July-09-00.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-hub&spoke-00.01-July-12.conf
+                                                  ^
+syntax error.
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-hub&spoke-00.01-july-12.conf
+                                                  ^
+syntax error.
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-hs-00.01-July-12.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-HS-OSPF-LFA-LDP-bgp-lu-luly-12.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-HS-ospf-lfa-ldp-bgp-lu-july-12.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-isis-rsvp-4G-VPLS-ver01-July-15.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-sis-rsvp-NEW-VPLS-July-15.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-sis-rsvp-BGP-VPLS-July-15.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-full-isis-rsvp-bgp-lu-VPLS-OAM-July-16.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh0.0-zero-conf-ring.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-test-config.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-A&A0.0-Zero-HaS-topology.conf
+                                         ^
+syntax error.
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce2.0-services.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce2.0-services-July31.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh1.1-isis-ring-bgp-lu-rsvp-VPLS-BGP-oam-mip-july-31-OAM-good.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-8032-AG1-protection-drafted-00.01-Aug-01.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-8032-AG1-and-CSR-protection-drafted-00.01-Aug-01.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-8032-All-protection-drafted-00.01-Aug-05.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-8032-All-protection-VPLS-Multihooming-BGP-drafted-00.02-Aug-06.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-all-services-protection-NO-ELAN-Aug-06.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-all-services-vpls-bd-ccc-8032-ed01.00-July-07.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-all-service-protected-8032-MTU-bgp-vpls.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-service-all-plus-mng-Aug-24.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-csr1.2-ce20-service-all-plus-ce-protection-new-Aug-27.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-all-services-pw-protect-profile-Aug-28.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-all-services-isis-rsvp-auto-oam-March-25-14.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-IPSEC-all-services-isis-rsvp-auto-oam-March-25-14.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-IPSEC-all-services-isis-rsvp-auto-oam-March-31-14.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-nsn-ipsec-jerry-1.0.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-MBH2.0-all-services-RLI18053-May-13-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-PWHT-for-Shokarev-07-July-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-PWHT-for-Shokarev-09-July-2014-01.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Lab-Zero-Config.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Lab-Zero-Config-global.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Lab-Zero-Config-re0.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Lab-Zero-Config-re1.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-BlueSky1.0-MBH-Sep-16-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-Telenor-IPsec.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-Telenor-IPsec-Multi-VRF-BFD.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-Telenor-IPsec-Multi-VRF-BFD-RLT.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-uaa2.0-multicast-p2p-protection-Sep-30-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-uaa2.0-Multicast-Andreas-03-Oct-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-uaa2.0-Multicast-Andreas-Oct-03-2014.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-mbh2.0-all-services-isis-rsvp-auto-oam-March-19-2015.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-MetroE3.0-PSPHT-with-OAM-PW.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-T&S-Cronos-test-May-05-2015.conf
+                                         ^
+syntax error.
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Chronos-SFP-test-May-05-2015.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-Chronos-SFP-test-May-22-2015.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-uaa2.0-ztd-unnumbered-mpls.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-uaa2.0-ZTP-unnumbered-mpls-Oct-29-2015.conf 
+
+--- JUNOS 12.3X54-D15.3 built 2014-11-29 23:21:25 UTC
+
+vmukhin@node-r> 
+
+vmukhin@node-r> 
+
+vmukhin@node-r> file list |match csr1.5-ce20-service-all-ACX5K-Nov-13-2015.conf 
+

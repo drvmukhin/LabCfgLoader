@@ -1,0 +1,213 @@
+﻿--- JUNOS 14.1B3 built 2014-04-01 21:49:53 UTC
+
+vmukhin@eabu-sol-eng-dc-core-01> 
+
+vmukhin@eabu-sol-eng-dc-core-01> 
+
+vmukhin@eabu-sol-eng-dc-core-01> show version 
+Hostname: eabu-sol-eng-dc-core-01
+Model: mx480
+Junos: 14.1B3
+JUNOS Base OS boot [14.1B3]
+JUNOS Base OS Software Suite [14.1B3]
+JUNOS 64-bit Kernel Software Suite [14.1B3]
+JUNOS Crypto Software Suite [14.1B3]
+JUNOS Packet Forwarding Engine Support (M/T/EX Common) [14.1B3]
+JUNOS Packet Forwarding Engine Support (MX Common) [14.1B3]
+JUNOS Online Documentation [14.1B3]
+JUNOS Services AACL Container package [14.1B3]
+JUNOS Services Application Level Gateways [14.1B3]
+JUNOS AppId Services [14.1B3]
+JUNOS Border Gateway Function package [14.1B3]
+JUNOS Services Captive Portal and Content Delivery Container package [14.1B3]
+JUNOS Services HTTP Content Management package [14.1B3]
+JUNOS IDP Services [14.1B3]
+JUNOS Services Jflow Container package [14.1B3]
+JUNOS Services LL-PDF Container package [14.1B3]
+JUNOS Services MobileNext Software package [14.1B3]
+JUNOS Services Mobile Subscriber Service Container package [14.1B3]
+JUNOS Services NAT [14.1B3]
+JUNOS Services PTSP Container package [14.1B3]
+JUNOS Services RPM [14.1B3]
+JUNOS Services Stateful Firewall [14.1B3]
+JUNOS Voice Services Container package [14.1B3]
+JUNOS Services Crypto [14.1B3]
+JUNOS Services SSL [14.1B3]
+JUNOS Services IPSec [14.1B3]
+JUNOS platform Software Suite [14.1B3]
+JUNOS Runtime Software Suite [14.1B3]
+JUNOS 64-bit Runtime Software Suite [14.1B3]
+JUNOS Routing Software Suite [14.1B3]
+JUNOS py-base-i386 [14.1B3]
+
+vmukhin@eabu-sol-eng-dc-core-01> 
+
+vmukhin@eabu-sol-eng-dc-core-01> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups global 
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-core-01# save grp-global-original.conf 
+Wrote 311 lines of configuration to 'grp-global-original.conf'
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups re0 
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-core-01# show 
+system {
+    host-name eabu-sol-eng-dc-core-01;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.130/23;
+            }
+        }
+    }
+}
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-core-01# save grp-re0.conf 
+Wrote 18 lines of configuration to 'grp-re0.conf'
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups re1 
+
+[edit groups re1]
+vmukhin@eabu-sol-eng-dc-core-01# show 
+system {
+    host-name eabu-sol-eng-dc-core-01-1;
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.164.1.131/23;
+            }
+        }
+    }
+}
+
+[edit groups re1]
+vmukhin@eabu-sol-eng-dc-core-01# save grp-re1.conf 
+Wrote 18 lines of configuration to 'grp-re1.conf'
+
+[edit groups re1]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+Exiting configuration mode
+
+vmukhin@eabu-sol-eng-dc-core-01> ftp 172.29.102.181 
+Connected to 172.29.102.181.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.102.181:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> get ./MetroE3.0-PSPHT-with-OAM-PW/2015-02-28-v.01/ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf
+local: ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf remote: ./MetroE3.0-PSPHT-with-OAM-PW/2015-02-28-v.01/ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf
+200 Port command successful
+150 Opening data channel for file download from server of "/MetroE3.0-PSPHT-with-OAM-PW/2015-02-28-v.01/ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf"
+100% |**********************************************************************************************************************************************************| 25826       00:00 ETAA
+226 Successfully transferred "/MetroE3.0-PSPHT-with-OAM-PW/2015-02-28-v.01/ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf"
+25826 bytes received in 0.13 seconds (198.99 KB/s)
+ftp> quit
+221 Goodbye
+
+vmukhin@eabu-sol-eng-dc-core-01> edit 
+Entering configuration mode
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete access 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete services 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete routing-instances 
+warning: statement not found
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete protocols 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete interfaces 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# delete routing-options 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# commit 
+commit complete
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# load update ag2.2-MetroE3.0-PSPHT-with-OAM-PW.conf 
+edit groups global
+load complete
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups global 
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-core-01# load replace grp-global-original.conf 
+exit
+load complete
+
+[edit groups global]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# set apply-groups global 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups re0 
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-core-01# load replace grp-re0.conf 
+exit
+load complete
+
+[edit groups re0]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# set apply-groups re0 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# edit groups re1 
+
+[edit groups re1]
+vmukhin@eabu-sol-eng-dc-core-01# load replace grp-re1.conf 
+exit
+load complete
+
+[edit groups re1]
+vmukhin@eabu-sol-eng-dc-core-01# exit 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# set apply-groups re1 
+
+[edit]
+vmukhin@eabu-sol-eng-dc-core-01# commit 
+commit complete
+
+[edit]

@@ -1,0 +1,345 @@
+﻿--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...stall-acx5k-15.1X54-D25.14-domestic-signed.tgz         
+The authenticity of host 'svl-jtac-tool01 (172.17.31.80)' can't be established.
+DSA key fingerprint is d1:dc:63:f7:17:6b:98:59:2b:4b:ae:e5:91:29:ed:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svl-jtac-tool01,172.17.31.80' (DSA) to the list of known hosts.
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                          88%  440MB   9.0MB/s   00:06 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                         100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........6UyqWO/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+vmukhin> ...d.tgz.md5 /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz.md5                     
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz.md5                     100%   33     0.0KB/s   00:00    
+
+{master:0}
+vmukhin> file checksum md5 /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz 
+error: md5: /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No such file or directory
+
+{master:0}
+vmukhin> request system store
+                        ^
+syntax error, expecting <command>.
+vmukhin> request system storage ?  
+Possible completions:
+  cleanup              Clean up temporary files and rotate logs
+  mount                Mount the file system
+  unmount              Unmount the file system
+{master:0}
+vmukhin> request system storage cleanup 
+Please check the list of files to be deleted using the dry-run option. i.e.
+request system storage cleanup dry-run
+Do you want to proceed ? [yes,no] (no) yes 
+
+fpc0:
+--------------------------------------------------------------------------
+
+List of files to delete:
+
+         Size Date         Name
+ 132.5K Apr 20 18:34 /var/log/chassisd.0.gz
+ 132.7K Apr 19 20:10 /var/log/chassisd.1.gz
+ 132.5K Apr 18 21:45 /var/log/chassisd.2.gz
+ 132.6K Apr 17 23:21 /var/log/chassisd.3.gz
+   113B Apr 20 21:51 /var/log/default-log-messages.0.gz
+  5717B Apr 20 21:51 /var/log/interactive-commands.0.gz
+  11.1K Apr 20 21:51 /var/log/messages.0.gz
+  16.2K Apr  5 14:30 /var/log/messages.1.gz
+  16.6K Apr  5 13:30 /var/log/messages.2.gz
+   9.8K Dec  2 03:00 /var/log/messages.3.gz
+   9.9K Dec  1 21:15 /var/log/messages.4.gz
+   9.9K Dec  1 15:30 /var/log/messages.5.gz
+   9.8K Dec  1 09:45 /var/log/messages.6.gz
+   9.8K Dec  1 04:00 /var/log/messages.7.gz
+   9.9K Nov 30 22:15 /var/log/messages.8.gz
+  10.0K Nov 30 16:30 /var/log/messages.9.gz
+  2467B Apr 20 21:51 /var/log/security.0.gz
+   334B Apr 20 21:44 /var/log/wtmp.0.gz
+    57B Apr  4 15:16 /var/log/wtmp.1.gz
+    27B Dec 23 08:00 /var/log/wtmp.2.gz
+    57B Nov 28 01:24 /var/log/wtmp.3.gz
+   132B Nov 23 08:28 /var/log/wtmp.4.gz
+    45B Oct  7  2015 /var/preserve/jdhcp_client_data
+    45B Oct  7  2015 /var/preserve/jdhcp_client_data_bkp
+ 124.0K Nov 16 12:02 /var/tmp/gres-tp/env.dat
+     0B Nov 16 12:00 /var/tmp/gres-tp/lock
+    33B Apr 20 21:45 /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz.md5
+    57B Apr  5 14:17 /var/tmp/krt_rpf_filter.txt
+     0B Apr  5 14:17 /var/tmp/rtsdb/if-rtsdb
+     0B Apr  5 14:17 /var/tmp/stable
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...-15.1X54-D25.14-domestic-signed.tgz /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                           88%  440MB   9.0MB/s   00:06 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                          100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........PVtuDR/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...-15.1X54-D25.14-domestic-signed.tgz /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                           88%  440MB   9.0MB/s   00:06 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                          100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........fOMXMF/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...-15.1X54-D25.14-domestic-signed.tgz /var/tmp/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                           86%  434MB   9.0MB/s   00:07 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                          100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........WMDjNP/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...54-D25.14-acx5k/ship/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz      
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                           87%  435MB   9.1MB/s   00:07 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                          100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........pqleX3/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...54-D20-acx5k/ship/jinstall-acx5k-15.1X54-D20-domestic-signed.tgz /var/tmp/jinstall-acx5k-15.1X54-D20-domestic-signed.tgz      
+Password:
+jinstall-acx5k-15.1X54-D20-domestic-signed.tgz                                                              90%  443MB   9.1MB/s   00:05 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D20-domestic-signed.tgz                                                             100%  490MB   9.1MB/s   00:54    
+/var/home/fregress/...transferring.file.........RIfJ8I/jinstall-acx5k-15.1X54-D20-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+
+{master:0}
+vmukhin> 
+
+{master:0}
+vmukhin> show version |no-more 
+fpc0:
+--------------------------------------------------------------------------
+Model: acx5096
+Junos: 15.1X54-D20.7
+JUNOS Base OS boot [15.1X54-D20.7]
+JUNOS Base OS Software Suite [15.1X54-D20.7]
+JUNOS Crypto Software Suite [15.1X54-D20.7]
+JUNOS Online Documentation [15.1X54-D20.7]
+JUNOS Kernel Software Suite [15.1X54-D20.7]
+JUNOS Packet Forwarding Engine Support (acx5k) [15.1X54-D20.7]
+JUNOS Routing Software Suite [15.1X54-D20.7]
+JUNOS Enterprise Software Suite [15.1X54-D20.7]
+JUNOS py-base-i386 [15.1X54-D20.7]
+JUNOS Host Software [13.2I20150406_2016_rbu-builder]
+
+{master:0}
+vmukhin> ...-15.1X54-D25.14-domestic-signed.tgz /user/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                   
+Password:
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                           87%  434MB   9.0MB/s   00:07 ETA
+/var: write failed, filesystem is full
+jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz                                                          100%  499MB   9.1MB/s   00:55    
+/var/home/fregress/...transferring.file.........5uwA9L/jinstall-acx5k-15.1X54-D25.14-domestic-signed.tgz: No space left on device
+error: file-fetch failed
+error: could not fetch local copy of file
+
+{master:0}
+--- JUNOS 15.1X54-D20.7 built 2015-07-28 17:59:55 UTC
+root@:RE:0% cli 
+{master:0}

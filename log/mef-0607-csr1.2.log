@@ -1,0 +1,88 @@
+﻿--- JUNOS 12.3X54-D28 built 2016-04-17 17:00:31 UTC
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 59299) on since 2016-03-26 09:25:26 PDT, idle 00:53:49
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# save csr1.2-PWHT-VPLS-to-PS-2016.conf 
+Wrote 1065 lines of configuration to 'csr1.2-PWHT-VPLS-to-PS-2016.conf'
+
+[edit]
+vmukhin@csr1.2-a-quark# exit 
+Exiting configuration mode
+
+vmukhin@csr1.2-a-quark> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./PWHT-VPLS-to-PS-2016/2016-6-7-v.01
+250 CWD successful. "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01" is current directory.
+ftp> put csr1.2-PWHT-VPLS-to-PS-2016.conf csr1.2-PWHT-VPLS-to-PS-2016.conf
+local: csr1.2-PWHT-VPLS-to-PS-2016.conf remote: csr1.2-PWHT-VPLS-to-PS-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01/csr1.2-PWHT-VPLS-to-PS-2016.conf"
+100% |**********************************************************************************************************************************************************| 31072       00:00 ETAA
+226 Successfully transferred "/PWHT-VPLS-to-PS-2016/2016-6-7-v.01/csr1.2-PWHT-VPLS-to-PS-2016.conf"
+31072 bytes sent in 0.12 seconds (244.86 KB/s)
+ftp> quit
+221 Goodbye
+
+--- JUNOS 12.3X54-D28 built 2016-04-17 17:00:31 UTC
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> 
+
+vmukhin@csr1.2-a-quark> edit 
+Entering configuration mode
+Users currently editing the configuration:
+  vmukhin terminal p0 (pid 60244) on since 2016-03-27 00:49:54 PDT, idle 00:01:12
+      [edit]
+
+[edit]
+vmukhin@csr1.2-a-quark# save csr1.2-PWHT-VPLS-to-PS-2016.conf 
+Wrote 1065 lines of configuration to 'csr1.2-PWHT-VPLS-to-PS-2016.conf'
+
+[edit]
+vmukhin@csr1.2-a-quark# exit 
+Exiting configuration mode
+
+vmukhin@csr1.2-a-quark> ftp 172.29.103.14 
+Connected to 172.29.103.14.
+220-FileZilla Server version 0.9.48 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit http://sourceforge.net/projects/filezilla/
+Name (172.29.103.14:vmukhin): mamba
+331 Password required for mamba
+Password:
+230 Logged on
+Remote system type is UNIX.
+ftp> binary
+200 Type set to I
+ftp> cd ./PWHT-VPLS-to-PS-2016/2016-6-7-v.02
+250 CWD successful. "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02" is current directory.
+ftp> put csr1.2-PWHT-VPLS-to-PS-2016.conf csr1.2-PWHT-VPLS-to-PS-2016.conf
+local: csr1.2-PWHT-VPLS-to-PS-2016.conf remote: csr1.2-PWHT-VPLS-to-PS-2016.conf
+200 Port command successful
+150 Opening data channel for file upload to server of "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02/csr1.2-PWHT-VPLS-to-PS-2016.conf"
+100% |**********************************************************************************************************************************************************| 31072       00:00 ETAA
+226 Successfully transferred "/PWHT-VPLS-to-PS-2016/2016-6-7-v.02/csr1.2-PWHT-VPLS-to-PS-2016.conf"
+31072 bytes sent in 0.16 seconds (186.56 KB/s)
+ftp> quit
+221 Goodbye
+
