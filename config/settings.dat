@@ -86,6 +86,7 @@ acx5048,acx5k,1,member 0
 acx5096,acx5k,1,member 0
 mx80,mx80,1,re0
 mx80-p,mx80,1,re0
+mx80-48T,mx80,1,re0
 mx480,mx,2,re0,re1
 mx960,mx,2,re0,re1
 mx240,mx,2,re0,re1
