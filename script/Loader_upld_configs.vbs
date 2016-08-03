@@ -361,6 +361,8 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objTab_L.Screen.WaitForString "@" & strHostL & "# "
 			objTab_L.Screen.Send "delete routing-options" & chr(13)
 			objTab_L.Screen.WaitForString "@" & strHostL & "# "
+			objTab_L.Screen.Send "delete policy-options" & chr(13)
+			objTab_L.Screen.WaitForString "@" & strHostL & "# "
 			'---------------------------------------------
 			'   COMMIT CLEANED CONFIGURATION
 			'---------------------------------------------	
