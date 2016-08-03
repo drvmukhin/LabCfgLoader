@@ -1,7 +1,6 @@
 '----------------------------------------------------------------------------------
-'            JUNIPER MEF CONFIGURATION LOADER
+'            VASILY LAB CONFIGURATION LOADER
 '----------------------------------------------------------------------------------
-
 Const LDR_SCRIPT_NAME = "Lab_Loader_"
 Const ForAppending = 8
 Const ForWriting = 2
@@ -23,16 +22,21 @@ Const MAX_LEN = 		134
 Const nABC =			2
 Const PARENTS = 		"1"
 Const DEBUG_FILE = "debug-loader"
-
+' Define global array which stores parameters of all my objects per class
+Dim vObjects, vObjIndex
+' Define global array which keeps properties of all my Classes' 
+Dim vClass
+' Define global array for JunosSW objects
+Dim objMain, objMinor 
 Dim D0 
 Dim nResult, nTail, nIndex, nCountWeek, nCountMonth
 Dim strLine
 Dim strFileSessionTmp 
-Dim strDirectoryWork, strCRT_InstallFolder, strDirectoryTmp, strCRTexe, SecureCRT, nWindowState
+Dim strDirectoryWork, strCRT_InstallFolder, strDirectoryTmp, strCRTexe, SecureCRT, nWindowState, strCRT_ConfigFolder, strCRT_SessionFolder
 Dim nDebug, nLine, nDebugCRT
 Dim intX, intY
 Dim nSession, nSessionTmp, nInventory
-Dim vSession, vSessionTmp(20), vMsg(20)
+Dim vSession, vSessionTmp, vMsg(20), vSessionCRT, vSessionEnable
 Dim vLine
 Dim vvMsg(20,3)
 Dim strFolder
@@ -44,10 +48,10 @@ Dim strPID
 '----------------------------------
 ' NEW VARIABLES
 '----------------------------------
-Dim vFlavors, vSvc, vNodes(2,5), vTemplates(4), vSettings
+Dim vFlavors, vNodes(2,5), vTemplates(4), vSettings
 Dim strConfigFileL, strConfigFileR, strVersion
 Dim Platform, DUT_Platform
-Dim VBScript_DNLD_Config, VBScript_Upload_Config, VBScript_FWF_Apply, VBScript_FTP_User, VBScript_Set_Node
+Dim VBScript_DNLD_Config, VBScript_Upload_Config, VBScript_FWF_Apply, VBScript_FTP_User, VBScript_Set_Node, VBScript_BLK_DNLD_Config, VBScript_UPDATE_Catalog, VBScript_UPDATE_Junos
 Dim strTempOrigFolder, strTempDestFolder, vXLSheetPrefix(4)
 Dim objXLS, objWrkBk, objXLSeet
 Dim vDelim, vParamNames,vPlatforms, objWMIService, IE_Window_Title
@@ -65,13 +69,7 @@ Dim objFolder, colFiles, IPConfigSet, strEditor, SecureCRT_Installed, FileZilla_
     Const FTP_IP  = "FTP IP"
     Const FTP_User  = "FTP User"
     Const FTP_Password  = "FTP Password"
-	Const UNI_A = "UNI-A"
-	Const UNI_B = "UNI-B"
-	Const UNI_C = "UNI-C"
-	Const UNI_D = "UNI-D"
-	Const UNI_CC = "UNI-CC"
-	Const UNI_DD = "UNI-DD"
-	Const NNI = "NNI"
+	Const LAN_ADAPTER = "Network Adapter"
 	Const PLATFORM_NAME = "Platform Name"
 	Const PLATFORM_INDEX = "Node Name Prefix"
 	Const Template = "XLS TEMPLATE"
@@ -80,17 +78,20 @@ Dim objFolder, colFiles, IPConfigSet, strEditor, SecureCRT_Installed, FileZilla_
 	Const WorkBookPrefix = "WorkBookPrefix"
 	Const SECURECRT_L_SESSION = "Left Node Session"
 	Const SECURECRT_R_SESSION = "Right Node Session"
-	Const MAIN_TITLE = "Juniper Networks MEF Configuration Loader"
+	Const SECURECRT_SESSION = "Node Session"
+	Const SAVE_AS = "Save New Configuration As..."
+    Const LAST_BLK_FOLDER = "Blk Config File Folder"
+	Const MAIN_TITLE = "Juniper Networks Lab Configuration Loader"
     Const CRT_REG_INSTALL = "HKEY_LOCAL_MACHINE\SOFTWARE\VanDyke\SecureCRT\Install\Main Directory"
-    Const CRT_REG_SESSION = "HKEY_CURRENT_USER\Software\VanDyke\SecureCRT\Config Path"
-	Const MEF_CFG_LDR_REG = "HKEY_CURRENT_USER\Software\JnprLabCfgLdr\Main Directory"
+    Const CRT_REG_CONFIG = "HKEY_CURRENT_USER\Software\VanDyke\SecureCRT\Config Path"
+	Const LAB_CFG_LDR_REG = "HKEY_CURRENT_USER\Software\JnprLabCfgLdr\Main Directory"
 	Const FTP_REG_INSTALL = "HKEY_CURRENT_USER\Software\FileZilla Server\Install_Dir"
 	Const NOTEPAD_PP = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\notepad++.exe\"
 	Const IE_REG_KEY = "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Window Title"
 	
-ReDim vParamNames(15)
-    vParamNames(0) = Node_Left_IP
-    vParamNames(1) = Node_Right_IP
+ReDim vParamNames(30)
+    vParamNames(0) = HIDE_CRT
+    vParamNames(1) = LAN_ADAPTER
     vParamNames(2) = FTP_IP
     vParamNames(3) = FTP_User
     vParamNames(4) = FTP_Password
@@ -99,11 +100,12 @@ ReDim vParamNames(15)
     vParamNames(7) = CONFIGS_FOLDER
     vParamNames(8) = Orig_Folder
 	vParamNames(9) = Dest_Folder
-	vParamNames(10) = SECURECRT_L_SESSION
-	vParamNames(11) = SECURECRT_R_SESSION
+	vParamNames(10) = "Not Used"
+	vParamNames(11) = "Not Used" 
     vParamNames(12) = CONFIGS_PARAM
 	vParamNames(13) = PLATFORM_NAME
     vParamNames(14) = PLATFORM_INDEX
+    vParamNames(25) = LAST_BLK_FOLDER	
 	
 	
 vDelim = Array("=",",",":")
@@ -155,7 +157,7 @@ Sub Main()
 	nResult = 0
 	On Error Resume Next
 		Err.Clear
-		strDirectoryWork = objShell.RegRead(MEF_CFG_LDR_REG)
+		strDirectoryWork = objShell.RegRead(LAB_CFG_LDR_REG)
 		if Err.Number <> 0 Then 
 			strDirectoryWork = "Not Set"
 		End If
@@ -166,7 +168,7 @@ Do
 		Case 0 ' - Check if WorkFolder Exists
 				If Not objFSO.FolderExists(strDirectoryWork) Then 
 				    nResult = 1 
-					vvMsg(0,0) = "MEF Configuration Loader"		 				: vvMsg(0,1) = "Bold" : vvMsg(0,2) = HttpTextColor1
+					vvMsg(0,0) = "Lab Configuration Loader"		 				: vvMsg(0,1) = "Bold" : vvMsg(0,2) = HttpTextColor1
 					vvMsg(1,0) = "Set a Local Folder"							: vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1 
 					vvMsg(2,0) = " "											: vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor1 
 					nLine = 3
@@ -188,8 +190,8 @@ Do
 					If InStr(LCase(strFile),LCase(LDR_SCRIPT_NAME)) Then nResult = 5	End If 
 				Next
 				If nResult <> 5 Then
-					vvMsg(0,0) = "MEF Configuration Loader"		 				: vvMsg(0,1) = "Bold" : vvMsg(0,2) = HttpTextColor1
-					vvMsg(1,0) = "Can't find Mef_Loader script in the folder"	: vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2 				
+					vvMsg(0,0) = "Lab Configuration Loader"		 				: vvMsg(0,1) = "Bold" : vvMsg(0,2) = HttpTextColor1
+					vvMsg(1,0) = "Can't find Lab_Loader script in the folder"	: vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2 				
 					vvMsg(2,0) = "Set a Working Folder where script located"    : vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor1 
 					vvMsg(3,0) = " "											: vvMsg(3,1) = "normal" : vvMsg(3,2) = HttpTextColor1 
 					nLine = 4
@@ -200,7 +202,7 @@ Do
 		Case 3  ' - After new folder selected update Working folder in the script file
 				On Error Resume Next
 				Err.Clear
-				objShell.RegWrite MEF_CFG_LDR_REG, strDirectoryWork, "REG_SZ"
+				objShell.RegWrite LAB_CFG_LDR_REG, strDirectoryWork, "REG_SZ"
 				if Err.Number <> 0 Then 
 					MsgBox "Error: Can't Right to Windows Registry" & chr(13) & Err.Description
 					Exit Sub
@@ -257,14 +259,14 @@ Loop
 				Else 
 					vvMsg(0,0) = "IT SEAMS THAT ONE INSTANCE OF CONFIGURATION LOADER IS ALREADY RUNNING"	: vvMsg(0,1) = "normal" : vvMsg(0,2) = HttpTextColor1
 					vvMsg(1,0) = "Exit . . ."           									: vvMsg(1,1) = "bold" : vvMsg(1,2) = HttpTextColor2 
-					Call IE_MSG(vIE_Scale, "Error",vvMsg,2, Null)
+					Call IE_MSG(vIE_Scale, "Error",vvMsg,2, "Null")
 					Exit Sub
 				End If
 			Loop
 		Case Else 
 			vvMsg(0,0) = "SOMETHING GOING WRONG. CAN'T LAUNCH THE SCRIPT " 						: vvMsg(0,1) = "normal" : vvMsg(0,2) = "Red"
 			vvMsg(1,0) = "Exit . . ."									: vvMsg(1,1) = "bold" : vvMsg(1,2) = HttpTextColor1
- 			Call IE_MSG(vIE_Scale, "Error",vvMsg,2,Null)
+ 			Call IE_MSG(vIE_Scale, "Error",vvMsg,2,"Null")
 			Exit Sub
 	End Select
 	On Error goto 0
@@ -294,7 +296,7 @@ Loop
 						 "Folder with DUT Configuration files should " & _
 						 "be used as FTP User Homedirectory"                      	: vvMsg(2,1) = "normal" : vvMsg(1,2) = HttpTextColor1						
 			vvMsg(3,0) = "" : vvMsg(4,0) = "" :vvMsg(5,0) = "" :vvMsg(6,0) = "" :vvMsg(7,0) = "" :
-			Call IE_MSG(vIE_Scale, "Error",vvMsg,8,Null)
+			Call IE_MSG(vIE_Scale, "Error",vvMsg,8,"Null")
 			FileZilla_Installed = False
 			strFTP_Folder = "C:"
 		End If
@@ -312,23 +314,23 @@ Loop
 			vvMsg(1,0) = "Make sure that Secure CRT Application was " & _
 			              "installed on your system correctly"	        : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2			
 			vvMsg(2,0) = ""         									: vvMsg(2,1) = "bold" : vvMsg(2,2) = HttpTextColor1
-			Call IE_MSG(vIE_Scale, "Error",vvMsg,2,Null)
+			Call IE_MSG(vIE_Scale, "Error",vvMsg,2,"Null")
             SecureCRT_Installed = False
 			strCRT_InstallFolder = "C:"
 		End If
 		If Right(strCRT_InstallFolder,1) = "\" Then strCRT_InstallFolder = Left(strCRT_InstallFolder,Len(strCRT_InstallFolder)-1)
-		strCRT_SessionFolder = objShell.RegRead(CRT_REG_SESSION)
+		strCRT_ConfigFolder = objShell.RegRead(CRT_REG_CONFIG)
 		if Err.Number <> 0 Then 
 			vvMsg(0,0) = "WARNING: CAN'T FIND SecureCRT Session Folder"	              : vvMsg(0,1) = "normal" : vvMsg(0,2) = "Red"
 			vvMsg(1,0) = "Once SecureCRT application was installed run it, " & _
 			             "so that default session configuration will be created"	  : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1
 			vvMsg(2,0) = "Exit . . ."									              : vvMsg(2,1) = "bold" : vvMsg(1,2) = HttpTextColor1
-			Call IE_MSG(vIE_Scale, "Error",vvMsg,3,Null)
+			Call IE_MSG(vIE_Scale, "Error",vvMsg,3,"Null")
             SecureCRT_Installed = False
-			strCRT_SessionFolder = "C:"
+			strCRT_ConfigFolder = "C:"
 		End If
-		If Right(strCRT_SessionFolder,1) = "\" Then strCRT_SessionFolder = Left(strCRT_SessionFolder,Len(strCRT_SessionFolder)-1)
-		strCRT_SessionFolder = strCRT_SessionFolder & "\Sessions"
+		If Right(strCRT_ConfigFolder,1) = "\" Then strCRT_ConfigFolder = Left(strCRT_ConfigFolder,Len(strCRT_ConfigFolder)-1)
+		strCRT_SessionFolder = strCRT_ConfigFolder & "\Sessions"
 	On Error Goto 0
 	
 '-----------------------------------------------------
@@ -338,6 +340,8 @@ Loop
 		nSettings = GetFileLineCountByGroup(strDirectoryWork & "\config\" & strFileSettings, vLines,"Settings","","",0)
 		strFileSettings= strDirectoryWork & "\config\" & strFileSettings
 		For nInd = 0 to nSettings - 1 
+		    ' vSettings(26) Reserved for temporary value when creating new configuration
+		    ' vSettings(25) Used for the name of the file with list of the configurations for bulk load from nodes			
 			Select Case Split(vLines(nInd),"=")(0)
 					Case SECURECRT_FOLDER
 								vSettings(5) = vLines(nInd)
@@ -367,12 +371,19 @@ Loop
 					Case PLATFORM_INDEX
 					            vSettings(14) = vLines(nInd)					
 								Platform = Split(vLines(nInd),"=")(1)
-					Case Node_Left_IP
+					Case LAST_BLK_FOLDER
+   					            vSettings(25) = vLines(nInd)					
+					Case HIDE_CRT
 								vSettings(0) = vLines(nInd)
-								strLeft_ip =  Split(vLines(nInd),"=")(1)
-					Case Node_Right_IP
+							    Select Case Split(vLines(nInd),"=")(1)
+							        Case "1"
+                                        nWindowState = 2
+								    Case Else
+									    nWindowState = 1
+							    End Select
+					Case LAN_ADAPTER
 								vSettings(1) = vLines(nInd)
-								strRight_ip =  Split(vLines(nInd),"=")(1)
+								strEth =  Split(vLines(nInd),"=")(1)
 					Case FTP_IP
 								vSettings(2) = vLines(nInd)
 								strFTP_ip =  Split(vLines(nInd),"=")(1)
@@ -393,25 +404,63 @@ Loop
 	strDirectoryTmp = strDirectoryWork
 	strWinUtilsFolder = strDirectoryWork & "\Bin"
 	strCRTexe = """" & strCRT_InstallFolder & strCRTexe
+	Dim vsshFile, LineNumber
+	If objFSO.FileExists(strCRT_ConfigFolder & "\SSH2.ini") Then
+	    Call GetFileLineCountSelect(strCRT_ConfigFolder & "\SSH2.ini",vsshFile,"NULL","NULL","NULL",0)
+        LineNumber = GetObjectLineNumber( vsshFile, UBound(vsshFile), "Host Key Database Location")		
+		If LineNumber > 0 Then 
+		   vSettings(17) = Split(vsshFile(LineNumber - 1),"=")(1)
+		Else 
+		   vSettings(17) = strCRT_ConfigFolder
+		End If 
+	End If 
 '--------------------------------------------------------------------------------
-'          GET NAME OF THE TELNET SCRIPTS
+'   CHECK FTP IP ADDRESS = LAN ADAPTER IP
 '--------------------------------------------------------------------------------
+	Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
+	Set IPConfigSet = objWMIService.ExecQuery("Select * from Win32_NetworkAdapterConfiguration Where IPEnabled = True")
+	For Each IPConfig in IPConfigSet
+	    If Split(vSettings(1),"=")(1) = IPConfig.Description Then 
+			vSettings(2) = FTP_IP & "=" & IPConfig.IPAddress(0)
+		End If
+	Next
+'--------------------------------------------------------------------------------
+'          GET LIST OF TERMINAL SESSIONS
+'--------------------------------------------------------------------------------
+	Dim nSessionID
+	Redim vSessionCRT(1)
+	nSessionID = 0
 	nInventory = GetFileLineCountByGroup(strFileSettings, vLines,"Sessions","","",0)
 	For nInd = 0 to nInventory - 1
-		Select Case Split(vLines(nInd),"=")(0)
-			Case SECURECRT_L_SESSION
-						vSettings(10) = vLines(nInd)
-						If UBound(Split(vLines(nInd),",")) => 4 Then 
-						    Select Case Split(vLines(nInd),",")(4)
-							     Case "1"
-                                    nWindowState = 2
-								 Case Else
-									nWindowState = 1
-							End Select
-						End If 
-			Case SECURECRT_R_SESSION
-						vSettings(11) = vLines(nInd)
-		End Select
+		If InStr(Split(vLines(nInd),"=")(0),SECURECRT_SESSION) > 0 Then
+			Redim Preserve vSessionCRT(nSessionID + 1)
+			vSessionCRT(nSessionID) = Split(vLines(nInd),"=")(1)
+			nSessionID = nSessionID + 1
+        End If 
+	Next
+'--------------------------------------------------------------------------------
+'          GET STATUS OF THE SESSIONS
+'--------------------------------------------------------------------------------
+	Call GetFileLineCountByGroup(strFileSettings, vSessionEnable,"Active_Sessions","","",0)
+'--------------------------------------------------------------------------------
+'          LOAD CONFIGURATION LIST
+'--------------------------------------------------------------------------------
+    Dim vCfgInventory, vCfg, vCfgList, strCfg, nCfg, strCfgFile
+	strCfgFile = strDirectoryConfig & "\CfgList.txt"
+	nCount = GetFileLineCountByGroup(strCfgFile, vCfgInventory,"Inventory","","",0)
+	Redim vCfgList(nCount,UBound(vSessionCRT) + 2)
+	nCfg = 0 
+	For Each strCfg in vCfgInventory
+	   If strCfg = "" Then Exit For
+	   vCfgList(nCfg,0) = strCfg
+	   nCount = GetFileLineCountByGroup(strCfgFile, vCfg, strCfg,"","",0)
+	   nInd = 1
+	   For Each LineItem in vCfg
+	      If LineItem = "" Then Exit For
+	      vCfgList(nCfg,nInd) = LineItem
+		  nInd = nInd + 1
+	   Next
+	   nCfg = nCfg + 1
 	Next
 '--------------------------------------------------------------------------------
 '          GET NAME OF THE TELNET SCRIPTS
@@ -423,6 +472,12 @@ Loop
 				VBScript_Upload_Config = Split(vLines(nIndex),"=")(1)
 			Case "DOWNLOAD"
 			    VBScript_DNLD_Config = Split(vLines(nIndex),"=")(1)
+			Case "DNLD_EXISTED"
+			    VBScript_BLK_DNLD_Config = Split(vLines(nIndex),"=")(1)
+			Case "UPDATE_CATALOG"
+			    VBScript_UPDATE_Catalog = Split(vLines(nIndex),"=")(1)
+			Case "UPDATE_JUNOS"
+			    VBScript_UPDATE_Junos = Split(vLines(nIndex),"=")(1)
 			Case "FWFILTER"
 			    VBScript_FWF_Apply = Split(vLines(nIndex),"=")(1)
 			Case "FTPUSER"
@@ -472,104 +527,71 @@ Loop
 '        SET SERVICE PARAM FULL PATH
 '-------------------------------------------------------------------------------------------
 	strFileParam = strDirectoryWork & "\config\" & strFileParam
-'-------------------------------------------------------------------------------------------
-'  	LOAD TESTBED TOPOLOGY
-'-------------------------------------------------------------------------------------------
-If Not objFSO.FileExists(strFileParam) Then
-	nResult = 4
-	MsgBox "MEF Parameters File: " & chr(13) & strFileParam  & " not found!" & chr(13) & "Code# 000" & nResult
-End If
-
-If nResult = 3 or nResult = 4 Then 
-	Select Case IE_PromptForSettings(vIE_Scale, vSettings, vPlatforms, nDebug)
-	    Case -1, 0
-		   Exit Sub
-		Case 1
-	End Select
-End If
+'--------------------------------------------------------------------------------
+'   LOAD CATALOG FOR JUNOS S/W
+'--------------------------------------------------------------------------------
+    Dim strFileDeviceCatalog
+    strFileDeviceCatalog = strDirectoryWork & "\config\class_catalog.dat"
+	Redim vClass(1,1)
+	Redim vObjects(1,1,1)
+	Redim vObjIndex(1)
+	' vClass 
+    Call GetMyClass(strFileDeviceCatalog, vObjIndex, nDebug)
+    Call SetMyObject(objMain,"JunosSW",nDebug)
+	Call SetMyObject(objMinor,"Release",nDebug)
+'	Call TrDebug ("CHECK objDevice Data: ","", objDebug, MAX_LEN, 3, 1)
+'   Call GetDevicesStatus(objDevices, vClass, vAccount, vDevice, strSrvDirectory,False, 1)	
+'    MsgBox vClass(1,0) & ", " & vClass(1,2) & ", " & vClass(1,3) & chr(13) & "pIndex: " & pIndex("Release","Name")
+'    MsgBox GetVariable("ListNumber" & pIndex("Release","Minor List") + 1, vClass, 2, 1, 0, nDebug)
+'    MsgBox objMain(1,pIndex(0,"ImageTemplate"))	
 	
- 
-
-		nCount = GetFileLineCountByGroup(strFileParam, vLines,"Node-Left","","",0)
-		For nInd = 0 to nCount - 1
-			Select Case Split(vLines(nInd),"=")(0)
-					Case UNI_A
-								vNodes(0,0) = Split(vLines(nInd),"=")(1)
-					Case UNI_B
-								vNodes(0,1) = Split(vLines(nInd),"=")(1)
-					Case NNI
-								vNodes(0,2) = Split(vLines(nInd),"=")(1)
-			End Select
-		next
-		nCount = GetFileLineCountByGroup(strFileParam, vLines,"Node-Right","","",0)
-		For nInd = 0 to nCount - 1
-			Select Case Split(vLines(nInd),"=")(0)
-					Case UNI_C
-								vNodes(1,0) = Split(vLines(nInd),"=")(1)
-					Case UNI_D
-								vNodes(1,1) = Split(vLines(nInd),"=")(1)
-					Case UNI_CC
-								vNodes(1,2) = Split(vLines(nInd),"=")(1)
-					Case UNI_DD
-								vNodes(1,3) = Split(vLines(nInd),"=")(1)
-					Case NNI
-								vNodes(1,4) = Split(vLines(nInd),"=")(1)
-			End Select
-		Next
-'-------------------------------------------------------------------------------------------
-'  		LOAD LIST OF TEST SERIES FROM CONFIGURATIONS.DAT
-'-------------------------------------------------------------------------------------------
-	nService = GetTestSeries(strFileParam, vSvc, vFlavors, nDebug)
-'-------------------------------------------------------------------------------------------
-'  		CREATE BACK FOLDER FOR NODES CONFIGURATION FILES
-'-------------------------------------------------------------------------------------------
-'	If Not objFSO.FolderExists(strDirectoryConfig & "\Backup") Then 
-'		objFSO.CreateFolder(strDirectoryConfig & "\Backup") 
-'	End If
-'	For n = 0 to Ubound(vSvc) - 1
-'		If Not objFSO.FolderExists(strDirectoryConfig & "\Backup\" & vSvc(n,1)) Then 
-'			objFSO.CreateFolder(strDirectoryConfig & "\Backup\" & vSvc(n,1)) 
-'		End If
-'	Next
-'-------------------------------------------------------------------------------------------
-'  		CREATE BACK FOLDER FOR NODES CONFIGURATION FILES
-'-------------------------------------------------------------------------------------------
-'	If Not objFSO.FolderExists(strDirectoryConfig & "\Tested") Then 
-'		objFSO.CreateFolder(strDirectoryConfig & "\Tested") 
-'	End If
-'	For n = 0 to Ubound(vSvc) - 1
-'		If Not objFSO.FolderExists(strDirectoryConfig & "\Tested\" & vSvc(n,1)) Then 
-'			objFSO.CreateFolder(strDirectoryConfig & "\Tested\" & vSvc(n,1)) 
-'		End If
-'	Next
-
 '-------------------------------------------------------------------------------------------
 '  		LOAD TEMPORARY PARAMETERS FOR CURRENT/LAST SESSION
 '-------------------------------------------------------------------------------------------
 	If objFSO.FileExists(strDirectoryTmp & "\" & strFileSessionTmp) Then 
-		nSessionTmp = GetFileLineCount(strDirectoryTmp & "\" & strFileSessionTmp, vSessionTmp,0)
-		strServiceID = vSessionTmp(0)
-		strFlavorID = vSessionTmp(1)
-		strTaskID = vSessionTmp(2)
+		nSessionTmp = GetFileLineCountSelect(strDirectoryTmp & "\" & strFileSessionTmp, vSessionTmp, "#", "", "", 0)
 	Else
-		strServiceID = 0
-		strFlavorID = 0
-		strTaskID = 0
+	    Redim vSessionTmp(7)
 		vSessionTmp(0) = 0
 		vSessionTmp(1) = 0
 		vSessionTmp(2) = 0
+		vSessionTmp(3) = 0
+		vSessionTmp(4) = "N/A"
+		vSessionTmp(5) = 0		
+		vSessionTmp(6) = 0				
 	End If
-	Call TrDebug("GetTestSeries: LAST LOADED SESSION: " & strServiceID & "-" & strFlavorID & "-" & strTaskID, "", objDebug, MAX_LEN, 3, 1)
+
 '#####################################################################################
 '       MAIN PROGRAM
 '#####################################################################################	
 	Do
-         if Not IE_PromptForInput(vIE_Scale, vSessionTmp, vSvc, vFlavors, vSettings, vNodes,vTemplates, vXLSheetPrefix, nDebug) then
-            ' MsgBox "GOODBY !!!"
-			 ' Call FocusToParentWindow(strPID)
-            exit sub
-        end if
-	    exit Do
+        nResult = IE_PromptForInput(vIE_Scale, vCfgList,vSessionCRT, vSessionTmp, vSessionEnable, vSettings, vCfgInventory, nDebug)
+        Select Case nResult
+		    Case False
+			        ' Call FocusToParentWindow(strPID)
+                    exit sub
+			Case 1
+			        '---------------------------------------
+					'    UPDATE CfgList
+					'---------------------------------------
+					nCount = GetFileLineCountByGroup(strCfgFile, vCfgInventory,"Inventory","","",0)
+					Redim vCfgList(nCount,UBound(vSessionCRT) + 2)
+					nCfg = 0 
+					For Each strCfg in vCfgInventory
+					   If strCfg = "" Then Exit For
+					   vCfgList(nCfg,0) = strCfg
+					   nCount = GetFileLineCountByGroup(strCfgFile, vCfg, strCfg,"","",0)
+					   nInd = 1
+					   For Each LineItem in vCfg
+						  If LineItem = "" Then Exit For
+						  vCfgList(nCfg,nInd) = LineItem
+						  nInd = nInd + 1
+					   Next
+					   nCfg = nCfg + 1
+					Next
+			Case Else 
+                    exit Do
+	    End Select 
 	Loop
 	objDebug.Close
 End Sub
@@ -920,6 +942,21 @@ Dim nInd
 	nInd = nInd + 1
     Loop
 End Function
+'------------------------------------------------------------------------------------------------------------------
+' Function returns the number of the line from 1 to N which contains string strObject. Returns 0 if nothing found
+'------------------------------------------------------------------------------------------------------------------
+Function GetExactObjectLineNumber( byRef vArray, nArrayLen, byRef strObjectName)
+Dim nInd
+	nInd = 0
+	GetExactObjectLineNumber = 0
+	Do While nInd < nArrayLen
+	If vArray(nInd) = strObjectName Then 
+		GetExactObjectLineNumber = nInd + 1
+		Exit Do
+	End If
+	nInd = nInd + 1
+    Loop
+End Function
 ' ----------------------------------------------------------------------------------------------
 '   Function  TrDebug (strTitle, strString, objDebug)
 '   nFormat: 
@@ -1030,25 +1067,25 @@ Function GetMyDate()
 	GetMyDate = Month(Date()) & "/" & Day(Date()) & "/" & Year(Date()) 
 End Function
 '---------------------------------------------------------------------------------------
-'   Function WriteStrToFile
-'	Inserts or change Line in Text File at String Number "LineNumber" (count form 1)
+' 	nMode = 2  Then Insert Above
+'   nMode = 3  Then Insert Below
 ' 	nMode = 1  Then Change
-' 	nMode = 2  Then Insert
+'	Inserts or change Line in Text File at String Number "LineNumber" (count form 1)
+'   Function WriteStrToFile(strDirectoryTmp & "\" & strFileLocalSessionTmp, nTime, LineNumber, CHANGE)
 '---------------------------------------------------------------------------------------
-Function WriteStrToFile(strFile, strNewLine, LineNumber, nMode, nDebug)
+Function WriteStrToFile(strFile, strNewLine, Line, nMode, nDebug)
 	Dim strFolderTmp, nFileLine
-	Dim vFileLine, vvFileLine
+	Dim vFileLine, vvFileLine, LineNumber
 	Dim objFSO, objFile
 	Const FOR_WRITING = 1
-
 	WriteStrToFile = False
-	If LineNumber > 10000 Then objDebug.WriteLine "WriteStrToFile: ERROR: CAN'T OPERATE FILES WITH MORE THEN 1000 STRINGS" End If  
-
+'	If LineNumber > 10000 Then objDebug.WriteLine "WriteStrToFile: ERROR: CAN'T OPERATE FILES WITH MORE THEN 10000 STRINGS" End If  
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
 	If Not objFSO.FileExists(strFile) Then 	
 		On Error Resume Next
 		Err.Clear
-		Set objFile = objFSO.CreateTextFile(strFile)
+		Set objFile = objFSO.OpenTextFile(strFile,2,True)
+		objFile.WriteLine "Empty"
 		If Err.Number = 0 Then 
 			objFile.close
 			On Error Goto 0
@@ -1063,11 +1100,16 @@ Function WriteStrToFile(strFile, strNewLine, LineNumber, nMode, nDebug)
 			Exit Function
 		End If
 	End If
-
 	nFileLine = GetFileLineCountSelect(strFile,vFileLine,"NULL","NULL","NULL",0)                  ' - ATTANTION nFileLIne is number of lines counted like 1,2,...,n
-	If LineNumber > nFileLine Then nMode = 3 End If
+	If Not IsNumeric(Line) Then 
+	    LineNumber = GetExactObjectLineNumber(vFileLine, UBound(vFileLine),Line)
+	Else 
+	    LineNumber = Int(Line)
+	End If 
+	If nMode = 2 and LineNumber > nFileLine Then nMode = 12 End If
+	If nMode = 3 and LineNumber > nFileLine Then nMode = 12 End If	
+	If nMode = 1 and LineNumber > nFileLine Then nMode = 12 End If	
 	If nDebug = 1 Then objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) &  ": WriteStrToFile: LineNumber=" & LineNumber & " nFileLine=" & nFileLine  End If  
-
 	Select Case nMode
 			Case 1 																		' - CHANGE REQUESTED LINENUMBER
 					vFileLine(LineNumber - 1) = strNewLine
@@ -1083,7 +1125,18 @@ Function WriteStrToFile(strFile, strNewLine, LineNumber, nMode, nDebug)
 					Next
 					nFileLine = nFileLine + 1
 					If WriteArrayToFile(strFile,vvFileLine,nFileLine,FOR_WRITING,nDebug) Then WriteStrToFile = True End If
-			Case 3
+			Case 3 ' - Insert After
+					Redim vvFileLine(nFileLine + 1)
+					For i = 0 to LineNumber - 1
+						vvFileLine(i) = vFileLine(i)
+					Next
+					vvFileLine(LineNumber) = strNewLine
+					For i = LineNumber + 1 to nFileLine
+						vvFileLine(i) = vFileLine(i-1)
+					Next
+					nFileLine = nFileLine + 1
+					If WriteArrayToFile(strFile,vvFileLine,nFileLine,FOR_WRITING,nDebug) Then WriteStrToFile = True End If
+			Case 12
 					Redim vvFileLine(LineNumber)
 					For i = 0 to nFileLine - 1
 						vvFileLine(i) = vFileLine(i)
@@ -1096,18 +1149,16 @@ Function WriteStrToFile(strFile, strNewLine, LineNumber, nMode, nDebug)
 					If WriteArrayToFile(strFile,vvFileLine,nFileLine,FOR_WRITING,nDebug) Then WriteStrToFile = True End If
 	End Select
 End Function
-'#######################################################################
- ' Function WriteArrayToFile - Returns number of lines int the text file
- ' nMode = 1  Then Rewire all File content
- ' nMode = 2  Then Append
+ '#######################################################################
  ' Creates File if it doesn't exists
+ ' nMode = 2  Then Append
+ ' nMode = 1  Then Rewire all File content
+ ' Function WriteArrayToFile - Returns number of lines int the text file
  '#######################################################################
  Function WriteArrayToFile(strFile,vFileLine, nFileLine,nMode,nDebug)
     Dim i, nCount
 	Dim strLine
-	Dim objDataFileName, objFSO
-
-	
+	Dim objDataFileName, objFSO	
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
 	If Not objFSO.FileExists(strFile) Then 	
 		On Error Resume Next
@@ -1134,7 +1185,6 @@ End Function
 		Case 2 	
 			Set objDataFileName = objFSO.OpenTextFile(strFile,8,True)
 	End Select 
-
 	i = 0
 	On Error Resume Next
 	Err.Clear
@@ -1295,9 +1345,9 @@ End Function
 '------------------------------------------------
 '    MAIN DIALOG FORM 
 '------------------------------------------------
-Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef vFlavors, byRef vSettings, ByRef vNodes, byRef vTemplates, byref vXLSheetPrefix, nDebug)
+Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, ByRef vSessionTmp,Byref vSessionEnable, byRef vSettings, byref vCfgInventory, nDebug)
 	Dim g_objIE, g_objShell, objMonitor
-	Dim vFilterList, vPolicerList, vCIR, vCBS
+	Dim vFileLine
 	Dim nInd, Arg4, CFG_Downloaded, YES_NO
 	Dim nRatioX, nRatioY, nFontSize_10, nFontSize_12, nButtonX, nButtonY, nA, nB
     Dim intX
@@ -1310,21 +1360,67 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	Dim vvMsg(8,3)
 	Dim nMaxFlavors
 	Dim objFile, objCfgFile
-	Const MAX_PARAM = 40
+	Dim T_csr, T_ag1, T_ag2, T_ag3, csr_Notations, ag1_Notations, ag2_Notations, ag3_Notations, vTag
+	Dim nCfg, nTag, nVersion, strCfg, CurrentCfg, strBulkList, vBulkList
+	Const MAX_PARAM = 10
 	Const MAX_BW_PROFILES = 30
 	Const TCG_MONITOR = "TCG_monitor"
 	Dim objCell
 	Set g_objIE = Nothing
     Set g_objShell = Nothing
-	Call TrDebug ("IE_PromptForInputPullDown: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)				
+	Call TrDebug ("IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)				
+	vTag = Array("*", "MBH", "Metro", "RSVP", "ZTD", "ZTP", "CE20")
 	'-----------------------------------------------------
-	'	FIND THE MAXIMUM NUMBER OF ALL TASKS
+	'   SORT CRT SESSIONS INTO FOUR GROUPS
 	'-----------------------------------------------------
-	nMaxFlavors = 0
-	For n = 0 to Ubound(vSvc,1) - 1
-		nMaxFlavors = MaxQ(nMaxFlavors, vSvc(n,0)) 		
+	csr_Notations = Array("csr","an")
+	ag1_Notations = Array("ag1","ag-1","ag.1","pe1","pe-1","pe.1","agn1","agn-1","agn.1")
+	ag2_Notations = Array("ag2","ag-2","ag.2","pe2","pe-2","pe.2","agn2","agn-2","agn.2","asbr1","asbr-1","asbr.1","bng")
+	ag3_Notations = Array("ag3","ag-3","ag.3","pe3","pe-3","pe.3","agn3","agn-3","agn.3","asbr2","asbr-2","asbr.2")
+	Redim T_csr(1) : T_csr(0) = "N/A"
+	Redim T_ag1(1) : T_ag1(0) = "N/A"
+	Redim T_ag2(1) : T_ag2(0) = "N/A"
+	Redim T_ag3(1) : T_ag3(0) = "N/A"
+	Dim csrInd, ag1Ind, ag2Ind, ag3Ind, Tmax_Ind
+	csrInd=0 : ag1Ind=0 : ag2Ind=0 : ag3Ind=0
+	For nInd = 0 to UBound(vSessionCRT) - 1
+	    Do
+	        strSessionName = Split(vSessionCRT(nInd),",")(2)
+			For Each LineItem in csr_Notations
+			    If InStr(strSessionName, LineItem) > 0 Then 
+			        Redim Preserve T_csr(csrInd + 1)
+					T_csr(csrInd) = strSessionName
+                    csrInd = csrInd + 1
+					Exit Do
+			    End If 
+			Next
+			For Each LineItem in ag1_Notations
+			    If InStr(strSessionName, LineItem) > 0 Then 
+			        Redim Preserve T_ag1(ag1Ind + 1)
+					T_ag1(ag1Ind) = strSessionName
+                    ag1Ind = ag1Ind + 1
+					Exit Do
+			    End If 
+			Next
+			For Each LineItem in ag2_Notations
+			    If InStr(strSessionName, LineItem) > 0 Then 
+			        Redim Preserve T_ag2(ag2Ind + 1)
+					T_ag2(ag2Ind) = strSessionName
+                    ag2Ind = ag2Ind + 1
+					Exit Do
+			    End If 
+			Next
+			' If no match found then place session into fourth row
+			Redim Preserve T_ag3(ag3Ind + 1)
+			T_ag3(ag3Ind) = strSessionName
+			ag3Ind = ag3Ind + 1
+	        Exit Do
+		Loop
 	Next
-	Call TrDebug ("IE_PromptForInputPullDown: nMaxFlavors = " & nMaxFlavors , "", objDebug, MAX_LEN, 3, nDebug)				
+	Tmax_Ind = MaxQ(UBound(T_csr),Ubound(T_ag1))
+	Tmax_Ind = MaxQ(Tmax_Ind,Ubound(T_ag2))
+	Tmax_Ind = MaxQ(Tmax_Ind,Ubound(T_ag3))
+	
 	'----------------------------------------
 	' SCREEN RESOLUTION
 	'----------------------------------------
@@ -1382,6 +1478,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	nLine = 15
 	WindowH = IE_Menu_Bar + 4 * LoginTitleH + cellH * (nLine) + nButtonY + nBottom
 	WindowW = IE_Border + FullTitleW
+	MenuH = WindowH - IE_Menu_Bar
 	If WindowW < 300 then WindowW = 300 End If
 
 	nFontSize_10 = Round(10 * nRatioY,0)
@@ -1409,7 +1506,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
     htmlEmptyCell = _
         	"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """></td>"
 	nLine = nLine + 2
-   strLine = strLine &_	
+   htmlMain = htmlMain &_	
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 4 * LoginTitleH + cellH * (nLine) + nButtonY + nBottom &_
 		""" width=""" & FullTitleW & """ valign=""middle"" background=""" & bgFigure & """ background-repeat=""no-repeat""" &_ 
 		"style="" position: absolute; top: 0px; left:0px;" &_
@@ -1421,11 +1518,11 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 				"</tbody>" &_
 		"</table>"
 	'------------------------------------------------------
-	'   Configuration BUTTON 
+	'   MENU BUTTONS 
 	'------------------------------------------------------
     nMenuButtonX = Int(LoginTitleW/4)
 	nMenuButtonY = nButtonY
-	strLine = strLine &_
+	htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; top: " &  LoginTitleH & "px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: Transparent" &_
 		"; height: " & LoginTitleH & "px; width: " & Int(LoginTitleW/4) & "px;"">" & _
@@ -1439,35 +1536,35 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 				"</tr>" &_
     			"<tr>" &_
     				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='LOAD' onclick=document.all('ButtonHandler').value='LOAD';><u>L</u>oad Config</button>" & _	
+						"' name='LOAD' onclick=document.all('ButtonHandler').value='LOAD';><u>L</u>oad Config</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='DNLD' onclick=document.all('ButtonHandler').value='DOWNLOAD';><u>S</u>ave Tested Config</button>" & _	
+						"px; ' name='Save_Tested' onclick=document.all('ButtonHandler').value='SAVE_TESTED';><u>S</u>ave Tested Config</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Apply_FWF' AccessKey='E' onclick=document.all('ButtonHandler').value='APPLY_FWF';><u>A</u>pply Filter</button>" & _
+						"px; ' name='Save_as' AccessKey='E' onclick=document.all('ButtonHandler').value='SAVE_AS';><u>S</u>ave as...</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
+    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Check_' AccessKey='E' onclick=document.all('ButtonHandler').value='CHECK';><u>C</u>heck Config</button>" & _
+						"px; ' name='Blk_DownLoad' AccessKey='B' onclick=document.all('ButtonHandler').value='BLK_DOWNLOAD';><u>B</u>ulk Save</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
 						"px;' name='EDIT' onclick=document.all('ButtonHandler').value='EDIT';><u>E</u>dit Config</button>" & _	
 					"</td>"&_
@@ -1476,17 +1573,25 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
      					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='POPULATE_DNLD' onclick=document.all('ButtonHandler').value='POPULATE_DNLD';>TCG <u>E</u>xport Tested</button>" & _
+						"px; ' name='Delete_Cfg' onclick=document.all('ButtonHandler').value='DELETE_CFG';><u>D</u>elete Config</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
-    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
+    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
 						"px; ' name='POPULATE_ORIG' AccessKey='P' onclick=document.all('ButtonHandler').value='POPULATE_ORIG';>TCG <u>E</u>xport Original</button>" & _
 					"</td>"&_
+				"</tr>" &_					
 				"<tr>" &_
-    				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & 3 * LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
+    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='UPGRADE_SW' AccessKey='P' onclick=document.all('ButtonHandler').value='UPGRADE_SW';><u>U</u>pgrade Junos</button>" & _
+					"</td>"&_
+				"</tr>" &_					
+				"<tr>" &_
+    				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & 2 * LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & 3 * LoginTitleH & "; font-size: " & nFontSize_12 & ".0pt;" &_
 						"px; ' name='EPTY' onclick=document.all('ButtonHandler').value='EMPTY';></button>" & _	
@@ -1495,10 +1600,10 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 				"<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>"
 		nButton = 7
     '-----------------------------------------------------------------
-	' SET THE TITLE OF THE  FORM   		
+	' SET THE TITLE OF THE FORM   		
 	'-----------------------------------------------------------------
 	nLine = 0
-	    strLine = strLine &_
+	    htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; top: 0px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor5 &_
 		"; background-color: " & HttpBgColor5 & "; height: " & LoginTitleH & "px; width: " & FullTitleW & "px;"">" & _
@@ -1508,16 +1613,16 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 			"valign=""middle"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & FullTitleW - nTab & """>" & _
 				"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_				
 				";font-weight: normal;font-style: italic;"">"&_
-				"&nbsp;&nbsp;MEF Configuration Loader <span style=""font-weight: bold;"">Ver." & strVersion & "</span></span></p>"&_
+				"&nbsp;&nbsp;Lab Configuration Loader <span style=""font-weight: bold;"">Ver." & strVersion & "</span></span></p>"&_
 			"</td>" &_
-				"<td background=""" & SettingsFigure & """ style=""background-repeat: no-repeat; background-position: 50% 50%; background-size: 40px 40px;"&_
+			"<td background=""" & SettingsFigure & """ style=""background-repeat: no-repeat; background-position: 50% 50%; background-size: 40px 40px;"&_
 				"border-style: none; background-color: " & HttpBgColor5 & ";""" &_
 			    "valign=""middle"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & nTab & """>" & _
-				"<button  style='background-color: transparent; border-style: None; width:" &_
+				"<button style='background-color: transparent; border-style: None; width:" &_
 				"40;height:40;" &_
 				"' name='SETTINGS' onclick=document.all('ButtonHandler').value='SETTINGS_';></button>" & _	
 			"</td>" &_			
-		"</tr></tbody></table>"
+			"</tr></tbody></table>"
 	
 		'-----------------------------------------------------------------
 		' DRAW CONFIGURATION TABLE
@@ -1525,8 +1630,8 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 		'-----------------------------------------------------------------
 		' DRAW ROW WITH CONFIGURATION TITLE
 		'-----------------------------------------------------------------	
-		cTitle = "Choose MEF CE2.0 Service Configuration"
-	    strLine = strLine &_
+		cTitle = "Choose LAB Configuration"
+	    htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: " & Int(LoginTitleW/4) & "px; top: " & LoginTitleH & "px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor5 &_
 		"; background-color: Transparent; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
@@ -1545,7 +1650,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 						"<p style=""text-align: center; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 						";font-weight: normal;font-style: normal;"">"
 
-		strLine = strLine &_
+		htmlMain = htmlMain &_
 			"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: " & Int(LoginTitleW/4) & "px; top: " & 2 * LoginTitleH + nLine * cellH & "px;" &_
 			" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: Transparent"  &_
 			"; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
@@ -1557,17 +1662,17 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 					strTitleCell & "</p></td>"&_					 
 				"</tr>"	&_		
 				"<tr>" &_
-					strTitleCell & "SERVICE</p></td>"&_
-					strTitleCell & "TYPE</p></td>"&_
-					strTitleCell & "TEST CASE#</p></td>"&_
+					strTitleCell & "Year</p></td>"&_
+					strTitleCell & "Search Tag</p></td>"&_
+					strTitleCell & "Cfg Version</p></td>"&_
 					strTitleCell & "Use Saved CFG</p></td>"&_					 
 				"</tr>"
 					'-----------------------------------------------------
-					'  SELECT SERVICE NAME
+					'  SELECT DATE/YEAR
 					'-----------------------------------------------------
-					strLine = strLine &_
+					htmlMain = htmlMain &_
 					"<tr>"
-						strLine = strLine &_
+						htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 							"<select name='Input_Param_0' id='Input_Param_0'" &_
 											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -1576,18 +1681,21 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 											"; background-color:" & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 											" onchange=document.all('ButtonHandler').value='Select_0';" &_
 											"type=text > "
-					For nService = 0 to Ubound(vSvc) - 1
-						strLine = strLine &_
-											"<option value=" & nService & """>" & vSvc(nService,1) & "</option>" 
+						htmlMain = htmlMain &_
+											"<option value='All'>All</option>" 
+
+					For nYear = 2012 to Year(Date())
+						htmlMain = htmlMain &_
+											"<option value='" & nYear & "'>" & nYear & "</option>" 
 					Next
-					strLine = strLine &_
-    							"<option value=" & Ubound(vSvc) & """>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>" &_
+					htmlMain = htmlMain &_
+    							"<option value='All'>"& Space_html(18)&"</option>" &_
 							"</select>" &_
 						"</td>"
 					'-----------------------------------------------------
-					'  SELECT SERVISE FLAVOR
+					'  SELECT SEARCH TAG
 					'-----------------------------------------------------
-					strLine = strLine &_
+					htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & nNameW & """>" &_
 							"<select name='Input_Param_1' id='Input_Param_1'" &_
 											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -1596,17 +1704,20 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 											" onchange=document.all('ButtonHandler').value='Select_1';" &_
 											"type=text > "
-					For nFlavor = 0 to nMaxFlavors
-						strLine = strLine &_
-											"<option value=" & nFlavor & """>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>" 
+					For Each strTag in vTag
+						If strTag = "" Then Exit For
+						htmlMain = htmlMain &_
+											"<option value='" & strTag & "'>" & strTag & "</option>" 
 					Next
-					strLine = strLine &_
+						htmlMain = htmlMain &_
+											"<option value='*'>"& Space_html(18)& "</option>" 
+					htmlMain = htmlMain &_
 							"</select>" &_
 						"</td>"
 					'-----------------------------------------------------
-					'  SELECT TEST NUMBER
+					'  SELECT VERSION
 					'-----------------------------------------------------
-					strLine = strLine &_
+					htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & nNameW & """>" &_
 							"<select name='Input_Param_2' id='Input_Param_2'" &_
 											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -1615,14 +1726,14 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 											" onchange=document.all('ButtonHandler').value='Select_2';" &_
 											"type=text > "
-					For nTask = 0 to MAX_PARAM
-						strLine = strLine &_
-											"<option value=" & nTask & """>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>" 
+					For nVersion = 0 to MAX_PARAM
+						htmlMain = htmlMain &_
+											"<option value='Latest'>"& Space_html(18)& "</option>" 
 					Next
-					strLine = strLine &_
+					htmlMain = htmlMain &_
 							"</select>" &_
 						"</td>"
-					strLine = strLine &_
+					htmlMain = htmlMain &_
 						"<td style="" border-style: None; background-color: Transparent;"" class=""oa2"" height=""" & LoginTitleH & """ width=""" & nTab & """ align=""middle"">" & _
 							"<input type=checkbox name='ConfigLocation' style=""color: " & HttpTextColor2 & ";""" & _
 							" onclick=document.all('ButtonHandler').value='CONFIG_SOURCE';" &_
@@ -1636,10 +1747,10 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'-----------------------------------------------------
 	'  END OF TABLE
 	'-----------------------------------------------------
-				strLine = strLine &_
+				htmlMain = htmlMain &_
 						"</tbody></table>"
 	'-----------------------------------------------------
-	'  SELECT BW PROFILE FILTER
+	'  SELECT CFG NAME
 	'-----------------------------------------------------
 
 		strTitleCell = "<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
@@ -1651,42 +1762,33 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 					    "; background-color: Transparent; font-weight: Normal;"" AccessKey=i size=12 maxlength=15 " &_
 						"type=text > "
 
-		strLine = strLine &_
+		htmlMain = htmlMain &_
 			"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: " & Int(LoginTitleW/4) & "px; top: " & 2 * LoginTitleH + nLine * cellH & "px;" &_
 			" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: Transparent"  &_
 			"; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
 			"<tbody>" & _
 				"<tr>" &_
 					 strTitleCell & "</p></td>"&_
-					 strTitleCell & "</p></td>"&_
-					 strTitleCell & "</p></td>"&_
-					 strTitleCell & "</p></td>"&_
 				"</tr>" &_
     			"<tr>" &_
-					 strTitleCell & "FW FILTER</p></td>"&_
-					 strTitleCell & "POLICER</p></td>"&_
-					 strTitleCell & "CIR / PIR</p></td>"&_
-					 strTitleCell & "CBS / PBS</p></td>"&_
+					 strTitleCell & "Configuration Name</p></td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/5) & """>" &_
-						"<select name='bw_profile' id='bw_profile'" &_
+						"<select name='cfg_name' id='cfg_name'" &_
 						"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 						";position: relative; left:" & nTab & "px; " &_
 						"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 						"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
-						" onchange=document.all('ButtonHandler').value='CH_FWF' type=text > "
-						For nInd = 0 to MAX_BW_PROFILES - 1
-							strLine = strLine &_
+						" onchange=document.all('ButtonHandler').value='SELECT_CFG' type=text > "
+						For nInd = 0 to UBound(vCfgList,1)-1
+							htmlMain = htmlMain &_
 												"<option value=" & nInd & """></option>" 
 						Next
-						strLine = strLine &_
-									"<option value=" & MAX_BW_PROFILES & """>"& Space_html(20)& "</option>" &_
+						htmlMain = htmlMain &_
+									"<option value=New"">New"& Space_html(128)& "</option>" &_
 								"</select>" &_
 					"</td>"	&_
-					strInputCell & "</td>" &_
-					strInputCell & "</td>" &_
-					strInputCell & "</td>" &_				
 				"</tr>" &_
 				"<tr>" &_
 					strTitleCell & "</p></td>" & strTitleCell & "</p></td>" & strTitleCell & "</p></td>" & strTitleCell & "</p></td>"&_					 
@@ -1697,7 +1799,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'------------------------------------------------------
 	'   EXIT BUTTON
 	'------------------------------------------------------
-	strLine = strLine &_
+	htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: " & Int(LoginTitleW/4) & "px; bottom: " & LoginTitleH & "px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: Transparent; background-color: Transparent " &_
 		"; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
@@ -1715,7 +1817,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'------------------------------------------------------
 	'   BOTTOM INFO BAR 
 	'------------------------------------------------------
-	strLine = strLine &_
+	htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; bottom: 0px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: None; background-color: " & HttpBgColor5 &_
 		"; height: " & LoginTitleH & "px; width: " & FullTitleW & "px;"">" & _
@@ -1723,25 +1825,25 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/8) & """>" & _
 						"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
-						"; font-weight: normal;font-style: italic;"">Platform: </span></p>" &_
-					"</td>" & _
-					"<td style=""border-style: none; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/8) & """>" & _
-						"<input name=Current_config value='' style=""text-align: left; font-size: " & nFontSize_12 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; font-style: italic; color: " & HttpTextColor3 &_
-					    "; background-color: Transparent; font-weight: Normal;"" AccessKey=i size=30 maxlength=48 " &_
-						"type=text > " &_
+						"; font-weight: normal;font-style: italic;"">Topology: </span></p>" &_
 					"</td>" & _
 					"<td style=""border-style: none; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
-						"; font-weight: normal;font-style: italic;"">" & "Loaded Config:</span></p>" &_
-					"</td>" & _
-					"<td style=""border-style: None; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<input name=Current_config value='' style=""text-align: left; font-size: " & nFontSize_12 & ".0pt;" &_ 
 						" border-style: none; font-family: 'Helvetica'; font-style: italic; color: " & HttpTextColor3 &_
 					    "; background-color: Transparent; font-weight: Normal;"" AccessKey=i size=30 maxlength=48 " &_
 						"type=text > " &_
 					"</td>" & _
-					"<td style=""border-style: None; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+					"<td style=""border-style: none; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/8) & """>" & _
+						"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
+						"; font-weight: normal;font-style: italic;"">" & "Last Loaded:</span></p>" &_
+					"</td>" & _
+					"<td style=""border-style: None; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & 5 * Int(LoginTitleW/8) & """>" & _
+						"<input name=Current_config value='' style=""text-align: left; font-size: " & nFontSize_12 & ".0pt;" &_ 
+						" border-style: none; font-family: 'Helvetica'; font-style: italic; color: " & HttpTextColor3 &_
+					    "; background-color: Transparent; font-weight: Normal;"" AccessKey=i size=30 maxlength=48 " &_
+						"type=text > " &_
+					"</td>" & _
+					"<td style=""border-style: None; background-color: " & HttpBgColor5 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/8) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor3 & "; width:" &_
 						2 * nButtonX & ";height:" & nButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
 						"px;' name='EXIT' onclick=document.all('ButtonHandler').value='Cancel';><u>E</u>xit</button>" & _	
@@ -1750,163 +1852,172 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'-----------------------------------------------------------------
 	' NETWORK DIAGRAM
 	'-----------------------------------------------------------------
-	htmlUniStyle = _
-		"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """ align=""middle"">" &_
-			"<input name=UNI value='' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
-			" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
-            ";position: relative; left:" & nLeft & "px; top: 2px; " &_			
-		    "; background-color: transparent; font-weight: Bold;"" AccessKey=i size=6 maxlength=10 " &_
-			"type=text > " &_
-			"<input name=UNI_BUTTON value='' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
-			" border-style: none; font-family: 'Helvetica'; color: Red" &_
-            ";position: relative; left:-" & nLeft & "px; top: 2px; " &_						
-		    "; background-color: transparent; font-weight: Bold;"" size=1 maxlength=1 " &_
-			"type=text > " &_
-		"</td>"
     htmlEmptyCell = _
         	"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """></td>"
-	nLine = nLine + 2
-   strLine = strLine &_	
-		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 10 * cellH & """ width=""" & Int(LoginTitleW) & """ valign=""middle"" background=""" & DiagramFigure & """" &_ 
-		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left:" & Int(LoginTitleW/4) & "px;" &_
+	nLine = nLine + 3
+
+   htmlMain = htmlMain &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & Int(LoginTitleW/6) & """ valign=""middle""" &_ 
+		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & nLeft + Int(LoginTitleW/4) & "px;" &_
 		"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-			"<tbody>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"</tbody>" &_
-		"</table>"
-   strLine = strLine &_
-		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 9 * cellH & """ width=""" & Int(LoginTitleW/6) & """ valign=""middle""" &_ 
-		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & Int(LoginTitleW/4) & "px;" &_
-		"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-			"<tbody>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell & _
-				"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
+			"<tbody>"
+				For Each LineItem in T_csr
+				    If LineItem = "" Then Exit For
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" &  Int(LoginTitleW/6) & """ align=""middle"">" &_
+								"<input type=checkbox name='" & LineItem & "' style=""color: " & HttpTextColor2 & ";" & _
+								"position: relative; left: 0px; top: 2px; """ &_									
+								" onclick=document.all('ButtonHandler').value='ENABLE_SESSION#"& LineItem &"';" &_
+								"value='Original'>" &_
+								"<input name=UNI value='" & LineItem & "' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
+								";position: relative; left:" & Int(nLeft/2) & "px; top: 2px; " &_			
+								"; background-color: transparent; font-weight: Bold;"" AccessKey=i size=6 maxlength=10 " &_
+								"type=text > " &_
+							"</td>" &_
+						"</tr>"
+				Next
+		htmlMain = htmlMain &_
 				"</tbody>" &_
 		"</table>"	
-		strLine = strLine &_
-		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 9 * cellH & """ width=""" & Int(LoginTitleW/6) & """ valign=""middle""" &_ 
-		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & Int(LoginTitleW/4) + 2 * Int(LoginTitleW/6) & "px;" &_
+		htmlMain = htmlMain &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width="""  & Int(LoginTitleW/6) &  """ valign=""middle""" &_ 
+		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & nLeft + Int(LoginTitleW/4) + Int(LoginTitleW/6) & "px;" &_
 		"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-			"<tbody>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell & _
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
+			"<tbody>"
+				For Each LineItem in T_ag1
+				    If LineItem = "" Then Exit For
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """ align=""middle"">" &_
+								"<input type=checkbox name='" & LineItem & "' style=""color: " & HttpTextColor2 & ";" & _
+								"position: relative; left: 0px; top: 2px; """ &_									
+								" onclick=document.all('ButtonHandler').value='ENABLE_SESSION#"& LineItem &"';" &_
+								"value='Original'>" &_
+								"<input name=UNI value='" & LineItem & "' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
+								";position: relative; left:" & Int(nLeft/2) & "px; top: 2px; " &_			
+								"; background-color: transparent; font-weight: Bold;"" AccessKey=i size=6 maxlength=10 " &_
+								"type=text > " &_
+							"</td>" &_
+						"</tr>"
+				Next
+		htmlMain = htmlMain &_
 				"</tbody>" &_
 		"</table>"
-     strLine = strLine &_
-		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 9 * cellH & """ width=""" & Int(LoginTitleW/6) & """ valign=""middle""" &_ 
-		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & Int(LoginTitleW/4) + 3 * Int(LoginTitleW/6) - nTab/2 & "px;" &_
+     htmlMain = htmlMain &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1""  width=""" & Int(LoginTitleW/4) & """ valign=""middle""" &_ 
+		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & nLeft + Int(LoginTitleW/4) + 2 * Int(LoginTitleW/6) & "px;" &_
 		"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-			"<tbody>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell & _
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
+			"<tbody>"
+				For Each LineItem in T_ag2
+				    If LineItem = "" Then Exit For
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """ align=""middle"">" &_
+								"<input type=checkbox name='" & LineItem & "' style=""color: " & HttpTextColor2 & ";" & _
+								"position: relative; left: 0px; top: 2px; """ &_									
+								" onclick=document.all('ButtonHandler').value='ENABLE_SESSION#"& LineItem &"';" &_
+								"value='Original'>" &_
+								"<input name=UNI value='" & LineItem & "' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
+								";position: relative; left:" & Int(nLeft/2) & "px; top: 2px; " &_			
+								"; background-color: transparent; font-weight: Bold;"" AccessKey=i size=6 maxlength=10 " &_
+								"type=text > " &_
+							"</td>" &_
+						"</tr>"
+				Next
+		htmlMain = htmlMain &_
 				"</tbody>" &_
 		"</table>"
-		strLine = strLine &_
-		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" height=""" & 9 * cellH & """ width=""" & Int(LoginTitleW/6) & """ valign=""middle""" &_ 
-		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & Int(LoginTitleW/4) + 5 * Int(LoginTitleW/6) & "px;" &_
+		htmlMain = htmlMain &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & Int(LoginTitleW/4) & """ valign=""middle""" &_ 
+		"style="" position: absolute; top: " & 2 * LoginTitleH + nLine * cellH & "px; left: " & nLeft + Int(LoginTitleW/4) + 3 * Int(LoginTitleW/6) & "px;" &_
 		"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-			"<tbody>" &_
-			    "<tr>"&_
-					htmlUniStyle &_
-				"</tr>" &_
-			    "<tr>"&_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle & _
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-    			"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlEmptyCell &_
-				"</tr>" &_
-				"<tr>" &_
-					htmlUniStyle &_
-				"</tr>" &_
-				"</tbody>" &_
+			"<tbody>"
+				For Each LineItem in T_ag3
+				    If LineItem = "" Then Exit For
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/6) & """ align=""middle"">" &_
+								"<input type=checkbox name='" & LineItem & "' style=""color: " & HttpTextColor2 & ";" & _
+								"position: relative; left: 0px; top: 2px; """ &_									
+								" onclick=document.all('ButtonHandler').value='ENABLE_SESSION#"& LineItem &"';" &_
+								"value='Original'>" &_
+								"<input name=UNI value='" & LineItem & "' style=""text-align: center; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor3 &_
+								";position: relative; left:" & Int(nLeft/2) & "px; top: 2px; " &_			
+								"; background-color: transparent; font-weight: Bold;"" AccessKey=i size=6 maxlength=10 " &_
+								"type=text > " &_
+							"</td>" &_
+						"</tr>"
+				Next
+		htmlMain = htmlMain &_
+    		"</tbody>" &_
 		"</table>"	
+	'-----------------------------------------------------------------
+	' SETTINGS MENU
+	'-----------------------------------------------------------------
+	htmlMain = htmlMain & _
+	 "<div id='divSettings' name='divSettings' style='color: " & HttpBgColor2 & " ;background-color:" & HttpBgColor5 & "; width: 200px; height: " & MenuH - 2 * LoginTitleH & "px; position: absolute; right: -200px; top: " & LoginTitleH & "px;'>" &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: relative; left: 0px; top: 0px;" &_
+		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: Transparent" &_
+		"; height: " & LoginTitleH & "px; width: " & Int(LoginTitleW/4) & "px;"">" & _
+			"<tbody>" & _
+    			"<tr>" &_
+    				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+					"</td>"&_
+				"</tr>" &_
+    			"<tr>" &_
+    				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='SET_CFG_TEMPLATE' onclick=document.all('ButtonHandler').value='SET_CFG_TEMPLATE';>CFG Template Name</button>" & _	
+					"</td>"&_
+				"</tr>" &_
+				"<tr>" &_
+					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='SET_CONNECTIVITY' onclick=document.all('ButtonHandler').value='SET_CONNECTIVITY';>LAB Connectivity</button>" & _	
+					"</td>"&_
+				"</tr>" &_
+				"<tr>" &_
+					"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='SET_FOLDER' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_FOLDER';>Folder Settings</button>" & _
+					"</td>"&_
+				"</tr>" &_
+				"<tr>" &_
+    				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+    					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='SET_CRT' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_CRT';>SecureCRT Sessions</button>" & _
+					"</td>"&_
+				"</tr>" &_
+				"<tr>" &_
+    				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
+						"px;' name='SET_OTHER' onclick=document.all('ButtonHandler').value='SET_OTHER';>Other Settings</button>" & _	
+					"</td>"&_
+				"</tr>" &_
+				"<tr>" &_
+    				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
+						"px;' name='JUNOS_CATALOG' onclick=document.all('ButtonHandler').value='SET_JUNOS_CATALOG';>Junos Catalog</button>" & _	
+					"</td>"&_
+				"</tr>" &_				
+		    "</tbody></table>" &_
+	 "</div>"
+
 	'-----------------------------------------------------------------
 	' HTML Form Parameaters
 	'-----------------------------------------------------------------
-    g_objIE.Document.Body.innerHTML = strLine
+    g_objIE.Document.Body.innerHTML = htmlMain
     g_objIE.MenuBar = False
     g_objIE.StatusBar = False
     g_objIE.AddressBar = False
@@ -1918,26 +2029,17 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'-----------------------------------------------------------------
 	CFG_Downloaded = False
 	YES_NO = False
-	CurrentSvc = "Null"
-	nService = vSessionTmp(0)
-	For i=0 to 2 
-		g_objIE.Document.All("BW_Param")(i).Value = "N/A"
-	Next
+	nYear = Int(vSessionTmp(0))
+	nTag = Int(vSessionTmp(1))
+	nCfg = Int(vSessionTmp(2))
+	nVersion = Int(vSessionTmp(3))
+	CurrentCfg = vSessionTmp(4)
+	If vSessionTmp(5) = "0" Then YES_NO = False Else YES_NO = True
+	g_objIE.Document.All("ButtonHandler").Value = vSessionTmp(6)
 
-	g_objIE.Document.All("UNI")(0).Value = vNodes(0,0)
-	g_objIE.Document.All("UNI")(1).Value = vNodes(0,1)
-	g_objIE.Document.All("UNI")(2).Value = vNodes(0,2)
-	g_objIE.Document.All("UNI")(3).Value = vNodes(1,4)
-	g_objIE.Document.All("UNI")(4).Value = vNodes(1,0)
-	g_objIE.Document.All("UNI")(5).Value = vNodes(0,1)
-	g_objIE.Document.All("UNI")(6).Value = vNodes(1,2)
-	g_objIE.Document.All("UNI")(7).Value = vNodes(1,3)	
-	g_objIE.Document.All("Current_config")(0).Value = DUT_Platform
-	g_objIE.Document.All("Current_config")(1).Value = "Unknown"
-	g_objIE.document.getElementById("Input_Param_0").selectedIndex = vSessionTmp(0)
-'   g_objIE.Document.All("ConfigLocation")(0).Select
-'   g_objIE.Document.All("ConfigLocation")(0).Checked = false
-'   g_objIE.Document.All("ConfigLocation")(0).Click	
+	g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+	g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
+
 	'--------------------------------------
 	' WAIT UNTIL IE FORM LOADED
 	'--------------------------------------
@@ -1951,63 +2053,52 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 		SourceFolder = strDirectoryConfig
 		Arg4 = "original"
     end if
+	'--------------------------------------
+	' LOAD INITAIAL YEAR AND SEARCH TAG
+	'--------------------------------------
+    g_objIE.document.getElementById("Input_Param_0").selectedIndex = nYear
+	g_objIE.document.getElementById("Input_Param_1").selectedIndex = nTag
+	strYear = g_objIE.document.getElementById("Input_Param_0").options(nYear).Value
+	strTag = g_objIE.document.getElementById("Input_Param_1").options(nTag).Value
+	'--------------------------------------
+	' LOAD CONFIGURATION LIST
+	'--------------------------------------
+	nOptions = UpdateCfgList(g_objIE, nCfg, strYear, strTag, vCfgList, "cfg_name")
+    g_objIE.document.getElementById("cfg_name").SelectedIndex = nOptions	
+	strCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Text
+	nCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Value
 
+'	strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
+'	strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
+'	    g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
+'	    g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
+'	    g_objIE.document.getElementById("bw_profile").Disabled = True
 	'--------------------------------------
-	' LOAD INITAIAL FLAVORS LIST
+	' UPDATE CFG VERSIONS
 	'--------------------------------------
-	For nFlavor = 0 to nMaxFlavors - 1
-		If nFlavor < vSvc(nService,0) Then 
-	        g_objIE.document.getElementById("Input_Param_1").Options(nFlavor).text = vFlavors(nService,nFlavor,0)	
-		else
-		    g_objIE.document.getElementById("Input_Param_1").Options(nFlavor).text = " "
-	    End If
-	Next
-    g_objIE.document.getElementById("Input_Param_1").selectedIndex = vSessionTmp(1)
+	nVersion = UpdateCfgVer(g_objIE, nCfg, vCfgList, "Input_Param_2")
+	strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text							
 	'--------------------------------------
-	' LOAD INITIAL TASK LIST
+	'  SESSION STATUS CHECK BOXES
 	'--------------------------------------
-	For nTaskInd = 0 to MAX_PARAM - 1
-	    If nTaskInd <= Ubound(Split(vFlavors(vSessionTmp(0),vSessionTmp(1),1),",")) Then 
-		    g_objIE.document.getElementById("Input_Param_2").Options(nTaskInd).text = Split(vFlavors(vSessionTmp(0),vSessionTmp(1),1),",")(nTaskInd)
-		Else 
-		    g_objIE.document.getElementById("Input_Param_2").Options(nTaskInd).text = " "
-		End If
-	Next
-	g_objIE.document.getElementById("Input_Param_2").selectedIndex = vSessionTmp(2) 
-	
+
+'	Select Case vSessionTmp(6)
+'	    Case "DOWNLOAD"
+'			Call UpdateSessionStatus(g_objIE, nCfg, SAVE_AS, vCfgList,vSessionCRT, vSessionEnable)
+'	    Case Else 
+'			Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)
+'	End Select
+    Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)
+    '--------------------------------------
 	Call TrDebug("MAIN FORM:" , g_objIE.document.getElementById("Input_Param_1").Options(0).text, objDebug, MAX_LEN, 1, 1)
 	Call TrDebug("MAIN FORM:" , g_objIE.document.getElementById("Input_Param_1").Options(1).text, objDebug, MAX_LEN, 1, 1)
 	'--------------------------------------
 	' LOAD LAST REMEMBERED PROFILE
 	'--------------------------------------
-	nService = vSessionTmp(0)
-	nFlavor = vSessionTmp(1)
-	nTaskInd = vSessionTmp(2)
-	nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)
-	'--------------------------------------
-	' BW PROFILE LIST
-	'--------------------------------------
-	strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-	strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
-'    Call GetFileLineCountSelect(strConfigFileL,vConfigFileLeft,"","","",0)
-    
-'	If Not GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, 1) Then 
-'	    g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
-'	    g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
-'	    g_objIE.document.getElementById("bw_profile").Disabled = True
-'	Else
-    Redim vFilterList(1)
-	Redim vPolicerList(1)
-	vPolicerList(0) = ""
-	vFilterList(0) = "Null"
-		g_objIE.document.getElementById("bw_profile").Disabled = False
-		For n = 0 to UBound(vFilterList)-1
-			g_objIE.document.getElementById("bw_profile").Options(n).text = vFilterList(n)
-		Next
-		If vPolicerList(0) <> "" Then g_objIE.Document.All("BW_Param")(0).Value = vPolicerList(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-'		If vCIR(0) <> "" Then g_objIE.Document.All("BW_Param")(1).Value = vCIR(0) Else g_objIE.Document.All("BW_Param")(1).Value = "N/A" End If
-'		If vCBS(0) <> "" Then g_objIE.Document.All("BW_Param")(2).Value = vCBS(0) Else g_objIE.Document.All("BW_Param")(2).Value = "N/A" End If	
-'	End If
+	'nService = vSessionTmp(0)
+	'nFlavor = vSessionTmp(1)
+	'nTaskInd = vSessionTmp(2)
+	'nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)
 
 	'----------------------------------------------------
 	'  GET MAIN FORM PID
@@ -2023,7 +2114,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 	'----------------------------------------------------
 	'  START MAIN CYCLE OF THE INPUT FORM
 	'----------------------------------------------------
-	g_objIE.Document.All("ButtonHandler").Value = "CHECK"
+	' g_objIE.Document.All("ButtonHandler").Value = "CHECK"
 	nPressSettings = 0
    Do
         ' If the user closes the IE window by Alt+F4 or clicking on the 'X'
@@ -2038,25 +2129,95 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
         On Error Goto 0    
         ' Check to see which buttons have been clicked, and address each one
         ' as it's clicked.
-        Select Case szNothing
+        Select Case Split(szNothing,"#")(0)
+		    Case "ENABLE_SESSION"
+			    g_objIE.Document.All("ButtonHandler").Value = "None"
+				strSessionName = split(szNothing,"#")(1)
+				nInd = GetObjectLineNumber(vSessionCRT,UBound(vSessionCRT),strSessionName)
+				If g_objIE.Document.All(strSessionName).Checked Then 
+					vSessionEnable(nInd - 1) = "Status " & nInd & "=Enabled"
+				Else 
+					vSessionEnable(nInd - 1) = "Status " & nInd & "=Disabled"
+				End If
+		    Case "SET_CFG_TEMPLATE"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 1, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+
+			Case "SET_CONNECTIVITY"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 2, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+			
+			Case "SET_FOLDER"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 3, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+			
+			Case "SET_CRT"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 4, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+			
+			Case "SET_OTHER"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 5, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+			Case "SET_JUNOS_CATALOG"
+                g_objIE.Document.All("ButtonHandler").Value = "None"
+        	    For MenuX = 200 to 0 step - 2
+					g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+				Next
+				nPressSettings = nPressSettings + 1				
+				Call IE_Hide(g_objIE)
+        	    If IE_PromptForSettings(vIE_Scale, 8, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+                Call IE_Unhide(g_objIE)
+			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
 		    Case "SETTINGS_"
 				g_objIE.Document.All("ButtonHandler").Value = "None"
-            '   Call IE_Hide(g_objIE)
-        	'    If IE_PromptForSettings(vIE_Scale, vSettings, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
-            '    Call IE_Unhide(g_objIE)
-			'   g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
-			    Select Case nPressSettings
-				    Case 0, 2, 4, 6, 8, 10
-						g_objIE.Document.Body.innerHTML = strLine & _
-							 "<div id='divSettings' name='divSettings' style='background-color:" & HttpBgColor5 & "; position: absolute; right: 0px; top: " & LoginTitleH & "px;'>" &_
-							 "<h3>This is a heading</h3>" &_
-							 "<p>This is a paragraph.</p>" &_
-							 "</div>"
-							 g_objIE.document.getElementById("divSettings").style.height = ( MenuH - LoginTitleH ) & "px"
-							 g_objIE.document.getElementById("divSettings").style.width = "200px"
+			    Select Case nPressSettings Mod 2
+				    Case 0
+							 For MenuX = 0 to 200 step 2
+							    g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+								'WScript.Sleep 1
+							 Next
+							 
 							 nPressSettings = nPressSettings + 1
 					Case Else
-				        g_objIE.Document.Body.innerHTML = strLine
+							 For MenuX = 200 to 0 step - 2
+							    g_objIE.document.getElementById("divSettings").style.right = (MenuX - 200) & "px"
+								'WScript.Sleep 1
+							 Next
 						nPressSettings = nPressSettings + 1
 				End Select
 		    Case "CONFIG_SOURCE"
@@ -2077,522 +2238,487 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 							Arg4 = "original"
 						end if
 						g_objIE.Document.All("ButtonHandler").Value = "Nothing is selected"
-			Case "Select_0"
-			           g_objIE.Document.All("ButtonHandler").Value = "None"
-			            Do
-						    '-------------------------------------------------------
-							'   CHECK THAT CONFIGURATION FILE EXISTS
-							'-------------------------------------------------------
-							nNewService = g_objIE.document.getElementById("Input_Param_0").selectedIndex
-							If nNewService > Ubound(vSvc)-1 Then nNewService = Ubound(vSvc)-1 : g_objIE.document.getElementById("Input_Param_0").selectedIndex = nNewService End If
-							nNewFlavor = 0
-							nNewTaskInd = 0
-							nNewTask = Split(vFlavors(nNewService,0,1),",")(0)
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nNewService,1) & "\" & vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform & "-l.conf") Then
-							    If g_objIE.Document.All("ConfigLocation").Checked Then 
-									vvMsg(0,0) = "CONFIGURATION: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "HASN'T BEEN TESTED YET."                                                                                          : vvMsg(1,1) = "normal" 	: vvMsg(1,2) =  HttpTextColor2
-									vvMsg(2,0) = "ORIGINAL CONFIGURATION WILL BE USED"     : vvMsg(2,1) = "bold" 	                                                : vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find configuration",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_0").selectedIndex = nService
-									Exit Do
-								Else 
-									vvMsg(0,0) = "CONFIGURATION FILE FOR: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "normal" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "WAS NOT FOUND."                                                                                   : vvMsg(1,1) = "normal" 	: vvMsg(1,2) =  HttpTextColor2
-									vvMsg(2,0) = "MAKE SURE THAT CONFIGURATION FILE EXISTS AND HAS THE RIGHT NAME."                                     : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find file",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_0").selectedIndex = nService
-									Exit Do
-								End If 
-							End If
-							nService = nNewService
-							nFlavor = nNewFlavor
-							nTaskInd = nNewTaskInd
-							nTask = nNewTask
-							'--------------------------------------
-							' LOAD INITAIAL FLAVORS LIST
-							'--------------------------------------
-							For nInd = 0 to nMaxFlavors - 1
-								If nInd < vSvc(nService,0) Then 
-									g_objIE.document.getElementById("Input_Param_1").Options(nInd).text = vFlavors(nService,nInd,0)	
-								else
-									g_objIE.document.getElementById("Input_Param_1").Options(nInd).text = " "
-								End If
-							Next
-							g_objIE.document.getElementById("Input_Param_1").selectedIndex = 0
-							'--------------------------------------
-							' LOAD INITAIAL TASK LIST
-							'--------------------------------------
-							For nInd = 0 to MAX_PARAM - 1
-								If nInd <= Ubound(Split(vFlavors(nService,0,1),",")) Then 
-									g_objIE.document.getElementById("Input_Param_2").Options(nInd).text = Split(vFlavors(nService,0,1),",")(nInd)
-								Else 
-									g_objIE.document.getElementById("Input_Param_2").Options(nInd).text = " "
-								End If
-							Next
-							g_objIE.document.getElementById("Input_Param_2").selectedIndex = 0
-							'--------------------------------------
-							' LOAD BW PROFILES
-							'--------------------------------------
-							strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-							strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
-							Call GetFileLineCountSelect(strConfigFileL,vConfigFileLeft,"","","",0)
-							If Not GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, 1) Then 
-								g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
-								g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
-								g_objIE.document.getElementById("bw_profile").Disabled = True
-							Else
-								g_objIE.document.getElementById("bw_profile").Disabled = False
-								For n = 0 to MAX_BW_PROFILES - 1
-									If n < UBound(vFilterList) Then 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = vFilterList(n) 
-									Else 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = Space(20)
-									End If
-								Next
-								g_objIE.document.getElementById("bw_profile").selectedIndex = 0
-							End If
-							If vPolicerList(0) <> "" Then g_objIE.Document.All("BW_Param")(0).Value = vPolicerList(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-							If vCIR(0) <> "" Then g_objIE.Document.All("BW_Param")(1).Value = vCIR(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-							If vCBS(0) <> "" Then g_objIE.Document.All("BW_Param")(2).Value = vCBS(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If	
-							g_objIE.Document.All("ButtonHandler").Value = "CHECK"
-							Exit Do
-						Loop       
-            Case "Select_1" 
+			Case "Select_0", "Select_1"
 			            g_objIE.Document.All("ButtonHandler").Value = "None"
-                        Do			
-						    '-------------------------------------------------------
-							'   CHECK THAT CONFIGURATION FILE EXISTS
-							'-------------------------------------------------------
-							nNewService = nService
-							nNewFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex
-							If nNewFlavor > vSvc(nNewService,0) - 1 Then nNewFlavor = vSvc(nNewService,0) - 1 : g_objIE.document.getElementById("Input_Param_1").selectedIndex = nNewFlavor End If
-							nNewTaskInd = 0
-							nNewTask = Split(vFlavors(nNewService,nNewFlavor,1),",")(0)
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nNewService,1) & "\" & vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform & "-l.conf") Then
-							    If g_objIE.Document.All("ConfigLocation").Checked Then 
-									vvMsg(0,0) = "CONFIGURATION: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "HASN'T BEEN TESTED YET."                                                                 : vvMsg(1,1) = "normal" 	: vvMsg(1,2) =  HttpTextColor2
-									vvMsg(2,0) = "ORIGINAL CONFIGURATION WILL BE USED"     : vvMsg(2,1) = "bold" 	                       : vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find configuration",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_1").selectedIndex = nFlavor
-									Exit Do
-								Else 
-									vvMsg(0,0) = "CONFIGURATION FILE FOR: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "Normal" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "WAS NOT FOUND."                                                                                   : vvMsg(1,1) = "Normal" : vvMsg(1,2) =  HttpTextColor2
-									vvMsg(2,0) = "MAKE SURE THAT CONFIGURATION FILE HAS RIGHT NAME."                                                : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find file",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_1").selectedIndex = nFlavor
-									Exit Do
-								End If 
-							End If
-							nService = nNewService
-							nFlavor = nNewFlavor
-							nTaskInd = nNewTaskInd
-							nTask = nNewTask
-							'--------------------------------------
-							' LOAD INITAIAL TASK LIST
-							'--------------------------------------
-							For nInd = 0 to MAX_PARAM - 1
-								If nInd <= Ubound(Split(vFlavors(nService,nFlavor,1),",")) Then 
-									g_objIE.document.getElementById("Input_Param_2").Options(nInd).text = Split(vFlavors(nService,nFlavor,1),",")(nInd)
-								Else 
-									g_objIE.document.getElementById("Input_Param_2").Options(nInd).text = " "
-								End If
-							Next
-							g_objIE.document.getElementById("Input_Param_2").selectedIndex = 0
-							'--------------------------------------
-							' LOAD BW PROFILES
-							'--------------------------------------
-							strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-							strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
-							Call GetFileLineCountSelect(strConfigFileL,vConfigFileLeft,"","","",0)
-							If Not GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, 1) Then 
-								g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
-								g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
-								g_objIE.document.getElementById("bw_profile").Disabled = True
-							Else
-								g_objIE.document.getElementById("bw_profile").Disabled = False
-								For n = 0 to MAX_BW_PROFILES - 1
-									If n < UBound(vFilterList) Then 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = vFilterList(n) 
-									Else 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = Space(20)
-									End If
-								Next
-								g_objIE.document.getElementById("bw_profile").selectedIndex = 0
-							End If
-							If vPolicerList(0) <> "" Then g_objIE.Document.All("BW_Param")(0).Value = vPolicerList(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-							If vCIR(0) <> "" Then g_objIE.Document.All("BW_Param")(1).Value = vCIR(0) Else g_objIE.Document.All("BW_Param")(1).Value = "N/A" End If
-							If vCBS(0) <> "" Then g_objIE.Document.All("BW_Param")(2).Value = vCBS(0) Else g_objIE.Document.All("BW_Param")(2).Value = "N/A" End If	
-							g_objIE.Document.All("ButtonHandler").Value = "CHECK"
-							Exit Do
-						Loop
-						
+						'--------------------------------------
+						' UPDATE SEARCH YEAR
+						'--------------------------------------
+					    nYear = g_objIE.document.getElementById("Input_Param_0").selectedindex
+					    strYear = g_objIE.document.getElementById("Input_Param_0").options(nYear).Value
+						'--------------------------------------
+						' UPDATE SEARCH TAG
+						'--------------------------------------
+					    nTag = g_objIE.document.getElementById("Input_Param_1").selectedindex
+					    strTag = g_objIE.document.getElementById("Input_Param_1").options(nTag).Value
+						'--------------------------------------
+						' UPDATE CFG LIST
+						'--------------------------------------
+						nOptions = UpdateCfgList(g_objIE, nCfg, strYear, strTag, vCfgList, "cfg_name")
+						g_objIE.document.getElementById("cfg_name").SelectedIndex = nOptions
+						strCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Text
+						nCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Value
+						'--------------------------------------
+						' UPDATE CFG VERSIONS
+						'--------------------------------------
+                        nVersion = UpdateCfgVer(g_objIE, nCfg, vCfgList, "Input_Param_2")
+						strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text
+						'--------------------------------------
+						'  SESSION STATUS CHECK BOXES
+						'--------------------------------------
+						Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)	
             Case "Select_2" 
 			            g_objIE.Document.All("ButtonHandler").Value = "None"
-                        Do	
-						    '-------------------------------------------------------
-							'   CHECK THAT CONFIGURATION FILE EXISTS
-							'-------------------------------------------------------
-							nNewService = nService
-							nNewFlavor = nFlavor
-							nNewTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-					        nNewTask = g_objIE.document.getElementById("Input_Param_2").options(nNewTaskInd).text
-							If LTrim(nNewTask) = "" Then 
-							    g_objIE.document.getElementById("Input_Param_2").selectedIndex = 0 
-								nNewTaskInd = 0 
-								nNewTask = g_objIE.document.getElementById("Input_Param_2").options(nNewTaskInd).text
-							End If
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nNewService,1) & "\" & vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform & "-l.conf") Then
-							    If g_objIE.Document.All("ConfigLocation").Checked Then 
-									vvMsg(0,0) = "CONFIGURATION: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "HASN'T BEEN TESTED YET."                    : vvMsg(1,1) = "bold" 	: vvMsg(1,2) =  HttpTextColor1
-									vvMsg(2,0) = "ORIGINAL CONFIGURATION WILL BE USED"     : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find configuration",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_2").selectedIndex = nTaskInd
-									Exit Do
-								Else 
-									vvMsg(0,0) = "CONFIGURATION FILE FOR: " &  vFlavors(nNewService, nNewFlavor,0) & "-" & nNewTask & "-" & Platform : vvMsg(0,1) = "normal" 	: vvMsg(0,2) =  HttpTextColor2
-									vvMsg(1,0) = "WAS NOT FOUND."                                                                                   : vvMsg(1,1) = "normal" : vvMsg(1,2) =  HttpTextColor2
-									vvMsg(2,0) = "MAKE SURE THAT CONFIGURATION FILE EXISTS AND HAS THE RIGHT NAME."                                                : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-									Call IE_MSG(vIE_Scale, "Can't find file",vvMsg, 3, g_objIE)
-									g_objIE.document.getElementById("Input_Param_2").selectedIndex = nTaskInd
-									Exit Do
-								End If 
-							End If
-							nService = nNewService
-							nFlavor = nNewFlavor
-							nTaskInd = nNewTaskInd
-							nTask = nNewTask
-							'--------------------------------------
-							' LOAD BW PROFILES
-							'--------------------------------------
-							strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-							strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
-							Call GetFileLineCountSelect(strConfigFileL,vConfigFileLeft,"","","",0)
-							If Not GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, 1) Then 
-								g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
-								g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
-								g_objIE.document.getElementById("bw_profile").Disabled = True
-							Else
-								g_objIE.document.getElementById("bw_profile").Disabled = False
-								For n = 0 to MAX_BW_PROFILES - 1
-									If n < UBound(vFilterList) Then 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = vFilterList(n) 
-									Else 
-										g_objIE.document.getElementById("bw_profile").Options(n).text = Space(20)
-									End If
-								Next
-								g_objIE.document.getElementById("bw_profile").selectedIndex = 0
-							End If
-							If vPolicerList(0) <> "" Then g_objIE.Document.All("BW_Param")(0).Value = vPolicerList(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-							If vCIR(0) <> "" Then g_objIE.Document.All("BW_Param")(1).Value = vCIR(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-							If vCBS(0) <> "" Then g_objIE.Document.All("BW_Param")(2).Value = vCBS(0) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If	
-							g_objIE.Document.All("ButtonHandler").Value = "CHECK"
-						    Exit Do
-						Loop
-			Case "CH_FWF"
-						nFilter = g_objIE.document.getElementById("bw_profile").selectedIndex
-						If LTrim(g_objIE.document.getElementById("bw_profile").Options(nFilter).Text) = "" Then g_objIE.document.getElementById("bw_profile").selectedIndex = 0 : nFilter = 0 : End If
-					'	nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-						'--------------------------------------
-						' LOAD BW PROFILES
-						'--------------------------------------
-						If vPolicerList(nFilter) <> "" Then g_objIE.Document.All("BW_Param")(0).Value = vPolicerList(nFilter) Else g_objIE.Document.All("BW_Param")(0).Value = "N/A" End If
-						If vCIR(nFilter) <> "" Then g_objIE.Document.All("BW_Param")(1).Value = vCIR(nFilter) Else g_objIE.Document.All("BW_Param")(1).Value = "N/A" End If
-						If vCBS(nFilter) <> "" Then g_objIE.Document.All("BW_Param")(2).Value = vCBS(nFilter) Else g_objIE.Document.All("BW_Param")(2).Value = "N/A" End If	
-						g_objIE.Document.All("ButtonHandler").Value = "None"
-			
-			Case "APPLY_FWF"
+						nVersion = g_objIE.document.getElementById("Input_Param_2").selectedIndex
+						strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text														
+			Case "SELECT_CFG"
 			            g_objIE.Document.All("ButtonHandler").Value = "None"
+						nOptions_New = g_objIE.document.getElementById("cfg_name").selectedIndex
+						If g_objIE.document.getElementById("cfg_name").Options(nOptions_New).Value = "N/A"	Then 
+						    g_objIE.document.getElementById("cfg_name").selectedIndex = nOptions
+						Else 
+						    nOptions = nOptions_New
+						End If
+						strCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Text
+						nCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Value
+						'--------------------------------------
+						' UPDATE CFG VERSIONS
+						'--------------------------------------
+                        nVersion = UpdateCfgVer(g_objIE, nCfg, vCfgList, "Input_Param_2")
+						strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text							
+						'--------------------------------------
+						'  SESSION STATUS CHECK BOXES
+						'--------------------------------------
+						Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)						
+			Case "DELETE_CFG"
+						g_objIE.Document.All("ButtonHandler").Value = "Do Nothing"
 						Do
-				            If Not SecureCRT_Installed Then 
-							   Exit Do
-    						End If 
-							If g_objIE.document.getElementById("bw_profile").Disabled Then 
-								vvMsg(0,0) = "CAN'T APPLY FW FILTER: " 		: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-								vvMsg(1,0) = "ACTION IS NOT AVAILABLE"    : vvMsg(1,1) = "bold" 	: vvMsg(1,2) =  HttpTextColor1
-								vvMsg(2,0) = "FOR THIS TEST CONFIGURATION"    : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-								Call IE_MSG(vIE_Scale, "Applying BW Profile?",vvMsg, 3, g_objIE)
-					    		Exit Do
-							End If 
-							nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex
-							nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex
-							nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-							nTask = g_objIE.document.getElementById("Input_Param_2").options(nTaskInd).text
-							Call TrDebug ("IE_PromptForInput: Current Config: " & CurrentSvc & " " & CurrentFlv & " " & CurrentTsk, "", objDebug, MAX_LEN, 1, 1)						
-							Call TrDebug ("IE_PromptForInput: Applyng Config: " & nService & " " & nFlavor & " " & nTask, "", objDebug, MAX_LEN, 1, 1)						
-							If nService <> CurrentSvc or nFlavor <> CurrentFlv or nTask <> CurrentTsk Then 
-								vvMsg(0,0) = "CAN'T APPLY FW FILTER:" 		: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-								vvMsg(1,0) = "LOAD CONFIGURATION FIRST!"    : vvMsg(1,1) = "bold" 	: vvMsg(1,2) =  HttpTextColor1
-								Call IE_MSG (vIE_Scale, "Applying BW Profile?", vvMsg, 2, g_objIE)
-								Exit Do
+							strCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Text
+							nOptions = g_objIE.document.getElementById("cfg_name").selectedIndex 
+							nCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Value
+							nVersion = g_objIE.document.getElementById("Input_Param_2").selectedIndex  
+							strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).Text
+							'------------------------------------------------------------
+							'   CHECK IF MULTIPLE VERSION OF THE SAME CFG ARE AVAILABLE
+							'------------------------------------------------------------
+							bDelete = 0
+							Call GetFileLineCountByGroup(strDirectoryConfig & "\CfgList.txt", vFileLine,strCfg,"","",0)
+							If UBound(Split(vFileLine(0),"v.")) = 1 Then 
+								vvMsg(0,0) = "DELETE ALL CONFIGURATIONS?"    : vvMsg(0,1) = "bold" 	: vvMsg(0,2) = HttpTextColor2
+								vvMsg(1,0) = "Name: " & strCfg  	           : vvMsg(1,1) = "normal"  : vvMsg(1,2) = HttpTextColor1
+								vButton = Array("Cancel", "Continue")
+								If IE_CONT_MULT(vIE_Scale, "Delete Configuration?", vvMsg, 2, vButton, g_objIE, nDebug) > 0 Then bDelete = 1 
+							Else 
+								vvMsg(0,0) = "DELETING CONFIGURATION?"                : vvMsg(0,1) = "bold" 	: vvMsg(0,2) = HttpTextColor2
+								vvMsg(1,0) = "Would You like to completely delete"    : vvMsg(1,1) = "normal" 	: vvMsg(1,2) = HttpTextColor1
+								vvMsg(2,0) = "configuration or current version only?" : vvMsg(2,1) = "normal" 	: vvMsg(2,2) = HttpTextColor1									
+								vvMsg(3,0) = "Name:    " & strCfg  	           : vvMsg(3,1) = "normal"  : vvMsg(3,2) = HttpTextColor1
+								vvMsg(4,0) = "Version: " & strVersion  	       : vvMsg(4,1) = "normal"  : vvMsg(4,2) = HttpTextColor1								
+								vButton = Array("Cancel", "All", "Version")
+								Select Case IE_CONT_MULT(vIE_Scale, "Delete Configuration?", vvMsg, 5, vButton, g_objIE, nDebug)
+								    Case 0 
+							            bDelete = 0
+									Case 1
+							            bDelete = 1										
+                                    Case 2
+							            bDelete = 2										
+								End Select 
 							End If
-							'---------------------------------------------------------
-							' RUN TELNET SCRIPT
-							'---------------------------------------------------------
-							nFilter = g_objIE.document.getElementById("bw_profile").selectedIndex
-							strFilter = g_objIE.document.getElementById("bw_profile").Options(nFilter).text
-							g_objShell.run strCRTexe &_
-								" /ARG " & strFilter &_
-								" /ARG " & strFileSettings &_
-								" /ARG " & strDirectoryWork &_									
-								" /SCRIPT " & strDirectoryWork & "\" & VBScript_FWF_Apply,nWindowState
-                                Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)						
-								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strFilter, "", objDebug, MAX_LEN, 1, 1)						
-							Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_FWF_Apply, "",objDebug, MAX_LEN, 1, 1)						
+							Select Case bDelete
+							    Case 0 
+								     Exit Do
+							    Case 1 ' Delete All
+								    Call FindAndReplaceExactStrInFile(strDirectoryConfig & "\CfgList.txt", strCfg, "", nDebug)
+									Call DeleteFileGroup(strDirectoryConfig & "\CfgList.txt", strCfg, 0)
+									If objFSO.FolderExists(strDirectoryConfig & "\" & strCfg) Then 
+										objFSO.DeleteFolder  strDirectoryConfig & "\" & strCfg, true
+									End If
+								Case 2 ' Delete current version only
+									' Call GetFileLineCountByGroup(strDirectoryConfig & "\CfgList.txt", vFileLine,strCfg,"","",0)
+									VersionList = RTrim(LTrim(Split(vFileLine(0),"=")(1)))
+									vVersion = Split(VersionList,",")
+									vFileLine(0) = "Version = "
+									For nInd = 0 to UBound(vVersion)
+									   If vVersion(nInd) <> strVersion Then vFileLine(0) = vFileLine(0) & vVersion(nInd) & ","
+									Next
+									vFileLine(0) = Left(vFileLine(0),Len(vFileLine(0)) - 1)
+									Call DeleteFileGroup(strDirectoryConfig & "\CfgList.txt", strCfg, 0)
+									Call AppendStringToFile(strDirectoryConfig & "\CfgList.txt", "[" & strCfg & "]", 0)
+									Call WriteArrayToFile(strDirectoryConfig & "\CfgList.txt", vFileLine, UBound(vFileLine),2,0)
+									If objFSO.FolderExists(strDirectoryConfig & "\" & strCfg & "\" & strVersion) Then 
+										objFSO.DeleteFolder  strDirectoryConfig & "\" & strCfg & "\" & strVersion, True
+									End If 	
+							End Select
+                            g_objIE.Document.All("ButtonHandler").Value = "Reload after Download"																
 							Exit Do
 						Loop
-			Case "DOWNLOAD"
+			
+			Case "SAVE_TESTED"
+						strCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Text
+			            nOptions = g_objIE.document.getElementById("cfg_name").selectedIndex 
+						nCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Value
+						nVersion = g_objIE.document.getElementById("Input_Param_2").selectedIndex  
+						strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).Text
+						g_objIE.Document.All("ButtonHandler").Value = "DOWNLOAD"
+			Case "SAVE_AS"
+						g_objIE.Document.All("ButtonHandler").Value = "Do Nothing"
+						Do
+							Call IE_Hide(g_objIE)
+							nResult = IE_PromptForSettings(vIE_Scale, 6, vSettings, vSessionCRT, vPlatforms, nDebug)
+							Select Case nResult
+								Case 0, -1
+									Call IE_Unhide(g_objIE)
+									Exit Do
+								Case Else
+									Call IE_Unhide(g_objIE)
+									strCfg = vSettings(26)
+							End Select										
+							Call CreateNewCfg(strCfg, nCfg, strVersion,strDirectoryConfig, vCfgInventory, vCfgList, nDebug)
+							nYear = 0
+							nTag = 0
+							nVersion = 0
+							CurrentCfg = strCfg
+							YES_NO = True
+							g_objIE.Document.All("ButtonHandler").Value = "DOWNLOAD"
+							Exit Do
+						Loop
+			Case "DOWNLOAD" ' Save Tested Config
 						g_objIE.Document.All("ButtonHandler").Value = "None"			
 			            Do
-				            If Not SecureCRT_Installed Then 
+    						If Not SecureCRT_Installed Then 
 							   Exit Do
-    						End If 
-    						If CurrentSvc = "Null" Then
-								nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex
-								nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex 
-								nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-								nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)                   
-								vvMsg(0,0) = "CURRENTLY LOADED CONFIG IS UNKNOWN:" 		: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
-								vvMsg(1,0) = "DOWNLOAD IT AS:" 						    : vvMsg(1,1) = "bold" 	: vvMsg(1,2) =  HttpTextColor1
-								vvMsg(2,0) = "Service: " & vSvc(nService,1)         	: vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor2			
-								vvMsg(3,0) = "Configuration:  " & vFlavors(nService, nFlavor,0) & "-" & nTask  	: vvMsg(3,1) = "bold" 	: vvMsg(3,2) = HttpTextColor2
-								If IE_CONT(vIE_Scale, "DownLoad configurations?", vvMsg, 4, g_objIE, nDebug) Then 
-									CurrentSvc = nService
-									CurrentFlv = nFlavor
-									CurrentTsk = nTask
+    						End If
+							If CurrentCfg <> "Null" and CurrentCfg <> strCfg Then
+						        If Not YES_NO Then
+									vvMsg(0,0) = "ATTENTION!" 	: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+									vvMsg(1,0) = "The name of the loaded configuration is different from the name you use to save it now:"  : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1			
+									vvMsg(2,0) = " "       	  : vvMsg(2,1) = "normal"   : vvMsg(2,2) = HttpTextColor1
+									vvMsg(3,0) = "New Name: " & strCfg  	  : vvMsg(3,1) = "normal"   : vvMsg(3,2) = HttpTextColor1
+									vvMsg(4,0) = "Old Name: " & CurrentCfg    : vvMsg(4,1) = "normal" : vvMsg(4,2) = HttpTextColor1			
+									If Not IE_CONT(vIE_Scale, "Downloading Final Configuration?", vvMsg, 5, g_objIE, nDebug) Then Exit Do
 								End If
 							End If
-							If CurrentSvc <> "Null" Then
-						        If Not YES_NO Then
-									vvMsg(0,0) = "DOWNLOAD CONFIGURATION:" 			    	: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
-									vvMsg(1,0) = "Service: " & vSvc(CurrentSvc,1)         	: vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2			
-									vvMsg(2,0) = "Configuration:  " & vFlavors(CurrentSvc, CurrentFlv,0) & "-" & CurrentTsk  	: vvMsg(2,1) = "bold" 	: vvMsg(2,2) = HttpTextColor2
-									If Not IE_CONT(vIE_Scale, "Downloading Final Configuration?", vvMsg, 3, g_objIE, nDebug) Then Exit Do
-								Else 
-								    g_objIE.Document.All("ButtonHandler").Value = "LOAD"			
-								End If
-									g_objShell.run strCRTexe &_ 
-										" /ARG " & vSvc(CurrentSvc,1) &_
-										" /ARG " & vFlavors(CurrentSvc, CurrentFlv,0) &_
-										" /ARG " & CurrentTsk &_
-										" /ARG " & strFileSettings &_
-										" /ARG " & strDirectoryWork &_																		
-										" /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config, nWindowState
-                                    Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)															
-									Call TrDebug ("IE_PromptForInput: " & " /ARG " & vSvc(CurrentSvc,1), "", objDebug, MAX_LEN, 1, 1)						
-									Call TrDebug ("IE_PromptForInput: " & " /ARG " & vFlavors(CurrentSvc, CurrentFlv,0), "", objDebug, MAX_LEN, 1, 1)						
-									Call TrDebug ("IE_PromptForInput: " & " /ARG " & CurrentTsk, "", objDebug, MAX_LEN, 1, 1)						
-									Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)
-                                    wscript.sleep 5000									
+							If Not YES_NO Then
+								vvMsg(0,0) = "ATTENTION!" 	                                                     : vvMsg(0,1) = "bold" : vvMsg(0,2) =  HttpTextColor1
+								vvMsg(1,0) = "Would you like to create a new version of the configuration?"      : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1			
+								vvMsg(2,0) = " "                                                                 : vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor1											
+								If IE_CONT(vIE_Scale, "Downloading Final Configuration?", vvMsg, 4, g_objIE, nDebug) Then
+									'--------------------------------------------
+									'   CREARE NEW VERSION OF THE CONFIGURATION
+									'--------------------------------------------
+									Call CreateNewCfg(strCfg, nCfg, strVersion, strDirectoryConfig,vCfgInventory, vCfgList, nDebug)
+									'--------------------------------------
+									' UPDATE CFG VERSIONS
+									'--------------------------------------
+									nVersion = UpdateCfgVer(g_objIE, nCfg, vCfgList, "Input_Param_2")
+									strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text
+							    End if 
+							End If
+							'------------------------------------------------
+							'   READ A SESSION LIST TO DOWNLOAD CONFIG FROM
+							'------------------------------------------------
+							SessionList = ""
+							For nInd = 0 to Ubound(vSessionEnable) - 1
+							    strFileSettings = strDirectoryWork & "\config\settings.dat"
+							    Call FindAndReplaceStrInFile(strFileSettings, "Status " & nInd + 1, vSessionEnable(nInd), 0)
+								If InStr(vSessionEnable(nInd),"Enabled") > 0 Then SessionList = SessionList & Split(vSessionCRT(nInd),",")(2) & " "
+                            Next
+							SessionList = RTrim(SessionList)
+							vvMsg(0,0) = "SAVING CONFIGURATION:" 					        	: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+							vvMsg(1,0) = "Configuration Name: ..\" & strCfg             	: vvMsg(1,1) = "normal; font-size 4pt;" : vvMsg(1,2) = HttpTextColor1			
+							vvMsg(2,0) = "Version:  " & strVersion                       	: vvMsg(2,1) = "normal"	: vvMsg(2,2) = HttpTextColor1
+							vvMsg(3,0) = "Session List:  " & SessionList                   	: vvMsg(3,1) = "normal"	: vvMsg(3,2) = HttpTextColor1
+							If IE_CONT(vIE_Scale, "Save configurations?", vvMsg, 4, g_objIE, nDebug) Then 
+								'---------------------------------------------------------
+								' RUN TELNET SCRIPT
+								'---------------------------------------------------------
+								strCmd = strCRTexe &_ 
+									" /ARG " & strCfg &_
+									" /ARG " & strVersion &_
+									" /ARG " & strFileSettings &_	
+									" /ARG " & strDirectoryWork
+								For i = 0 to UBound(Split(SessionList," "))
+								    strCmd = strCmd & " /ARG " & Split(SessionList," ")(i)
+								Next
+								strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config
+                                Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strCfg, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strVersion, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strFileSettings, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)
+								For i = 0 to UBound(Split(SessionList," "))
+								    Call TrDebug ("IE_PromptForInput: " & " /ARG " & Split(SessionList," ")(i), "", objDebug, MAX_LEN, 1, 1)
+								Next
+								Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)						
+								g_objShell.run strCmd, nWindowState, True
+								CurrentCfg = strCfg
+								CurrentVer = strVer
+							    CFG_Downloaded = True
+								g_objIE.Document.All("ButtonHandler").Value = "Reload after Download"								
 							End If	
-							CFG_Downloaded = True
 						    Exit Do
 						Loop
 						YES_NO = False
-			Case "CHECK"
-						Do
-						nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex 
-						nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex  
-						nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-						nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)                    
-							strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-						    strConfigFileR = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-r.conf"
-							'---------------------------------------------------------
-							' CHECK IF CONFIGURATION FILE LEFT EXIST. 
-							'---------------------------------------------------------
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL) Then 
-								Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileL, objDebug, MAX_LEN, 1, 1)						
-								MsgBox "File L doesn't Exist"
-								exit Do
-							End If
-							'---------------------------------------------------------
-							' CHECK IF CONFIGURATION FILE RIGHT EXIST
-							'---------------------------------------------------------
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileR) Then 
-								Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileR, objDebug, MAX_LEN, 1, 1)						
-								MsgBox "File R doesn't Exist"
-								exit Do
-							End If
-							'---------------------------------------------------------
-							' CHECK INTERFACES LEFT
-							'---------------------------------------------------------
-							For i=0 to 2
-								nCount = FindStrInFile(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL, vNodes(0,i), 1)
-								If nCount > 0 Then 
-									g_objIE.Document.All("UNI")(i).Value = vNodes(0,i)
-									g_objIE.Document.All("UNI_BUTTON")(i).Value = ""									
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Left cfg: " & vNodes(0,i), "OK " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)						
-								Else
-									g_objIE.Document.All("UNI")(i).Value = ""
-									g_objIE.Document.All("UNI_BUTTON")(i).Value = "N/A"
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Left cfg:" & vNodes(0,i), "NONE " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)															
-								End If
-							Next
-							'---------------------------------------------------------
-							' CHECK INTERFACES RIGHT
-							'---------------------------------------------------------
-								nCount = FindStrInFile(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileR, vNodes(1,4), 1)
-								If nCount > 0 Then 
-									g_objIE.Document.All("UNI")(3).Value = vNodes(1,4)
-									g_objIE.Document.All("UNI_BUTTON")(3).Value = ""									
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Right cfg: " & vNodes(1,4), "OK " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)						
-								Else
-									g_objIE.Document.All("UNI")(3).Value = ""
-									g_objIE.Document.All("UNI_BUTTON")(i).Value = "N/A"									
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Right cfg:" & vNodes(1,4), "NONE " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)															
-								End If
-
-							For i=0 to 3
-								nCount = FindStrInFile(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileR, vNodes(1,i), 1)
-								If nCount > 0 Then 
-									g_objIE.Document.All("UNI")(4 + i).Value = vNodes(1,i)
-									g_objIE.Document.All("UNI_BUTTON")(4 + i).Value = ""									
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Right cfg: " & vNodes(1,i), "OK " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)						
-								Else
-									g_objIE.Document.All("UNI")(4 + i).Value = ""
-									g_objIE.Document.All("UNI_BUTTON")(4 + i).Value = "N/A"									
-									Call TrDebug ("IE_PromptForInput: Looking for UNI in Right cfg:" & vNodes(1,i), "NONE " & "(" & nCount & ")", objDebug, MAX_LEN, 1, 1)															
-								End If
-							Next
-
-						Exit Do
-						Loop
+			Case "BLK_DOWNLOAD" 
 						g_objIE.Document.All("ButtonHandler").Value = "None"			
+			            Do
+    						If Not SecureCRT_Installed Then 
+							   Exit Do
+    						End If
+							'----------------------------------------------------
+							'   CREATE NEW CONFIGURATION NAME AND FOLDERS FOR IT
+							'----------------------------------------------------							
+							Call IE_Hide(g_objIE)
+							nResult = IE_PromptForSettings(vIE_Scale, 7, vSettings, vSessionCRT, vPlatforms, nDebug)
+							Select Case nResult
+								Case 0, -1
+									Call IE_Unhide(g_objIE)
+									Exit Do
+								Case Else
+									Call IE_Unhide(g_objIE)
+									strBulkList = Split(vSettings(25),"=")(1)
+							End Select										
+							If GetFileLineCountByGroup(strBulkList, vBulkList,"Bulk_Load","","",0) = 0 Then Exit Do
+							nYear = 0
+							nTag = 0
+							nVersion = 0
+							'------------------------------------------------
+							'   READ A SESSION LIST TO DOWNLOAD CONFIG FROM
+							'------------------------------------------------
+							SessionList = ""
+							For nInd = 0 to Ubound(vSessionEnable) - 1
+								strFileSettings = strDirectoryWork & "\config\settings.dat"
+								Call FindAndReplaceStrInFile(strFileSettings, "Status " & nInd + 1, vSessionEnable(nInd), 0)
+								If InStr(vSessionEnable(nInd),"Enabled") > 0 Then SessionList = SessionList & Split(vSessionCRT(nInd),",")(2) & " "
+							Next
+							SessionList = RTrim(SessionList)
+							vvMsg(0,0) = "SAVING CONFIGURATION:" 					        	: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+							vvMsg(1,0) = "Bulk Download: " & UBound(vBulkList) & " configurations"    	: vvMsg(1,1) = "normal; font-size 4pt;" : vvMsg(1,2) = HttpTextColor1			
+							vvMsg(2,0) = "Session List:  " & SessionList                   	: vvMsg(2,1) = "normal"	: vvMsg(2,2) = HttpTextColor1
+							If Not IE_CONT(vIE_Scale, "Save configurations?", vvMsg, 4, g_objIE, nDebug) Then Exit Do
+							For each strCfg in vBulkList
+							    If strCfg = "" Then Exit For
+								CurrentCfg = strCfg
+								nCfg = GetExactObjectLineNumber(vCfgInventory, UBound(vCfgInventory),strCfg)
+								' Call CreateNewCfg(strCfg, nCfg, strVersion, strDirectoryConfig,vCfgInventory, vCfgList, nDebug)
+								'---------------------------------------------------------
+								' RUN TELNET SCRIPT
+								'---------------------------------------------------------
+								strCmd = strCRTexe &_ 
+									" /ARG " & strCfg &_
+									" /ARG " & strVersion &_
+									" /ARG " & strFileSettings &_	
+									" /ARG " & strDirectoryWork
+								For i = 0 to UBound(Split(SessionList," "))
+								    strCmd = strCmd & " /ARG " & Split(SessionList," ")(i)
+								Next
+								strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_BLK_DNLD_Config
+                                Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strCfg, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strVersion, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strFileSettings, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)
+								For i = 0 to UBound(Split(SessionList," "))
+								    Call TrDebug ("IE_PromptForInput: " & " /ARG " & Split(SessionList," ")(i), "", objDebug, MAX_LEN, 1, 1)
+								Next
+								Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_BLK_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)						
+								g_objShell.run strCmd, nWindowState, True
+								CurrentCfg = strCfg
+								CurrentVer = strVer
+							    CFG_Downloaded = True
+                            Next								
+						    Exit Do
+						Loop
+						g_objIE.Document.All("ButtonHandler").Value = "Reload after Download"						
+						YES_NO = False
 			Case "LOAD"
 		                g_objIE.Document.All("ButtonHandler").Value = "None"
 						Do
 				            If Not SecureCRT_Installed Then 
 							   Exit Do
     						End If 
-							If Not CFG_Downloaded and CurrentSvc <> "Null" Then 
-								vvMsg(0,0) = "SAVE CURRENT CONFIGURATION FIRST"  : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
-								vvMsg(1,0) = "Service: " & vSvc(CurrentSvc,1) : vvMsg(1,1) = "normal" : vvMsg(1,2) =  HttpTextColor2
-								vvMsg(2,0) = "Configuration: " & vFlavors(CurrentSvc, CurrentFlv,0) & "-" & CurrentTsk & "-" & Platform   : vvMsg(2,1) = "bold"     : vvMsg(2,2) =  HttpTextColor2
+							If Not CFG_Downloaded and CurrentCfg <> "Null" Then 
+								vvMsg(0,0) = "DO YOU WANT TO SAVE"  : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+								vvMsg(1,0) = "Current Configuration ? "  : vvMsg(1,1) = "normal" : vvMsg(1,2) =  HttpTextColor2
+								vvMsg(2,0) = "Configuration: " & CurrentCfg   : vvMsg(2,1) = "bold"     : vvMsg(2,2) =  HttpTextColor2
 								If IE_CONT(vIE_Scale, "Continue?", vvMsg,3, g_objIE, nDebug) Then 
 									g_objIE.Document.All("ButtonHandler").Value = "DOWNLOAD"
 									YES_NO = True
 									Exit Do
 								End If
 							End If
-							nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex 
-							nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex  
-							nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-							nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)                   
-							vvMsg(0,0) = "LOAD CONFIGURATION:" 						: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
-							vvMsg(1,0) = "Service: " & vSvc(nService,1)         	: vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2			
-							vvMsg(2,0) = "Configuration:  " & vFlavors(nService, nFlavor,0) & "-" & nTask  	: vvMsg(2,1) = "bold" 	: vvMsg(2,2) = HttpTextColor2
-							If IE_CONT(vIE_Scale, "Load new configurations?", vvMsg, 3, g_objIE, nDebug) Then 
-								strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-								strConfigFileR = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-r.conf"
-								'---------------------------------------------------------
-								' CHECK IF CONFIGURATION FILE LEFT EXIST. COPY TO BACK FOLDER
-								'---------------------------------------------------------
-								If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL) Then 
-									Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileL, objDebug, MAX_LEN, 1, 1)						
-									MsgBox "Error: Configuration File for Left Node" & chr(13) & vSvc(nService,1) & "\" & strConfigFileL &  chr(13) & "doesn't Exist"
-									g_objIE.Document.All("ButtonHandler").Value = "None"
-									exit Do
-								End If
-								'---------------------------------------------------------
-								' CHECK IF CONFIGURATION FILE RIGHT EXIST. COPY TO BACK FOLDER
-								'---------------------------------------------------------
-								If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileR) Then 
-									Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileR, objDebug, MAX_LEN, 1, 1)						
-									MsgBox "Error: Configuration File for Left Node" & chr(13) & vSvc(nService,1) & "\" & strConfigFileR &  chr(13) & "doesn't Exist"
-									g_objIE.Document.All("ButtonHandler").Value = "None"
-									exit Do
-								End If
+							nOptions = g_objIE.document.getElementById("cfg_name").selectedIndex 
+							nCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Value
+							strCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Text
+							nVersion = g_objIE.document.getElementById("Input_Param_2").selectedIndex  
+							strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).Text
+							SessionList = ""
+							For nInd = 0 to Ubound(vSessionEnable) - 1
+							    strFileSettings = strDirectoryWork & "\config\settings.dat"
+							    Call FindAndReplaceStrInFile(strFileSettings, "Status " & nInd + 1, vSessionEnable(nInd), 0)
+								If InStr(vSessionEnable(nInd),"Enabled") > 0 Then SessionList = SessionList & Split(vSessionCRT(nInd),",")(2) & " "
+                            Next
+							SessionList = RTrim(SessionList)
+							vvMsg(0,0) = "LOAD CONFIGURATION:" 					        	: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+							vvMsg(1,0) = "Configuration Name: ..\" & strCfg             	: vvMsg(1,1) = "normal; font-size 7;" : vvMsg(1,2) = HttpTextColor2			
+							vvMsg(2,0) = "Version:  " & strVersion                       	: vvMsg(2,1) = "normal"	: vvMsg(2,2) = HttpTextColor2
+							vvMsg(3,0) = "Session List:  " & SessionList                   	: vvMsg(3,1) = "normal"	: vvMsg(3,2) = HttpTextColor2
+							If IE_CONT(vIE_Scale, "Load new configurations?", vvMsg, 4, g_objIE, nDebug) Then 
 								'---------------------------------------------------------
 								' RUN TELNET SCRIPT
 								'---------------------------------------------------------
-								g_objShell.run strCRTexe &_ 
-									" /ARG " & vSvc(nService,1) &_
-									" /ARG " & vFlavors(nService, nFlavor,0) &_
-									" /ARG " & nTask &_
+								strCmd = strCRTexe &_ 
+									" /ARG " & strCfg &_
+									" /ARG " & strVersion &_
 									" /ARG " & strFileSettings &_	
-									" /ARG " & strDirectoryWork &_																	
-									" /ARG " & Arg4 &_
-									" /ARG " & DUT_Platform &_								
-									" /SCRIPT " & strDirectoryWork & "\" & VBScript_Upload_Config, nWindowState
+									" /ARG " & strDirectoryWork
+								For i = 0 to UBound(Split(SessionList," "))
+								    strCmd = strCmd & " /ARG " & Split(SessionList," ")(i)
+								Next
+								strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_Upload_Config
                                 Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
-								Call TrDebug ("IE_PromptForInput: " & " /ARG " & vSvc(nService,1), "", objDebug, MAX_LEN, 1, 1)						
-								Call TrDebug ("IE_PromptForInput: " & " /ARG " & vFlavors(nService, nFlavor,0), "", objDebug, MAX_LEN, 1, 1)						
-								Call TrDebug ("IE_PromptForInput: " & " /ARG " & nTask, "", objDebug, MAX_LEN, 1, 1)						
-								Call TrDebug ("IE_PromptForInput: " & " /ARG " & Arg4, "", objDebug, MAX_LEN, 1, 1)													
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strCfg, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strVersion, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strFileSettings, "", objDebug, MAX_LEN, 1, 1)						
+								Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)
+								For i = 0 to UBound(Split(SessionList," "))
+								    Call TrDebug ("IE_PromptForInput: " & " /ARG " & Split(SessionList," ")(i), "", objDebug, MAX_LEN, 1, 1)
+								Next
 								Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_Upload_Config, "",objDebug, MAX_LEN, 1, 1)						
-								g_objIE.Document.All("Current_config")(1).Value = vSvc(nService,1) & ": " & vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform 
-								CurrentSvc = nService
-								CurrentFlv = nFlavor
-								CurrentTsk = nTask
+								g_objShell.run strCmd, nWindowState
+								CurrentCfg = strCfg
+								CurrentVer = strVer
                                 CFG_Downloaded = False							
 							End If	
 							Exit Do
 						Loop
+			Case "UPGRADE_SW"
+			                g_objIE.Document.All("ButtonHandler").Value = "None"
+							Do 
+								Call IE_Hide(g_objIE)
+								nResult = IE_PromptForSettings(vIE_Scale, 8, vSettings, vSessionCRT, vPlatforms, nDebug)
+								Select Case nResult
+									Case 1
+                                        strDownloadOnly = "-i"
+									Case 3
+									    strDownloadOnly = "-d"
+									Case Else 										
+										Call IE_Unhide(g_objIE)
+										Exit Do
+								End Select
+								SessionList = ""
+								Call IE_Unhide(g_objIE)
+                                ' Get list of Sessions to be Upgraded
+								For nInd = 0 to Ubound(vSessionEnable) - 1
+									If InStr(vSessionEnable(nInd),"Enabled") > 0 Then SessionList = SessionList & Split(vSessionCRT(nInd),",")(2) & " "
+								Next
+								SessionList = RTrim(SessionList)
+								vvMsg(0,0) = "UPGRADE JUNOS IMAGE:"					: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+								vvMsg(1,0) = "Following nodes will be upgraded: "   : vvMsg(1,1) = "normal; font-size 7;" : vvMsg(1,2) = HttpTextColor2			
+								vvMsg(2,0) = SessionList                   	        : vvMsg(2,1) = "normal"	: vvMsg(2,2) = HttpTextColor2
+								vvMsg(3,0) = ""                   	                : vvMsg(3,1) = "normal"	: vvMsg(3,2) = HttpTextColor2
+								If Not IE_CONT(vIE_Scale, "Load new configurations?", vvMsg, 3, g_objIE, nDebug) Then Exit Do
+								'---------------------------------------------------------
+								' ENTER LOGIN AND PASSWORD TO ACCESS CATALOG
+								'---------------------------------------------------------
+								strLogin = "vmukhin"
+								strPassword = ""
+								vvMsg(0,0) = "Login and Password for"			 : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
+								vvMsg(1,0) = "Junos Image Catalogue: "           : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor2
+								vvMsg(2,0) = "Hint: Use your UNIX credentials"   : vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor2
+								Call IE_PromptLoginPassword (objParentWin, vIE_Scale, vvMsg, 3, strLogin, strPassword, True, nDebug )
+								'---------------------------------------------------------
+								' RUN TELNET SCRIPT
+								'---------------------------------------------------------
+								For nInd = 0 to Ubound(vSessionEnable) - 1
+									If InStr(vSessionEnable(nInd),"Enabled") > 0 Then 
+										strCmd = strCRTexe &_ 
+											" /ARG " & strDirectoryWork & "\config\class_catalog.dat" &_	
+											" /ARG " & strDirectoryWork & "\config\settings.dat" &_
+											" /ARG " & strDirectoryWork &_
+											" /ARG " & nInd &_
+											" /ARG " & strLogin &_
+											" /ARG " & strPassword &_
+											" /ARG " & strDownloadOnly
+										strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_UPDATE_Junos
+										Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\class_catalog.dat", "", objDebug, MAX_LEN, 1, 1)						
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\settings.dat" , "", objDebug, MAX_LEN, 1, 1)						
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)						
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & nInd, "", objDebug, MAX_LEN, 1, 1)
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & strLogin, "", objDebug, MAX_LEN, 1, 1)
+										Call TrDebug ("IE_PromptForInput: " & " /ARG " & strPassword, "", objDebug, MAX_LEN, 1, 1)
+										Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_UPDATE_Junos, "",objDebug, MAX_LEN, 1, 1)						
+								        g_objShell.run strCmd, nWindowState, True
+									End If
+								Next
+							    Exit Do
+						    Loop								
 			Case "EDIT"
 						Do
-						nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex
-						nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex
-						nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-						nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)
-						strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-						strConfigFileR = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-r.conf"
-						Tsys0 = DateDiff("n",D0,Date() & " " & Time()) 
-						'---------------------------------------------------------
-						' CHECK IF CONFIGURATION FILE LEFT EXIST. COPY TO BACK FOLDER
-						'---------------------------------------------------------
-						If objFSO.FileExists(strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileL) Then 
-								objFSO.CopyFile strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileL, strDirectoryConfig & "\Backup\" & vSvc(nService,1) & "\" & Split(strConfigFileL,".")(0) & "-" & Tsys0 & ".conf", True
-						Else
-							Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileL, objDebug, MAX_LEN, 1, 1)						
-							MsgBox "File L doesn't Exist"
-							exit Do
-						End If
-						'---------------------------------------------------------
-						' CHECK IF CONFIGURATION FILE RIGHT EXIST. COPY TO BACK FOLDER
-						'---------------------------------------------------------
-						If objFSO.FileExists(strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileR) Then 
-								objFSO.CopyFile strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileR,_
-												strDirectoryConfig & "\Backup\" & vSvc(nService,1) & "\" & Split(strConfigFileR,".")(0) & "-" & Tsys0 & ".conf", True
-						Else
-							Call TrDebug ("IE_PromptForInput: FILE DOESN'T EXIST", "...\" & vSvc(nService,1) & "\" & strConfigFileR, objDebug, MAX_LEN, 1, 1)						
-							MsgBox "File R doesn't Exist"
-							exit Do
-						End If
-						'---------------------------------------------------------
-						' OPEN CONFIGURATION FILES WITH TEXT EDITOR
-						'---------------------------------------------------------
-						g_objShell.Run strEditor & " " & strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileL	
-						g_objShell.Run strEditor & " "  & strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileR
+							nOptions = g_objIE.document.getElementById("cfg_name").selectedIndex 
+							nCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Value
+							strCfg = g_objIE.document.getElementById("cfg_name").options(nOptions).Text
+							nVersion = g_objIE.document.getElementById("Input_Param_2").selectedIndex  
+							strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).Text
+							Tsys0 = DateDiff("n",D0,Date() & " " & Time()) 
+							'---------------------------------------------------------
+							' OPEN CONFIGURATION FILES WITH TEXT EDITOR
+							'---------------------------------------------------------
+							g_objShell.Run "Explorer.exe" & " " & strDirectoryConfig & "\" & strCfg & "\" & strVersion	
+'							g_objShell.Run strEditor & " " & strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileL	
+'							g_objShell.Run strEditor & " "  & strDirectoryConfig & "\" & vSvc(nService,1) & "\" & strConfigFileR
 						Exit Do
 						Loop
 						g_objIE.Document.All("ButtonHandler").Value = "None"
+			Case "Reload and Download"
+					    vSessionTmp(0) = nYear
+						vSessionTmp(1) = nTag
+						vSessionTmp(2) = nCfg
+						vSessionTmp(3) = nVersion
+						vSessionTmp(4) = CurrentCfg
+						vSessionTmp(5) = 1
+						vSessionTmp(6) = "DOWNLOAD"
+                        IE_PromptForInput = 1
+						g_objIE.Quit
+						Set g_objIE = Nothing
+						Set g_objShell = Nothing
+						exit function						
+			Case "Reload after Download"
+					    vSessionTmp(0) = nYear
+						vSessionTmp(1) = nTag
+						vSessionTmp(2) = nCfg
+						vSessionTmp(3) = nVersion
+						vSessionTmp(4) = CurrentCfg
+						vSessionTmp(5) = 0
+						vSessionTmp(6) = "Do Nothing"
+                        IE_PromptForInput = 1
+						g_objIE.Quit
+						Set g_objIE = Nothing
+						Set g_objShell = Nothing
+						exit function						
 			Case "Cancel"
-			    		nService = g_objIE.document.getElementById("Input_Param_0").selectedIndex
-						nFlavor = g_objIE.document.getElementById("Input_Param_1").selectedIndex
-						nTaskInd = g_objIE.document.getElementById("Input_Param_2").selectedIndex
-						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nService, 1, 1, 0)
-						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nFlavor, 2, 1, 0)
-						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nTaskInd, 3, 1, 0)
-						IE_PromptForInputPullDown = 0
+					    vSessionTmp(0) = nYear
+						vSessionTmp(1) = nTag
+						vSessionTmp(2) = nCfg
+						vSessionTmp(3) = nVersion
+						vSessionTmp(4) = CurrentCfg
+						vSessionTmp(5) = 0		
+						vSessionTmp(6) = "Do Nothing"
+						Call WriteArrayToFile(strDirectoryTmp & "\" & strFileSessionTmp,vSessionTmp,UBound(vSessionTmp),1,0)
+'						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nService, 1, 1, 0)
+'						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nFlavor, 2, 1, 0)
+'						Call WriteStrToFile(strDirectoryTmp & "\" & strFileSessionTmp, nTaskInd, 3, 1, 0)
+						IE_PromptForInput = 0
 						g_objIE.Quit
 						Set g_objIE = Nothing
 						Set g_objShell = Nothing
 						exit function
-             Case "Save_FTP" 
-                IE_PromptForInputPullDown = 1
-                g_objIE.Quit
-				Set g_objIE = Nothing
-                Set g_objShell = Nothing
-                exit function
 			Case "POPULATE_ORIG"
 				vvMsg(0,0) = "WOULD YOU LIKE TO POPULATE :" 		: vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor1
 				vvMsg(1,0) = "ALL ORIGINAL CONFIGS" 			    : vvMsg(1,1) = "bold" 	: vvMsg(1,2) =  HttpTextColor1
 				vvMsg(2,0) = "TO TCG XLS TEMPLATES? "           	: vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor2			
 				If IE_CONT(vIE_Scale, "DownLoad configurations?", vvMsg, 3, g_objIE, nDebug) Then 
-					g_objIE.Document.All("ButtonHandler").Value = "POPULATE_ALL"
+					g_objIE.Document.All("ButtonHandler").Value = "None" ' <-- If You need to activate action use POPULATE_ALL instead of None
 					SourceCfgFolder = strDirectoryConfig
 				Else 
 					g_objIE.Document.All("ButtonHandler").Value = "None"
@@ -2603,7 +2729,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vSessionTmp, ByRef vSvc, ByRef
 				vvMsg(2,0) = "TO TCG XLS TEMPLATES? "           	: vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor2			
 				If IE_CONT(vIE_Scale, "DownLoad configurations?", vvMsg, 3, g_objIE, nDebug) Then 
 					SourceCfgFolder = strDirectoryConfig & "\Tested"
-					g_objIE.Document.All("ButtonHandler").Value = "POPULATE_ALL"
+					g_objIE.Document.All("ButtonHandler").Value = "None" ' <-- If You need to activate action use POPULATE_ALL instead of None
 				Else 
 					g_objIE.Document.All("ButtonHandler").Value = "None"
 				End If
@@ -2762,10 +2888,10 @@ End Function
 '------------------------------------------------
 '    SETTINGS DIALOG FORM 
 '------------------------------------------------
-Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms, nDebug)
+Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vSessionCRT, byRef vPlatforms, nDebug)
 	Dim g_objIE, g_objShell, objShellApp, objFSO
 	Dim nInd
-	Dim nRatioX, nRatioY, nFontSize_10, nFontSize_12, nButtonX, nButtonY, nA, nB, vOld_Settings
+	Dim nRatioX, nRatioY, nFontSize_10, nFontSize_12, nButtonX, nButtonY, nA, nB, vOld_Settings, vOld_SessionCRT, vSessionCRT_to_file
     Dim intX
     Dim intY
 	Dim nCount
@@ -2775,16 +2901,27 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 	Dim nLine, nService, nFlavor, nTask, nPlatform
 	Dim vvMsg(8,3)
 	Dim objFile, objCfgFile
-	Dim objWMIService, IPConfigSet
+	Dim objWMIService, IPConfigSet, vTitle
 	Const MAX_PARAM = 40
 	Const MAX_BW_PROFILES = 30
-	Dim objFolder, objForm, colFiles, strFile
-	Call TrDebug ("IE_PromptForInputPullDown: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)	
+	Const N_SELECT = 5
+	Dim objFolder, objForm, colFiles, strFile, objDialog
+	Call TrDebug ("IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)	
 	Set objForm = CreateObject("Shell.Application")
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
 	Redim vOld_Settings(Ubound(vSettings))
+	Redim vOld_SessionCRT(1)
+	Redim vSessionCRT_to_file(1)
 	Set g_objIE = Nothing
     Set g_objShell = Nothing
+	vTitle = Array("Platform under test",_
+	               "Connectivity Settings",_
+				   "Folder Settings",_
+				   "SecureCRT Sessions",_
+				   "Advanced Settings",_
+				   "Create New Configuration Name",_
+				   "Browse for file with list of configurations",_
+				   "Junos Images Catalog")
 	'----------------------------------------
 	' SCREEN RESOLUTION
 	'----------------------------------------
@@ -2841,8 +2978,34 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 	'------------------------------------------
 	'	GET NUMBER OF TASKS LINES
 	'------------------------------------------	
-	nLine = 24
-	WindowH = IE_Menu_Bar + 2 * LoginTitleH + cellH * (nLine) + nButtonY + nBottom
+	Select Case MenuID
+	    Case 0 
+	      nLine = 26
+	    Case 1
+	      nLine = 5
+	    Case 2
+	      nLine = 6
+	    Case 3
+	      nLine = 8
+	    Case 4 
+	      nLine = 5 + Ubound(vSessionCRT)
+	    Case 5 
+	      nLine = 4
+		Case 6
+		  nLine = 4
+		Case 7
+		  nLine = 4
+		Case 8
+			ClassName = "JunosSW"
+'			Call SetMyObject(objMain,"JunosSW",nDebug)
+'			Call SetMyObject(objMinor,"Release",nDebug)
+			nLine = 5 + int(UBound(objMain,1) * N_SELECT * 3/4)
+'			MsgBox "pIndex: " & pIndex(1,"Minor List")
+'			MsgBox GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
+'           MsgBox objMain(1,pIndex(0,"ImageTemplate")) & ", " & UBound(objMain,1) & ", " & vClass(0,0)
+	End Select
+		
+	WindowH = IE_Menu_Bar + 2 * LoginTitleH + cellH * (nLine) + nBottom
 	WindowW = IE_Border + LoginTitleW
 	If WindowW < 300 then WindowW = 300 End If
 
@@ -2859,7 +3022,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 	g_objIE.Document.body.Style.color = HttpTextColor1
     g_objIE.height = WindowH
     g_objIE.width = WindowW  
-    g_objIE.document.Title = "MEF Configuration Loader Settings"
+    g_objIE.document.Title = "Lab Configuration Loader Settings"
 	g_objIE.Top = (intY - g_objIE.height)/2
 	g_objIE.Left = (intX - g_objIE.width)/2
 	g_objIE.Visible = True		
@@ -2867,8 +3030,8 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
     '-----------------------------------------------------------------
 	' SET THE TITLE OF THE  FORM   		
 	'-----------------------------------------------------------------
-	nLine = 1
-	    strLine = 	"<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>" &_
+	nLine = 0
+	    htmlMain = 	"<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>" &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; top: 0px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor5 &_
 		"; background-color: " & HttpBgColor5 & "; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
@@ -2878,391 +3041,531 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 			"valign=""middle"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & LoginTitleW & """>" & _
 				"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_				
 				";font-weight: normal;font-style: italic;"">"&_
-				"&nbsp;&nbsp;Configuration Loader Settings <span style=""font-weight: bold;""></span></span></p>"&_
+				"&nbsp;&nbsp;" & vTitle(MenuID - 1) & " <span style=""font-weight: bold;""></span></span></p>"&_
 			"</td>" &_
 		"</tr></tbody></table>"
-		'-----------------------------------------------------------------
-		' PLATFORM TITLE
-		'-----------------------------------------------------------------
-		cTitle = "Platform under test"
-		strLine = strLine &_
-			"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
-			"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
-			"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-				"<tbody>" &_
-					"<tr>" & _
-						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-						";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-							"<p style=""text-align: Left; font-size: " & nFontSize_12 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-							";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;" & cTitle & "</p>" &_
-						"</td>" & _
-						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-						";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """>" & _
-						"</td>" & _
-						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-						";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+	nLine = nLine +1
+	Select Case MenuID
+	    Case 1
+				'-----------------------------------------------------------------
+				' PLATFORM TITLE
+				'-----------------------------------------------------------------
+				cTitle = "Platform under test"
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>" 
+				nLine = nLine + 1
+				'-----------------------------------------------------------------
+				' PLATFORM PARAMETERS:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+				strType = "text"
+				htmlMain = htmlMain &_
+					"<tr>"&_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+							"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+							";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(13),"=")(0) & "</p>" &_
+						"</td>"&_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+						"</td>" &_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+							"<select name='Platform_Name' id='Platform_Name'" &_
+								"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
+								" onchange=document.all('ButtonHandler').value='SelectPlatform';" &_
+								"type=text > "
+								For nPlatform = 0 to Ubound(vPlatforms) - 1
+									htmlMain = htmlMain &_
+														"<option value=" & nPlatform & """>" & Split(vPlatforms(nPlatform),",")(0) & "</option>" 
+								Next
+								htmlMain = htmlMain &_
+							"<option value=" & Ubound(vPlatforms) & """>" & Space_html(24) & "</option>" &_
+							"</select>" &_
 						"</td>" &_
 					"</tr>"
-        nLine = nLine + 1
-		'-----------------------------------------------------------------
-		' PLATFORM PARAMETERS:
-		'-----------------------------------------------------------------
-	'	nColumn = Int(nScoreW/3)
-		strType = "text"
-		strLine = strLine &_
-			"<tr>"&_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-					"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(13),"=")(0) & "</p>" &_
-				"</td>"&_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
-				"</td>" &_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-					"<select name='Platform_Name' id='Platform_Name'" &_
-						"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
-						" onchange=document.all('ButtonHandler').value='SelectPlatform';" &_
-						"type=text > "
-						For nPlatform = 0 to Ubound(vPlatforms) - 1
-							strLine = strLine &_
-												"<option value=" & nPlatform & """>" & Split(vPlatforms(nPlatform),",")(0) & "</option>" 
-						Next
-						strLine = strLine &_
-					"<option value=" & Ubound(vPlatforms) & """>" & Space_html(24) & "</option>" &_
-					"</select>" &_
-				"</td>" &_
-			"</tr>"
-		strLine = strLine &_
-			"<tr>"&_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-					"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(14),"=")(0) & "</p>" &_
-				"</td>"&_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_
-					"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_				
-					";font-weight: normal;font-style: italic;"">"&_
-					"&nbsp;&nbsp;Config. name: [Service Type]-[TC#]-<span style=""font-weight: bold;"">[Prefix]</span>-[L|R].conf</span></p>"&_
-				"</td>" &_
-				"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-					"<input name=Platform_Index value='' style=""text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
-					" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=15 " &_
-					"type=" & strType & " > " &_
-				"</td>" &_
-			"</tr>"
+				htmlMain = htmlMain &_
+					"<tr>"&_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+							"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+							";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(14),"=")(0) & "</p>" &_
+						"</td>"&_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_
+							"<p><span style="" font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor3 &_				
+							";font-weight: normal;font-style: italic;"">"&_
+							"&nbsp;&nbsp;Config. name: [Service Type]-[TC#]-<span style=""font-weight: bold;"">[Prefix]</span>-[L|R].conf</span></p>"&_
+						"</td>" &_
+						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+							"<input name=Platform_Index value='' style=""text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+							" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+							"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=15 " &_
+							"type=" & strType & " > " &_
+						"</td>" &_
+					"</tr>"
 
-		strLine = strLine &_
-				"</tbody></table>"
-		nLine = nLine + 2
-			'-----------------------------------------------------------------
-			' CONNECTIVITY SETTINGS TITLE
-			'-----------------------------------------------------------------
-			cTitle = "Connectivity Settings"
-			strLine = strLine &_
-				"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
-				"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
-				"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-					"<tbody>" &_
-						"<tr>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-								"<p style=""text-align: Left; font-size: " & nFontSize_12 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-								";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;" & cTitle & "</p>" &_
-							"</td>" & _
-     						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """>" & _
-							"</td>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+		Case 2
+					'-----------------------------------------------------------------
+					' CONNECTIVITY SETTINGS TITLE
+					'-----------------------------------------------------------------
+					cTitle = "Connectivity Settings"
+					htmlMain = htmlMain &_
+						"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+						"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+						"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+							"<tbody>"
+				'-----------------------------------------------------------------
+				' SETTINGS PARAMETERS:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+				For nSetting = 2 to 4
+					nLine = nLine + 1
+					strType = "text"
+					If InStr(Split(vSettings(nSetting),"=")(0),"assword") Then strType = "password" End If
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
+							"</td>"
+					Select Case nSetting
+						Case 2
+								htmlMain = htmlMain &_
+										"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+											"<select name='Adapter_Name' id='Adapter_Name'" &_
+											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
+											" onchange=document.all('ButtonHandler').value='SelectAdapter';" &_
+											"type=text > "
+											nAdapter = 0
+											For Each IPConfig in IPConfigSet
+												htmlMain = htmlMain &	"<option value=" & IPConfig.IPAddress(0) & ">" & IPConfig.Description & "</option>" 
+												nAdapter = nAdapter + 1	
+											Next
+												htmlMain = htmlMain &	"<option value=127.0.0.1>Loopback</option>"
+												nAdapter = nAdapter + 1										
+											htmlMain = htmlMain & "</select>" &_
+										"</td>"
+						Case Else
+								htmlMain = htmlMain &_
+										"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+										"</td>"
+					End Select
+					htmlMain = htmlMain &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+								"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=18 maxlength=18 " &_
+								"type=" & strType & " > " &_
+							"</td>" &_
+						"</tr>" 
+				Next
+				ButtonDisabled = ""
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+		Case 3	
+				'-----------------------------------------------------------------
+				' FOLDERS TITLE
+				'-----------------------------------------------------------------
+				cTitle = "Folder Settings"
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>"
+				'-----------------------------------------------------------------
+				' FOLDERS PARAMETERS:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+				For nSetting = 5 to 9
+					nLine = nLine + 1
+					strType = "text"
+					BgTextColor = HttpBgColor4 : ButtonDisabled = ""
+					If nSetting = 5 Then ButtonDisabled = "disabled" : BgTextColor = HttpBgColor1  End If			
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+								"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & BgTextColor & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
+								"type=" & strType & " > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+								"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & 2 * nButtonX &_
+								";font-size: " & nFontSize_10 &".0pt;" &_
+								";height:" & Int(nButtonY/2) &_
+								"px' name='Edit_Folder'" & nSetting & " onclick=document.all('ButtonHandler').value='Folder_" & nSetting & "'; " & ButtonDisabled & ">Edit Folder</button>" & _	
 							"</td>" &_
 						"</tr>"
-		'-----------------------------------------------------------------
-		' SETTINGS PARAMETERS:
-		'-----------------------------------------------------------------
-	'	nColumn = Int(nScoreW/3)
-		For nSetting = 0 to 4
-			nLine = nLine + 1
-			strType = "text"
-			If InStr(Split(vSettings(nSetting),"=")(0),"assword") Then strType = "password" End If
-			strLine = strLine &_
-				"<tr>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
-					"</td>"
-			Select Case nSetting
-			    Case 2
-						strLine = strLine &_
-								"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
-									"<select name='Adapter_Name' id='Adapter_Name'" &_
+				Next
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+		Case 4
+				'-----------------------------------------------------------------
+				' SECURECRT SESSIONS TITLE
+				'-----------------------------------------------------------------
+				cTitle = "SecureCRT Sessions"
+				strTitleCell = 	"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
+								";"" align=""right"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """>" & _
+									"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
+									";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;&nbsp;&nbsp;"
+
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>" &_
+							"<tr>" & _
+								"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
+								";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"</td>" &_
+								strTitleCell & "Session Name" & "</p></td>" &_
+								strTitleCell & "MNG IP" & "</p></td>" &_
+								strTitleCell & "Platform Type" & "</p></td>" &_
+								strTitleCell & "Session Login" & "</p></td>" &_
+							"</tr>"
+				'-----------------------------------------------------------------
+				' SECURECRT SESSIONS PARAMETERS:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+			    strEmptyCell = "</td><td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">"
+				For nSetting = 0 to UBound(vSessionCRT) - 1
+					nLine = nLine + 1
+					BgTextColor = HttpBgColor1
+					strDisabled = "disabled"
+					If nSetting = 0 Then 
+					    strDisabled = ""  
+						BgTextColor = HttpBgColor4
+					End If			
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;Session&nbsp; " & nSetting + 1 & "</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+								"<input name='Session_Param_2' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+								"<input name='Session_Param_0' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+								"<input name='Session_Param_3' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text> " &_
+							"</td>" &_							
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+								"<input name='Session_Param_4' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+						"</tr>"
+				Next
+				htmlMain = htmlMain &_				
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & HIDE_CRT & "</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+									"<input type=checkbox name='Hide_CRT' style=""color: " & HttpTextColor2 & ";""" & _
+									" onclick=document.all('ButtonHandler').value='HIDE_CRT';" &_
+									"value='Display'>" &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+							"</td>" &_
+						"</tr>" &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;Session Folder</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
+								"<input name='Session_Param_1' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text> " &_
+							strEmptyCell & strEmptyCell & strEmptyCell &_
+						"</tr>"
+						
+
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 3
+		Case 5
+				'-----------------------------------------------------------------
+				' LAB CONFIGURATION PARAMETERS TITLE
+				'-----------------------------------------------------------------
+				cTitle = "Advanced Settings"
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>" 
+				'-----------------------------------------------------------------
+				' LAB CONFIGURATION PARAMETERS
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+				For nSetting = 12 to 12
+					nLine = nLine + 1
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+								"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+								"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & 2 * nButtonX &_
+								";font-size: " & nFontSize_10 &".0pt;" &_
+								";height:" & Int(nButtonY/2) &_
+								"px' name='Edit_PARAM' onclick=document.all('ButtonHandler').value='EDIT_PARAM';>Edit File</button>" & _	
+							"</td>" &_
+						"</tr>"
+				Next
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+		Case 6
+				'-----------------------------------------------------------------
+				' CREATE NEW LAB CONFIGURATION NAME
+				'-----------------------------------------------------------------
+				cTitle = "Create Ne Configuration Name"
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>" 
+				'-----------------------------------------------------------------
+				' LAB CONFIGURATION PARAMETERS
+				'-----------------------------------------------------------------
+				For nSetting = 26 to 26
+					nLine = nLine + 1
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;Enter Configuration Name</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+								"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+							"</td>" &_
+						"</tr>"
+				Next
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+        Case 7
+				'-----------------------------------------------------------------
+				' TITLE
+				'-----------------------------------------------------------------
+				cTitle = "Folder Settings"
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>"
+				'-----------------------------------------------------------------
+				' FOLDERS PARAMETERS:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+				For nSetting = 25 to 25
+					nLine = nLine + 1
+					strType = "text"
+					BgTextColor = HttpBgColor4 : ButtonDisabled = ""
+					If nSetting = 5 Then ButtonDisabled = "disabled" : BgTextColor = HttpBgColor1  End If			
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
+								"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & BgTextColor & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
+								"type=" & strType & " > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
+								"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & 2 * nButtonX &_
+								";font-size: " & nFontSize_10 &".0pt;" &_
+								";height:" & Int(nButtonY/2) &_
+								"px' name='Edit_Folder'" & nSetting & " onclick=document.all('ButtonHandler').value='Folder_" & nSetting & "'; " & ButtonDisabled & ">Edit Folder</button>" & _	
+							"</td>" &_
+						"</tr>"
+				Next
+				htmlMain = htmlMain &_
+						"</tbody></table>"
+				nLine = nLine + 2
+		Case 8
+				'-----------------------------------------------------------------
+				' JUNOS CATALOG TITLE
+				'-----------------------------------------------------------------
+				strTitleCell = 	"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
+								";"" align=""right"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """>" & _
+									"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
+									";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;&nbsp;&nbsp;"
+
+				htmlMain = htmlMain &_
+					"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
+					"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
+					"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
+						"<tbody>" &_
+							"<tr>" & _
+								"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
+								";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+								"</td>" &_
+								strTitleCell & "Platform" & "</p></td>" &_
+								strTitleCell & "Type" & "</p></td>" &_
+								strTitleCell & "Main Release" & "</p></td>" &_
+								strTitleCell & "Minor Release" & "</p></td>" &_
+							"</tr>"
+				'-----------------------------------------------------------------
+				' LIST OF JUNOS RELEASE:
+				'-----------------------------------------------------------------
+			'	nColumn = Int(nScoreW/3)
+			    strEmptyCell = "</td><td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">"
+				For nImage = 0 to UBound(objMain,1) - 1
+					nLine = nLine + 1
+					BgTextColor = HttpBgColor1
+					strDisabled = "disabled"
+					htmlMain = htmlMain &_
+						"<tr>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """align=""center"" valign=""top"">" & _
+									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
+									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
+									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImage& "';><u>C</u>lear</button>" &_										
+							"</td>"&_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
+								"<input name='Image_Param_7' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
+								"<input name='Image_Param_9' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
+								"type=text > " &_
+							"</td>" &_							
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
+									"<select name='Main_Release" & nImage & "' id='Main_Relese" & nImage & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
-									" onchange=document.all('ButtonHandler').value='SelectAdapter';" &_
+									" onchange=document.all('ButtonHandler').value='SelectMain_" & nImage & "';" &_
 									"type=text > "
-									nAdapter = 0
-									For Each IPConfig in IPConfigSet
-										strLine = strLine &	"<option value=" & IPConfig.IPAddress(0) & ">" & IPConfig.Description & "</option>" 
-										nAdapter = nAdapter + 1	
+									vMain = Split(objMain(nImage,pIndex(0,"Main List")),",")
+									For nMain = 0 to UBound(vMain)
+										htmlMain = htmlMain &	"<option value=Main_" & nMain & ">" & vMain(nMain) & "</option>" 
 									Next
-									    strLine = strLine &	"<option value=127.0.0.1>Loopback</option>"
-										nAdapter = nAdapter + 1										
-									strLine = strLine & "</select>" &_
-								"</td>"
-				Case Else
-						strLine = strLine &_
-								"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
-								"</td>"
-			End Select
-			strLine = strLine &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=18 maxlength=18 " &_
-						"type=" & strType & " > " &_
-					"</td>" &_
-				"</tr>" 
-		Next
-		ButtonDisabled = ""
-'		strLine = strLine &_				
-'				"<tr>"&_
-'					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """>" & _
-'					"</td>" &_
-'					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """>" & _
-'						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & Int(LoginTitleW/2) &_
-'						";font-size: " & nFontSize_10 &".0pt;" &_
-'						";height:" & Int(nButtonY/2) &_
-'						"px' name='Set_Node' onclick=document.all('ButtonHandler').value='SET_NODE'; " & ButtonDisabled & ">Set Initial Configuration on DUT Node</button>" & _	
-'					"</td>" &_
-'					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ align=""center"">" &_									
-'					"</td>" &_
-'				"</tr>" 
-
-		strLine = strLine &_
-				"</tbody></table>"
-		nLine = nLine + 2
-			'-----------------------------------------------------------------
-			' FOLDERS TITLE
-			'-----------------------------------------------------------------
-			cTitle = "Folder Settings"
-			strLine = strLine &_
-				"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
-				"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
-				"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-					"<tbody>" &_
-						"<tr>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-								"<p style=""text-align: Left; font-size: " & nFontSize_12 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-								";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;" & cTitle & "</p>" &_
-							"</td>" & _
-     						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """>" & _
-							"</td>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+									htmlMain = htmlMain & "<option value=Main_" & nMain + 1 & ">" & Space_html(30) & "</option>" 
+									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_
+							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
+									"<select name='Minor_Release" & nImage & "' id='Minor_Relese" & nImage & "'" &_
+									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
+									" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImage & "';" &_
+									"type=text > "
+									' Split(objMain(0,pIndex(1,"Minor List")),",")(nMinor)
+									' For nMinor = 0 to GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
+									For nMinor = 0 to 100
+										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(30) & "</option>" 
+									Next
+									htmlMain = htmlMain & "</select>" &_
+							"</td>" &_							
 						"</tr>"
-		'-----------------------------------------------------------------
-		' FOLDERS PARAMETERS:
-		'-----------------------------------------------------------------
-	'	nColumn = Int(nScoreW/3)
-		For nSetting = 5 to 9
-			nLine = nLine + 1
-			strType = "text"
-			BgTextColor = HttpBgColor4 : ButtonDisabled = ""
-			If nSetting = 5 Then ButtonDisabled = "disabled" : BgTextColor = HttpBgColor1  End If			
-			strLine = strLine &_
-			    "<tr>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
-					"</td>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & BgTextColor & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
-						"type=" & strType & " > " &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & 2 * nButtonX &_
-						";font-size: " & nFontSize_10 &".0pt;" &_
-						";height:" & Int(nButtonY/2) &_
-						"px' name='Edit_Folder'" & nSetting & " onclick=document.all('ButtonHandler').value='Folder_" & nSetting & "'; " & ButtonDisabled & ">Edit Folder</button>" & _	
-					"</td>" &_
-				"</tr>"
-		Next
-		strLine = strLine &_
-				"</tbody></table>"
-		nLine = nLine + 2
-			'-----------------------------------------------------------------
-			' SECURECRT SESSIONS TITLE
-			'-----------------------------------------------------------------
-			cTitle = "SecureCRT Sessions"
-			strTitleCell = 	"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" align=""right"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """>" & _
-								"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-								";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;&nbsp;&nbsp;"
-
-			strLine = strLine &_
-				"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
-				"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
-				"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-					"<tbody>" &_
-						"<tr>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-								"<p style=""text-align: Left; font-size: " & nFontSize_12 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-								";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;" & cTitle & "</p>" &_
+				Next
+				htmlMain = htmlMain &_
+				        "<tr></tr>" &_
+				        "<tr>" &_
+				    		"<td style="" background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 & "; border-style: Solid;"" class=""oa2"" height=""" & cellH & """ align=""center"">" &_									
+									"<input type=checkbox name='DNLD_IMG_ONLY' style=""color: " & HttpTextColor2 & ";""" & _
+									" onclick=document.all('ButtonHandler').value='DNLD_IMG_ONLY';" &_
+									"value='Display'>" &_
 							"</td>" &_
-							strTitleCell & "Session Folder" & "</p></td>" &_
-							strTitleCell & "Session Name" & "</p></td>" &_
-							strTitleCell & "Host Name" & "</p></td>" &_
-							strTitleCell & "Session Login" & "</p></td>" &_
-						"</tr>"
-		'-----------------------------------------------------------------
-		' SECURECRT SESSIONS PARAMETERS:
-		'-----------------------------------------------------------------
-	'	nColumn = Int(nScoreW/3)
-		For nSetting = 10 to 11
-			nLine = nLine + 1
-			BgTextColor = HttpBgColor4
-			If nSetting = 11 Then BgTextColor = HttpBgColor1  End If			
-			strLine = strLine &_
-			    "<tr>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
-					"</td>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & BgTextColor & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
-						"type=text > " &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
-						"type=text > " &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
-						"type=text > " &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & BgTextColor & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=128 " &_
-						"type=text > " &_
-					"</td>" &_
-				"</tr>"
-		Next
-		strLine = strLine &_				
-				"<tr>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & HIDE_CRT & "</p>" &_
-					"</td>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-							"<input type=checkbox name='Hide_CRT' style=""color: " & HttpTextColor2 & ";""" & _
-							" onclick=document.all('ButtonHandler').value='HIDE_CRT';" &_
-							"value='Display'>" &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">" &_									
-					"</td>" &_
-				"</tr>"
-
-		strLine = strLine &_
-				"</tbody></table>"
-		nLine = nLine + 3
-			'-----------------------------------------------------------------
-			' MEF CONFIGURATION PARAMETERS TITLE
-			'-----------------------------------------------------------------
-			cTitle = "MEF Service Settings"
-			strLine = strLine &_
-				"<table border=""1"" cellpadding=""1"" cellspacing=""1"" width=""" & LoginTitleW & """ valign=""middle""" &_ 
-				"style="" position: absolute; top: " & LoginTitleH + nLine * cellH & "px; left: 0px;" &_
-				"border-collapse: collapse; border-style: none ; background-color: " & HttpBgColor6 & "'; width: " & LoginTitleW & "px;"">" & _
-					"<tbody>" &_
-						"<tr>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-								"<p style=""text-align: Left; font-size: " & nFontSize_12 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor1 &_
-								";font-weight: bold;font-style: bold;"">&nbsp;&nbsp;" & cTitle & "</p>" &_
-							"</td>" & _
-     						"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """>" & _
-							"</td>" & _
-							"<td style="" border-style: solid;background-color: " & HttpBgColor6 & "; border-color: " & HttpBgColor6 &_
-							";"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-							"</td>" &_
-						"</tr>"
-		'-----------------------------------------------------------------
-		' MEF CONFIGURATION PARAMETERS
-		'-----------------------------------------------------------------
-	'	nColumn = Int(nScoreW/3)
-		For nSetting = 12 to 12
-			nLine = nLine + 1
-			strLine = strLine &_
-			    "<tr>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-						"<p style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-						";font-weight: normal;font-style: normal;"">&nbsp;&nbsp;" & Split(vSettings(nSetting),"=")(0) & "</p>" &_
-					"</td>"&_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/2) & """ align=""center"">" &_									
-						"<input name=Settings_Param_" & nSetting & " value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
-						" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-					    "; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=50 maxlength=128 " &_
-						"type=text > " &_
-					"</td>" &_
-					"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 & "; width:" & 2 * nButtonX &_
-						";font-size: " & nFontSize_10 &".0pt;" &_
-						";height:" & Int(nButtonY/2) &_
-						"px' name='Edit_PARAM' onclick=document.all('ButtonHandler').value='EDIT_PARAM';>Edit File</button>" & _	
-					"</td>" &_
-				"</tr>"
-		Next
-		strLine = strLine &_
-				"</tbody></table>"
-		nLine = nLine + 2
+								strTitleCell & "Download Only" & "</p></td>" &_
+								strTitleCell & "</p></td>" &_
+								strTitleCell & "</p></td>" &_
+								strTitleCell  & "</p></td>" &_
+						"</tr>" &_
+			"</tbody></table>"
+			nLine = nLine + 1		
+	End Select
 	'------------------------------------------------------
 	'   EXIT BUTTON
 	'------------------------------------------------------
-	strLine = strLine &_
+	htmlMain = htmlMain &_
 		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; bottom: 0px;" &_
 		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: " & HttpBgColor2 &_
-		"; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" & _
+		"; height: " & LoginTitleH & "px; width: " & LoginTitleW & "px;"">" &_
 			"<tbody>" & _
 				"<tr>" &_
-					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""center"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/3) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						2 * nButtonX & ";height:" & nButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
 						"px; ' name='SAVE' onclick=document.all('ButtonHandler').value='SAVE';><u>S</u>ave Settings</button>" & _	
-					"</td>"&_
-					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-					"</td>"&_
-					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
-					"</td>"&_
-					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
+					"</td>"
+
+	Select Case MenuID
+	    Case 8
+	            htmlMain = htmlMain &_
+                	"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""center"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/3) & """>" & _
+						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
+						2 * nButtonX & ";height:" & nButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
+						"px; ' name='UPDATE_CATALOG' onclick=document.all('ButtonHandler').value='UPDATE_CATALOG';><u>U</u>pdate Catalog</button>" & _	
+					"</td>"
+		Case Else
+        	    htmlMain = htmlMain &_
+					"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""center"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/3) & """>" & _
+					"</td>"
+    End Select
+	htmlMain = htmlMain &_
+						"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";""align=""center"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/3) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						2 * nButtonX & ";height:" & nButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
 						"px;' name='EXIT' onclick=document.all('ButtonHandler').value='Cancel';><u>E</u>xit</button>" & _	
-					"</td>"&_
-				"</tr></tbody></table>"
-
+					"</td>" &_
+					"</tr></tbody></table>"
 	'-----------------------------------------------------------------
 	' HTML Form Parameaters
 	'-----------------------------------------------------------------
-	g_objIE.Document.Body.innerHTML = strLine
+	g_objIE.Document.Body.innerHTML = htmlMain
     g_objIE.MenuBar = False
     g_objIE.StatusBar = False
     g_objIE.AddressBar = False
@@ -3283,27 +3586,79 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 	'-----------------------------------------------------------------
 	'	SET DEFAULT PARAMETERS
 	'-----------------------------------------------------------------
-	If Split(vSettings(13),"=")(1) <> "Unknown" Then nIndex = GetObjectLineNumber( vPlatforms, UBound(vPlatforms), Split(vSettings(13),"=")(1)) - 1 Else nIndex = 0 End If
- 	g_objIE.document.getElementById("Platform_Name").selectedIndex = nIndex
-	g_objIE.Document.All("Platform_Index").Value = Split(vSettings(14),"=")(1)
-
-	For nInd = 0 to 9
-		g_objIE.Document.All("Settings_Param_" & nInd).Value = Split(vSettings(nInd),"=")(1)
-	Next
-	
-	For i = 0 to UBound(Split(Split(vSettings(10),"=")(1),","))
-		Select Case i
-		   Case 0, 3
-		      g_objIE.Document.All("Settings_Param_11")(i).Value = "Same as above"
-			  g_objIE.Document.All("Settings_Param_10")(i).Value = Split(Split(vSettings(10),"=")(1),",")(i)
-		   Case 4
-		      If Split(Split(vSettings(10),"=")(1),",")(i) = "1" Then g_objIE.Document.All("Hide_CRT").Checked = True
-		   Case 1, 2
-		      g_objIE.Document.All("Settings_Param_10")(i).Value = Split(Split(vSettings(10),"=")(1),",")(i)
-			  g_objIE.Document.All("Settings_Param_11")(i).Value = Split(Split(vSettings(11),"=")(1),",")(i)
-		End Select 
-	Next
-       g_objIE.Document.All("Settings_Param_12").Value = Split(vSettings(12),"=")(1)
+	Select Case MenuID
+	    Case 0
+		Case 1
+			If Split(vSettings(13),"=")(1) <> "Unknown" Then nIndex = GetObjectLineNumber( vPlatforms, UBound(vPlatforms), Split(vSettings(13),"=")(1)) - 1 Else nIndex = 0 End If
+			g_objIE.document.getElementById("Platform_Name").selectedIndex = nIndex
+			g_objIE.Document.All("Platform_Index").Value = Split(vSettings(14),"=")(1)
+        Case 2
+			For nInd = 0 to nAdapter - 1
+			    If Split(vSettings(1),"=")(1) = g_objIE.document.getElementById("Adapter_Name").Options(nInd).text Then 
+				   g_objIE.document.getElementById("Adapter_Name").selectedindex = nInd
+				End If 
+			Next
+			g_objIE.Document.All("Settings_Param_2").Value = g_objIE.document.getElementById("Adapter_Name").Value
+			For nInd = 3 to 4
+				g_objIE.Document.All("Settings_Param_" & nInd).Value = Split(vSettings(nInd),"=")(1)
+			Next
+        Case 3
+			For nInd = 5 to 9
+				g_objIE.Document.All("Settings_Param_" & nInd).Value = Split(vSettings(nInd),"=")(1)
+			Next
+        Case 4	
+		    If Split(vSettings(0),"=")(1) = "1" Then g_objIE.Document.All("Hide_CRT").Checked = True
+			For i = 0 to UBound(vSessionCRT) - 1
+				g_objIE.Document.All("Session_Param_0")(i).Value = Split(vSessionCRT(i),",")(0)
+				g_objIE.Document.All("Session_Param_1").Value = Split(vSessionCRT(0),",")(1)
+                g_objIE.Document.All("Session_Param_2")(i).Value = Split(vSessionCRT(i),",")(2)
+                g_objIE.Document.All("Session_Param_3")(i).Value = Split(vSessionCRT(i),",")(3)				
+                g_objIE.Document.All("Session_Param_4")(i).Value = Split(vSessionCRT(i),",")(4)
+			Next
+		Case 5
+		    g_objIE.Document.All("Settings_Param_12").Value = Split(vSettings(12),"=")(1) 			
+		Case 7
+			strFolder = Split(vSettings(25),"=")(1)
+			Select Case IsFile(strFolder)
+				Case 0 ' Empty path
+					strFolder = "C:\Users\vmukhin\Documents\LAB_CONFIGS"
+				Case 1 ' File 
+					strFolder = objFSO.GetParentFolderName(strFolder)
+				Case 2  ' Folder
+					' Do nothing
+				Case Else 
+					strFolder = "C:\Users\vmukhin\Documents\LAB_CONFIGS"
+			End Select
+		    g_objIE.Document.All("Settings_Param_25").Value = strFolder
+		Case 8 
+		    For nImage = 0 to UBound(objMain,1) - 1
+			    g_objIE.Document.All("Image_Param_7")(nImage).Value = objMain(nImage,pIndex(0,"Platform"))
+				g_objIE.Document.All("Image_Param_9")(nImage).Value = objMain(nImage,pIndex(0,"Display_Name"))
+				
+				strMain = objMain(nImage,pIndex(0,"Main"))
+				strMinor = objMain(nImage,pIndex(0,"Minor"))
+				strStatus = objMain(nImage,pIndex(0,"Status"))
+				nOptions = 0
+				For nInd = 0 to 99
+				    If RTrim(Ltrim(g_objIE.document.getElementById("Main_Release" & nImage).Options(nInd).Text)) = "" Then Exit For
+					If RTrim(Ltrim(g_objIE.document.getElementById("Main_Release" & nImage).Options(nInd).Text)) = strMain Then nOptions = nInd : Exit For End If
+				Next
+				g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex = nOptions
+				strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
+				For nMinor = 0 to UBound(objMinor,1) - 1
+				   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
+				Next
+                vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
+				nInd = 0
+				nOptions = 0
+				For Each LineItem in vMinor
+				   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = LineItem
+				   if strMinor = LineItem Then nOptions = nInd
+				   nInd = nInd + 1
+				Next
+				if strStatus = "Active" Then g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex = nOptions
+			Next		
+	End Select
     Do
         WScript.Sleep 100
     Loop While g_objIE.Busy
@@ -3323,7 +3678,25 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
         ' Check to see which buttons have been clicked, and address each one
         ' as it's clicked.
         Select Case szNothing
-		    Case "SelectPlatform"
+		    Case "SelectMain_0", "SelectMain_1","SelectMain_2","SelectMain_3","SelectMain_4","SelectMain_5","SelectMain_6","SelectMain_7","SelectMain_8","SelectMain_9","SelectMain_10"
+			            g_objIE.Document.All("ButtonHandler").Value = "Nothing Selected"   
+						nImage = Int(Split(szNothing,"_")(1))
+						nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
+						strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
+						For nMinor = 0 to UBound(objMinor,1) - 1
+						   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
+						Next
+						vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
+						nInd = 0
+						For nInd = 0 to 99
+						    If UBound(vMinor) >= nInd Then
+						       g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = vMinor(nInd)
+						    Else 
+							   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = Space(30)
+							End If
+						Next
+						
+			Case "SelectPlatform"
 			            nPlatform = g_objIE.document.getElementById("Platform_Name").selectedIndex
 			            g_objIE.Document.All("Platform_Index").Value = Split(vPlatforms(nPlatform),",")(1)
 						g_objIE.Document.All("ButtonHandler").Value = "Nothing Selected"
@@ -3341,6 +3714,17 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 						IE_PromptForSettings = 0
 						'Call FocusToParentWindow(strPID)
 						exit function
+			Case "Exit_and_Reload_Settings"
+						g_objIE.Quit
+						Set objForm = Nothing
+						Set objFolder = Nothing
+						Set g_objIE = Nothing
+						Set g_objShell = Nothing
+						Set objFSO = Nothing
+						IE_PromptForSettings = 1000 + Int(MenuID)
+						'Call FocusToParentWindow(strPID)
+						exit function
+			
 			Case "Exit_After_Save"
 						g_objIE.Quit
 						Set objForm = Nothing
@@ -3349,6 +3733,16 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 						Set g_objShell = Nothing
 						Set objFSO = Nothing
 						IE_PromptForSettings = 1
+						'Call FocusToParentWindow(strPID)
+						exit function
+			Case "Exit_After_Save_3"
+						g_objIE.Quit
+						Set objForm = Nothing
+						Set objFolder = Nothing
+						Set g_objIE = Nothing
+						Set g_objShell = Nothing
+						Set objFSO = Nothing
+						IE_PromptForSettings = 3
 						'Call FocusToParentWindow(strPID)
 						exit function
 			Case "Exit_And_Close_Wscript"
@@ -3400,125 +3794,293 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 							g_objIE.Document.All("Settings_Param_9").Value = strFolder
 						End If
 						g_objIE.Document.All("ButtonHandler").Value = "None"
-												
-		    Case "SAVE" 
+			Case "Folder_25"
+						strFolder = BrowseForFile()
+						g_objIE.Document.All("Settings_Param_25").Value = strFolder													
+						g_objIE.Document.All("ButtonHandler").Value = "None"		
+		    Case "UPDATE_CATALOG"
+						g_objIE.Document.All("ButtonHandler").Value = "None"		
+						'---------------------------------------------------------
+						' RUN TELNET SCRIPT
+						'---------------------------------------------------------
+						strCmd = strCRTexe &_ 
+							" /ARG " & strDirectoryWork & "\config\class_catalog.dat" &_	
+                            " /ARG " & strDirectoryWork & "\config\settings.dat" &_								
+							" /ARG " & strDirectoryWork
+						strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_UPDATE_Catalog
+						Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\class_catalog.dat", "", objDebug, MAX_LEN, 1, 1)						
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\settings.dat", "", objDebug, MAX_LEN, 1, 1)						
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)
+						Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)						
+						g_objShell.run strCmd, nWindowState, True
+						'Reload Classes and objects properties
+						'g_objIE.Document.All("ButtonHandler").Value = "Exit_and_Reload_Settings"
+						Call GetMyClass(strDirectoryWork & "\config\class_catalog.dat", vObjIndex, nDebug)
+						Call SetMyObject(objMain,"JunosSW",nDebug)
+						Call SetMyObject(objMinor,"Release",nDebug)
+						' Refresh forms
+					    For nImage = 0 to UBound(objMain,1) - 1
+							g_objIE.Document.All("Image_Param_7")(nImage).Value = objMain(nImage,pIndex(0,"Platform"))
+							g_objIE.Document.All("Image_Param_9")(nImage).Value = objMain(nImage,pIndex(0,"Display_Name"))
+							nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
+							strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
+							For nMinor = 0 to UBound(objMinor,1) - 1
+							   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
+							Next
+							vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
+							nInd = 0
+							For Each strMinor in vMinor
+							   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = strMinor
+							   nInd = nInd + 1
+							Next
+						Next		
+            Case "Clear_0", "Clear_1", "Clear_2", "Clear_3", "Clear_4", "Clear_5", "Clear_6", "Clear_7","Clear_8"  
+			            nImage = Int(Split(szNothing,"_")(1))
+					    g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex = -1
+						g_objIE.Document.All("ButtonHandler").Value = "None"
+			Case "SAVE" 
 						g_objIE.Document.All("ButtonHandler").Value = "None"
 						For i = 0 to Ubound(vSettings)
 						    vOld_Settings(i) = vSettings(i)
 						Next
+                        Redim vOld_SessionCRT(UBound(vSessionCRT))						
+						For i = 0 to Ubound(vSessionCRT) - 1
+						    vOld_SessionCRT(i) = vSessionCRT(i)
+						Next
 						Do
+					        '----------------------------------------------------
+							'   DO CONSISTENCY AND FORMAT CHECK OF THE SETTINGS
 							'----------------------------------------------------
-							'   SAVE NEW WorkFolder to Registry
-							'----------------------------------------------------
-							strFolder = g_objIE.Document.All("Settings_Param_6").Value
-							If Right(strFolder,1) = "\" Then 
-								strFolder = Left(strFolder,Len(strFolder)-1)
-								g_objIE.Document.All("Settings_Param_6").Value = strFolder
-							End If
-							If strFolder <> Split(vOld_Settings(6),"=")(1) Then 
-							    If Not Continue("You are about to change work folder of the MEF CFG Loader Script!?", "Continue?") Then 
-								   g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
-								   Exit Do
-								End If
-								If Not objFSO.FolderExists(strFolder) Then 
-                                    MsgBox "Error: Can't find Work Folder: " & chr(13) & strFolder 
-									g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
-									Exit Do
-								End If	    
-								Set objFolder = objFSO.GetFolder(strFolder)
-								Set colFiles = objFolder.Files
-								nResult = 0
-								For Each objFile in colFiles
-									strFile = objFile.Name
-									If InStr(LCase(strFile),LCase(LDR_SCRIPT_NAME)) Then nResult = 1 End If 
-								Next
-								If nResult = 0 Then 
-                                    MsgBox "Error: Folder doesn't contain a MEF Loader script: " & chr(13) & strFolder & chr(13) & "Check work folder path"
-									g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
-									Exit Do
-								End If
-								On Error Resume Next
-								Err.Clear
-								g_objShell.RegWrite MEF_CFG_LDR_REG, strFolder, "REG_SZ"
-								if Err.Number <> 0 Then 
-									MsgBox "Error: Can't Right to Windows Registry" & chr(13) & Err.Description
-									g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
-								Else
-									g_objIE.Document.All("ButtonHandler").Value = "Exit_And_Close_Wscript"   
-								End If 
-								On Error Goto 0
-    							Exit Do
-							End If
-							'-------------------------------------
-							'   GET WORK FOLDER AND SETTINGS FILE
-							'-------------------------------------
-							strDirectoryWork = g_objIE.Document.All("Settings_Param_6").Value
-							strFileSettings = strDirectoryWork & "\config\settings.dat"
-							'-------------------------------------
-							'   CHECK OTHER FOLDERS
-							'-------------------------------------
-							For nInd = 6 to 9
-								strFolder = g_objIE.Document.All("Settings_Param_" & nInd).Value
-								If Right(strFolder,1) = "\" Then 
-									strFolder = Left(strFolder,Len(strFolder)-1)
-									g_objIE.Document.All("Settings_Param_" & nInd).Value = strFolder
-								End If
-								If Not objFSO.FolderExists(g_objIE.Document.All("Settings_Param_" & nInd).Value) Then
-									MsgBox "Folder doesn't exist: " & chr(13) &  g_objIE.Document.All("Settings_Param_" & nInd).Value
-									Exit Do
-								End If
-							Next
-							'-------------------------------------
-							'   UPDATE ALL OTHER PARAMETERS
-							'-------------------------------------
-							If Not CheckAddrFormat(g_objIE.Document.All("Settings_Param_0").Value,True) Then
-								MsgBox "Wrong IP address format: " & g_objIE.Document.All("Settings_Param_0").Value &_
-										chr(13) & "Use the following format for management IP address: "  &  "A.B.C.D/Prefix"
-								Exit Do
-							End If						
-							If Not CheckAddrFormat(g_objIE.Document.All("Settings_Param_1").Value,True) Then 
-								MsgBox "Wrong IP address format: " & g_objIE.Document.All("Settings_Param_0").Value & chr(13) &_
-										"Use the following format for management IP address: "  &  "A.B.C.D/Prefix"
-								Exit Do
-							End If
-							'-------------------------------------
-							'  UPDATE vSETTINGS AND WRITE SETTINGS TO FILE
-							'-------------------------------------
-							For nInd = 0 to 14
-								Select Case nInd
-									Case 0,1,2,3,4,5,6,7,8,9,12
-										vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.Document.All("Settings_Param_" & nInd).Value
-									Case 10
-									    vSettings(10) = vParamNames(10) & Space(30 - Len(vParamNames(10))) & "= "
-										vSettings(10) = vSettings(10) & g_objIE.Document.All("Settings_Param_" & 10)(0).Value & ", "
-										vSettings(10) = vSettings(10) & g_objIE.Document.All("Settings_Param_" & 10)(1).Value & ", "
-										vSettings(10) = vSettings(10) & g_objIE.Document.All("Settings_Param_" & 10)(2).Value & ", "
-										vSettings(10) = vSettings(10) & g_objIE.Document.All("Settings_Param_" & 10)(3).Value
-										If g_objIE.Document.All("Hide_CRT").Checked Then 
-										    vSettings(10) = vSettings(10) & ",1"
-											 nWindowState = 2
-										Else 
-										     nWindowState = 1
+						    Select Case MenuID
+							    Case 7
+								        If Not objFSO.FileExists(g_objIE.Document.All("Settings_Param_25").Value) Then 
+											vvMsg(0,0) = "WRONG FILE NAME OR FILE DOESN'T EXISTS"	   : vvMsg(0,1) = "bold" : vvMsg(0,2) = HttpTextColor2
+											vvMsg(1,0) = "Try again "           		   : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1 											
+											Call IE_MSG(vIE_Scale, "Error",vvMsg,2,"Null")
+										    Exit Do										
+										End If 
+								Case 6  
+								        If InStr(g_objIE.Document.All("Settings_Param_26").Value," ") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"/") > 0 Or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"\") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"""") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"'") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"#") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"$") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"*") > 0 or _
+										InStr(g_objIE.Document.All("Settings_Param_26").Value,"?") > 0 Then 
+											vvMsg(0,0) = "IVALID CONFIGURATION NAME!"	   : vvMsg(0,1) = "bold" : vvMsg(0,2) = HttpTextColor2
+											vvMsg(1,0) = "<space>, #,\,/,$,*,? "           : vvMsg(1,1) = "normal" : vvMsg(1,2) = HttpTextColor1 
+                                            vvMsg(2,0) = "symbols are not allowed "        : vvMsg(2,1) = "normal" : vvMsg(2,2) = HttpTextColor1 											
+											vvMsg(3,0) = "Try again "           		   : vvMsg(3,1) = "normal" : vvMsg(3,2) = HttpTextColor1 											
+											Call IE_MSG(vIE_Scale, "Error",vvMsg,4,"Null")
+										    Exit Do
+										End If 			
+								Case 3  ' CHEK FOLDERS
+										'----------------------------------------------------
+										'   SAVE NEW WorkFolder to Registry
+										'----------------------------------------------------
+										strFolder = g_objIE.Document.All("Settings_Param_6").Value
+										If Right(strFolder,1) = "\" Then 
+											strFolder = Left(strFolder,Len(strFolder)-1)
+											g_objIE.Document.All("Settings_Param_6").Value = strFolder
 										End If
-									Case 11
-										vSettings(11) = vParamNames(11) & Space(30 - Len(vParamNames(11))) & "= "
-										vSettings(11) = vSettings(11) & g_objIE.Document.All("Settings_Param_" & 10)(0).Value & ", "
-										vSettings(11) = vSettings(11) & g_objIE.Document.All("Settings_Param_" & 11)(1).Value & ", "
-										vSettings(11) = vSettings(11) & g_objIE.Document.All("Settings_Param_" & 11)(2).Value & ", "
-										vSettings(11) = vSettings(11) & g_objIE.Document.All("Settings_Param_" & 10)(3).Value
-									Case 13
+										If strFolder <> Split(vOld_Settings(6),"=")(1) Then 
+											If Not Continue("You are about to change work folder of the MEF CFG Loader Script!?", "Continue?") Then 
+											   g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
+											   Exit Do
+											End If
+											If Not objFSO.FolderExists(strFolder) Then 
+												MsgBox "Error: Can't find Work Folder: " & chr(13) & strFolder 
+												g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
+												Exit Do
+											End If	    
+											Set objFolder = objFSO.GetFolder(strFolder)
+											Set colFiles = objFolder.Files
+											nResult = 0
+											For Each objFile in colFiles
+												strFile = objFile.Name
+												If InStr(LCase(strFile),LCase(LDR_SCRIPT_NAME)) Then nResult = 1 End If 
+											Next
+											If nResult = 0 Then 
+												MsgBox "Error: Folder doesn't contain a Cfg Loader script: " & chr(13) & strFolder & chr(13) & "Check work folder path"
+												g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
+												Exit Do
+											End If
+											On Error Resume Next
+											Err.Clear
+											g_objShell.RegWrite LAB_CFG_LDR_REG, strFolder, "REG_SZ"
+											if Err.Number <> 0 Then 
+												MsgBox "Error: Can't Right to Windows Registry" & chr(13) & Err.Description
+												g_objIE.Document.All("Settings_Param_6").Value = Split(vOld_Settings(6),"=")(1)
+											Else
+												g_objIE.Document.All("ButtonHandler").Value = "Exit_And_Close_Wscript"   
+											End If 
+											On Error Goto 0
+											Exit Do
+										End If
+										'-------------------------------------
+										'   GET WORK FOLDER AND SETTINGS FILE
+										'-------------------------------------
+										strDirectoryWork = g_objIE.Document.All("Settings_Param_6").Value
+										strFileSettings = strDirectoryWork & "\config\settings.dat"
+										'-------------------------------------
+										'   CHECK OTHER FOLDERS
+										'-------------------------------------
+										For nInd = 6 to 9
+											strFolder = g_objIE.Document.All("Settings_Param_" & nInd).Value
+											If Right(strFolder,1) = "\" Then 
+												strFolder = Left(strFolder,Len(strFolder)-1)
+												g_objIE.Document.All("Settings_Param_" & nInd).Value = strFolder
+											End If
+											If Not objFSO.FolderExists(g_objIE.Document.All("Settings_Param_" & nInd).Value) Then
+												MsgBox "Folder doesn't exist: " & chr(13) &  g_objIE.Document.All("Settings_Param_" & nInd).Value
+												Exit Do
+											End If
+										Next
+									
+                                Case 4  '   CHECK IP ADDRESS FORMAT
+                                    For i = 0 to UBound(vSessionCRT) - 1								
+										If Not CheckAddrFormat(g_objIE.Document.All("Session_Param_0")(i).Value,False) Then
+											MsgBox "Wrong IP address format Session (" & i & "): " & g_objIE.Document.All("Session_Param_0")(i).Value &_
+													chr(13) & "Use the following format for management IP address: "  &  "A.B.C.D"
+											Exit Do
+										End If						
+									Next
+							End Select ' End of consistency check
+							'--------------------------------------------------------------------
+							'  PREPARE UPDATED vSETTINGS, vSessionCRT, Objects AND WRITE SETTINGS TO FILE
+							'--------------------------------------------------------------------
+							g_objIE.Document.All("ButtonHandler").Value = "Exit_After_Save"
+							Select Case MenuID
+							    Case 7 ' Enter name of the file with list of configuration names to download
+								        vSettings(25) = vParamNames(25) & Space(30 - Len(vParamNames(25))) & "= " & g_objIE.Document.All("Settings_Param_25").Value
+							    Case 6
+								       vSettings(26) = g_objIE.Document.All("Settings_Param_26").Value
+									   g_objIE.Document.All("ButtonHandler").Value = "Exit_After_Save"
+									   Exit Do
+						        Case 0 
+								Case 1
 										nPlatform = g_objIE.document.getElementById("Platform_Name").selectedIndex
-										vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.document.getElementById("Platform_Name").Options(nPlatform).text
-									Case 14
-										vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.Document.All("Platform_Index").Value
-								End Select
-							Next
-							For nInd = 0 to 14
-								Call FindAndReplaceStrInFile(strFileSettings, vParamNames(nInd), vSettings(nInd), 0)
-								vSettings(nInd) = NormalizeStr(vSettings(nInd),vDelim)
-							Next 
+										vSettings(13) = vParamNames(13) & Space(30 - Len(vParamNames(13))) & "= " & g_objIE.document.getElementById("Platform_Name").Options(nPlatform).text
+										vSettings(14) = vParamNames(14) & Space(30 - Len(vParamNames(14))) & "= " & g_objIE.Document.All("Platform_Index").Value								
+								Case 2
+								        For nInd = 1 to 4
+										    Select Case nInd
+												Case 1
+												    nAdapter = g_objIE.document.getElementById("Adapter_Name").selectedIndex
+													vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.document.getElementById("Adapter_Name").Options(nAdapter).Text
+												Case 2,3,4
+													vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.Document.All("Settings_Param_" & nInd).Value
+												End Select
+										Next
+								Case 3
+     							        For nInd = 5 to 9
+										    vSettings(nInd) = vParamNames(nInd) & Space(30 - Len(vParamNames(nInd))) & "= " & g_objIE.Document.All("Settings_Param_" & nInd).Value
+										Next
+                                Case 4
+										If g_objIE.Document.All("Hide_CRT").Checked Then 
+											 vSettings(0) = vParamNames(0) & Space(30 - Len(vParamNames(0))) & "= 1"
+										Else 
+											 vSettings(0) = vParamNames(0) & Space(30 - Len(vParamNames(0))) & "= 0"										
+										End If
+										' Normalize folder session name across all CRT sessions
+										Redim vSessionCRT_to_file(UBound(vSessionCRT))
+										For nInd = 0 to UBound(vSessionCRT) - 1
+										    'UPDATE SESSION ARREY WITH NEW DATA
+										    vSessionCRT(nInd) = _
+											g_objIE.Document.All("Session_Param_0")(nInd).Value & "," &_
+											g_objIE.Document.All("Session_Param_1").Value       & "," &_
+											g_objIE.Document.All("Session_Param_2")(nInd).Value & "," &_
+											g_objIE.Document.All("Session_Param_3")(nInd).Value & "," &_
+											g_objIE.Document.All("Session_Param_4")(nInd).Value
+                                            'CREATE LIST OF NEW SESSION RECORDS TO BE PLACED INTO SESSIONGS FILE
+										    vSessionCRT_to_file(nInd) = SECURECRT_SESSION & " " & nInd + 1 & Space(30 - Len(SECURECRT_SESSION & " " & nInd + 1)) & "= " &_
+											g_objIE.Document.All("Session_Param_0")(nInd).Value & ", " &_
+											g_objIE.Document.All("Session_Param_1").Value & ", " &_
+											g_objIE.Document.All("Session_Param_2")(nInd).Value & ", " &_
+											g_objIE.Document.All("Session_Param_3")(nInd).Value & ", " &_
+											g_objIE.Document.All("Session_Param_4")(nInd).Value
+										Next
+                                Case 5
+ 								        vSettings(12) = vParamNames(12) & Space(30 - Len(vParamNames(12))) & "= " & g_objIE.Document.All("Settings_Param_12").Value
+								Case 8
+								        For nImage = 0 to UBound(objMain,1) - 1
+											nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
+											objMain(nImage,pIndex(0,"Main")) = g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
+											nOptions = g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex
+											If nOptions => 0 Then 
+												objMain(nImage,pIndex(0,"Minor")) = g_objIE.document.getElementById("Minor_Release" & nImage).Options(nOptions).Text
+                                                objMain(nImage,pIndex(0,"Status")) = "Active"												
+											Else 
+											    objMain(nImage,pIndex(0,"Minor")) = "None"
+												objMain(nImage,pIndex(0,"Status")) = "Inactive"
+											End If
+										Next
+                         				If g_objIE.Document.All("DNLD_IMG_ONLY").Checked Then 
+											g_objIE.Document.All("ButtonHandler").Value = "Exit_After_Save_3"
+										End If										
+                            End Select    
+							'------------------------------------------------------------------
+							'  WRITE NEW SETTINGS TO FILE
+							'------------------------------------------------------------------
+							Select Case MenuID
+							        Case 0
+									Case 1
+										For nInd = 13 to 14
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(nInd), vSettings(nInd), 0)
+											vSettings(nInd) = NormalizeStr(vSettings(nInd),vDelim)
+										Next 									
+									Case 2
+										For nInd = 1 to 4
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(nInd), vSettings(nInd), 0)
+											vSettings(nInd) = NormalizeStr(vSettings(nInd),vDelim)
+										Next 									
+									Case 3
+										For nInd = 5 to 9
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(nInd), vSettings(nInd), 0)
+											vSettings(nInd) = NormalizeStr(vSettings(nInd),vDelim)
+										Next 									
+									Case 4
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(0), vSettings(0), 0)
+											vSettings(0) = NormalizeStr(vSettings(0),vDelim)
+											For nInd = 0 to UBound(vSessionCRT) - 1
+											    If vSessionCRT(nInd) <> vOld_SessionCRT(nInd) Then 
+												    Call FindAndReplaceStrInFile(strFileSettings, SECURECRT_SESSION & " " & nInd + 1, vSessionCRT_to_File(nInd), 0)
+												End If
+											Next
+									Case 5
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(12), vSettings(12), 0)
+											vSettings(12) = NormalizeStr(vSettings(12),vDelim)
+									Case 7 
+											Call FindAndReplaceStrInFile(strFileSettings, vParamNames(25), vSettings(25), 0)
+											vSettings(25) = NormalizeStr(vSettings(25),vDelim)	
+                                    Case 8 
+                        				For nImage = 0 to UBound(objMain,1) - 1
+										    nCount = 0
+											For Each objName in vObjIndex
+											    If InStr(objName,"JunosSW") > 0 Then 
+											       If nCount = nImage Then Exit For Else nCount = nCount + 1
+												End If
+											Next
+											Call ReplaceFileLineInGroup(strDirectoryWork & "\config\class_catalog.dat", objName, "Main", "Main = " & objMain(nImage,pIndex(0,"Main")) ,nDebug)
+											Call ReplaceFileLineInGroup(strDirectoryWork & "\config\class_catalog.dat", objName, "Minor", "Minor = " & objMain(nImage,pIndex(0,"Minor")),nDebug)
+											Call ReplaceFileLineInGroup(strDirectoryWork & "\config\class_catalog.dat", objName, "Status", "Status = " & objMain(nImage,pIndex(0,"Status")),nDebug)
+										Next
+							End Select
+							'-------------------------------------------------------
+							'   SET SETTINGS VARIABLES CONSISTENT WITH DATA IN FILE
+							'-------------------------------------------------------
 							For nInd = 0 to 14
 								Select Case Split(vSettings(nInd),"=")(0)
+									Case HIDE_CRT
+										Select Case Split(vSettings(nInd),"=")(1)
+											Case "1"
+												nWindowState = 2
+											Case Else
+												nWindowState = 1
+										End Select									
 									Case SECURECRT_FOLDER
 										strCRT_InstallFolder = Split(vSettings(nInd),"=")(1)
 									Case WORK_FOLDER
@@ -3527,12 +4089,10 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 										strDirectoryConfig =  Split(vSettings(nInd),"=")(1)
 									Case CONFIGS_PARAM
 										strFileParam = strDirectoryWork & "\config\" & Split(vSettings(nInd),"=")(1)
-									Case Node_Left_IP
-										strLeft_ip =  Split(vSettings(nInd),"=")(1)
-									Case Node_Right_IP
-										strRight_ip =  Split(vSettings(nInd),"=")(1)
 									Case FTP_IP
 										strFTP_ip =  Split(vSettings(nInd),"=")(1)
+									Case LAN_ADAPTER
+										strEth =  Split(vSettings(nInd),"=")(1)
 									Case FTP_User
 										strFTP_name =  Split(vSettings(nInd),"=")(1)
 									Case FTP_Password
@@ -3547,32 +4107,26 @@ Function IE_PromptForSettings(ByRef vIE_Scale, byRef vSettings, byRef vPlatforms
 										Platform = Split(vSettings(nInd),"=")(1)									
 								End Select
 							Next
-							g_objIE.Document.All("ButtonHandler").Value = "None"
-
-							'----------------------------------------------------
-							'   CREATE ZERO CONFIG FILES
-							'----------------------------------------------------
-							Old_Platform_Index = Split(vOld_Settings(14),"=")(1)
-							Call Create_Zero_Configs(vSettings, Old_Platform_Index)
-							'-----------------------------------------------------
-							'   CREATE SECURE CRT SESSIONS
-							'-----------------------------------------------------
-							If SecureCRT_Installed Then Call Create_CRT_Sessions(vSettings, vOld_Settings)
-							'-----------------------------------------------------
-							'   CREATE FTP USER AND HOME FOLDERS
-							'-----------------------------------------------------
-							If FileZilla_Installed Then 
-								If vSettings(3) <> vOld_Settings(3) or vSettings(4) <> vOld_Settings(4) or vSettings(7) <> vOld_Settings(7) Then 
-									Set objShellApp = CreateObject("Shell.Application")
-									objShellApp.ShellExecute "wscript", """" & VBScript_FTP_User & """" &_
-																		" """ & strDirectoryConfig & """ " &_
-																		strFTP_name & " " &_
-																		Split(vOld_Settings(3),"=")(1) & " " &_
-																		Split(vSettings(4),"=")(1), "", "runas", 1
-									Set objShellApp = Nothing
-								End If
-                            End If								
-							g_objIE.Document.All("ButtonHandler").Value = "Exit_After_Save"
+    						' g_objIE.Document.All("ButtonHandler").Value = "None"
+							'------------------------------------------------------------------
+							'  WRITE NEW SETTINGS TO FILE
+							'------------------------------------------------------------------
+							Select Case MenuID
+							    Case 4 ' SAVE SECURE CRT SESSIONS SETTINGS
+									If SecureCRT_Installed Then Call Create_CRT_Sessions(vSettings, vSessionCRT, vOld_SessionCRT)
+								Case 2 ' RECREATE FTP USER AND HOME FOLDERS
+									If FileZilla_Installed Then 
+										If vSettings(3) <> vOld_Settings(3) or vSettings(4) <> vOld_Settings(4) or vSettings(7) <> vOld_Settings(7) Then 
+											Set objShellApp = CreateObject("Shell.Application")
+											objShellApp.ShellExecute "wscript", """" & VBScript_FTP_User & """" &_
+																				" """ & strDirectoryConfig & """ " &_
+																				strFTP_name & " " &_
+																				Split(vOld_Settings(3),"=")(1) & " " &_
+																				Split(vSettings(4),"=")(1), "", "runas", 1
+											Set objShellApp = Nothing
+										End If
+									End If
+							End Select
 							Exit Do
 					    Loop
 			Case "EDIT_PARAM"
@@ -3592,7 +4146,6 @@ End Function
 '##############################################################################
 '      Function PROMPT FOR FOLDER NAME
 '##############################################################################
-
  Function IE_DialogFolder (vIE_Scale, strTitle, strFolder, vLine, ByVal nLine, nDebug)
 	Dim objForm, g_objIE, objShell
     Dim intX
@@ -3833,86 +4386,98 @@ End Function
 '----------------------------------------------------------------------------------
 '    Function Create_CRT_Sessions(ByRef vSettings,ByRef vOld_Settings )
 '----------------------------------------------------------------------------------
-Function Create_CRT_Sessions(ByRef vSettings,ByRef vOld_Settings )
+Function Create_CRT_Sessions(ByRef vSettings,ByRef vSessions, ByRef vOld_Sessions )
 Dim strSessionFolder, strSessionNameL, strSessionNameR, strOldSessionFolder, strOldSessionNameL, strOldSessionNameR
 Dim  StrWinUser, strLeft_ip, strRight_ip, strCRT_SessionFolder,strDirectoryWork, nIndex
-Dim objFSO
+Dim objFSO, nInd
 	Set objFSO = CreateObject("Scripting.FileSystemObject")
-	strSessionFolder = Split(Split(vSettings(10),"=")(1),",")(0)
-	strSessionNameL = Split(Split(vSettings(10),"=")(1),",")(1)
-	strSessionNameR = Split(Split(vSettings(11),"=")(1),",")(1)
-	strOldSessionFolder =  Split(Split(vOld_Settings(10),"=")(1),",")(0)
-	strOldSessionNameL = Split(Split(vOld_Settings(10),"=")(1),",")(1)
-	strOldSessionNameR = Split(Split(vOld_Settings(11),"=")(1),",")(1)
-	strDirectoryWork = Split(vOld_Settings(6),"=")(1)
-	strLeft_ip = Split(Split(vOld_Settings(0),"=")(1),"/")(0)
-	strRight_ip = Split(Split(vOld_Settings(1),"=")(1),"/")(0)
-	strCRT_SessionFolder = Split(vOld_Settings(15),"=")(1)
+	strDirectoryWork = Split(vSettings(6),"=")(1)
+	strCRT_SessionFolder = Split(vSettings(15),"=")(1)
 	StrWinUser = GetScreenUserSYS()
-
-
-	' Check if folder for your session exists
-	If strOldSessionFolder <> strSessionFolder and objFSO.FolderExists(strCRT_SessionFolder & "\" & strOldSessionFolder) Then 
-		objFSO.DeleteFolder strCRT_SessionFolder & "\" & strOldSessionFolder, True
-	End If
-	If Not objFSO.FolderExists(strCRT_SessionFolder & "\" & strSessionFolder) Then 
-		objFSO.CreateFolder strCRT_SessionFolder & "\" & strSessionFolder
-	End If
-	' Check if __DataFolder__.ini file exists in ..\sessions
-	If Not objFSO.FileExists(strCRT_SessionFolder & "\__FolderData__.ini") Then 
-		objFSO.CopyFile strDirectoryWork & "\config\secureCRT\__FolderData__.ini", strCRT_SessionFolder & "\__FolderData__.ini", True
-	End If
-	' Check if __DataFolder__.ini has in formation about your session folder
-	Call  GetFileLineCountSelect(strCRT_SessionFolder & "\__FolderData__.ini", vFolderData,"", "", "", 0)
-	nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Folder List") - 1
-	If strOldSessionFolder <> strSessionFolder and InStr(vFolderData(nIndex),strOldSessionFolder & ":") then 
-		vFolderData(nIndex) = Replace(vFolderData(nIndex), strOldSessionFolder & ":","")
-	End If
-	If Not Instr(vFolderData(nIndex),strSessionFolder  & ":") then 
-		vFolderData(nIndex) = vFolderData(nIndex) & strSessionFolder & ":"
-		Call WriteArrayToFile(strCRT_SessionFolder & "\__FolderData__.ini",vFolderData, UBound(vFolderData),1,0)
-	End If
-	' - Delete old session files
-	If strOldSessionFolder = strSessionFolder and strOldSessionNameL <> stressionNameL and objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameL & ".ini") Then
-	   objFSO.DeleteFile strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameL & ".ini", True
-	End If 
-	If strOldSessionFolder = strSessionFolder and strOldSessionNameR <> stressionNameR and objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameR & ".ini") Then
-	   objFSO.DeleteFile strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameR & ".ini", True
-	End If 
-	' - Create New Session File for Left Node Session
-	objFSO.CopyFile strDirectoryWork & "\config\secureCRT\node.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini", True
-	Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini", vSessionFile,"", "", "", 0)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{hostname}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{hostname}}",strLeft_ip)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{winusername}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{winusername}}",StrWinUser)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{Workdirectory}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{Workdirectory}}",strDirectoryWork)
-	Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini",vSessionFile, UBound(vSessionFile),1,0)
-	' - Create New Session File for Right Node Session
-	objFSO.CopyFile strDirectoryWork & "\config\secureCRT\node.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameR & ".ini", True
-	Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameR & ".ini", vSessionFile,"", "", "", 0)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{hostname}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{hostname}}",strRight_ip)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{winusername}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{winusername}}",StrWinUser)
-	nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{Workdirectory}}") - 1
-	vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{Workdirectory}}",strDirectoryWork)
-	Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameR & ".ini",vSessionFile, UBound(vSessionFile),1,0)
-	' Check if __DataFolder__.ini file exists in ..\sessions\SessionName
-	If Not objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini") Then 
-		objFSO.CopyFile strDirectoryWork & "\config\secureCRT\__FolderData__.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini", True
-	End If
-	' Check if __DataFolder__.ini has information about your new sessions
-	Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini", vFolderData,"", "", "", 0)
-	nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Session List") - 1
-	If Not Instr(vFolderData(nIndex),strSessionNameL & ":") then 
-		vFolderData(nIndex) = vFolderData(nIndex) & strSessionNameL & ":"
-	End If
-	If Not Instr(vFolderData(nIndex),strSessionNameR & ":") then 
-		vFolderData(nIndex) = vFolderData(nIndex) & strSessionNameR & ":"
-	End If
-	Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini",vFolderData, UBound(vFolderData),1,0)	
+	For nInd = 0 to UBound(vSessions) - 1
+		Do 
+		   ' If vSessions(nInd) = vOld_Sessions(nInd) Then Exit Do 
+			strSessionFolder = Split(vSessions(nInd),",")(1)
+			strOldSessionFolder =  Split(vOld_Sessions(nInd),",")(1)
+			strSessionNameL = Split(vSessions(nInd),",")(2)
+			strOldSessionNameL = Split(vOld_Sessions(nInd),",")(2)
+			strLeft_ip = Split(vSessions(nInd),",")(0)
+			' Check if folder for your session exists
+			If strOldSessionFolder <> strSessionFolder and objFSO.FolderExists(strCRT_SessionFolder & "\" & strOldSessionFolder) Then 
+				objFSO.DeleteFolder strCRT_SessionFolder & "\" & strOldSessionFolder, True
+			End If
+            ' - Create New Session Folder
+			If Not objFSO.FolderExists(strCRT_SessionFolder & "\" & strSessionFolder) Then 
+				objFSO.CreateFolder strCRT_SessionFolder & "\" & strSessionFolder
+			End If
+			' - Create Root Folder
+			If Not objFSO.FolderExists(strCRT_SessionFolder & "\" & strSessionFolder & "\root") then objFSO.CreateFolder strCRT_SessionFolder & "\" & strSessionFolder & "\root"
+			' Check if __DataFolder__.ini file exists in ..\sessions
+			If Not objFSO.FileExists(strCRT_SessionFolder & "\__FolderData__.ini") Then 
+				objFSO.CopyFile strDirectoryWork & "\config\secureCRT\__FolderData__.ini", strCRT_SessionFolder & "\__FolderData__.ini", True
+			End If
+			' Check if __DataFolder__.ini has information about your session folder
+			Call  GetFileLineCountSelect(strCRT_SessionFolder & "\__FolderData__.ini", vFolderData,"", "", "", 0)
+			nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Folder List") - 1
+			If strOldSessionFolder <> strSessionFolder and InStr(vFolderData(nIndex),strOldSessionFolder & ":") then 
+				vFolderData(nIndex) = Replace(vFolderData(nIndex), strOldSessionFolder & ":","")
+			End If
+			If Not Instr(vFolderData(nIndex),strSessionFolder  & ":") then 
+				vFolderData(nIndex) = vFolderData(nIndex) & strSessionFolder & ":"
+				Call WriteArrayToFile(strCRT_SessionFolder & "\__FolderData__.ini",vFolderData, UBound(vFolderData),1,0)
+			End If
+			' - Delete old session files
+			If strOldSessionFolder = strSessionFolder and strOldSessionNameL <> stressionNameL and objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameL & ".ini") Then
+			   objFSO.DeleteFile strCRT_SessionFolder & "\" & strSessionFolder & "\" & strOldSessionNameL & ".ini", True
+			End If 
+			If strOldSessionFolder = strSessionFolder and strOldSessionNameL <> stressionNameL and objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\root\" & strOldSessionNameL & ".ini") Then
+			   objFSO.DeleteFile strCRT_SessionFolder & "\" & strSessionFolder & "\root\" & strOldSessionNameL & ".ini", True
+			End If 
+			' - Create New Session File for the Node Session
+			objFSO.CopyFile strDirectoryWork & "\config\secureCRT\node.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini", True
+			objFSO.CopyFile strDirectoryWork & "\config\secureCRT\node_root.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\root\" & strSessionNameL & ".ini", True
+			Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini", vSessionFile,"", "", "", 0)
+			Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\root\" & strSessionNameL & ".ini", vRootFile,"", "", "", 0)
+			nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{hostname}}") - 1
+			vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{hostname}}",strLeft_ip)
+			vRootFile(nIndex)    = Replace(vRootFile(nIndex),"{{hostname}}",strLeft_ip)
+			nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{winusername}}") - 1
+			vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{winusername}}",StrWinUser)
+			vRootFile(nIndex)    = Replace(vRootFile(nIndex),"{{winusername}}",StrWinUser)
+			nIndex = GetObjectLineNumber(vSessionFile, UBound(vSessionFile),"{{Workdirectory}}") - 1
+			vSessionFile(nIndex) = Replace(vSessionFile(nIndex),"{{Workdirectory}}",strDirectoryWork)
+            vRootFile(nIndex)    = Replace(vRootFile(nIndex),"{{Workdirectory}}",strDirectoryWork)			
+			Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\" & strSessionNameL & ".ini",vSessionFile, UBound(vSessionFile),1,0)
+			Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\root\" & strSessionNameL & ".ini",vRootFile, UBound(vSessionFile),1,0)
+			' Check if __DataFolder__.ini file exists in ..\sessions\SessionName
+			If Not objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini") Then 
+				objFSO.CopyFile strDirectoryWork & "\config\secureCRT\__FolderData__.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini", True
+			End If
+			' Check if __DataFolder__.ini has information about your new sessions
+			Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini", vFolderData,"", "", "", 0)
+			nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Folder List") - 1
+			If Not Instr(vFolderData(nIndex),"root:") then 
+				vFolderData(nIndex) = vFolderData(nIndex) & "root:"
+			End If			
+			nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Session List") - 1
+			If Not Instr(vFolderData(nIndex),strSessionNameL & ":") then 
+				vFolderData(nIndex) = vFolderData(nIndex) & strSessionNameL & ":"
+			End If
+			Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\__FolderData__.ini",vFolderData, UBound(vFolderData),1,0)	
+			' Check if __DataFolder__.ini file exists in ..\sessions\SessionName\root
+			If Not objFSO.FileExists(strCRT_SessionFolder & "\" & strSessionFolder & "\root\__FolderData__.ini") Then 
+				objFSO.CopyFile strDirectoryWork & "\config\secureCRT\__FolderData__.ini", strCRT_SessionFolder & "\" & strSessionFolder & "\root\__FolderData__.ini", True
+			End If
+			' Check if __DataFolder__.ini has information about your new sessions			
+			Call  GetFileLineCountSelect(strCRT_SessionFolder & "\" & strSessionFolder & "\root\__FolderData__.ini", vFolderData,"", "", "", 0)
+			nIndex = GetObjectLineNumber(vFolderData, UBound(vFolderData),"Session List") - 1
+			If Not Instr(vFolderData(nIndex),strSessionNameL & ":") then 
+				vFolderData(nIndex) = vFolderData(nIndex) & strSessionNameL & ":"
+			End If
+			Call WriteArrayToFile(strCRT_SessionFolder & "\" & strSessionFolder & "\root\__FolderData__.ini",vFolderData, UBound(vFolderData),1,0)	
+	        Exit Do
+		Loop
+	Next
     Set objFSO = Nothing
 End Function
 '###################################################################################
@@ -4276,7 +4841,7 @@ End Function
 '   Function IE_Hide(objIE) changes the visibility of the Window referenced by the objIE
 '----------------------------------------------------------------------------------------
 Function IE_Hide(byRef objIE)
-   if objIE = Null then exit function
+   if objIE = "Null" then exit function
    If objIE.Visible then 
         objIE.Visible = False
     End If 
@@ -4285,8 +4850,1118 @@ End Function
 '   Function IE_UnHide(objIE) changes the visibility of the Window referenced by the objIE
 '----------------------------------------------------------------------------------------
 Function IE_Unhide(byRef objIE)
-   if objIE = Null then exit function
+   if objIE = "Null" then exit function
    If Not objIE.Visible then 
         objIE.Visible = True
     End If 
+End Function
+'----------------------------------------------------------------------------------------
+'   Function UpdateCfgList(g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htmlCfgSelect)
+'----------------------------------------------------------------------------------------
+Function UpdateCfgList(byRef g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htmlCfgSelect)
+    Dim nOptions_New, nOptions, nInd
+	nOptions_New = 0
+	g_objIE.document.getElementById("cfg_name").Options(0).Text = "N/A"
+	g_objIE.document.getElementById("cfg_name").Options(0).Value = 0				   	
+	For nInd = 1 to UBound(vCfgList,1)
+		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Text = Space(128)
+		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Value = "N/A"					   
+	Next
+	nOptions = 0
+	For nInd = 0 to UBound(vCfgList,1) - 1
+		Do 
+			If strYear <> "All" Then 
+				If InStr(vCfgList(nInd,1),strYear) = 0 Then 
+					Exit Do
+				End If
+			End If
+			If strTag <> "*" Then 
+				If InStr(vCfgList(nInd,0),LCase(strTag)) = 0 and InStr(vCfgList(nInd,0),strTag) = 0 Then 
+					Exit Do 
+				End If
+			End If			   
+			g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Text = vCfgList(nInd,0)
+			g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Value = nInd
+'			MsgBox "nCfg = " & nCfg & chr(13) & "nInd = " & nInd
+			If nInd = CInt(nCfg) Then 
+				nOptions_New = nOptions
+			End If
+			nOptions = nOptions + 1
+			Exit Do
+		Loop 
+	Next
+'	g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Text = SAVE_AS & Space(100)
+'	g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Value = nInd + 1	
+	UpdateCfgList = nOptions_New
+End Function
+'----------------------------------------------------------------------------------------
+'   Function UpdateCfgVer(g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htmlCfgSelect)
+'----------------------------------------------------------------------------------------
+Function UpdateCfgVer(ByRef g_objIE, ByRef nCfg, ByRef vCfgList, htmlSelect)
+	Dim nInd, strLine
+	UpdateCfgVer = 0
+	If Int(nCfg) >= Ubound(vCfgList,1) Then Exit Function
+	strLine = Split(vCfgList(nCfg,1),"=")(1)
+	Const MAX_PARAM = 10
+	For nInd = 0 to MAX_PARAM
+		If nInd < UBound(Split(strLine,",")) Then 
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Split(strLine,",")(nInd)
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = nInd
+		End If
+		If nInd = UBound(Split(strLine,",")) Then 
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Split(strLine,",")(nInd)
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = nInd
+			g_objIE.document.getElementById(htmlSelect).selectedIndex = nInd			
+		End If
+		If nInd > UBound(Split(strLine,",")) Then 
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Space(18)
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = 0
+		End If
+	Next
+	UpdateCfgVer = g_objIE.document.getElementById(htmlSelect).selectedIndex
+End Function 
+'----------------------------------------------------------------------------------------
+'   Function UpdateSessionStatus(ByRef g_objIE, nCfg, strCfg, ByRef vCfgList,ByRef vSessionCRT, ByRef vSessionEnable)
+'----------------------------------------------------------------------------------------
+Function UpdateSessionStatus(ByRef g_objIE, nCfg, strCfg, ByRef vCfgList,ByRef vSessionCRT, ByRef vSessionEnable)
+	Dim nInd, i, strBoxName
+    If InStr(strCfg,SAVE_AS) > 0 Then 
+		For nInd = 0 to UBound(vSessionCRT) - 1
+		    strBoxName = Split(vSessionCRT(nInd),",")(2)
+			If InStr(vSessionEnable(nInd),"Enabled") > 0 Then 
+			   'g_objIE.Document.All(strBoxName).Select
+			   g_objIE.Document.All(strBoxName).Checked = true
+			   'g_objIE.Document.All(strBoxName).Click
+			Else 
+			    g_objIE.Document.All(strBoxName).Checked = false
+			End If 		       
+		Next 
+    Else 
+		For nInd = 0 to UBound(vSessionCRT) - 1
+		    strBoxName = Split(vSessionCRT(nInd),",")(2)
+			For i = 1 to UBound(vCfgList,2)
+			    If i = UBound(vCfgList,2) Then 
+'				   g_objIE.Document.All(strBoxName).Select
+				   g_objIE.Document.All(strBoxName).Checked = false
+                   vSessionEnable(nInd) = "Status " & nInd + 1 & "=Disabled"
+				   Exit For
+				End If 
+			    If vCfgList(nCfg,i) = "" Then 
+'				   g_objIE.Document.All(strBoxName).Select
+				   g_objIE.Document.All(strBoxName).Checked = false
+                   vSessionEnable(nInd) = "Status " & nInd + 1 & "=Disabled"				   
+				   Exit For
+				End If
+				If InStr(vCfgList(nCfg,i),strBoxName) > 0 Then 
+'				   g_objIE.Document.All(strBoxName).Select
+				   g_objIE.Document.All(strBoxName).Checked = True
+'				   g_objIE.Document.All(strBoxName).Click
+                   vSessionEnable(nInd) = "Status " & nInd + 1 & "=Enabled"				   
+				   Exit For
+				End If 		       
+			Next
+		Next 	    
+    End If
+End Function
+'----------------------------------------------------------------------------
+'    Function CreateNewCfg(ByRef strCfg, nCfg, ByRef strVersion, strDirectoryConfig, ByRef vCfgInventory, ByRef vCfgList, nDebug)
+'----------------------------------------------------------------------------
+Function CreateNewCfg(ByRef strCfg, ByRef nCfg, ByRef strVersion, strDirectoryConfig, ByRef vCfgInventory, ByRef vCfgList, nDebug)
+    Dim objFSO, vFileLine, nLine, strLine, nVersion, vLine(1), vCfgTempList
+	Set objFSO = CreateObject("Scripting.FileSystemObject")	
+	If nCfg = 0 or GetExactObjectLineNumber(vCfgInventory, UBound(vCfgInventory),strCfg) = 0 Then 
+	    '----------------------------------------------------
+		'   CREATE NEW CFG RECORD AND VERSION
+		'----------------------------------------------------
+	    nCfg = UBound(vCfgInventory)
+		' write new cfg name to CfgList file to the END of the list
+		Call WriteStrToFile(strDirectoryConfig & "\CfgList.txt", strCfg, vCfgInventory(nCfg - 1), 3, 0)
+		' write new cfg name to CfgInventory Array
+		Redim Preserve vCfgInventory(nCfg + 1)
+		vCfgInventory(nCfg) = strCfg
+		' write new cfg name to CfgList Array
+		nDim1 = UBound(vCfgList,1)
+		nDim2 = UBound(vCfgList,2)
+		Redim vCfgTempList(nDim1, nDim2)
+		For i = 0 to nDim1 - 1
+		    For n = 0 to nDim2 - 1
+			   vCfgTempList(i,n) = vCfgList(i,n)
+		    Next
+		Next
+		Redim vCfgList(nDim1 + 1, nDim2)
+		For i = 0 to nDim1 - 1
+		    For n = 0 to nDim2 - 1
+			   vCfgList(i,n) = vCfgTempList(i,n)
+		    Next
+		Next
+		vCfgList(nCfg,0) = strCfg
+		' Create new Version Number
+		strVersion = Year(Date) & "-" & Month(Date()) & "-" & Day(Date()) & "-" & "v.01"
+		Redim vFileLine(3)
+		vFileLine(0) = " "
+		vFileLine(1) = "[" & strCfg & "]"
+		vFileLine(2) = "Version = " & strVersion
+		Call WriteArrayToFile(strDirectoryConfig & "\CfgList.txt", vFileLine, UBound(vFileLine),2,0)
+	Else 
+	    '------------------------------------------------------
+		'   CREATE NEW VERSION FOR EXISTED CFG
+		'------------------------------------------------------
+	    Call GetFileLineCountByGroup(strDirectoryConfig & "\CfgList.txt", vFileLine,strCfg,"","",0)
+		nLine = GetObjectLineNumber(vFileLine, UBound(vFileLine),"Version")
+		If UBound(Split(vFileLine(nLine - 1),"v.")) > 0 Then 
+		    nVersion = CInt(Split(vFileLine(nLine - 1),"v.")(UBound(Split(vFileLine(nLine - 1),"v.")))) + 1
+			If nVersion > 9 Then 
+			    strVersion = Year(Date) & "-" & Month(Date()) & "-" & Day(Date()) & "-" & "v." & nVersion
+			    vFileLine(nLine - 1) = vFileLine(nLine - 1) & "," & strVersion
+				vCfgList(nCfg,1) = vCfgList(nCfg,1) & "," & strVersion
+			Else 
+			    strVersion = Year(Date) & "-" & Month(Date()) & "-" & Day(Date()) & "-" & "v.0" & nVersion
+			    vFileLine(nLine - 1) = vFileLine(nLine - 1) & "," & strVersion
+				vCfgList(nCfg,1) = vCfgList(nCfg,1) & "," & strVersion
+			End If
+		Else 
+		   strVersion = Year(Date) & "-" & Month(Date()) & "-" & Day(Date()) & "-" & "v.01"
+           vFileLine(nLine - 1) = "Version = " & strVersion
+		End If 
+		Call DeleteFileGroup(strDirectoryConfig & "\CfgList.txt", strCfg, 0)
+		vLine(0) = "[" & strCfg & "]"
+		Call WriteArrayToFile(strDirectoryConfig & "\CfgList.txt", vLine, UBound(vLine),2,0)
+		Call WriteArrayToFile(strDirectoryConfig & "\CfgList.txt", vFileLine, UBound(vFileLine),2,0)
+	End If 
+	'----------------------------------------------------
+	'   CREATE CONFIGURATION AND VERSION FOLDERS
+	'----------------------------------------------------
+	If Not objFSO.FolderExists(strDirectoryConfig & "\" & strCfg) Then 
+	    objFSO.CreateFolder  strDirectoryConfig & "\" & strCfg
+	End If 
+	If Not objFSO.FolderExists(strDirectoryConfig & "\" & strCfg & "\" & strVersion) Then 
+	    objFSO.CreateFolder  strDirectoryConfig & "\" & strCfg & "\" & strVersion
+	End If 	
+	Set objFSO = Nothing
+End Function
+'---------------------------------------------------------------------------
+' Function DeleteFileLineGroup - Returns number of lines int the text file
+'---------------------------------------------------------------------------
+ Function DeleteFileLineGroup(strFileName, strGroup1, strParam1,nDebug_)
+    Dim nIndex
+	Dim strLine 
+	Dim nGroupSelector
+	DeleteFileLineGroup = 0
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+	nIndex = 0
+	Redim vFileLines(nIndex)
+	Call TrDebug ("DeleteFileLineGroup: String containing """ & strParam1 & """ under Group [" & strGroup1 & "] WILL BE DELETED", "", objDebug, MAX_LEN, 1, 1)					
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+    Do While objDataFileName.AtEndOfStream <> True
+		strLine = RTrim(LTrim(objDataFileName.ReadLine))
+		Select Case Left(strLine,1)
+			Case "["
+				Select Case strLine
+						Case "[" & strGroup1 & "]"
+							nGroupSelector = 1
+						Case Else
+							nGroupSelector = 0
+				End Select
+				Redim Preserve vFileLines(nIndex + 1)
+				vFileLines(nIndex) = strLine
+				nIndex = nIndex + 1
+			Case Else
+				If nGroupSelector = 1 and InStr(strLine,strParam1) <> 0 Then 
+					Call TrDebug ("DeleteFileLineGroup: String containing """ & strParam1 & """", "WAS DELETED", objDebug, MAX_LEN, 1, 1)					
+				Else
+					Redim Preserve vFileLines(nIndex + 1)
+					vFileLines(nIndex) = strLine
+					nIndex = nIndex + 1
+				End If
+		End Select
+	Loop
+	objDataFileName.Close
+	Call WriteArrayToFile(strFileName,vFileLines, UBound(vFileLines),1,nDebug)
+    DeleteFileLineGroup = True
+End Function	
+'---------------------------------------------------------------------------
+'   Function AddFileLineInGroup(strFileName, strGroup1, strParam1,nDebug_)
+'---------------------------------------------------------------------------
+ Function AddFileLineInGroup(strFileName, strGroup1, strParam1,nDebug_)
+    Dim nIndex
+	Dim strLine 
+	Dim nGroupSelector
+	AddFileLineInGroup = 0
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+	nIndex = 0
+	Redim vFileLines(nIndex)
+	Call TrDebug ("AddFileLineInGroup: String """ & strParam1 & """ under Group [" & strGroup1 & "] WILL BE ADDED", "", objDebug, MAX_LEN, 1, 1)					
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+    Do While objDataFileName.AtEndOfStream <> True
+		strLine = RTrim(LTrim(objDataFileName.ReadLine))
+		Select Case Left(strLine,1)
+			Case "["
+				Select Case strLine
+						Case "[" & strGroup1 & "]"
+							nGroupSelector = 1
+						Case Else
+							If nGroupSelector = 1 Then 
+								nIndex = nIndex - 1
+								Do While Len(vFileLines(nIndex)) <= 1
+									nIndex = nIndex - 1
+								Loop
+								nIndex = nIndex + 1
+								Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = strParam1 : nIndex = nIndex + 1
+								Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = " " : nIndex = nIndex + 1
+								Call TrDebug ("AddFileLineInGroup: String """ & strParam1 & """", "WAS ADDED", objDebug, MAX_LEN, 1, 1)					
+							End If 
+							nGroupSelector = 0
+				End Select
+				Redim Preserve vFileLines(nIndex + 1)
+				vFileLines(nIndex) = strLine
+				nIndex = nIndex + 1
+			Case Else
+					Redim Preserve vFileLines(nIndex + 1)
+					vFileLines(nIndex) = strLine
+					nIndex = nIndex + 1
+		End Select
+	Loop
+	If nGroupSelector = 1 Then 
+		nIndex = nIndex - 1
+		Do While Len(vFileLines(nIndex)) <= 1
+			nIndex = nIndex - 1
+		Loop
+		nIndex = nIndex + 1
+		Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = strParam1 : nIndex = nIndex + 1
+		Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = " " : nIndex = nIndex + 1
+		Call TrDebug ("AddFileLineInGroup: String """ & strParam1 & """", "WAS ADDED", objDebug, MAX_LEN, 3, 1)					
+	End If 
+	objDataFileName.Close
+	Call WriteArrayToFile(strFileName,vFileLines, UBound(vFileLines),1,nDebug)
+    AddFileLineInGroup = True
+End Function
+'---------------------------------------------------------------------------
+' Function DeleteFileGroup - Returns number of lines int the text file
+'---------------------------------------------------------------------------
+ Function DeleteFileGroup(strFileName, strGroup1, nDebug_)
+    Dim nIndex
+	Dim strLine 
+	Dim nGroupSelector
+	DeleteFileGroup = 0
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+	nIndex = 0
+	Redim vFileLines(nIndex)
+	If nDebug_ = 1 Then objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) &  ": DeleteFileGroup: -------------- NOW READ TO ARRAY -----------" End If  
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+    Do While objDataFileName.AtEndOfStream <> True
+		strLine = RTrim(LTrim(objDataFileName.ReadLine))
+		Select Case Left(strLine,1)
+			Case "["
+				Select Case strLine
+						Case "[" & strGroup1 & "]"
+							nGroupSelector = 1
+						Case Else
+							nGroupSelector = 0
+							Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = strLine : nIndex = nIndex + 1
+				End Select
+			Case Else	
+				If nGroupSelector = 0 Then
+					Redim Preserve vFileLines(nIndex + 1) : vFileLines(nIndex) = strLine : nIndex = nIndex + 1
+					If nDebug_ = 1 Then objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) &  ": GetFileLineCountByGroup: vFileLines(" & nIndex & "): "  & vFileLines(nIndex) End If  
+				End If
+		End Select
+	Loop
+	objDataFileName.Close
+	Call WriteArrayToFile(strFileName,vFileLines, UBound(vFileLines),1,nDebug)
+    DeleteFileGroup = True
+End Function
+'---------------------------------------------------------------------------
+'   Function IsFile(strFile)
+'---------------------------------------------------------------------------
+Function IsFile(strFile)
+Dim objFSO
+	Set objFSO = CreateObject("Scripting.FileSystemObject")
+	Do
+		If objFSO.FileExists(strFile) Then IsFile = 1 : Exit Do : End If
+		If objFSO.FolderExists(strFile) Then IsFile = 2 : Exit Do : End If
+		IsFile = 0
+		Exit Do
+	Loop
+	Set objFSO = Nothing
+End Function 
+'---------------------------------------------------------------------------
+'   Function IsFile(strFile)
+'---------------------------------------------------------------------------
+Function BrowseForFile()
+    With CreateObject("WScript.Shell")
+        Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+        Dim tempFolder : Set tempFolder = fso.GetSpecialFolder(2)
+        Dim tempName : tempName = fso.GetTempName() & ".hta"
+        Dim path : path = "HKCU\Volatile Environment\MsgResp"
+        With tempFolder.CreateTextFile(tempName)
+            .Write "<input type=file name=f>" & _
+            "<script>f.click();(new ActiveXObject('WScript.Shell'))" & _
+            ".RegWrite('HKCU\\Volatile Environment\\MsgResp', f.value);" & _
+            "close();</script>"
+            .Close
+        End With
+        .Run tempFolder & "\" & tempName, 1, True
+        BrowseForFile = .RegRead(path)
+        .RegDelete path
+        fso.DeleteFile tempFolder & "\" & tempName
+    End With
+End Function
+'-----------------------------------------------------------------------------------------
+'      Function Displays a Message with Continue and No Button. Returns True if Continue
+'-----------------------------------------------------------------------------------------
+ Function IE_CONT_MULT (vIE_Scale, strTitle, vLine, ByVal nLine, vButton, objIEParent, nDebug)
+    Dim intX
+    Dim intY
+	Dim WindowH, WindowW
+	Dim nFontSize_Def, nFontSize_10, nFontSize_12
+	Dim nInd
+	Dim g_objIE, objShell
+    Set g_objIE = Nothing
+    Set objShell = Nothing
+	Dim N, xTab
+	intX = 1920
+	intY = 1080
+	intX = vIE_Scale(0,0) : IE_Border = vIE_Scale(0,1) : intY = vIE_Scale(1,0) : IE_Menu_Bar = vIE_Scale(1,1)
+	IE_CONT_MULT = False
+	Set objShell = WScript.CreateObject("WScript.Shell")
+	Call IE_Hide(objIEParent)
+	Call Set_IE_obj (g_objIE)
+	g_objIE.Offline = True
+	g_objIE.navigate "about:blank"
+	' This loop is required to allow the IE object to finish loading...
+	Do
+		WScript.Sleep 200
+	Loop While g_objIE.Busy
+	nRatioX = intX/1920
+    nRatioY = intY/1080
+	CellW = Round(500 * nRatioX,0)
+	CellH = Round((150 + nLine * 30) * nRatioY,0)
+	WindowW = CellW + IE_Border
+	WindowH = CellH + IE_Menu_Bar
+	nTab = Round(20 * nRatioX,0)
+	BottomH = Round(10 * nRatioY,0)
+	nFontSize_10 = Round(10 * nRatioY,0)
+	nFontSize_12 = Round(12 * nRatioY,0)
+	nFontSize_Def = Round(16 * nRatioY,0)
+	nButtonX = Round(80 * nRatioX,0)
+	nButtonY = Round(40 * nRatioY,0)
+	If nButtonX < 50 then nButtonX = 50 End If
+	If nButtonY < 30 then nButtonY = 30 End If
+	
+ '  If nDebug = 1 Then MsgBox "intX=" & intX & "   intY=" & intY & "   RatioX=" & nRatioX & "  RatioY=" & nRatioY & "   Cell Width=" & cellW & "  Cell Hight=" & cellH End If
+	g_objIE.Document.body.Style.FontFamily = "Helvetica"
+	g_objIE.Document.body.Style.FontSize = nFontSize_Def
+	g_objIE.Document.body.scroll = "no"
+	g_objIE.Document.body.Style.overflow = "hidden"
+	g_objIE.Document.body.Style.border = "none " & HttpBdColor1
+	g_objIE.Document.body.Style.background = HttpBgColor1
+	g_objIE.Document.body.Style.color = HttpTextColor1
+	g_objIE.Top = (intY - WindowH)/2
+	g_objIE.Left = (intX - WindowW)/2
+	strHTMLBody = "<br>"
+	For nInd = 0 to nLine - 1
+		strHTMLBody = strHTMLBody &_
+						"<p style=""text-align: center; font-weight: " & vLine(nInd,1) & "; color: " & vLine(nInd,2) & """>" & vLine(nInd,0) & "</p>" 
+			
+	Next
+    If UBound(vButton) < 5 Then N = UBound(vButton) + 1 Else N = 4 End If	
+    xTab = 	Round((CellW - 2 * nTab - N * nButtonX)/(N - 1),0)
+	For nButton = 0 to N - 1
+    strHTMLBody = strHTMLBody &_
+				"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 &_
+				"; color: " & HttpTextColor2 & "; width:" & nButtonX & ";height:" & nButtonY &_
+				";position: absolute; left: " & nTab + nButton * (xTab + nButtonX)   & "px; bottom: " & BottomH & "px' name='Button_"& nButton & "' onclick=document.all('ButtonHandler').value='Button_"& nButton & "';>" & vButton(nButton) & "</button>" 
+	Next
+	strHTMLBody = strHTMLBody & "<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>"
+	g_objIE.Document.Body.innerHTML = strHTMLBody
+	g_objIE.MenuBar = False
+	g_objIE.StatusBar = False
+	g_objIE.AddressBar = False
+	g_objIE.Toolbar = False
+	g_objIE.height = WindowH
+	g_objIE.width = WindowW
+	g_objIE.document.Title = strTitle
+	g_objIE.Visible = True
+	IE_Full_AppName = g_objIE.document.Title & " - " & IE_Window_Title
+	Do
+		WScript.Sleep 100
+	Loop While g_objIE.Busy
+	'----------------------------------------------------
+	'  GET MAIN FORM PID
+	'----------------------------------------------------
+	strCmd = "tasklist /fo csv /fi ""Windowtitle eq " & IE_Full_AppName & """"
+	Call RunCmd("127.0.0.1", "", vCmdOut, strCMD, nDebug)
+    strMyPID = ""
+	For Each strLine in vCmdOut
+	   If InStr(strLine,"iexplore.exe") then strMyPID = Split(strLine,""",""")(1)
+	     ' Call TrDebug("READ TASK PID:" , strLine, objDebug, MAX_LEN, 1, 1)
+    Next
+    If strMyPID = "" Then Call GetAppPID(strMyPID, "iexplore.exe")
+	objShell.AppActivate strMyPID										
+	Do
+		On Error Resume Next
+		g_objIE.Document.All("UserInput").Value = Left(strQuota,8)
+		Err.Clear
+		strNothing = g_objIE.Document.All("ButtonHandler").Value
+		if Err.Number <> 0 then exit do
+		On Error Goto 0
+		If InStr(g_objIE.Document.All("ButtonHandler").Value, "Button") > 0 Then  
+				IE_CONT_MULT = Split(g_objIE.Document.All("ButtonHandler").Value,"_")(1)
+				g_objIE.quit
+				Set g_objIE = Nothing
+				Exit Do
+	    End If
+		Wscript.Sleep 300
+		Loop
+		Call IE_UnHide(objIEParent)
+End Function
+'---------------------------------------------------------------------------------------
+'   Function FindAndReplaceExactStrInFile(strFile, strFind, strNewLine, nDebug)
+'   Search for the First Line which contains "strFind" and Replaces whole Line with "strNewLine"
+'---------------------------------------------------------------------------------------
+Function FindAndReplaceExactStrInFile(strFile, strFind, strNewLine, nDebug)
+	Dim strFolderTmp, nFileLine
+	Dim vFileLine, vvFileLine
+	Const FOR_WRITING = 1
+	FindAndReplaceExactStrInFile = False
+	nFileLine = GetFileLineCountSelect(strFile,vFileLine,"NULL","NULL","NULL",0)                  ' - ATTANTION nFileLine is number of lines counted like 1,2,...,n
+	LineNumber = GetExactObjectLineNumber( vFileLine, nFileLine, strFind)
+	If nDebug = 1 Then objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) &  ": FindAndReplaceExactStrInFile: LineNumber=" & LineNumber & " nFileLine=" & nFileLine  End If  
+	vFileLine(LineNumber - 1) = strNewLine
+	If WriteArrayToFile(strFile,vFileLine,nFileLine,FOR_WRITING,nDebug) Then FindAndReplaceExactStrInFile = True End If
+End Function
+'-------------------------------------------------------------------------
+' Function AppendStringToFile - Returns number of lines int the text file
+'-------------------------------------------------------------------------
+ Function AppendStringToFile(strFile,strLine, nDebug)
+	Dim objDataFileName, objFSO	
+	Set objFSO = CreateObject("Scripting.FileSystemObject")
+	If Not objFSO.FileExists(strFile) Then 	
+		On Error Resume Next
+		Err.Clear
+		Set objDataFileName = objFSO.CreateTextFile(strFile)
+		If Err.Number = 0 Then 
+			objDataFileName.close
+			On Error Goto 0
+		Else
+			Set objFSO = Nothing
+			If IsObject(objDebug) Then 
+				objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) & ": AppendStringToFile: ERROR: CAN'T CREATE FILE " & strFile
+				objDebug.WriteLine GetMyDate() & " " & FormatDateTime(Time(), 3) & ": AppendStringToFile:  Error: " & Err.Number & " Srce: " & Err.Source & " Desc: " &  Err.Description
+			End If
+			AppendStringToFile = False
+			On Error Goto 0
+			Exit Function
+		End If
+	End If
+	Set objDataFileName = objFSO.OpenTextFile(strFile,8,True)
+	objDataFileName.WriteLine strLine
+	objDataFileName.close
+	Set objFSO = Nothing
+End Function
+'-------------------------------------------------------------
+' Function GetVariable("Param" & i, vCat, 2, nCat)
+'-------------------------------------------------------------
+Function GetVariable(strVar, vArray, nDim, Dim1, Dim2, nDebug)
+	Dim vFileLines, i, nResult
+	GetVariable = ""
+	nSize = UBound(vArray,nDim)
+	Redim vFileLines(nSize)
+	Select Case nDim
+		Case 1
+			For i = 0 to nSize - 1
+				vFileLines(i) = vArray(i)
+			Next
+		Case 2
+			For i = 0 to nSize - 1
+				vFileLines(i) = vArray(Dim1, i)
+			Next
+		Case 3
+			For i = 0 to nSize - 1
+				vFileLines(i) = vArray(Dim1, Dim2,i)
+			Next
+	End Select
+	Do
+		For i = 0 to 10
+			nResult = GetObjectLineNumber( vFileLines, nSize, strVar & Space(i) & "=")
+			If nResult > 0 Then Exit For End If
+		Next
+		If nResult = 0 Then 
+			GetVariable = "NULL" 
+			Call TrDebug ("GetVariable: CAN'T FIND VARIABLE: " & strVar, "Dim1=" & Dim1 & " Dim2=" & Dim2, objDebug, MAX_LEN, 1, nDebug)
+			Exit Do 
+		End If
+		If nResult > 0 and InStr(vFileLines(nResult - 1),"=") = 0 Then 
+			GetVariable = "NULL" 
+			Call TrDebug ("GetVariable: ERROR: WRONG DEFINITION OF THE VARIABLE " & strVar, "", objDebug, MAX_LEN, 1, 1)
+			Exit Do
+		End If
+			GetVariable = LTrim(RTrim(Split(vFileLines(nResult - 1),"=")(1)))
+			Exit Do
+	Loop
+End Function 
+'------------------------------------------------------------------------------
+' Function GetMyClass
+'------------------------------------------------------------------------------
+Function GetMyClass(strFileName, ByRef vObjIndex, nDebug)
+    Dim nIndex
+	Dim strLine 
+	Dim nGroupSelector, nClass
+	Dim vFileLines, nFileLines, vClassIndex
+	Const MAX_PARAM = 1
+	
+	GetMyClass = 0
+	nGroupSelector = 0
+	nMaxObjects = 0
+	Call GetFileLineCountByGroup(strFileName , vObjIndex,"Object_Index","","",0)
+	nClass = GetFileLineCountByGroup(strFileName , vClassIndex,"Classes","","",0)
+	Redim vClass(nClass, MAX_PARAM)
+	nFileLines = GetFileLineCountSelect(strFileName, vFileLines,"#","NULL","NULL",0)
+	'-----------------------------------------------------
+	'	COUNT Named Objects in Each Class
+	'-----------------------------------------------------
+	For n = 0 to nClass - 1
+		nObj = 0
+		For i = 0 to nFileLines - 1
+			If InStr(vFileLines(i), "[" & vClassIndex(n) & "_") > 0 Then nObj = nObj + 1 End If
+		Next
+		vClass(n,0) = nObj
+		Call TrDebug ("GetMyClass: TOTAL OBJECTS IN CLASS: " & vClassIndex(n), nObj, objDebug, MAX_LEN, 1, nDebug)
+	Next
+	'-----------------------------------------------------
+	'	FIND THE MAXIMUM NUMBER OF ALL OBJECTS
+	'-----------------------------------------------------
+	For n = 0 to nClass - 1
+		nMaxObjects = MaxQ(nMaxObjects, vClass(n,0)) 		
+	Next
+	'-----------------------------------------------------
+	'	LOAD CLASSES PROPERIES FROM CATALOG
+	'-----------------------------------------------------
+		nGroupSelector = 0
+		For n = 0 to nClass - 1
+			For nIndex = 0 to nFileLines - 1
+				strLine = LTrim(vFileLines(nIndex))
+				Select Case Left(strLine,1)
+					Case "#"
+					Case ""
+					Case "["
+						Select Case strLine
+							Case "[Class_" & vClassIndex(n) & "]"
+								Call TrDebug ("GetMyClass: LOAD PROPERTIES FOR [Class_" & vClassIndex(n) & "]", "", objDebug, MAX_LEN, 3, nDebug)
+								nParam = 1
+								nGroupSelector = 1
+							Case Else
+								nGroupSelector = 0
+						End Select
+					Case Else	
+						If nGroupSelector = 1 Then 
+							Call TrDebug ("GetMyClass:" & strLine, "", objDebug, MAX_LEN, 1, nDebug)					
+							If nParam + 1 > UBound(vClass,2) Then Redim Preserve vClass(nClass,nParam + 1)
+							vClass(n,nParam) = strLine
+							nParam = nParam + 1 
+						End If
+				End Select
+			Next
+		Next
+	'-----------------------------------------------------
+	'	DEFINE vObjects Arrey
+	'-----------------------------------------------------
+	Redim vObjects(nClass, nMaxObjects, UBound(vClass,2))		
+	'-----------------------------------------------------
+	'	LOAD ALL CURRENT USER OBJECTS PROPERIES
+	'-----------------------------------------------------
+	For n = 0 to nClass - 1
+		Do 
+			If vClass(n,0) = 0 Then Exit Do End If
+			Redim vIndex(0) : nCount = 0
+			'-----------------------------------------------------
+			'	CREATE OBJECT INDEX FOR THE CLASS
+			'-----------------------------------------------------
+			For nInd = 0 to UBound(vObjIndex)
+				If InStr(vObjIndex(nInd),vClassIndex(n))<> 0 Then 
+					nCount = nCount + 1
+					Redim Preserve vIndex(nCount)
+					vIndex(nCount - 1) = vObjIndex(nInd)
+				End If
+			Next
+			'-----------------------------------------------------
+			'	LOAD OBJECT PARAMETERS FROM CATALOG
+			'-----------------------------------------------------
+			For i = 0 to vClass(n,0) - 1
+				nGroupSelector = 0
+				For nIndex = 0 to nFileLines - 1
+					strLine = LTrim(vFileLines(nIndex))
+					Select Case Left(strLine,1)
+						Case "#"
+						Case ""
+						Case "["
+							Select Case strLine
+								Case "[" & vIndex(i) & "]"
+									Call TrDebug ("GetMyClass: LOAD DATA FOR: " & strLine, "", objDebug, MAX_LEN, 3, nDebug)
+									nParam = 0
+									nGroupSelector = 1
+								Case Else
+									' If nGroupSelector = 1 Then Exit For
+									nGroupSelector = 0
+							End Select
+						Case Else	
+							If nGroupSelector = 1 Then 
+								Call TrDebug ("GetMyClass:" & strLine, "", objDebug, MAX_LEN, 1, nDebug)					
+								vObjects(n,i,nParam) = strLine
+								nParam = nParam + 1 
+							End If
+					End Select
+				Next
+			Next
+			Exit Do
+		Loop
+	Next
+	GetMyClass = nClass
+End Function
+'----------------------------------------------------------
+'    Function pIndex(Byref vClass,strClassID,ParamName)
+'----------------------------------------------------------
+Function pIndex(strClassID,ParamName)
+  Dim nIndex, ClassID, strLine
+    pIndex = -1
+    If Not IsNumeric(strClassID) Then 
+	    For nIndex = 0 to UBound(vClass,1) - 1
+	       If InStr(vClass(nIndex,1),strClassID) <> 0 Then  ClassID = nIndex
+	    Next
+	Else 
+	   ClassID = Int(strClassID)
+	End If 
+	Call TrDebug ("pIndex: ClassName: " & strClassID & " ClassID = " & ClassID, "", objDebug, MAX_LEN, 1, nDebug)					
+    nIndex = 1
+	For i = 0 to UBound(vClass,2)
+	    strLine = vClass(ClassID,i)
+		If InStr(strLine, "Param") <> 0 Then 
+		   If InStr(strLine, ParamName) <> 0 Then pIndex = nIndex - 1 : Exit For : End If
+		   nIndex = nIndex + 1
+		End If
+	Next
+End Function
+'----------------------------------------------------------
+'    Function SetMyObject(ByRef objDevices, ByRef vObjects, ByRef vClass, strClassID)
+'----------------------------------------------------------
+Function SetMyObject(ByRef objDevices, strClassID, nDebug)
+  Dim nIndex, ClassID, nObj, i
+    '-------------------------------------
+	'   GET CLASS ID 
+	'-------------------------------------
+    If Not IsNumeric(strClassID) Then 
+	    For nIndex = 0 to UBound(vClass,1) - 1
+	       If InStr(vClass(nIndex,1),strClassID) <> 0 Then  ClassID = nIndex
+	    Next
+	Else 
+	   ClassID = Int(strClassID)
+	End If 
+	Call TrDebug ("SetMyObject: ClassName: " & strClassID & " ClassID = " & ClassID, "", objDebug, MAX_LEN, 1, nDebug)	
+	'---------------------------------------
+	'   COUNT Params in Given Class
+	'---------------------------------------
+	nParam = 0
+	For i = 0 to UBound(vClass,2)-1
+		If InStr(vClass(ClassID,i),"Param") > 0 Then 
+			nParam = nParam + 1 
+		End If
+	Next
+	Call TrDebug ("SetMyObject: Found " & n & " Properties for class " & strClassID,"", objDebug, MAX_LEN, 1, 1)
+	'---------------------------------------
+	'   COPY PROPERTIES VALUES TO THE OBJECT
+	'---------------------------------------
+	Redim objDevices(vClass(ClassID,0),nParam)
+    For nObj = 0 to vClass(ClassID,0) - 1
+	    For i = 1 to nParam
+		    Param_Name = GetVariable("Param" & i, vClass, 2, ClassID, 0, nDebug)
+			Param_Value = GetVariable(Param_Name, vObjects, 3, ClassID, nObj, nDebug)
+		    objDevices(nObj,i-1) = Param_Value
+        Next
+	Next
+End Function
+'-----------------------------------------------------
+'   GetAmountOfProperties(vClass)
+'-----------------------------------------------------
+Function GetAmountOfProperties(vClass, strClassID)
+  Dim nParam, i, nIndex, ClassID
+    '-------------------------------------
+	'   GET CLASS ID 
+	'-------------------------------------
+    If Not IsNumeric(strClassID) Then 
+	    For nIndex = 0 to UBound(vClass,1) - 1
+	       If InStr(vClass(nIndex,1),strClassID) <> 0 Then  ClassID = nIndex
+	    Next
+	Else 
+	   ClassID = Int(strClassID)
+	End If   
+	nParam = 0
+	For i = 0 to UBound(vClass,2)-1
+		If InStr(vClass(ClassID,i),"Param") > 0 Then 
+			nParam = nParam + 1 
+		End If
+	Next
+	GetAmountOfProperties = nParam
+End Function 
+'#######################################################################
+' Function ReplaceFileLineInGroup - Returns number of lines int the text file
+'#######################################################################
+ Function ReplaceFileLineInGroup(strFileName, strGroup1, strParamOld, strParam1,nDebug)
+    Dim nIndex
+	Dim strLine 
+	Dim nGroupSelector
+	ReplaceFileLineInGroup = False
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+	nIndex = 0
+	Redim vFileLines(nIndex)
+	Call TrDebug ("ReplaceFileLineInGroup: String """ & strParam1 & """ under Group [" & strGroup1 & "] WILL BE ADDED", "", objDebug, MAX_LEN, 1, nDebug)					
+	nGroupSelector = 0
+	Set objDataFileName = objFSO.OpenTextFile(strFileName)
+    Do While objDataFileName.AtEndOfStream <> True
+		strLine = RTrim(LTrim(objDataFileName.ReadLine))
+		Select Case Left(strLine,1)
+			Case "["
+				Select Case strLine
+						Case "[" & strGroup1 & "]"
+							nGroupSelector = 1
+						Case Else
+							nGroupSelector = 0
+				End Select
+				Redim Preserve vFileLines(nIndex + 1)
+				vFileLines(nIndex) = strLine
+				nIndex = nIndex + 1
+			Case Else
+			        Select Case nGroupSelector
+					    Case 1
+					        If InStr(strLine, strParamOld & " =") > 0 Then strLine = strParam1
+							ReplaceFileLineInGroup = True
+					    Case 0
+					End Select
+					Redim Preserve vFileLines(nIndex + 1)
+					vFileLines(nIndex) = strLine
+					nIndex = nIndex + 1
+		End Select
+	Loop
+	objDataFileName.Close
+	Call WriteArrayToFile(strFileName,vFileLines, UBound(vFileLines),1,nDebug)
+    ReplaceFileLineInGroup = True
+End Function
+'##############################################################################
+'      Function ASKS USER TO ENTER PASSWORD
+'##############################################################################
+ Function IE_PromptLoginPassword (objParentWin, vIE_Scale, vLine, nLine, ByRef strUsername, ByRef strPassword, Confirm, nDebug )
+    Dim strPID
+	Dim intX
+    Dim intY
+	Dim WindowH, WindowW
+	Dim nFontSize_Def, nFontSize_10, nFontSize_12
+	Dim g_objIE, g_objShell
+	intX = 1920
+	intY = 1080
+	Dim IE_Menu_Bar
+	Dim  IE_Border
+	Const IE_REG_KEY = "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Window Title"
+	'-----------------------------------------------------------------
+	'  GET THE TITLE NAME USED BY IE EXPLORER WINDOW
+	'-----------------------------------------------------------------
+	On Error Resume Next
+		Err.Clear
+		IE_Window_Title =  objShell.RegRead(IE_REG_KEY)
+		if Err.Number <> 0 Then 
+			IE_Window_Title = "Internet Explorer"
+		End If
+	On Error Goto 0
+	strPassword = "DO NOT MATCH"
+	IE_PromptLoginPassword = False	
+	
+	'----------------------------------------
+	' SCREEN RESOLUTION
+	'----------------------------------------
+	intX = 1920
+	intY = 1080
+	intX = vIE_Scale(0,2) : IE_Border = vIE_Scale(0,1) : intY = vIE_Scale(1,2) : IE_Menu_Bar = vIE_Scale(1,1)
+	nRatioX = vIE_Scale(0,0)/1920
+    nRatioY = vIE_Scale(1,0)/1080
+	Call Set_IE_obj (g_objIE)
+	g_objIE.Offline = True
+	g_objIE.navigate "about:blank"
+	' This loop is required to allow the IE object to finish loading...
+	Do
+		WScript.Sleep 200
+	Loop While g_objIE.Busy
+	nHeader = Round (12 * nRatioY,0)
+	LineH = Round (12 * nRatioY,0)
+	nTab = 20
+	nFontSize_10 = Round(10 * nRatioY,0)
+	nFontSize_12 = Round(12 * nRatioY,0)
+	nFontSize_14 = Round(14 * nRatioY,0)
+	nFontSize_Def = Round(16 * nRatioY,0)
+	nButtonX = Round(80 * nRatioX,0)
+	nButtonY = Round(40 * nRatioY,0)
+	If nButtonX < 50 then nButtonX = 50 End If
+	If nButtonY < 30 then nButtonY = 30 End If
+	CellW = Round(330 * nRatioX,0)
+	ColumnW1 = Round(150 * nRatioX,0)
+	CellH = 2 * (nLine + 7) * LineH
+	WindowW = IE_Border + CellW
+	WindowH = IE_Menu_Bar + CellH
+	If Confirm Then 
+	    CellH = CellH + 3 * 2 * LineH 
+		nOrder = 1
+    Else 
+	    nOrder = 0
+	End If
+	WindowW = IE_Border + CellW
+	WindowH = IE_Menu_Bar + CellH
+    '----------------------------------------------
+    '   MAIN COLORS OF THE FORM
+    '----------------------------------------------		
+	BackGroundColor = "grey"
+	ButtonColor = HttpBgColor2
+	InputBGColor = HttpBgColor4
+	MainTextColor = HttpTextColor1
+	g_objIE.Document.body.Style.FontFamily = "Helvetica"
+	g_objIE.Document.body.Style.FontSize = nFontSize_Def
+	g_objIE.Document.body.scroll = "no"
+	g_objIE.Document.body.Style.overflow = "hidden"
+	g_objIE.Document.body.Style.border = "none " & BackGroundColor
+	g_objIE.Document.body.Style.background = BackGroundColor
+	g_objIE.Document.body.Style.color = BackGroundColor
+	g_objIE.Top = (intY - WindowH)/2
+	g_objIE.Left = (intX - WindowW)/2
+	'----------------------------------------------------------
+	'    TITLE
+	'----------------------------------------------------------
+	strHTMLBody = strHTMLBody &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; top: 0px;" &_
+		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor2 & "; background-color: "& HttpBgColor2 & ";" &_
+		"width: " & CellW & "px;"">" & _
+		"<tbody>"	
+	For nInd = 0 to nLine - 1
+		 If vLine(nInd,2) = HttpTextColor1 Then vLine(nInd,2) = MainTextColor
+		strHTMLBody = strHTMLBody &_
+		"<tr>" &_
+			"<td style=""border-style: none; background-color: " & HttpBgColor2 & ";"" class=""oa1"" height=""" &  2 * LineH & """ width=""" & CellW & """>" & _
+				"<p style=""text-align: center; font-family: 'arial narrow';font-size: " & nFontSize_12 & ".0pt; font-weight: " & vLine(nInd,1) & "; color: " & vLine(nInd,2) & """>" & vLine(nInd,0) & "</p>" &_
+			"</td>" &_
+		"</tr>"
+	Next
+	strHTMLBody = strHTMLBody & "</tbody></table>"
+	
+	'----------------------------------------------------------
+	'    MAIN FORM FOR ENTERING LOGON AND PASSWORD
+	'----------------------------------------------------------
+	TableW = CellW
+	ColumnW_1 = 3 * Int(TableW/3)
+	ColumnW_2 = TableW - ColumnW_1
+	strHTMLBody = strHTMLBody &_
+		"<table border=""1"" cellpadding=""1"" cellspacing=""1"" style="" position: absolute; left: 0px; top: " & (nLine + 1) * LineH * 2 & "px;" &_
+		" border-collapse: collapse; border-style: none; border width: 1px; border-color: " & HttpBgColor5 & "; background-color: none;;" &_
+		"width: " & TableW & "px;"">" & _
+		"<tbody>"		
+	'----------------------------------------------------	
+	'  ROW 1
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ width=""" & ColumnW_1 & """>" & _
+			"<p style=""position: relative; left: " & Int(nTab/2) & "px; bottom: -3px; font-size: " & nFontSize_12 & ".0pt; font-family: 'arial narrow'; color: " & MainTextColor &_
+			"; font-weight: bold;"">LOGIN NAME</p>" &_
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ width=""" & ColumnW_1 & """>" & _
+		"</td>" &_
+	"</tr>"		
+	'----------------------------------------------------	
+	'  ROW 2
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" & 2 * LineH & """ >" & _
+			"<input name=UserName style=""text-align: center;font-size: " & nFontSize_12 & ".0pt; border-style: None; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+			"; border-radius: 10px " &_
+			"; background-color: " & InputBGColor & "; font-weight: Normal;"" AccessKey=p size=20 maxlength=25 tabindex=1>" &_
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" &  2 * LineH & """ width=""" & ColumnW_1 & """>" & _
+		   "<button style=""font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 &_
+			"; width:" & nButtonX & ";height:" & 2 * LineH & "; font-family: 'arial narrow';""" & _
+			"id='EXIT' name='Cancel' AccessKey='C' tabindex=" & nOrder + 4 & " onclick=document.all('ButtonHandler').value='Cancel';>CANCEL</button>" & _		    
+		"</td>" &_		
+	"</tr>"
+	'----------------------------------------------------	
+	'  ROW 3 (EMPTY)
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  LineH & """>" & _
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  LineH & """>" & _
+		"</td>" &_
+	"</tr>"
+	'----------------------------------------------------	
+	'  ROW 4
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ >" & _
+			"<p style=""position: relative; left: " & Int(nTab/2) & "px; bottom: -3px; font-size: " & nFontSize_12 & ".0pt; font-family: 'arial narrow'; color: " & MainTextColor &_
+			"; font-weight: bold;"">PASSWORD</p>" &_
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ >" & _
+		"</td>" &_
+	"</tr>"			
+	'----------------------------------------------------	
+	'  ROW 5
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" & 2 * LineH & """>" & _
+			"<input id='PASSWD' name=Password style=""text-align: center;font-size: " & nFontSize_12 & ".0pt; border-style: None; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+			"; border-radius: 10px " &_
+			"; background-color: " & InputBGColor & "; font-weight: Normal;"" AccessKey=p size=20 maxlength=32 tabindex=2 " & _
+			"type=password onkeydown=""if (event.keyCode == 13) document.all('ButtonHandler').value='OK'"" > " &_
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" &  2 * LineH & """ width=""" & ColumnW_1 & """>" & _
+		   "<button style=""font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor2 &_
+			"; width:" & nButtonX & ";height:" & 2 * LineH & "; font-family: 'arial narrow';""" & _
+			"id='OK' name='OK' AccessKey='C' tabindex=" & nOrder + 3 & " onclick=document.all('ButtonHandler').value='OK';>SIGN IN</button>" & _		    
+		"</td>" &_				
+	"</tr>"
+	'----------------------------------------------------	
+	'  ROW 6 (EMPTY)
+	'----------------------------------------------------
+	strHTMLBody = strHTMLBody & _
+	"<tr>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  LineH & """>" & _
+		"</td>" &_
+		"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  LineH & """>" & _
+		"</td>" &_
+	"</tr>"
+	'----------------------------------------------------	
+	'  CONFIRM PASSWORD ROW
+	'----------------------------------------------------
+	If Confirm Then 
+		'----------------------------------------------------	
+		'  ROW 7
+		'----------------------------------------------------
+		strHTMLBody = strHTMLBody & _
+		"<tr>" &_
+			"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ >" & _
+				"<p style=""position: relative; left: " & Int(nTab/2) & "px; bottom: -3px; font-size: " & nFontSize_12 & ".0pt; font-family: 'arial narrow'; color: " & MainTextColor &_
+				"; font-weight: bold;"">CONFIRM PASSWORD</p>" &_
+			"</td>" &_
+			"<td style=""border-style: none; background-color: none;""class=""oa1"" height=""" &  2 * LineH & """ >" & _
+			"</td>" &_
+		"</tr>"			
+		'----------------------------------------------------	
+		'  ROW 8
+		'----------------------------------------------------
+		strHTMLBody = strHTMLBody & _
+		"<tr>" &_
+			"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" & 2 * LineH & """>" & _
+				"<input id='PASSWD2' name=Password2 style=""text-align: center;font-size: " & nFontSize_12 & ".0pt; border-style: None; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+				"; border-radius: 10px " &_
+				"; background-color: " & InputBGColor & "; font-weight: Normal;"" AccessKey=p size=20 maxlength=32 tabindex=3 " & _
+				"type=password onkeydown=""if (event.keyCode == 13) document.all('ButtonHandler').value='OK'"" > " &_
+			"</td>" &_
+			"<td style=""border-style: none; background-color: none;"" align=""center"" class=""oa1"" height=""" &  2 * LineH & """>" & _
+			"</td>" &_				
+		"</tr>"
+	End If
+	strHTMLBody = strHTMLBody & "</tbody></table>"
+    strHTMLBody = strHTMLBody &_
+                "<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>"
+			
+	g_objIE.Document.Body.innerHTML = strHTMLBody
+	g_objIE.MenuBar = False
+	g_objIE.StatusBar = False
+	g_objIE.AddressBar = False
+	g_objIE.Toolbar = False
+	g_objIE.height = WindowH
+	g_objIE.width = WindowW
+	g_objIE.document.Title = "Login and Password"
+'	g_objIE.document.getElementById("OK").style.borderRadius = "10px"
+'	g_objIE.document.getElementById("EXIT").style.borderRadius = "10px"
+	g_objIE.document.getElementById("OK").style.backgroundcolor = ButtonColor
+	g_objIE.document.getElementById("EXIT").style.backgroundcolor = ButtonColor
+	If Confirm Then
+	    g_objIE.Document.getElementById("OK").innerHTML = "OK"
+	Else 
+	   	g_objIE.Document.getElementById("OK").innerHTML = "SIGN IN"
+	End If
+	
+	g_objIE.Visible = False
+	Do
+		WScript.Sleep 100
+	Loop While g_objIE.Busy	
+	Set g_objShell = WScript.CreateObject("WScript.Shell")
+	Call IE_Unhide(g_objIE)
+	Call IE_GetPID(strPID, g_objIE.document.Title & " - " & IE_Window_Title, nDebug)
+	g_objShell.AppActivate strPID
+	g_objIE.Document.All("UserName").Focus
+	g_objIE.Document.All("UserName").Value = strUsername
+'    g_objIE.Document.body.addeventlistener "keydown", GetRef("KeyLA"), false
+	Do
+		On Error Resume Next
+		Err.Clear
+		strNothing = g_objIE.Document.All("ButtonHandler").Value
+		if Err.Number <> 0 then exit do
+		On Error Goto 0
+		Select Case strNothing
+			Case "Cancel"
+				' The user clicked Cancel. Exit the loop
+				IE_PromptLoginPassword = False				
+				Exit Do
+			Case "OK"
+				' strUsername = g_objIE.Document.All("Username").Value
+				Select Case Confirm
+					Case True
+						if g_objIE.Document.All("Password").Value = g_objIE.Document.All("Password2").Value  and _
+						   InStr(g_objIE.Document.All("Password").Value," ") = 0 and _
+						   g_objIE.Document.All("Password").Value <> "" Then 
+							strUsername = g_objIE.Document.All("UserName").Value
+							strPassword = g_objIE.Document.All("Password").Value
+							IE_PromptLoginPassword = True
+							Exit Do
+						Else
+							strUsername = g_objIE.Document.All("UserName").Value
+							strPassword = "DO NOT MATCH"
+							IE_PromptLoginPassword = True
+							Exit Do
+						End If 
+					Case False
+							strUsername = g_objIE.Document.All("UserName").Value
+							strPassword = g_objIE.Document.All("Password").Value
+							IE_PromptLoginPassword = True
+							Exit Do
+				End Select
+		End Select
+	    Wscript.Sleep 200
+    Loop
+	g_objIE.quit
+	Wscript.Sleep 200
+	Set g_objIE = Nothing
+	Set g_objShell = Nothing
+End Function
+'----------------------------------------------------------------
+'   Function IE_GetPID(strPID) Returns focus to the parent Window/Form
+'----------------------------------------------------------------
+Function IE_GetPID(ByRef strPID, strWinTitle, nDebug)
+Dim strLine, strCmd, vCmdOut
+    IE_GetPID = False
+	strCmd = "tasklist /fo csv /fi ""Windowtitle eq " & strWinTitle & """"
+	Call RunCmd("127.0.0.1", "", vCmdOut, strCMD,nDebug)
+    strPID = ""
+	For Each strLine in vCmdOut
+	   If InStr(strLine,"iexplore.exe") then 
+	        strPID = Split(strLine,""",""")(1)
+			IE_GetPID = True
+			Exit For
+	        Call TrDebug("IE_GetPID IE Window (" & strWinTitle & ") PID: " & strPID  , "", objDebug, MAX_LEN, 1, nDebug)
+		End If
+    Next
 End Function
