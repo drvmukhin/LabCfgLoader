@@ -29,18 +29,18 @@ Node Session 11               = 10.164.1.136, LabCfgLoader, switch, mx80, vmukhi
 Node Session 12               = 10.164.1.146, LabCfgLoader, csr1.6, acx5096, vmukhin
 
 [Active_Sessions]
-Status 1=Enabled
-Status 2=Enabled
-Status 3=Enabled
-Status 4=Enabled
+Status 1=Disabled
+Status 2=Disabled
+Status 3=Disabled
+Status 4=Disabled
 Status 5=Disabled
 Status 6=Enabled
-Status 7=Disabled
-Status 8=Enabled
-Status 9=Enabled
-Status 10=Enabled
-Status 11=Enabled
-Status 12=Enabled
+Status 7=Enabled
+Status 8=Disabled
+Status 9=Disabled
+Status 10=Disabled
+Status 11=Disabled
+Status 12=Disabled
 
 [Settings]
 
@@ -56,7 +56,7 @@ Node Name Prefix              = acx
 Hide Terminal Session         = 0
 Network Adapter               = Juniper Networks Virtual Adapter
 Right Node IP                 = 10.164.1.142/24
-FTP IP                        = 172.29.102.242
+FTP IP                        = 172.29.100.145
 FTP User                      = mamba
 FTP Password                  = jnpr1234
 Blk Config File Folder        = C:\Users\vmukhin\Documents\LAB_CONFIGS\MissedCfgList.txt

@@ -3638,6 +3638,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 				strMain = objMain(nImage,pIndex(0,"Main"))
 				strMinor = objMain(nImage,pIndex(0,"Minor"))
 				strStatus = objMain(nImage,pIndex(0,"Status"))
+				' Found line number to highlighting'
 				nOptions = 0
 				For nInd = 0 to 99
 				    If RTrim(Ltrim(g_objIE.document.getElementById("Main_Release" & nImage).Options(nInd).Text)) = "" Then Exit For

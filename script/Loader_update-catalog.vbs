@@ -196,7 +196,7 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objMainName = objMain(nSession,pIndex(0,"Name"))
 			MaxMinor = objMain(nSession,pIndex(0,"Amount_of_Minors"))
 			'------------------------------------------------------------------
-			'	LOG MAIN VARIABLES
+			'	Write main variables to log file
 			'------------------------------------------------------------------
 			Call TrDebug_No_Date ("TelnetScript: " & objMain(nSession,pIndex(0,"Name")) & " : " & strSessionL,"", objDebug, MAX_LEN, 1, nDebug)						
 			'--------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objTab_L.Caption = Split(strSessionL,"/")(1)
 			objTab_L.Screen.Synchronous = True
 			'--------------------------------------------------------------------------------
-			'  Read Catalog Structure
+			'  Read Structure of folders on server
 			'--------------------------------------------------------------------------------
 			' strLine = objTab_L.Screen.ReadString ("]$")
 			objTab_L.Screen.Send chr(13)
@@ -284,9 +284,8 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 					   nCount = nCount + 1
 				    End If
 				Next 
-				If ReplaceFileLineInGroup(strCatalogFile, strObj, "Minor List =", strMinorList,nDebug) Then 
-				Else
-				MsgBox "False"
+				If Not ReplaceFileLineInGroup(strCatalogFile, strObj, "Minor List =", strMinorList,nDebug) Then 
+				   MsgBox "Failed to update catalogue file"
 				End If
 			Next
 			bSuccess = True
