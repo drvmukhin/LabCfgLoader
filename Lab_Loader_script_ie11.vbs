@@ -133,7 +133,9 @@ Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objEnvar = WScript.CreateObject("WScript.Shell")
 Set objShell = WScript.CreateObject("WScript.Shell")
 nDebugCRT = 0
-nDebug = 1
+nDebug = 0
+nInfo = 1
+ShowLog = True
 CurrentDate = Date()
 CurrentTime = Time()
 D0 = DateSerial(2015,1,1)
@@ -269,7 +271,18 @@ Loop
  			Call IE_MSG(vIE_Scale, "Error",vvMsg,2,"Null")
 			Exit Sub
 	End Select
-	On Error goto 0
+	On Error goto 0	
+	'-----------------------------------------------------------------
+	'  DISPLAY LOG FILE
+	'-----------------------------------------------------------------
+	If ShowLog Then 
+		strLaunch = strDirectoryWork & "\bin\tail.exe -n 40 -f " & strDirectoryWork & "\Log\" & DEBUG_FILE & ".log"
+		If Not GetWinAppPID(strPID, strParrentID, DEBUG_FILE, "tail.exe", nInfo) Then 
+			objEnvar.run (strLaunch)
+		Else
+			Call FocusToParentWindow(strPID)
+		End If
+	End If
 	'-----------------------------------------------------------------
 	'  CHOOSE A DEFAULT TEXT EDITOR
 	'-----------------------------------------------------------------
@@ -2146,7 +2159,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 				Next
 				nPressSettings = nPressSettings + 1				
 				Call IE_Hide(g_objIE)
-        	    If IE_PromptForSettings(vIE_Scale, 1, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+        	    If IE_PromptForSettings(vIE_Scale, 1, vSettings, vSessionCRT, vPlatforms, nInfo) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
                 Call IE_Unhide(g_objIE)
 			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
 
@@ -2200,7 +2213,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 				Next
 				nPressSettings = nPressSettings + 1				
 				Call IE_Hide(g_objIE)
-        	    If IE_PromptForSettings(vIE_Scale, 8, vSettings, vSessionCRT, vPlatforms, nDebug) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
+        	    If IE_PromptForSettings(vIE_Scale, 8, vSettings, vSessionCRT, vPlatforms, nInfo) = -1 Then g_objIE.Document.All("ButtonHandler").Value = "Cancel"
                 Call IE_Unhide(g_objIE)
 			    g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
 		    Case "SETTINGS_"
@@ -2902,9 +2915,11 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 	Dim vvMsg(8,3)
 	Dim objFile, objCfgFile
 	Dim objWMIService, IPConfigSet, vTitle
+	Dim bResult, strLine
 	Const MAX_PARAM = 40
 	Const MAX_BW_PROFILES = 30
 	Const N_SELECT = 5
+	Const MAIN_MAX = 10
 	Dim objFolder, objForm, colFiles, strFile, objDialog
 	Call TrDebug ("IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)	
 	Set objForm = CreateObject("Shell.Application")
@@ -2999,7 +3014,24 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 			ClassName = "JunosSW"
 '			Call SetMyObject(objMain,"JunosSW",nDebug)
 '			Call SetMyObject(objMinor,"Release",nDebug)
-			nLine = 5 + int(UBound(objMain,1) * N_SELECT * 3/4)
+			Dim vImageTypes,strImageType, nImageType 
+			Redim vImageTypes(1)
+			nImageType = 0
+			For nImage = 0 to UBound(objMain,1) - 1
+				bResult = True
+				strImageType = objMain(nImage,pIndex(0,"Name"))
+				For Each strLine in vImageTypes
+				   If strImageType = "" then Exit For
+				   If strImageType = strLine Then bResult = False
+				Next
+				If bResult Then 
+					vImageTypes((Ubound(vImageTypes)-1)) = strImageType
+					Redim Preserve vImageTypes(Ubound(vImageTypes) + 1)
+					nImageType = nImageType + 1
+				End If
+			Next
+			Redim Preserve vImageTypes(Ubound(vImageTypes) - 1)
+			nLine = 5 + int(nImageType * N_SELECT * 3/4)
 '			MsgBox "pIndex: " & pIndex(1,"Minor List")
 '			MsgBox GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
 '           MsgBox objMain(1,pIndex(0,"ImageTemplate")) & ", " & UBound(objMain,1) & ", " & vClass(0,0)
@@ -3458,16 +3490,17 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 				'-----------------------------------------------------------------
 			'	nColumn = Int(nScoreW/3)
 			    strEmptyCell = "</td><td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(3 * LoginTitleW/16) & """ align=""center"">"
-				For nImage = 0 to UBound(objMain,1) - 1
+				For nImageType = 0 to UBound(vImageTypes) - 1
 					nLine = nLine + 1
 					BgTextColor = HttpBgColor1
 					strDisabled = "disabled"
+					Call TrDebug ("Update Catalogue: CREATE FORMS: " & "Main_Release" & nImageType, "", objDebug, MAX_LEN, 1, 1)														
 					htmlMain = htmlMain &_
 						"<tr>"&_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """align=""center"" valign=""top"">" & _
 									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
-									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImage& "';><u>C</u>lear</button>" &_										
+									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImageType & "';><u>C</u>lear</button>" &_										
 							"</td>"&_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 								"<input name='Image_Param_7' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -3482,30 +3515,28 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 								"type=text > " &_
 							"</td>" &_							
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Main_Release" & nImage & "' id='Main_Relese" & nImage & "'" &_
+									"<select name='Main_Release" & nImageType & "' id='Main_Relese" & nImageType & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
-									" onchange=document.all('ButtonHandler').value='SelectMain_" & nImage & "';" &_
+									" onchange=document.all('ButtonHandler').value='SelectMain_" & nImageType & "';" &_
 									"type=text > "
-									vMain = Split(objMain(nImage,pIndex(0,"Main List")),",")
-									For nMain = 0 to UBound(vMain)
-										htmlMain = htmlMain &	"<option value=Main_" & nMain & ">" & vMain(nMain) & "</option>" 
+									For nMain = 0 to MAIN_MAX
+										htmlMain = htmlMain &	"<option value=Main_" & nMain & ">" & Space_html(30) & "</option>" 
 									Next
-									htmlMain = htmlMain & "<option value=Main_" & nMain + 1 & ">" & Space_html(30) & "</option>" 
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Minor_Release" & nImage & "' id='Minor_Relese" & nImage & "'" &_
+									"<select name='Minor_Release" & nImageType & "' id='Minor_Relese" & nImageType & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
-									" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImage & "';" &_
+									" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImageType & "';" &_
 									"type=text > "
 									' Split(objMain(0,pIndex(1,"Minor List")),",")(nMinor)
 									' For nMinor = 0 to GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
 									For nMinor = 0 to 100
-										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(30) & "</option>" 
+										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(35) & "</option>" 
 									Next
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_							
@@ -3631,34 +3662,12 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 			End Select
 		    g_objIE.Document.All("Settings_Param_25").Value = strFolder
 		Case 8 
-		    For nImage = 0 to UBound(objMain,1) - 1
-			    g_objIE.Document.All("Image_Param_7")(nImage).Value = objMain(nImage,pIndex(0,"Platform"))
-				g_objIE.Document.All("Image_Param_9")(nImage).Value = objMain(nImage,pIndex(0,"Display_Name"))
-				
-				strMain = objMain(nImage,pIndex(0,"Main"))
-				strMinor = objMain(nImage,pIndex(0,"Minor"))
-				strStatus = objMain(nImage,pIndex(0,"Status"))
-				' Found line number to highlighting'
-				nOptions = 0
-				For nInd = 0 to 99
-				    If RTrim(Ltrim(g_objIE.document.getElementById("Main_Release" & nImage).Options(nInd).Text)) = "" Then Exit For
-					If RTrim(Ltrim(g_objIE.document.getElementById("Main_Release" & nImage).Options(nInd).Text)) = strMain Then nOptions = nInd : Exit For End If
-				Next
-				g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex = nOptions
-				strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
-				For nMinor = 0 to UBound(objMinor,1) - 1
-				   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
-				Next
-                vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
-				nInd = 0
-				nOptions = 0
-				For Each LineItem in vMinor
-				   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = LineItem
-				   if strMinor = LineItem Then nOptions = nInd
-				   nInd = nInd + 1
-				Next
-				if strStatus = "Active" Then g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex = nOptions
-			Next		
+		    Dim vMain, vMinor
+			Redim vMain(1)
+			Redim vMinor(1)
+			vMain(0) = 0 
+			vMinor(0) = 0
+			Call FillJunosCatalogueForm(g_objIE, vImageTypes, nDebug) 
 	End Select
     Do
         WScript.Sleep 100
@@ -3680,23 +3689,35 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
         ' as it's clicked.
         Select Case szNothing
 		    Case "SelectMain_0", "SelectMain_1","SelectMain_2","SelectMain_3","SelectMain_4","SelectMain_5","SelectMain_6","SelectMain_7","SelectMain_8","SelectMain_9","SelectMain_10"
-			            g_objIE.Document.All("ButtonHandler").Value = "Nothing Selected"   
-						nImage = Int(Split(szNothing,"_")(1))
-						nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
-						strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
-						For nMinor = 0 to UBound(objMinor,1) - 1
-						   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
-						Next
+			        Do    
+						g_objIE.Document.All("ButtonHandler").Value = "Nothing Selected"   
+						nImageType = Int(Split(szNothing,"_")(1))
+						nOptions = g_objIE.document.getElementById("Main_Release" & nImageType).SelectedIndex
+						strImageType = g_objIE.document.getElementById("Main_Release" & nImageType).Options(nOptions).Text
+						strPlatform = g_objIE.Document.All("Image_Param_7")(nImageType).Value
+						strDisplayName = g_objIE.Document.All("Image_Param_9")(nImageType).Value
+						Call TrDebug ("ImageType: " & strImageType & " strPlatform: " & strPlatform & " strDisplayName: " & strDisplayName,"", objDebug, MAX_LEN, 1, nDebug)
+						' Get Main image object ID by its release version, platform and DisplayName
+						If Not GetImageIDbyName(strImageType,strPlatform,strDisplayName, nImage,nDebug) Then 
+						   MsgBox "Error: Can't find Image version: "  & strImageType & " in Cataloge"
+						   Exit Do						   
+						End If
+						strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImageType).Options(nOptions).Text
+						If Not GetMinorIDbyName(strMinorName,nMinor,nDebug) Then 
+						   MsgBox "Error: Can't find Minor Image version: "  & strMinorName & " in Cataloge"
+						   Exit Do						   
+						End If
 						vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
 						nInd = 0
 						For nInd = 0 to 99
 						    If UBound(vMinor) >= nInd Then
-						       g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = vMinor(nInd)
+						       g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = vMinor(nInd)
 						    Else 
-							   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = Space(30)
+							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = Space(35)
 							End If
 						Next
-						
+						Exit Do
+					Loop
 			Case "SelectPlatform"
 			            nPlatform = g_objIE.document.getElementById("Platform_Name").selectedIndex
 			            g_objIE.Document.All("Platform_Index").Value = Split(vPlatforms(nPlatform),",")(1)
@@ -4611,6 +4632,63 @@ Const IE_PAUSE = 70
 	Set objShell = Nothing
 End Function
 '----------------------------------------------------------------
+'   Function GetWinAppPID(strPID) Returns focus to the parent Window/Form
+'----------------------------------------------------------------
+Function GetWinAppPID(ByRef strPID, ByRef strParentPID, strCommandLine, strAppName, nDebug)
+Dim objWMI, colItems
+Dim process
+Dim strUser, pUser, pDomain, wql
+	strUser = GetScreenUserSYS()
+	GetWinAppPID = False
+	Do 
+		On Error Resume Next
+		Set objWMI = GetObject("winmgmts:\\127.0.0.1\root\cimv2")
+		If Err.Number <> 0 Then 
+				Call TrDebug ("GetMyPID ERROR: CAN'T CONNECT TO WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
+				On error Goto 0 
+				Exit Do
+		End If 
+		wql = "SELECT * FROM Win32_Process WHERE Name = '" & strAppName & "' OR Name = '" & strAppName & " *32'"
+		On Error Resume Next
+		Set colItems = objWMI.ExecQuery(wql)
+		If Err.Number <> 0 Then
+				Call TrDebug ("GetMyPID ERROR: CAN'T READ QUERY FROM WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
+				On error Goto 0 
+				Set colItems = Nothing
+				Exit Do
+		End If 
+		On error Goto 0 
+		For Each process In colItems
+			process.GetOwner  pUser, pDomain 
+			Call TrDebug ("GetWinAppPID: Process Name (PID): " & process.Name & " (" & process.ProcessId & ")", "",objDebug, MAX_LEN, 1, nDebug)
+			Call TrDebug ("GetWinAppPID: Owner: " & process.CSName & "/" & pUser, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug ("GetWinAppPID: CMD: " & process.CommandLine, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug ("GetWinAppPID: ParentPID:" &  Process.ParentProcessId, "",objDebug, MAX_LEN, 1, nDebug) 			
+			Select Case Lcase(strCommandLine)
+			    Case "null", "none", ""
+					If pUser = strUser then 
+						strPID = process.ProcessId
+						strParentPID = Process.ParentProcessId
+						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID , "",objDebug, MAX_LEN, 1, nDebug)
+						GetWinAppPID = True
+						Exit For
+					End If
+			    Case Else
+					If pUser = strUser and InStr(process.CommandLine,strCommandLine) then 
+						strPID = process.ProcessId
+						strParentPID = Process.ParentProcessId
+						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID, "",objDebug, MAX_LEN, 1, nDebug)
+						GetWinAppPID = True
+						Exit For
+					End If
+			End Select
+		Next
+		Set colItems = Nothing
+		Exit Do
+	Loop
+	Set objWMI = Nothing
+End Function
+'----------------------------------------------------------------
 '   Function GetAppPID(strPID) Returns focus to the parent Window/Form
 '----------------------------------------------------------------
 Function GetAppPID(ByRef strPID, strAppName)
@@ -4655,7 +4733,7 @@ Dim strUser, pUser, pDomain, wql
 	Set objWMI = Nothing
 End Function
 '-----------------------------------------------------------------------
-'   Function GetAppPID(strPID) Returns focus to the parent Window/Form
+'   Function GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, nDebug)
 '-----------------------------------------------------------------------
 Function GetFilterList(vConfigFileLeft, vFilterList, vPolicerList, vCIR, vCBS, nDebug)
 Dim nFilter, nPolicer,FW_Start, FoundFilter, FoundPolicer, strLine
@@ -5537,7 +5615,7 @@ Function pIndex(strClassID,ParamName)
 	Else 
 	   ClassID = Int(strClassID)
 	End If 
-	Call TrDebug ("pIndex: ClassName: " & strClassID & " ClassID = " & ClassID, "", objDebug, MAX_LEN, 1, nDebug)					
+	Call TrDebug ("pIndex: ClassName: " & strClassID & " ClassID = " & ClassID, "", objDebug, MAX_LEN, 1, 0)					
     nIndex = 1
 	For i = 0 to UBound(vClass,2)
 	    strLine = vClass(ClassID,i)
@@ -5966,3 +6044,126 @@ Dim strLine, strCmd, vCmdOut
 		End If
     Next
 End Function
+'------------------------------------------------------------------------------------------------------------------
+' Function returns the number of the line from 1 to N which contains string strObject. Returns 0 if nothing found
+'------------------------------------------------------------------------------------------------------------------
+Function GetExactObjectLineNumber( byRef vArray, strObjectName, nDebug)
+ Dim nInd
+ Dim nIndex
+ Dim CharLeft, CharRight
+	nInd = 0
+	GetExactObjectLineNumber = 0
+	Do While nInd < UBound(vArray)
+	Call TrDebug (" LOOK FOR """ & strObjectName & """", " IN: " & vArray(nInd) & """", objDebug, MAX_LEN, 1, nDebug)
+	nIndex = InStr(vArray(nInd), strObjectName)
+	If nIndex <> 0	Then 
+		If nIndex = 1 Then CharLeft = "" Else CharLeft = LCase(Mid(vArray(nInd),nIndex-1, 1)) End If
+		If Len(vArray(nInd)) = nIndex + Len(strObjectName) Then CharRight = "" 	Else CharRight = LCase(Mid(vArray(nInd),nIndex + Len(strObjectName),1)) End If
+		If CharLeft <> "" and CharRight <> "" Then 
+			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharLeft) = 0 and InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharRight) = 0 Then 
+				GetExactObjectLineNumber = nInd + 1
+				Exit Do
+			End If 
+		End If
+		If CharLeft <> "" and CharRight = "" Then 
+			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharLeft) = 0 Then 
+				GetExactObjectLineNumber = nInd + 1
+				Exit Do
+			End If 
+		End If
+		If CharLeft = "" and CharRight <> "" Then 
+			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharRight) = 0 Then 
+				GetExactObjectLineNumber = nInd + 1
+				Exit Do
+			End If 
+		End If
+		If CharLeft = "" and CharRight = "" Then 
+			GetExactObjectLineNumber = nInd + 1
+			Exit Do
+		End If 
+	End If
+	nInd = nInd + 1
+    Loop
+End Function
+'------------------------------------------------------------------
+'   GetImageIDbyName(strName)
+'------------------------------------------------------------------
+Function GetImageIDByName(strImageName, strPlatform, strDisplayName, ByRef nImage, nDebug)
+Dim nInd, vImage
+    Redim vImage(1)
+    GetImageIDByName = False
+	For nInd = 0 to UBound(objMain,1) - 1
+	    Call TrDebug ("ImageType: " & strImageName & " strPlatform: " & objMain(nInd,pIndex(0,"Platform")) & " strDisplayName: " & objMain(nInd,pIndex(0,"Display_Name")),"", objDebug, MAX_LEN, 1, nDebug)
+		If objMain(nInd,pIndex(0,"Platform")) = strPlatform and objMain(nInd,pIndex(0,"Display_Name")) = strDisplayName Then 
+		    vImage(0) = objMain(nInd,pIndex(0,"Main List"))
+			Call TrDebug ("vImage: " & vImage(0),"", objDebug, MAX_LEN, 1, nDebug)
+			Call TrDebug ("GetObjLineNumber: " & GetExactObjectLineNumber( vImage, strImageName, nDebug),"", objDebug, MAX_LEN, 1, nDebug)
+			Call TrDebug ("----------------------- " ,"", objDebug, MAX_LEN, 1, nDebug)
+			If GetExactObjectLineNumber( vImage, strImageName, nDebug) = 1 Then 
+			    nImage = nInd
+				GetImageIDByName = True
+			End If 
+		End If
+	Next
+End Function
+'------------------------------------------------------------------
+'   GetMinorIDbyName(strName)
+'------------------------------------------------------------------
+Function GetMinorIDByName(strMinorName, ByRef nMinor, nDebug)
+    GetMinorIDByName = False
+	For nMinor = 0 to UBound(objMinor,1) - 1
+	    If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then 
+		   GetMinorIDByName = True
+	       Exit For
+		End If
+	Next
+End Function
+'---------------------------------------------------------------------
+'   Function FillJunosCatalogueForm
+'---------------------------------------------------------------------
+Function FillJunosCatalogueForm (byRef g_objIE, byRef vImageTypes, nDebug) 
+Dim kInd, n, nInd
+Dim nMinor,strMainItem, strMinorName,strMain,strMinor,strStatus,strImageType,LineItem
+Dim vMinorList,vMainList
+Dim nImageType, nImage
+	For nImageType = 0 to UBound(vImageTypes) - 1
+		nInd = 0
+		For nImage = 0 to UBound(objMain,1) - 1
+			strImageType = objMain(nImage,pIndex(0,"Name"))
+			If vImageTypes(nImageType) = strImageType Then 
+				g_objIE.Document.All("Image_Param_7")(nImageType).Value = objMain(nImage,pIndex(0,"Platform"))
+				g_objIE.Document.All("Image_Param_9")(nImageType).Value = objMain(nImage,pIndex(0,"Display_Name"))
+				strMain = objMain(nImage,pIndex(0,"Main"))
+				strMinor = objMain(nImage,pIndex(0,"Minor"))
+				strStatus = objMain(nImage,pIndex(0,"Status"))						
+				vMainList = Split(objMain(nImage,pIndex(0,"Main List")),",")
+				For Each strMainItem in vMainList
+					If strMainItem = "" Then Exit For
+					Call TrDebug ("Update Catalogue: WRITE INTO FORM: " & "Main_Release" & nImageType & " Options(" & nInd & ")" , "", objDebug, MAX_LEN, 1, 1)														
+					g_objIE.document.getElementById("Main_Release" & nImageType).Options(nInd).Text = strMainItem
+					If RTrim(Ltrim(strMainItem)) = strMain Then 
+						g_objIE.document.getElementById("Main_Release" & nImageType).SelectedIndex = nInd
+						strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & strMainItem
+						' Get Minor object ID by its name
+						Call GetMinorIDByName(strMinorName, nMinor, nDebug)
+						vMinorList = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
+						kInd = 0
+						For Each LineItem in vMinorList
+							If LineItem = "" Then Exit For
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(kInd).Text = LineItem
+							if strMinor = LineItem and strStatus = "Active" Then 
+								g_objIE.document.getElementById("Minor_Release" & nImageType).SelectedIndex = kInd
+							End If
+							kInd = kInd + 1
+						Next
+						For n = kInd to 99
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(n).Text = Space(35)
+						Next
+					End If
+					nInd = nInd + 1
+				Next
+			End If
+		Next
+	Next		
+End Function
+

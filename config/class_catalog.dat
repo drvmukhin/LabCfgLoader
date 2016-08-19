@@ -25,13 +25,16 @@ JunosSW_7
 Release_0
 Release_1
 Release_3
+Release_311
 Release_4
 Release_5
 Release_6
+Release_61
 Release_7
 Release_711
 Release_8
 Release_9
+Release_91
 Release_911
 Release_10
 Release_11
@@ -106,7 +109,7 @@ Folder2 = development/
 ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
 Status = Inactive
 Minor = None
-Main = x_151_x54
+Main = None
 ImageFile =
 Amount_of_Minors = 5
 Release_Tag = None
@@ -140,7 +143,7 @@ Folder2 = release/
 ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
 Status = Active
 Minor = None
-Main = 15.1F
+Main = None
 ImageFile =
 Amount_of_Minors = 99
 Release_Tag = None
@@ -290,9 +293,14 @@ Name = MX80-DEV-15.1
 Minor List = current,20160818.0,20160817.0,20160816.0,20160814.0
 ImageFile List =
 
+[Release_61]
+Name = MX80-DEV-15.1F
+Minor List = 
+ImageFile List =
+
 [Release_7]
 Name = MX80-DEV-16.1
-Minor List = current,20160818.0,20160817.0,20160816.0,20160815.0
+Minor List = 
 ImageFile List =
 
 [Release_711]
@@ -308,6 +316,11 @@ ImageFile List =
 [Release_9]
 Name = MX80-PROD-15.1
 Minor List = 15.1R4.6-centos,15.1R4.6,15.1R4.5-centos,15.1R4.5,15.1R4.4-qfx5k,15.1R4.3-qfx5k,15.1R4-S1.5-centos,15.1R4-S1.5,15.1R4-S1.4-centos,15.1R4-S1.4,15.1R4-S1.3-centos,15.1R4-S1.3,15.1R4-S1.2,15.1R4-S1.1,15.1R4-S1,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S3-centos,15.1R3-S3,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1-J1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5
+ImageFile List =
+
+[Release_91]
+Name = MX80-PROD-15.1F
+Minor List = 
 ImageFile List =
 
 [Release_911]
