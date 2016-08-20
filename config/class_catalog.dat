@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------
-#  This is class catalog for location of Junos S/W per platfrom type
+#  This is class catalogue for location of Junos S/W per platfrom type
 #  Object types:
 #  [Device_<number>]
 #--------------------------------------------------------------------
@@ -18,6 +18,7 @@ JunosSW_1
 JunosSW_111
 JunosSW_2
 JunosSW_3
+JunosSW_311
 JunosSW_4
 JunosSW_5
 JunosSW_6
@@ -31,7 +32,6 @@ Release_5
 Release_6
 Release_61
 Release_7
-Release_711
 Release_8
 Release_9
 Release_91
@@ -46,6 +46,8 @@ Release_1411
 Release_19
 Release_20
 Release_21
+Release_898739
+Release_298657
 
 [Class_JunosSW]
 
@@ -115,7 +117,7 @@ Amount_of_Minors = 5
 Release_Tag = None
 Release_Deny_Tag = None
 Display_Name = Development Image
-SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
+SecureCRT_Session = JTAC-TOOL/bng-eabu05
 
 [JunosSW_1]
 Name = ACX-PROD
@@ -124,13 +126,13 @@ Main List = 12.3,15.1
 Folder1 = /volume/build/junos/
 Folder2 = service/
 ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
-Status = Active
-Minor = 15.1X54-D37.5
-Main = 15.1
+Status = Inactive
+Minor = None
+Main = None
 ImageFile =
 Amount_of_Minors = 99
 Release_Tag = X54
-Release_Deny_Tag = 5k
+Release_Deny_Tag = 5k,centos
 Display_Name = Production Image
 SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
 
@@ -141,13 +143,13 @@ Main List = 15.1F
 Folder1 = /volume/build/junos/
 Folder2 = release/
 ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
-Status = Active
+Status = Inactive
 Minor = None
-Main = None
+Main = 15.1F
 ImageFile =
 Amount_of_Minors = 99
-Release_Tag = None
-Release_Deny_Tag = None
+Release_Tag = 15.1F3
+Release_Deny_Tag = 5k,centos
 Display_Name = Production Image
 SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
 
@@ -172,19 +174,38 @@ SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
 [JunosSW_3]
 Name = MX80-PROD
 Platform = mx80
-Main List = 14.2,15.1,15.1F,16.1
+Main List = 14.2,15.1,16.1,16.2
 Folder1 = /volume/build/junos/
 Folder2 = release/
 ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
 Status = Inactive
 Minor = None
-Main = 15.1
+Main = 16.1
 ImageFile =
 Amount_of_Minors = 99
 Release_Tag = None
-Release_Deny_Tag = failed
+Release_Deny_Tag = failed,centos,qfx
 Display_Name = Production Image
 SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
+
+[JunosSW_311]
+Name = MX80-PROD
+Platform = mx80
+Main List = 15.1F
+Folder1 = /volume/build/junos/
+Folder2 = release/
+ImageTemplate1 = jinstall-ppc-*-domestic-signed.tgz
+Status = Inactive
+Minor = None
+Main = None
+ImageFile =
+Amount_of_Minors = 99
+Release_Tag = 15.1F
+Release_Deny_Tag = failed,centos,qfx
+Display_Name = Production Image
+SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
+
+
 
 [JunosSW_4]
 Name = MX-DEV
@@ -218,7 +239,7 @@ Main = 15.1
 ImageFile =
 Amount_of_Minors = 99
 Release_Tag = None
-Release_Deny_Tag = failed
+Release_Deny_Tag = failed,centos,qfx
 Display_Name = Production Image
 SecureCRT_Session = JTAC-TOOL/svl-jtac-tool01
 
@@ -263,18 +284,18 @@ ImageFile List =
 
 [Release_1]
 Name = ACX-DEV-x_151_x54
-Minor List = 
+Minor List = current,20160807.0,20160731.0,20160717.0,20160604.0
 ImageFile List =
 
 
 [Release_3]
 Name = ACX-PROD-15.1
-Minor List = 15.1X54-D51.5-centos,15.1X54-D51.5,15.1X54-D51.3,15.1X54-D50.13,15.1X54-D50.11,15.1X54-D50.10,15.1X54-D37.5,15.1X54-D37.4,15.1X54-D37.3,15.1X54-D37.2,15.1X54-D37.1,15.1X54-D37,15.1X54-D36.2,15.1X54-D36.1,15.1X54-D35.9,15.1X54-D35.8,15.1X54-D35.7,15.1X54-D35.6,15.1X54-D35.5,15.1X54-D35.4,15.1X54-D35.3,15.1X54-D35.2,15.1X54-D35.11,15.1X54-D35.10,15.1X54-D35.1,15.1X54-D35,15.1X54-D30.2,15.1X54-D30.1,15.1X54-D30,15.1X54-D25.14,15.1X54-D20.7,15.1X54-D20-acx,15.1X54-D10.5,15.1X54-D10.4
+Minor List = 15.1X54-D51.6,15.1X54-D51.5,15.1X54-D50.13,15.1X54-D50.11,15.1X54-D50.10,15.1X54-D37.5,15.1X54-D37.4,15.1X54-D37.3,15.1X54-D37.2,15.1X54-D37.1,15.1X54-D37,15.1X54-D36.2,15.1X54-D36.1,15.1X54-D35.9,15.1X54-D35.8,15.1X54-D35.7,15.1X54-D35.6,15.1X54-D35.5,15.1X54-D35.4,15.1X54-D35.3,15.1X54-D35.2,15.1X54-D35.11,15.1X54-D35.10,15.1X54-D35.1,15.1X54-D35,15.1X54-D30.2,15.1X54-D30.1,15.1X54-D30,15.1X54-D25.14,15.1X54-D20.7,15.1X54-D20-acx,15.1X54-D10.5,15.1X54-D10.4
 ImageFile List =
 
 [Release_311]
 Name = ACX-PROD-15.1F
-Minor List = 
+Minor List = 15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5
 ImageFile List =
 
 
@@ -285,27 +306,22 @@ ImageFile List =
 
 [Release_5]
 Name = MX80-DEV-14.2
-Minor List = current,20160817.1,20160815.0,20160814.0,20160813.0
+Minor List = current,20160819.0,20160817.1,20160815.0,20160814.0
 ImageFile List =
 
 [Release_6]
 Name = MX80-DEV-15.1
-Minor List = current,20160818.0,20160817.0,20160816.0,20160814.0
+Minor List = current,20160819.0,20160818.0,20160817.0,20160816.0
 ImageFile List =
 
 [Release_61]
 Name = MX80-DEV-15.1F
-Minor List = 
+Minor List = current,20160819.0,20160818.0,20160817.0,20160816.0
 ImageFile List =
 
 [Release_7]
 Name = MX80-DEV-16.1
-Minor List = 
-ImageFile List =
-
-[Release_711]
-Name = MX80-DEV-16.2
-Minor List = 
+Minor List = current,20160819.0,20160818.0,20160817.0,20160816.0
 ImageFile List =
 
 [Release_8]
@@ -315,37 +331,37 @@ ImageFile List =
 
 [Release_9]
 Name = MX80-PROD-15.1
-Minor List = 15.1R4.6-centos,15.1R4.6,15.1R4.5-centos,15.1R4.5,15.1R4.4-qfx5k,15.1R4.3-qfx5k,15.1R4-S1.5-centos,15.1R4-S1.5,15.1R4-S1.4-centos,15.1R4-S1.4,15.1R4-S1.3-centos,15.1R4-S1.3,15.1R4-S1.2,15.1R4-S1.1,15.1R4-S1,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S3-centos,15.1R3-S3,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1-J1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5
+Minor List = 15.1R4.6,15.1R4.5,15.1R4-S1.5,15.1R4-S1.4,15.1R4-S1.3,15.1R4-S1.2,15.1R4-S1.1,15.1R4-S1,15.1R4,15.1R3.6,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S3,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1-J1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1
 ImageFile List =
 
 [Release_91]
 Name = MX80-PROD-15.1F
-Minor List = 
+Minor List = 15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1,15.1F4.15,15.1F4.14,15.1F4-S3.1,15.1F4-S2,15.1F4-S1.6,15.1F4-S1.5,15.1F4-S1.2,15.1F4-S1.1,15.1F4-S1,15.1F3.7,15.1F3.3,15.1F3.11,15.1F3-S1.5,15.1F2.8,15.1F2-S9.3,15.1F2-S9.2,15.1F2-S9.1,15.1F2-S9,15.1F2-S8.2,15.1F2-S7.1,15.1F2-S7,15.1F2-S6,15.1F2-S5.2,15.1F2-S5.1,15.1F2-S5,15.1F2-S4,15.1F2-S3.1,15.1F2-S2.1,15.1F2-S2
 ImageFile List =
 
 [Release_911]
 Name = MX80-PROD-16.1
-Minor List = 
+Minor List = 16.1R1.8,16.1R1.7,16.1R1.6,16.1R1.4,16.1R1.3,16.1R1.11,16.1R1-S1.3,16.1R1-S1.2,16.1B1.6
 ImageFile List =
 
 [Release_10]
 Name = MX-DEV-14.2
-Minor List = current,20160817.1,20160815.0,20160814.0,20160813.0
+Minor List = current,20160819.0,20160817.1,20160815.0,20160814.0
 ImageFile List =
 
 [Release_11]
 Name = MX-DEV-15.1
-Minor List = current,20160818.0,20160817.0,20160816.0,20160814.0
+Minor List = current,20160819.0,20160818.0,20160817.0,20160816.0
 ImageFile List =
 
 [Release_12]
 Name = MX-DEV-16.1
-Minor List = current,20160818.0,20160817.0,20160816.0,20160815.0
+Minor List = current,20160819.0,20160818.0,20160817.0,20160816.0
 ImageFile List =
 
 [Release_1211]
 Name = MX-DEV-16.2
-Minor List = 
+Minor List = current,20160814.0,20160812.2,20160812.1,20160811.0
 ImageFile List =
 
 [Release_13]
@@ -355,12 +371,12 @@ ImageFile List =
 
 [Release_14]
 Name = MX-PROD-15.1
-Minor List = 15.1R4.6-centos,15.1R4.6,15.1R4.5-centos,15.1R4.5,15.1R4.4-qfx5k,15.1R4.3-qfx5k,15.1R4-S1.5-centos,15.1R4-S1.5,15.1R4-S1.4-centos,15.1R4-S1.4,15.1R4-S1.3-centos,15.1R4-S1.3,15.1R4-S1.2,15.1R4-S1.1,15.1R4-S1,15.1R4,15.1R3.6,15.1R3.5-qfx5k,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S3-centos,15.1R3-S3,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1-J1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5
+Minor List = 15.1R4.6,15.1R4.5,15.1R4-S1.5,15.1R4-S1.4,15.1R4-S1.3,15.1R4-S1.2,15.1R4-S1.1,15.1R4-S1,15.1R4,15.1R3.6,15.1R3.5,15.1R3.4,15.1R3.3,15.1R3.2,15.1R3.1,15.1R3-S3,15.1R3-S2.2,15.1R3-S2,15.1R3-S1.1,15.1R3-S1-J1.1,15.1R3-S1,15.1R3,15.1R2.9,15.1R2-S3,15.1R2-S2,15.1R2-S1.1,15.1R2-S1,15.1R1.9,15.1R1.8,15.1R1-S3,15.1R1-S2.3,15.1R1-S1,15.1F6.9,15.1F6.8,15.1F6.7,15.1F6.5,15.1F6-S1.3,15.1F6-S1.2,15.1F6-S1,15.1F6,15.1F5.6,15.1F5.15,15.1F5-S99,15.1F5-S4,15.1F5-S3.6,15.1F5-S3.5,15.1F5-S3.3,15.1F5-S2.8,15.1F5-S2.7,15.1F5-S2.5,15.1F5-S1.5,15.1F5-S1.4,15.1F5-S1.3,15.1F5-S1.2,15.1F5-S1.1
 ImageFile List =
 
 [Release_1411]
 Name = MX-PROD-16.1
-Minor List = 
+Minor List = 16.1R1.8,16.1R1.7,16.1R1.6,16.1R1.4,16.1R1.3,16.1R1.11,16.1R1-S1.3,16.1R1-S1.2,16.1B1.6
 ImageFile List =
 
 [Release_19]
@@ -370,7 +386,7 @@ ImageFile List =
 
 [Release_20]
 Name = ACX5K-DEV-misha_rel3_p1
-Minor List = current,20160816.0,20160805.0,20160803.0,20160801.0
+Minor List = current,20160819.0,20160816.0,20160805.0,20160803.0
 ImageFile List =
 
 [Release_21]
@@ -378,3 +394,15 @@ Name = ACX5K-PROD-15.1
 Minor List = 15.1X54-D50.13-acx5k,15.1X54-D50.11-acx5k,15.1X54-D50.10-acx5k,15.1X54-D25.14-acx5k,15.1X54-D20.7-acx5k,15.1X54-D20.6-acx5k,15.1X54-D20.5-acx5k,15.1X54-D20.4-acx5k,15.1X54-D20.2-acx5k,15.1X54-D20.1-acx5k,15.1X54-D20-acx5k
 ImageFile List =
 
+
+[Release_898739]
+#   Object group generated during consistency check
+Name = MX80-PROD-16.2
+Minor List =
+ImagFile List =
+
+[Release_298657]
+#   Object group generated during consistency check
+Name = MX80-DEV-16.2
+Minor List = current,20160814.0,20160812.2,20160812.1,20160811.0
+ImagFile List =

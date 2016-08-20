@@ -224,7 +224,7 @@ Sub Main()
 			   If strPlatformType = objMain(nInd,pIndex(0,"Platform")) and objMain(nInd,pIndex(0,"Status")) = "Active" Then nImage = nInd
 			Next
             If nImage = -1 Then 
-   			    Call  TrDebug_No_Date ("No Image was scheduled for platform " & strPlatform, "SKIP", objDebug, MAX_LEN, 1, nInfo)
+   			    Call  TrDebug_No_Date ("No Junos image was scheduled for platform " & strPlatform, "SKIP", objDebug, MAX_LEN, 1, nInfo)
 			    Exit Do
 			End If			
 			'------------------------------------------------------------------

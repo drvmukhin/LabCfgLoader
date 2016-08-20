@@ -30,6 +30,8 @@ Dim Platform
 Dim objTab_L
 Dim vWaitForCommit, vModels, vWaitForShip,vLoadComplete, vCfgInventory
 Dim vSessionCRT, bConnect, vLookForCfg, bSuccess
+Dim MainUpdateFlag, MinorUpdateFlag, MsgSuccess
+
 vWaitForShip = Array("ship","]$")
 vWaitForCommit = Array("error: configuration check-out failed","error: commit failed","commit complete")
 vModels = Array("mx240","mx480","mx960","acx5096","acx5048","acx1100","acx1000","acx2100","acx2200","mx80","mx104")
@@ -56,6 +58,7 @@ Dim vDelim, vParamNames
 	Const WorkBookPrefix = "WorkBookPrefix"
 	Const SECURECRT_L_SESSION = "Left Node Session"
 	Const SECURECRT_R_SESSION = "Right Node Session"
+	Const DEBUG_FILE = "debug-terminal"
 ReDim vSettings(30)
 vDelim = Array("=",",",":")	
 nDebug = 0
@@ -79,6 +82,13 @@ Sub Main()
 	End If
 	strFileSettings = crt.Arguments(1)
 	strDirectoryWork = crt.Arguments(2)
+	If crt.Arguments.Count = 5 Then
+	    MainUpdateFlag = crt.Arguments(3)
+		MinorUpdateFlag = crt.Arguments(4)
+	Else 
+	    MainUpdateFlag = "All"
+		MinorUpdateFlag = "All"
+    End If
 '----------------------------------------------------------------
 '	Open log File
 '----------------------------------------------------------------
@@ -104,8 +114,8 @@ Sub Main()
 '--------------------------------------------------------------------
 '   LOOKING FOR EXISTED MONITOR SESSION (tail.exe)
 '--------------------------------------------------------------------
-strLaunch = strDirectoryWork & "\bin\tail.exe -f " & strDirectoryWork & "\log\debug-terminal.log"
-If Not GetAppPID(strPID, strParentPID, "tail.exe") Then 
+strLaunch = strDirectoryWork & "\bin\tail.exe -f " & strDirectoryWork & "\log\" & DEBUG_FILE & ".log"
+If Not GetWinAppPID(strPID, strParentPID, DEBUG_FILE, "tail.exe",nDebug) Then 
     objEnvar.run (strLaunch)
 Else
     Call FocusToParentWindow(strPID)
@@ -172,19 +182,21 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 	ClassName = "JunosSW"
     Call SetMyObject(objMain,"JunosSW",nDebug)	
 	Call SetMyObject(objMinor,"Release",nDebug)	
-'	Call TrDebug_No_Date("Number of Sessions: " & UBound(objMain,1), "" , objDebug, MAX_LEN, 1, 1)	
-'	Call TrDebug_No_Date("Number of Minor Releases: " & UBound(objMinor,1), "" , objDebug, MAX_LEN, 1, 1)	
-'	Exit Sub
     '--------------------------------
 	' BEGIN MAIN CYCLE
 	'--------------------------------
-	' Call WriteStringToFile(strDirectoryConfig & "\DownloadedCfgList.txt","[Bulk_Dnld_" & Year(Date) & "_" & Month(Date()) & "_" & Day(Date()) & "_" & Time(), nDebug)
     Dim strHostL, strLogin, strSessionL, strFolder, Folder1, Folder2,strTag,strDenyTag,objMainName, MaxMinor
+	Dim vTag, vDenyTag
 	bFoundConfig = False
 	For nSession = 0 to UBound(objMain,1) - 1
 	    bSuccess = False
 		bConnect = False
 	    Do
+			If MainUpdateFlag <> "All" and CInt(MainUpdateFlag) <> nSession Then 
+			    bSuccess = True
+			    MsgSuccess = "SKIP"
+			    Exit Do
+			End If				
 			'--------------------------------------------------------------------------------
 			'          GET NAME OF THE TELNET SESSIONS
 			'--------------------------------------------------------------------------------
@@ -192,9 +204,13 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			Folder1 = objMain(nSession,pIndex(0,"Folder1"))
 			Folder2 = objMain(nSession,pIndex(0,"Folder2"))
 			strTag = objMain(nSession,pIndex(0,"Release_Tag"))
-			strDenyTag = objMain(nSession,pIndex(0,"Release_Deny_Tag"))			
+			strDenyTag = objMain(nSession,pIndex(0,"Release_Deny_Tag"))
+            If strDenyTag = "" or strDenyTag = " " Then strDenyTag = "None"
+			If strTag = "" or strTag = " " Then strTag = "None"			
 			objMainName = objMain(nSession,pIndex(0,"Name"))
 			MaxMinor = objMain(nSession,pIndex(0,"Amount_of_Minors"))
+			vTag = Split(strTag,",")
+			vDenyTag = Split(strDenyTag,",")
 			'------------------------------------------------------------------
 			'	Write main variables to log file
 			'------------------------------------------------------------------
@@ -202,7 +218,7 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			'--------------------------------------------------------------------------------
 			'  Start SSH session to Node
 			'--------------------------------------------------------------------------------
-			Call TrDebug_No_Date ("START LOADING CATALOGS FROM " & strSessionL,"", objDebug, MAX_LEN, 3, nInfo)						
+			Call TrDebug_No_Date ("START LOADING CATALOGUES FROM " & strSessionL & " FOR " & objMain(nSession,pIndex(0,"Name")),"", objDebug, MAX_LEN, 3, nInfo)						
 			On Error Resume Next
 			Err.Clear
 			Set objTab_L = crt.Session.ConnectInTab("/S " & strSessionL)
@@ -225,77 +241,88 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objTab_L.Screen.Send "bash" & chr(13)	
 			objTab_L.Screen.WaitForString ("]$")
 			For nRelease = 0 to UBound(Split(objMain(nSession,pIndex(0,"Main List")),","))
-			    ' strMinorList = "Minor List = "
-				strMinorList = ""
-			    strRelease = Split(objMain(nSession,pIndex(0,"Main List")),",")(nRelease)
-			    objTab_L.Screen.Send "cd " & Folder1 & chr(13)	
-				objTab_L.Screen.WaitForString ("]$")				
-			    objTab_L.Screen.Send "cd " & strRelease & "/" & Folder2 & chr(13)	
-				objTab_L.Screen.WaitForString ("]$")
-			    objTab_L.Screen.Send "ls -l" & chr(13)	
-				strLine = objTab_L.Screen.ReadString ("[")
-				objTab_L.Screen.WaitForString ("]$")
-				' Get last five releases
-				vLine = Split(strLine,chr(13))
-				nLine = 0
-				For i = UBound(vLine) to 0 Step -1
-				    vLine(i) = RTrim(vLine(i)) 
-					vLine(i) = RTrim(Split(vLine(i),"->")(0)) 
-				    vLine(i) = Split(vLine(i)," ")(UBound(Split(vLine(i)," ")))
-					Select Case vLine(i)
-					    Case "current"
-							nLine = nLine + 1 : If nLine = int(MaxMinor) Then Exit For
-						    strMinorList = strMinorList & vLine(i) & ","
-						Case Else
-							If Len(vLine(i)) > 3  and IsNumeric(Left(vLine(i),1)) and ( strTag = "None" or InStr(vLine(i),strTag) > 0) and ( strDenyTag = "None" or InStr(vLine(i),strDenyTag) = 0) Then 
-							   strMinorList = strMinorList & vLine(i) & ","
-							   nLine = nLine + 1 : If nLine = int(MaxMinor) Then Exit For
-							End If 
-					End Select
-				Next
-				' Call  TrDebug_No_Date ("TOTAL RELEASES IN FOLDER: " & objMain(nSession,pIndex(0,"Name")) & "-" & strRelease & ": " & UBound(vLine), "" , objDebug, MAX_LEN, 1, nInfo)
-				if Len(strMinorList) > 0 Then strMinorList = Left(strMinorList,Len(strMinorList)-1)
-				vMinorList = Split(strMinorList,",")
-				strMinorList = "Minor List = "
-				For Each strMinor in vMinorList
-				    objTab_L.Screen.Send "ls " & strMinor & "/" & chr(13)
-					nResult = objTab_L.Screen.WaitForStrings (vWaitForShip, 20)
-					Select Case nResult
-						Case 1 
-						  strMinorList = strMinorList & strMinor & ","
-						  objTab_L.Screen.WaitForString ("]$")
-     					Case Else
-					 End Select				
-				Next
-				if Len(strMinorList) > 0 Then strMinorList = Left(strMinorList,Len(strMinorList)-1)
-				' Get ID number of the objMinor by objMinor Name
-				objMinorName = objMainName & "-" & strRelease
-				Call TrDebug_No_Date("objMinorName: " & objMinorName, "" , objDebug, MAX_LEN, 1, nInfo)				
-				For nMinor = 0 to UBound(objMinor,1) - 1
-				   If objMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
-				Next
-				nCount = 0
-				For Each strObj in vObjIndex
-				    If InStr(strObj,"Release_") > 0 Then 
-				        If nCount = nMinor Then 
-						   Call TrDebug_No_Date("GroupName FOUND: nCount = " & nCount & "  " & strObj, "" , objDebug, MAX_LEN, 1, nInfo)				
-						   Exit For
+		        Do 
+				    If MinorUpdateFlag <> "All" and CInt(MinorUpdateFlag) <> nRelease Then Exit Do
+					' strMinorList = "Minor List = "
+					strMinorList = ""
+					strRelease = Split(objMain(nSession,pIndex(0,"Main List")),",")(nRelease)
+					Call TrDebug_No_Date("FETCHING for list of images for: " & strRelease & " branch", "" , objDebug, MAX_LEN, 1, nInfo)	
+					objTab_L.Screen.Send "cd " & Folder1 & chr(13)	
+					objTab_L.Screen.WaitForString ("]$")				
+					objTab_L.Screen.Send "cd " & strRelease & "/" & Folder2 & chr(13)	
+					objTab_L.Screen.WaitForString ("]$")
+					objTab_L.Screen.Send "ls -l" & chr(13)	
+					strLine = objTab_L.Screen.ReadString ("[")
+					objTab_L.Screen.WaitForString ("]$")
+					' Get last five releases
+					vLine = Split(strLine,chr(13))
+					nLine = 0
+					For i = UBound(vLine) to 0 Step -1
+						vLine(i) = RTrim(vLine(i)) 
+						vLine(i) = RTrim(Split(vLine(i),"->")(0)) 
+						vLine(i) = Split(vLine(i)," ")(UBound(Split(vLine(i)," ")))
+						Select Case vLine(i)
+							Case "current"
+								nLine = nLine + 1 : If nLine = int(MaxMinor) Then Exit For
+								strMinorList = strMinorList & vLine(i) & ","
+							Case Else
+								If Len(vLine(i)) > 3  and IsNumeric(Left(vLine(i),1)) and ( strTag = "None" or InStrings(vLine(i),vTag)) and ( Not InStrings(vLine(i),vDenyTag)) Then 
+								   strMinorList = strMinorList & vLine(i) & ","
+								   nLine = nLine + 1 : If nLine = int(MaxMinor) Then Exit For
+								End If 
+						End Select
+					Next
+					' 
+					' Validate Minor Release by checking if ship folder exist. If not Exclude it from minor list
+					'
+					if Len(strMinorList) > 0 Then strMinorList = Left(strMinorList,Len(strMinorList)-1)
+					vMinorList = Split(strMinorList,",")
+					strMinorList = "Minor List = "
+					For Each strMinor in vMinorList
+						objTab_L.Screen.Send "ls " & strMinor & "/" & chr(13)
+						nResult = objTab_L.Screen.WaitForStrings (vWaitForShip, 20)
+						Select Case nResult
+							Case 1 
+							  strMinorList = strMinorList & strMinor & ","
+							  objTab_L.Screen.WaitForString ("]$")
+							Case Else
+						 End Select				
+					Next
+					' Delete final coma sign
+					if Len(strMinorList) > 0 Then strMinorList = Left(strMinorList,Len(strMinorList)-1)
+					' Get ID number of the objMinor by objMinor Name
+					objMinorName = objMainName & "-" & strRelease
+					Call TrDebug_No_Date("UPDATING  Images list for: " & objMinorName, "" , objDebug, MAX_LEN, 1, nInfo)				
+					For nMinor = 0 to UBound(objMinor,1) - 1
+					   If objMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
+					Next
+					nCount = 0
+					' Find [Release_ ] group for the given minor object ID
+					For Each strObj in vObjIndex
+						If InStr(strObj,"Release_") > 0 Then 
+							If nCount = nMinor Then 
+							   Call TrDebug_No_Date("GroupName FOUND: nCount = " & nCount & "  " & strObj, "" , objDebug, MAX_LEN, 1, nDebug)				
+							   Exit For
+							End If
+						   nCount = nCount + 1
 						End If
-					   nCount = nCount + 1
-				    End If
-				Next 
-				If Not ReplaceFileLineInGroup(strCatalogFile, strObj, "Minor List =", strMinorList,nDebug) Then 
-				   MsgBox "Failed to update catalogue file"
-				End If
+					Next 
+					Call TrDebug_No_Date("FOUND " & Left(strMinorList,80) & "...", "" , objDebug, MAX_LEN, 1, nInfo)				
+					If Not ReplaceFileLineInGroup(strCatalogFile, strObj, "Minor List =", strMinorList,nDebug) Then 
+					   MsgBox "Failed to update catalogue file"
+					End If
+					Exit Do
+				Loop
 			Next
 			bSuccess = True
+			MsgSuccess = "SUCCESS"
 			Exit Do
 		Loop
         If bConnect Then
 			objTab_L.Session.Disconnect	
 		End If
 		If bSuccess Then 
-		    Call TrDebug_No_Date (objMain(nSession,pIndex(0,"Name")) , "SUCCESS", objDebug, MAX_LEN, 1, 1)
+		    Call TrDebug_No_Date (objMain(nSession,pIndex(0,"Name")) , MsgSuccess, objDebug, MAX_LEN, 1, 1)
             '----------------------------------------------------
             '   UPDATE LIST OF MINOR RELEASES
             '----------------------------------------------------
@@ -575,29 +602,27 @@ Const IE_PAUSE = 70
 	Set objShell = Nothing
 End Function
 '----------------------------------------------------------------
-'   Function GetAppPID(strPID) Returns focus to the parent Window/Form
+'   Function GetWinAppPID(strPID) Returns focus to the parent Window/Form
 '----------------------------------------------------------------
-Function GetAppPID(ByRef strPID, ByRef strParentPID, strAppName)
+Function GetWinAppPID(ByRef strPID, ByRef strParentPID, strCommandLine, strAppName, nDebug)
 Dim objWMI, colItems
-Const IE_PAUSE = 70
 Dim process
 Dim strUser, pUser, pDomain, wql
 	strUser = GetScreenUserSYS()
-	GetAppPID = False
+	GetWinAppPID = False
 	Do 
 		On Error Resume Next
 		Set objWMI = GetObject("winmgmts:\\127.0.0.1\root\cimv2")
 		If Err.Number <> 0 Then 
-				Call TrDebug_No_Date ("GetMyPID ERROR: CAN'T CONNECT TO WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, 0)
+				Call TrDebug ("GetMyPID ERROR: CAN'T CONNECT TO WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
 				On error Goto 0 
 				Exit Do
 		End If 
-'		wql = "SELECT ProcessId FROM Win32_Process WHERE Name = 'Launcher Ver.'"  WHERE Name = 'iexplore.exe' OR Name = 'wscript.exe'
 		wql = "SELECT * FROM Win32_Process WHERE Name = '" & strAppName & "' OR Name = '" & strAppName & " *32'"
 		On Error Resume Next
 		Set colItems = objWMI.ExecQuery(wql)
 		If Err.Number <> 0 Then
-				Call TrDebug_No_Date ("GetMyPID ERROR: CAN'T READ QUERY FROM WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, 1)
+				Call TrDebug ("GetMyPID ERROR: CAN'T READ QUERY FROM WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
 				On error Goto 0 
 				Set colItems = Nothing
 				Exit Do
@@ -605,15 +630,28 @@ Dim strUser, pUser, pDomain, wql
 		On error Goto 0 
 		For Each process In colItems
 			process.GetOwner  pUser, pDomain 
-			Call TrDebug_No_Date ("GetMyPID: RESTORE IE WINDOW:", "PName: " & process.Name & ", PID " & process.ProcessId & ", OWNER: " & pUser & ", Parent PID: " &  Process.ParentProcessId,objDebug, MAX_LEN, 1, 0) 
-			If pUser = strUser then 
-				strPID = process.ProcessId
-				strParentPID = Process.ParentProcessId
-'				Call TrDebug_No_Date ("GetMyPID: ", "PName: " & process.Name & ", PID " & process.ProcessId & ", OWNER: " & pUser & ", Parent PID: " &  Process.ParentProcessId,objDebug, MAX_LEN, 1, 1) 
-'				Call TrDebug_No_Date ("GetMyPID: ", "Caption: " & process.Caption & ", CSName " & process.CSName & ", Description: " & process.Description & ", Handle: " &  Process.Handle,objDebug, MAX_LEN, 1, 1) 
-			GetAppPID = True
-				Exit For
-			End If
+			Call TrDebug ("GetWinAppPID: Process Name (PID): " & process.Name & " (" & process.ProcessId & ")", "",objDebug, MAX_LEN, 1, nDebug)
+			Call TrDebug ("GetWinAppPID: Owner: " & process.CSName & "/" & pUser, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug ("GetWinAppPID: CMD: " & process.CommandLine, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug ("GetWinAppPID: ParentPID:" &  Process.ParentProcessId, "",objDebug, MAX_LEN, 1, nDebug) 			
+			Select Case Lcase(strCommandLine)
+			    Case "null", "none", ""
+					If pUser = strUser then 
+						strPID = process.ProcessId
+						strParentPID = Process.ParentProcessId
+						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID , "",objDebug, MAX_LEN, 1, nDebug)
+						GetWinAppPID = True
+						Exit For
+					End If
+			    Case Else
+					If pUser = strUser and InStr(process.CommandLine,strCommandLine) then 
+						strPID = process.ProcessId
+						strParentPID = Process.ParentProcessId
+						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID, "",objDebug, MAX_LEN, 1, nDebug)
+						GetWinAppPID = True
+						Exit For
+					End If
+			End Select
 		Next
 		Set colItems = Nothing
 		Exit Do
@@ -1227,7 +1265,7 @@ Function SetMyObject(ByRef objDevices, strClassID, nDebug)
 			nParam = nParam + 1 
 		End If
 	Next
-	Call TrDebug_No_Date ("SetMyObject: Found " & nParam & " Properties for class " & strClassID,"", objDebug, MAX_LEN, 1, 1)
+	Call TrDebug_No_Date ("SetMyObject: Found " & nParam & " Properties for class " & strClassID,"", objDebug, MAX_LEN, 1, nDebug)
 	'---------------------------------------
 	'   COPY PROPERTIES VALUES TO THE OBJECT
 	'---------------------------------------
@@ -1326,4 +1364,18 @@ End Function
 	objDataFileName.Close
 	Call WriteArrayToFile(strFileName,vFileLines, UBound(vFileLines),1,nDebug)
     ReplaceFileLineInGroup = True
+End Function
+'----------------------------------------------------
+'  Function InStrings(String1, String2)
+'----------------------------------------------------
+Function InStrings(String1, vString2)
+Dim strLine
+    InStrings = False
+	For each strLine in vString2
+	    If strLine = "" Then Exit For
+	    If Instr(String1,strLine) Then 
+	        Instrings = True
+			Exit For
+	    End If
+	Next
 End Function

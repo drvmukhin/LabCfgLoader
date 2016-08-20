@@ -26,7 +26,7 @@ Const DEBUG_FILE = "debug-loader"
 Dim vObjects, vObjIndex
 ' Define global array which keeps properties of all my Classes' 
 Dim vClass
-' Define global array for JunosSW objects
+' Define global array for JunosSW and Release objects
 Dim objMain, objMinor 
 Dim D0 
 Dim nResult, nTail, nIndex, nCountWeek, nCountMonth
@@ -135,7 +135,7 @@ Set objShell = WScript.CreateObject("WScript.Shell")
 nDebugCRT = 0
 nDebug = 0
 nInfo = 1
-ShowLog = True
+ShowLog = False
 CurrentDate = Date()
 CurrentTime = Time()
 D0 = DateSerial(2015,1,1)
@@ -548,16 +548,17 @@ Loop
 	Redim vClass(1,1)
 	Redim vObjects(1,1,1)
 	Redim vObjIndex(1)
-	' vClass 
     Call GetMyClass(strFileDeviceCatalog, vObjIndex, nDebug)
     Call SetMyObject(objMain,"JunosSW",nDebug)
 	Call SetMyObject(objMinor,"Release",nDebug)
-'	Call TrDebug ("CHECK objDevice Data: ","", objDebug, MAX_LEN, 3, 1)
-'   Call GetDevicesStatus(objDevices, vClass, vAccount, vDevice, strSrvDirectory,False, 1)	
+	If CheckCatalogueConsistency(strFileDeviceCatalog,nInfo) Then 
+	    Call GetMyClass(strFileDeviceCatalog, vObjIndex, nDebug)
+		Call SetMyObject(objMain,"JunosSW",nDebug)
+		Call SetMyObject(objMinor,"Release",nDebug)	
+	End If 
 '    MsgBox vClass(1,0) & ", " & vClass(1,2) & ", " & vClass(1,3) & chr(13) & "pIndex: " & pIndex("Release","Name")
 '    MsgBox GetVariable("ListNumber" & pIndex("Release","Minor List") + 1, vClass, 2, 1, 0, nDebug)
 '    MsgBox objMain(1,pIndex(0,"ImageTemplate"))	
-	
 '-------------------------------------------------------------------------------------------
 '  		LOAD TEMPORARY PARAMETERS FOR CURRENT/LAST SESSION
 '-------------------------------------------------------------------------------------------
@@ -3012,8 +3013,6 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 		  nLine = 4
 		Case 8
 			ClassName = "JunosSW"
-'			Call SetMyObject(objMain,"JunosSW",nDebug)
-'			Call SetMyObject(objMinor,"Release",nDebug)
 			Dim vImageTypes,strImageType, nImageType 
 			Redim vImageTypes(1)
 			nImageType = 0
@@ -3032,15 +3031,10 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 			Next
 			Redim Preserve vImageTypes(Ubound(vImageTypes) - 1)
 			nLine = 5 + int(nImageType * N_SELECT * 3/4)
-'			MsgBox "pIndex: " & pIndex(1,"Minor List")
-'			MsgBox GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
-'           MsgBox objMain(1,pIndex(0,"ImageTemplate")) & ", " & UBound(objMain,1) & ", " & vClass(0,0)
 	End Select
-		
 	WindowH = IE_Menu_Bar + 2 * LoginTitleH + cellH * (nLine) + nBottom
 	WindowW = IE_Border + LoginTitleW
 	If WindowW < 300 then WindowW = 300 End If
-
 	nFontSize_10 = Round(10 * nRatioY,0)
 	nFontSize_12 = Round(12 * nRatioY,0)
 	nFontSize_Def = Round(16 * nRatioY,0)
@@ -3500,7 +3494,11 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """align=""center"" valign=""top"">" & _
 									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
-									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImageType & "';><u>C</u>lear</button>" &_										
+									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImageType & "';><u>C</u>lear</button>" &_
+									"<br><br>" &_
+									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
+									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
+									"px; ' name='UpdateRequest' onclick=document.all('ButtonHandler').value='UpdateMain_" & nImageType & "';><u>U</u>date</button>" &_										
 							"</td>"&_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 								"<input name='Image_Param_7' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -3821,14 +3819,15 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						g_objIE.Document.All("Settings_Param_25").Value = strFolder													
 						g_objIE.Document.All("ButtonHandler").Value = "None"		
 		    Case "UPDATE_CATALOG"
-						g_objIE.Document.All("ButtonHandler").Value = "None"		
+						g_objIE.Document.All("ButtonHandler").Value = "None"	
 						'---------------------------------------------------------
 						' RUN TELNET SCRIPT
 						'---------------------------------------------------------
 						strCmd = strCRTexe &_ 
 							" /ARG " & strDirectoryWork & "\config\class_catalog.dat" &_	
                             " /ARG " & strDirectoryWork & "\config\settings.dat" &_								
-							" /ARG " & strDirectoryWork
+							" /ARG " & strDirectoryWork &_
+							" /ARG All /ARG All" 
 						strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_UPDATE_Catalog
 						Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
 						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\class_catalog.dat", "", objDebug, MAX_LEN, 1, 1)						
@@ -3842,21 +3841,46 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						Call SetMyObject(objMain,"JunosSW",nDebug)
 						Call SetMyObject(objMinor,"Release",nDebug)
 						' Refresh forms
-					    For nImage = 0 to UBound(objMain,1) - 1
-							g_objIE.Document.All("Image_Param_7")(nImage).Value = objMain(nImage,pIndex(0,"Platform"))
-							g_objIE.Document.All("Image_Param_9")(nImage).Value = objMain(nImage,pIndex(0,"Display_Name"))
-							nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
-							strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
-							For nMinor = 0 to UBound(objMinor,1) - 1
-							   If strMinorName = objMinor(nMinor,pIndex(1,"Name")) Then Exit For
-							Next
-							vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
-							nInd = 0
-							For Each strMinor in vMinor
-							   g_objIE.document.getElementById("Minor_Release" & nImage).Options(nInd).Text = strMinor
-							   nInd = nInd + 1
-							Next
-						Next		
+						Call FillJunosCatalogueForm(g_objIE, vImageTypes, nDebug)
+            Case "UpdateMain_0", "UpdateMain_1","UpdateMain_2","UpdateMain_3","UpdateMain_4","UpdateMain_5","UpdateMain_6","UpdateMain_7","UpdateMain_8","UpdateMain_9","UpdateMain_10"
+						g_objIE.Document.All("ButtonHandler").Value = "None"
+						nImageType = Int(Split(szNothing,"_")(1))
+						nOptions = g_objIE.document.getElementById("Main_Release" & nImageType).SelectedIndex
+						strImageType = g_objIE.document.getElementById("Main_Release" & nImageType).Options(nOptions).Text
+						strPlatform = g_objIE.Document.All("Image_Param_7")(nImageType).Value
+						strDisplayName = g_objIE.Document.All("Image_Param_9")(nImageType).Value
+						Call TrDebug ("ImageType: " & strImageType & " strPlatform: " & strPlatform & " strDisplayName: " & strDisplayName,"", objDebug, MAX_LEN, 1, nDebug)
+						' Get Main image object ID by its release version, platform and DisplayName
+						If Not GetImageIDbyName(strImageType,strPlatform,strDisplayName, nImage,nDebug) Then 
+						   MsgBox "Error: Can't find Image version: "  & strImageType & " in Cataloge"
+						   Exit Do						   
+						End If
+						For nInd = 0 to UBound(Split(objMain(nImage,pIndex(0,"Main List")),","))
+						   If Split(objMain(nImage,pIndex(0,"Main List")),",")(nInd) = strImageType Then Exit For
+						Next
+						'---------------------------------------------------------
+						' RUN TELNET SCRIPT
+						'---------------------------------------------------------
+						strCmd = strCRTexe &_ 
+							" /ARG " & strDirectoryWork & "\config\class_catalog.dat" &_	
+                            " /ARG " & strDirectoryWork & "\config\settings.dat" &_								
+							" /ARG " & strDirectoryWork &_
+							" /ARG " & nImage & " /ARG " & nInd
+						strCmd = strCmd & " /SCRIPT " & strDirectoryWork & "\" & VBScript_UPDATE_Catalog
+						Call TrDebug ("IE_PromptForInput: " & strCRTexe, "", objDebug, MAX_LEN, 1, 1)														
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\class_catalog.dat", "", objDebug, MAX_LEN, 1, 1)						
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork & "\config\settings.dat", "", objDebug, MAX_LEN, 1, 1)						
+						Call TrDebug ("IE_PromptForInput: " & " /ARG " & strDirectoryWork, "", objDebug, MAX_LEN, 1, 1)
+						Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)						
+						g_objShell.run strCmd, nWindowState, True
+						'Reload Classes and objects properties
+						'g_objIE.Document.All("ButtonHandler").Value = "Exit_and_Reload_Settings"
+						Call GetMyClass(strDirectoryWork & "\config\class_catalog.dat", vObjIndex, nDebug)
+						Call SetMyObject(objMain,"JunosSW",nDebug)
+						Call SetMyObject(objMinor,"Release",nDebug)
+						' Refresh forms
+						Call FillJunosCatalogueForm(g_objIE, vImageTypes, nDebug)
+			
             Case "Clear_0", "Clear_1", "Clear_2", "Clear_3", "Clear_4", "Clear_5", "Clear_6", "Clear_7","Clear_8"  
 			            nImage = Int(Split(szNothing,"_")(1))
 					    g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex = -1
@@ -4028,16 +4052,28 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
                                 Case 5
  								        vSettings(12) = vParamNames(12) & Space(30 - Len(vParamNames(12))) & "= " & g_objIE.Document.All("Settings_Param_12").Value
 								Case 8
-								        For nImage = 0 to UBound(objMain,1) - 1
-											nOptions = g_objIE.document.getElementById("Main_Release" & nImage).SelectedIndex
-											objMain(nImage,pIndex(0,"Main")) = g_objIE.document.getElementById("Main_Release" & nImage).Options(nOptions).Text
-											nOptions = g_objIE.document.getElementById("Minor_Release" & nImage).SelectedIndex
+                                        ' Clear all image's load status'
+								        For nInd = 0 to UBound(objMain,1)
+										    objMain(nInd,pIndex(0,"Minor")) = "None"
+											objMain(nInd,pIndex(0,"Status")) = "Inactive"
+											objMain(nInd,pIndex(0,"Main")) = "None"
+										Next
+										For nImageType = 0 to UBound(vImageTypes) - 1
+											nOptions = g_objIE.document.getElementById("Main_Release" & nImageType).SelectedIndex
+											strImageType = g_objIE.document.getElementById("Main_Release" & nImageType).Options(nOptions).Text
+											strPlatform = g_objIE.Document.All("Image_Param_7")(nImageType).Value
+											strDisplayName = g_objIE.Document.All("Image_Param_9")(nImageType).Value	
+											' Get Main image object ID by its release version, platform and DisplayName
+											If Not GetImageIDbyName(strImageType,strPlatform,strDisplayName, nImage,nDebug) Then 
+											   MsgBox "Error: Can't find Image version: "  & strImageType & " in Catalogue"
+											   Exit Do						   
+											End If
+											' Update image's load status and name of the exact release to be loaded 
+											objMain(nImage,pIndex(0,"Main")) = strImageType
+											nOptions = g_objIE.document.getElementById("Minor_Release" & nImageType).SelectedIndex
 											If nOptions => 0 Then 
-												objMain(nImage,pIndex(0,"Minor")) = g_objIE.document.getElementById("Minor_Release" & nImage).Options(nOptions).Text
+												objMain(nImage,pIndex(0,"Minor")) = g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nOptions).Text
                                                 objMain(nImage,pIndex(0,"Status")) = "Active"												
-											Else 
-											    objMain(nImage,pIndex(0,"Minor")) = "None"
-												objMain(nImage,pIndex(0,"Status")) = "Inactive"
 											End If
 										Next
                          				If g_objIE.Document.All("DNLD_IMG_ONLY").Checked Then 
@@ -5650,7 +5686,7 @@ Function SetMyObject(ByRef objDevices, strClassID, nDebug)
 			nParam = nParam + 1 
 		End If
 	Next
-	Call TrDebug ("SetMyObject: Found " & n & " Properties for class " & strClassID,"", objDebug, MAX_LEN, 1, 1)
+	Call TrDebug ("SetMyObject: Found " & n & " Properties for class " & strClassID,"", objDebug, MAX_LEN, 1, nDebug)
 	'---------------------------------------
 	'   COPY PROPERTIES VALUES TO THE OBJECT
 	'---------------------------------------
@@ -6093,15 +6129,14 @@ Dim nInd, vImage
     Redim vImage(1)
     GetImageIDByName = False
 	For nInd = 0 to UBound(objMain,1) - 1
-	    Call TrDebug ("ImageType: " & strImageName & " strPlatform: " & objMain(nInd,pIndex(0,"Platform")) & " strDisplayName: " & objMain(nInd,pIndex(0,"Display_Name")),"", objDebug, MAX_LEN, 1, nDebug)
 		If objMain(nInd,pIndex(0,"Platform")) = strPlatform and objMain(nInd,pIndex(0,"Display_Name")) = strDisplayName Then 
 		    vImage(0) = objMain(nInd,pIndex(0,"Main List"))
-			Call TrDebug ("vImage: " & vImage(0),"", objDebug, MAX_LEN, 1, nDebug)
-			Call TrDebug ("GetObjLineNumber: " & GetExactObjectLineNumber( vImage, strImageName, nDebug),"", objDebug, MAX_LEN, 1, nDebug)
-			Call TrDebug ("----------------------- " ,"", objDebug, MAX_LEN, 1, nDebug)
-			If GetExactObjectLineNumber( vImage, strImageName, nDebug) = 1 Then 
-			    nImage = nInd
+			Call TrDebug ("LOOKING FOR: " & strImageName & " in: " & vImage(0),"", objDebug, MAX_LEN, 1, nDebug)
+			If GetExactObjectLineNumber( vImage, strImageName, 0) = 1 Then 
+			    Call TrDebug ("FOUND: " & strImageName & " nImage=" & nInd,"", objDebug, MAX_LEN, 1, nDebug)
+				nImage = nInd
 				GetImageIDByName = True
+				Exit For
 			End If 
 		End If
 	Next
@@ -6166,4 +6201,45 @@ Dim nImageType, nImage
 		Next
 	Next		
 End Function
-
+'---------------------------------------------------------------
+'   Function CheckCatalogueConsistency(strFileDeviceCatalog, nDebug)
+'---------------------------------------------------------------
+Function CheckCatalogueConsistency(strFileDeviceCatalog, nDebug)
+Dim strGroup,nLine,nParam,i,Param_Name, bReload,nMinor, nImage
+Dim vMainList,vFileLines
+    CheckCatalogueConsistency = False
+    	For nImage = 0 to UBound(objMain,1) - 1
+			strImageType = objMain(nImage,pIndex(0,"Name"))
+			vMainList = Split(objMain(nImage,pIndex(0,"Main List")),",")
+			For Each strMainItem in vMainList
+				If strMainItem = "" Then Exit For
+				strMinorName = strImageType & "-" & strMainItem
+				' Get Minor object ID by its name
+				If Not GetMinorIDByName(strMinorName, nMinor, nDebug) Then
+                    Call TrDebug ("Release object " & strMinorName & " was not found " , "", objDebug, MAX_LEN, 1, nDebug)									
+				    ' Create new object for Minor release
+				    strGroup = "Release_" & My_Random(1, 999999)
+				    nParam = GetAmountOfProperties(vClass,1)
+					nLine = 0
+					Redim vFileLines(nParam + 3)
+					Call TrDebug ("Creating new minor release object in the catalogue file " , "", objDebug, MAX_LEN, 1, nDebug)					
+					vFileLines(nLine) = "" : nLine = nLine + 1
+					vFileLines(nLine) = "[" & strGroup & "]" : nLine = nLine + 1
+					vFileLines(nLine) = "#   Object group generated during consistency check" : nLine = nLine + 1
+					For i = 1 to nParam
+					    Param_Name = GetVariable("Param" & i, vClass, 2, 1, 0, 0)
+						vFileLines(nLine) = Param_Name & " = "
+						If Param_Name = "Name" Then vFileLines(nLine) = vFileLines(nLine) & strMinorName
+						Call TrDebug ("Create: " & vFileLines(nLine), "", objDebug, MAX_LEN, 1, nDebug)					
+						nLine = nLine + 1
+					Next
+				    Call WriteArrayToFile(strFileDeviceCatalog,vFileLines, UBound(vFileLines),2,nDebug)
+					'   Update Catalogue Index
+					Call AddFileLineInGroup(strFileDeviceCatalog, "Object_Index", strGroup,nDebug)
+                    CheckCatalogueConsistency = True
+				Else 
+				   Call TrDebug (strMinorName , "OK", objDebug, MAX_LEN, 1, nDebug)					
+				End If
+			Next
+		Next
+End Function
