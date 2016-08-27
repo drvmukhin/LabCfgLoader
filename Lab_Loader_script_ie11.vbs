@@ -3482,7 +3482,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 								"type=text > " &_
 							"</td>" &_							
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Main_Release" & nImage & "' id='Main_Relese" & nImage & "'" &_
+									"<select name='Main_Release" & nImage & "' id='Main_Release" & nImage & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
@@ -3496,7 +3496,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Minor_Release" & nImage & "' id='Minor_Relese" & nImage & "'" &_
+									"<select name='Minor_Release" & nImage & "' id='Minor_Release" & nImage & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
