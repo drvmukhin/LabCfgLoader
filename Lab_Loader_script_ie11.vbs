@@ -1545,70 +1545,70 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
     				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & 2 * LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & 2 * nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='EPTY' onclick=document.all('ButtonHandler').value='EMPTY';></button>" & _	
+						"px; ' name='EPTY' id='m_Button0' onclick=document.all('ButtonHandler').value='EMPTY';></button>" & _	
 					"</td>"&_
 				"</tr>" &_
     			"<tr>" &_
     				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"' name='LOAD' onclick=document.all('ButtonHandler').value='LOAD';><u>L</u>oad Config</button>" & _	
+						"' name='LOAD' id='m_Button1' onclick=document.all('ButtonHandler').value='LOAD';><u>L</u>oad Config</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Save_Tested' onclick=document.all('ButtonHandler').value='SAVE_TESTED';><u>S</u>ave Tested Config</button>" & _	
+						"px; ' name='Save_Tested' id='m_Button2' onclick=document.all('ButtonHandler').value='SAVE_TESTED';><u>S</u>ave Tested Config</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Save_as' AccessKey='E' onclick=document.all('ButtonHandler').value='SAVE_AS';><u>S</u>ave as...</button>" & _
+						"px; ' name='Save_as' id='m_Button3' AccessKey='E' onclick=document.all('ButtonHandler').value='SAVE_AS';><u>S</u>ave as...</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Blk_DownLoad' AccessKey='B' onclick=document.all('ButtonHandler').value='BLK_DOWNLOAD';><u>B</u>ulk Save</button>" & _
+						"px; ' name='Blk_DownLoad' id='m_Button4' AccessKey='B' onclick=document.all('ButtonHandler').value='BLK_DOWNLOAD';><u>B</u>ulk Save</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px;' name='EDIT' onclick=document.all('ButtonHandler').value='EDIT';><u>E</u>dit Config</button>" & _	
+						"px;' name='EDIT' id='m_Button5' onclick=document.all('ButtonHandler').value='EDIT';><u>E</u>dit Config</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
      					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='Delete_Cfg' onclick=document.all('ButtonHandler').value='DELETE_CFG';><u>D</u>elete Config</button>" & _
+						"px; ' name='Delete_Cfg' id='m_Button6' onclick=document.all('ButtonHandler').value='DELETE_CFG';><u>D</u>elete Config</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='POPULATE_ORIG' AccessKey='P' onclick=document.all('ButtonHandler').value='POPULATE_ORIG';>TCG <u>E</u>xport Original</button>" & _
+						"px; ' name='POPULATE_ORIG' id='m_Button7' AccessKey='P' onclick=document.all('ButtonHandler').value='POPULATE_ORIG';>TCG <u>E</u>xport Original</button>" & _
 					"</td>"&_
 				"</tr>" &_					
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor4 & "; width:" &_
 						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='UPGRADE_SW' AccessKey='P' onclick=document.all('ButtonHandler').value='UPGRADE_SW';><u>U</u>pgrade Junos</button>" & _
+						"px; ' name='UPGRADE_SW' id='m_Button8' AccessKey='P' onclick=document.all('ButtonHandler').value='UPGRADE_SW';><u>U</u>pgrade Junos</button>" & _
 					"</td>"&_
 				"</tr>" &_					
 				"<tr>" &_
     				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & 2 * LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
 						nMenuButtonX & ";height:" & 3 * LoginTitleH & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='EPTY' onclick=document.all('ButtonHandler').value='EMPTY';></button>" & _	
+						"px; ' name='EPTY' id='m_Button9' onclick=document.all('ButtonHandler').value='EMPTY';></button>" & _	
 					"</td>"&_
 				"</tr></tbody></table>" &_
 				"<input name='ButtonHandler' type='hidden' value='Nothing Clicked Yet'>"
@@ -1689,7 +1689,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 						htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 							"<select name='Input_Param_0' id='Input_Param_0'" &_
-											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+											"style=""width: " & Int(LoginTitleW/5) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 											";position: relative; left:" & nTab & "px; " &_
 											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 											"; background-color:" & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
@@ -1703,7 +1703,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 											"<option value='" & nYear & "'>" & nYear & "</option>" 
 					Next
 					htmlMain = htmlMain &_
-    							"<option value='All'>"& Space_html(18)&"</option>" &_
+    							"<option value='All'></option>" &_
 							"</select>" &_
 						"</td>"
 					'-----------------------------------------------------
@@ -1712,7 +1712,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 					htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & nNameW & """>" &_
 							"<select name='Input_Param_1' id='Input_Param_1'" &_
-											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+											"style="" width: " & Int(LoginTitleW/5) & "px; border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 											";position: relative; left:" & nTab & "px; " &_
 											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
@@ -1724,7 +1724,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 											"<option value='" & strTag & "'>" & strTag & "</option>" 
 					Next
 						htmlMain = htmlMain &_
-											"<option value='*'>"& Space_html(18)& "</option>" 
+											"<option value='*'> </option>" 
 					htmlMain = htmlMain &_
 							"</select>" &_
 						"</td>"
@@ -1734,7 +1734,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 					htmlMain = htmlMain &_
 						"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & nNameW & """>" &_
 							"<select name='Input_Param_2' id='Input_Param_2'" &_
-											"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+											"style=""width: " & Int(LoginTitleW/5) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 											";position: relative; left:" & nTab & "px; " &_
 											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
@@ -1742,7 +1742,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 											"type=text > "
 					For nVersion = 0 to MAX_PARAM
 						htmlMain = htmlMain &_
-											"<option value='Latest'>"& Space_html(18)& "</option>" 
+											"<option value='Latest'></option>" 
 					Next
 					htmlMain = htmlMain &_
 							"</select>" &_
@@ -1789,15 +1789,15 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 				"</tr>" &_
 				"<tr>" &_
 					"<td style="" border-style: None;"" align=""left"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/5) & """>" &_
-						"<select name='cfg_name' id='cfg_name'" &_
-						"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+						"<select name='cfg_name' id='cfg_name' " &_
+						"style=""width: " & Int(3 * LoginTitleW/5) & "px; border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 						";position: relative; left:" & nTab & "px; " &_
 						"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 						"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 						" onchange=document.all('ButtonHandler').value='SELECT_CFG' type=text > "
 						For nInd = 0 to UBound(vCfgList,1)-1
 							htmlMain = htmlMain &_
-												"<option value=" & nInd & """></option>" 
+												"<option value=" & nInd & """>" & Space_html(131) & "</option>" 
 						Next
 						htmlMain = htmlMain &_
 									"<option value=New"">New"& Space_html(128)& "</option>" &_
@@ -1986,43 +1986,43 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
     			"<tr>" &_
     				"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='SET_CFG_TEMPLATE' onclick=document.all('ButtonHandler').value='SET_CFG_TEMPLATE';>CFG Template Name</button>" & _	
+						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;position: relative; left: 10px; " &_
+						"' id='s_Button0' name='SET_CFG_TEMPLATE' onclick=document.all('ButtonHandler').value='SET_CFG_TEMPLATE';>CFG Template Name</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & Int(LoginTitleH/4) & """ width=""" & LoginTitleW & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='SET_CONNECTIVITY' onclick=document.all('ButtonHandler').value='SET_CONNECTIVITY';>LAB Connectivity</button>" & _	
+						nMenuButtonX & ";height:" & nMenuButtonY & "; font-size: " & nFontSize_12 & ".0pt; position: relative; left: 10px; " &_
+						"' id='s_Button1'  name='SET_CONNECTIVITY' onclick=document.all('ButtonHandler').value='SET_CONNECTIVITY';>LAB Connectivity</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
 					"<td style=""border-style: None; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='SET_FOLDER' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_FOLDER';>Folder Settings</button>" & _
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;position: relative; left: 10px; " &_
+						"' id='s_Button2'  name='SET_FOLDER' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_FOLDER';>Folder Settings</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
     					"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px; ' name='SET_CRT' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_CRT';>SecureCRT Sessions</button>" & _
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;position: relative; left: 10px; " &_
+						"' id='s_Button3'  name='SET_CRT' AccessKey='E' onclick=document.all('ButtonHandler').value='SET_CRT';>SecureCRT</button>" & _
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px;' name='SET_OTHER' onclick=document.all('ButtonHandler').value='SET_OTHER';>Other Settings</button>" & _	
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;position: relative; left: 10px; " &_
+						"' id='s_Button4'  name='SET_OTHER' onclick=document.all('ButtonHandler').value='SET_OTHER';>Other Settings</button>" & _	
 					"</td>"&_
 				"</tr>" &_
 				"<tr>" &_
     				"<td style=""border-style: none; background-color: Transparent;""align=""right"" class=""oa1"" height=""" & LoginTitleH & """ width=""" & Int(LoginTitleW/4) & """>" & _
 						"<button style='font-weight: bold; border-style: None; background-color: " & HttpBgColor5 & "; color: " & HttpTextColor4 & "; width:" &_
-						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;" &_
-						"px;' name='JUNOS_CATALOG' onclick=document.all('ButtonHandler').value='SET_JUNOS_CATALOG';>Junos Catalog</button>" & _	
+						nMenuButtonX & ";height:" & nMenuButtonY & ";font-size: " & nFontSize_12 & ".0pt;position: relative; left: 10px; " &_
+						"' id='s_Button5'  name='JUNOS_CATALOG' onclick=document.all('ButtonHandler').value='SET_JUNOS_CATALOG';>Junos Catalog</button>" & _	
 					"</td>"&_
 				"</tr>" &_				
 		    "</tbody></table>" &_
@@ -2070,10 +2070,38 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 	'--------------------------------------
 	' LOAD INITAIAL YEAR AND SEARCH TAG
 	'--------------------------------------
+	
+	For i = 1 to 8
+	    Select case i
+		Case 1
+		Case Else
+		'g_objIE.document.getElementById("m_Button" & i).style.backgroundcolor = "#0099ff"
+		g_objIE.document.getElementById("m_Button" & i).Style.borderradius = "25px"
+		End Select
+	Next
+	g_objIE.document.getElementById("m_Button1").Style.borderradius = "25px"
+	For i = 0 to 5
+	    Select case i
+		Case 10
+		Case Else
+		g_objIE.document.getElementById("s_Button" & i).style.backgroundcolor = "#002db3"
+		g_objIE.document.getElementById("s_Button" & i).Style.borderradius = "25px"
+		End Select
+	Next
+	g_objIE.document.getElementById("m_Button1").Style.borderradius = "25px"
+
     g_objIE.document.getElementById("Input_Param_0").selectedIndex = nYear
 	g_objIE.document.getElementById("Input_Param_1").selectedIndex = nTag
 	strYear = g_objIE.document.getElementById("Input_Param_0").options(nYear).Value
 	strTag = g_objIE.document.getElementById("Input_Param_1").options(nTag).Value
+	g_objIE.document.getElementById("Input_Param_0").length = 7
+	i = 0
+	for nInd = 2010 to 2016
+	   g_objIE.document.getElementById("Input_Param_0").options(i).Value = nInd
+	   g_objIE.document.getElementById("Input_Param_0").options(i).Text = nInd
+	   i = i + 1
+	Next
+	
 	'--------------------------------------
 	' LOAD CONFIGURATION LIST
 	'--------------------------------------
@@ -3030,7 +3058,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 				End If
 			Next
 			Redim Preserve vImageTypes(Ubound(vImageTypes) - 1)
-			nLine = 5 + int(nImageType * N_SELECT * 3/4)
+			nLine = 5 + int((nImageType-1) * N_SELECT * 3/4)
 	End Select
 	WindowH = IE_Menu_Bar + 2 * LoginTitleH + cellH * (nLine) + nBottom
 	WindowW = IE_Border + LoginTitleW
@@ -3098,7 +3126,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						"</td>" &_
 						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
 							"<select name='Platform_Name' id='Platform_Name'" &_
-								"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+								"style=""width: " & Int(LoginTitleW/6) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 								"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 								"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 								" onchange=document.all('ButtonHandler').value='SelectPlatform';" &_
@@ -3108,7 +3136,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 														"<option value=" & nPlatform & """>" & Split(vPlatforms(nPlatform),",")(0) & "</option>" 
 								Next
 								htmlMain = htmlMain &_
-							"<option value=" & Ubound(vPlatforms) & """>" & Space_html(24) & "</option>" &_
+							"<option value=" & Ubound(vPlatforms) & """></option>" &_
 							"</select>" &_
 						"</td>" &_
 					"</tr>"
@@ -3124,9 +3152,9 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 							"&nbsp;&nbsp;Config. name: [Service Type]-[TC#]-<span style=""font-weight: bold;"">[Prefix]</span>-[L|R].conf</span></p>"&_
 						"</td>" &_
 						"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(LoginTitleW/4) & """ align=""center"">" &_									
-							"<input name=Platform_Index value='' style=""text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+							"<input name=Platform_Index value='' style=""width: " & Int(LoginTitleW/6) & "px;text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 							" border-style: none; font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-							"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i size=15 maxlength=15 " &_
+							"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" AccessKey=i maxlength=15 " &_
 							"type=" & strType & " > " &_
 						"</td>" &_
 					"</tr>"
@@ -3493,12 +3521,12 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						"<tr>"&_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """align=""center"" valign=""top"">" & _
 									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
-									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
-									"px; ' name='ImageStatus' onclick=document.all('ButtonHandler').value='Clear_" & nImageType & "';><u>C</u>lear</button>" &_
+									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_10 & ".0pt;" &_
+									"' name='ClearStatus' id='Button1_" & nImageType & "' onclick=document.all('ButtonHandler').value='Clear_" & nImageType & "';><u>C</u>lear</button>" &_
 									"<br><br>" &_
 									"<button style='font-weight: Normal; border-style: None; background-color: " & HttpBgColor2 & "; color: " & HttpTextColor3 & "; width:" &_
-									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_12 & ".0pt;" &_
-									"px; ' name='UpdateRequest' onclick=document.all('ButtonHandler').value='UpdateMain_" & nImageType & "';><u>U</u>date</button>" &_										
+									nButtonX & ";height:" & Int(nButtonY/2) & "; font-size: " & nFontSize_10 & ".0pt;" &_
+									"' name='UpdateRequest' id='Button2_" & nImageType & "' onclick=document.all('ButtonHandler').value='UpdateMain_" & nImageType & "';><u>U</u>date</button>" &_										
 							"</td>"&_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(2 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 								"<input name='Image_Param_7' value='' style=""text-align: Left; font-size: " & nFontSize_10 & ".0pt;" &_ 
@@ -3514,19 +3542,19 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 							"</td>" &_							
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 									"<select name='Main_Release" & nImageType & "' id='Main_Release" & nImageType & "'" &_
-									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+									"style="" width: " & Int(LoginTitleW/6) & "px;   border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 									" onchange=document.all('ButtonHandler').value='SelectMain_" & nImageType & "';" &_
 									"type=text > "
 									For nMain = 0 to MAIN_MAX
-										htmlMain = htmlMain &	"<option value=Main_" & nMain & ">" & Space_html(30) & "</option>" 
+										htmlMain = htmlMain &	"<option value=Main_" & nMain & "></option>" 
 									Next
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 									"<select name='Minor_Release" & nImageType & "' id='Minor_Release" & nImageType & "'" &_
-									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+									"style=""width: " & Int(LoginTitleW/6) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
 									" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImageType & "';" &_
@@ -3534,7 +3562,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 									' Split(objMain(0,pIndex(1,"Minor List")),",")(nMinor)
 									' For nMinor = 0 to GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
 									For nMinor = 0 to 100
-										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(40) & "</option>" 
+										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " > </option>" 
 									Next
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_							
@@ -3660,6 +3688,10 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 			End Select
 		    g_objIE.Document.All("Settings_Param_25").Value = strFolder
 		Case 8 
+			for i=0 to Ubound(vImageTypes) - 1
+			    g_objIE.document.getElementById("Button1_" & i).style.borderRadius = "10px"
+	           g_objIE.document.getElementById("Button2_" & i).style.borderRadius = "10px"
+            Next
 		    Dim vMain, vMinor
 			Redim vMain(1)
 			Redim vMinor(1)
@@ -3711,7 +3743,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						    If UBound(vMinor) >= nInd Then
 						       g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = vMinor(nInd)
 						    Else 
-							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = Space(40)
+							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = " "
 							End If
 						Next
 						Exit Do
@@ -4979,7 +5011,7 @@ Function UpdateCfgList(byRef g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htm
 	g_objIE.document.getElementById("cfg_name").Options(0).Text = "N/A"
 	g_objIE.document.getElementById("cfg_name").Options(0).Value = 0				   	
 	For nInd = 1 to UBound(vCfgList,1)
-		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Text = Space(128)
+		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Text = " "
 		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Value = "N/A"					   
 	Next
 	nOptions = 0
@@ -5029,7 +5061,7 @@ Function UpdateCfgVer(ByRef g_objIE, ByRef nCfg, ByRef vCfgList, htmlSelect)
 			g_objIE.document.getElementById(htmlSelect).selectedIndex = nInd			
 		End If
 		If nInd > UBound(Split(strLine,",")) Then 
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Space(18)
+			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = " "
 			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = 0
 		End If
 	Next
@@ -6192,7 +6224,7 @@ Dim nImageType, nImage
 							kInd = kInd + 1
 						Next
 						For n = kInd to 99
-							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(n).Text = Space(35)
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(n).Text = " "
 						Next
 					End If
 					nInd = nInd + 1
