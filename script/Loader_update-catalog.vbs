@@ -107,10 +107,15 @@ Sub Main()
 								n = 3
 								crt.sleep 100 * n
 							Case Else 
-								Exit Do		
+								Exit Sub
+								MsgBox "Error: " & Err.Number & ": " & Err.Description
 						End Select
 				Loop
 				On Error goto 0
+				if i => nRetries Then 
+				   MsgBox "Error: " & Err.Number & ": " & Err.Description
+				   Exit Sub
+				End If
 '--------------------------------------------------------------------
 '   LOOKING FOR EXISTED MONITOR SESSION (tail.exe)
 '--------------------------------------------------------------------
@@ -191,11 +196,13 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 	For nSession = 0 to UBound(objMain,1) - 1
 	    bSuccess = False
 		bConnect = False
-	    Do
-			If MainUpdateFlag <> "All" and CInt(MainUpdateFlag) <> nSession Then 
-			    bSuccess = True
-			    MsgSuccess = "SKIP"
-			    Exit Do
+	    Do			
+			If MainUpdateFlag <> "All" Then 
+			    If CInt(MainUpdateFlag) <> nSession Then 
+					bSuccess = True
+					MsgSuccess = "SKIP"
+					Exit Do
+				End If
 			End If				
 			'--------------------------------------------------------------------------------
 			'          GET NAME OF THE TELNET SESSIONS
@@ -242,7 +249,9 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objTab_L.Screen.WaitForString ("]$")
 			For nRelease = 0 to UBound(Split(objMain(nSession,pIndex(0,"Main List")),","))
 		        Do 
-				    If MinorUpdateFlag <> "All" and CInt(MinorUpdateFlag) <> nRelease Then Exit Do
+				    If MinorUpdateFlag <> "All" Then 
+					   If CInt(MinorUpdateFlag) <> nRelease Then Exit Do
+				    End If 
 					' strMinorList = "Minor List = "
 					strMinorList = ""
 					strRelease = Split(objMain(nSession,pIndex(0,"Main List")),",")(nRelease)
@@ -307,7 +316,7 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 						   nCount = nCount + 1
 						End If
 					Next 
-					Call TrDebug_No_Date("FOUND " & Left(strMinorList,80) & "...", "" , objDebug, MAX_LEN, 1, nInfo)				
+					Call TrDebug_No_Date("FOUND " & Left(strMinorList,60) & "...", "" , objDebug, MAX_LEN, 1, nInfo)				
 					If Not ReplaceFileLineInGroup(strCatalogFile, strObj, "Minor List =", strMinorList,nDebug) Then 
 					   MsgBox "Failed to update catalogue file"
 					End If
@@ -330,7 +339,7 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 		    Call TrDebug_No_Date (objMain(nSession,pIndex(0,"Name")), "FAILED", objDebug, MAX_LEN, 1, 1)		
 		End If 
     Next
-	' Call TrDebug_No_Date ("JOB DONE ", "", objDebug, MAX_LEN, 3, 1)	
+	Call TrDebug_No_Date ("JOB DONE ", "", objDebug, MAX_LEN, 3, 1)	
 	If IsObject(objDebug) Then objDebug.close : End If
 	Set objFSO = Nothing
 	Set objEnvar = Nothing
@@ -614,7 +623,7 @@ Dim strUser, pUser, pDomain, wql
 		On Error Resume Next
 		Set objWMI = GetObject("winmgmts:\\127.0.0.1\root\cimv2")
 		If Err.Number <> 0 Then 
-				Call TrDebug ("GetMyPID ERROR: CAN'T CONNECT TO WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
+				Call TrDebug_No_Date ("GetMyPID ERROR: CAN'T CONNECT TO WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
 				On error Goto 0 
 				Exit Do
 		End If 
@@ -622,7 +631,7 @@ Dim strUser, pUser, pDomain, wql
 		On Error Resume Next
 		Set colItems = objWMI.ExecQuery(wql)
 		If Err.Number <> 0 Then
-				Call TrDebug ("GetMyPID ERROR: CAN'T READ QUERY FROM WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
+				Call TrDebug_No_Date ("GetMyPID ERROR: CAN'T READ QUERY FROM WMI PROCESS OF THE SERVER","",objDebug, MAX_LEN, 1, nDebug)
 				On error Goto 0 
 				Set colItems = Nothing
 				Exit Do
@@ -630,16 +639,16 @@ Dim strUser, pUser, pDomain, wql
 		On error Goto 0 
 		For Each process In colItems
 			process.GetOwner  pUser, pDomain 
-			Call TrDebug ("GetWinAppPID: Process Name (PID): " & process.Name & " (" & process.ProcessId & ")", "",objDebug, MAX_LEN, 1, nDebug)
-			Call TrDebug ("GetWinAppPID: Owner: " & process.CSName & "/" & pUser, "",objDebug, MAX_LEN, 1, nDebug) 
-			Call TrDebug ("GetWinAppPID: CMD: " & process.CommandLine, "",objDebug, MAX_LEN, 1, nDebug) 
-			Call TrDebug ("GetWinAppPID: ParentPID:" &  Process.ParentProcessId, "",objDebug, MAX_LEN, 1, nDebug) 			
+			Call TrDebug_No_Date ("GetWinAppPID: Process Name (PID): " & process.Name & " (" & process.ProcessId & ")", "",objDebug, MAX_LEN, 1, nDebug)
+			Call TrDebug_No_Date ("GetWinAppPID: Owner: " & process.CSName & "/" & pUser, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug_No_Date ("GetWinAppPID: CMD: " & process.CommandLine, "",objDebug, MAX_LEN, 1, nDebug) 
+			Call TrDebug_No_Date ("GetWinAppPID: ParentPID:" &  Process.ParentProcessId, "",objDebug, MAX_LEN, 1, nDebug) 			
 			Select Case Lcase(strCommandLine)
 			    Case "null", "none", ""
 					If pUser = strUser then 
 						strPID = process.ProcessId
 						strParentPID = Process.ParentProcessId
-						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID , "",objDebug, MAX_LEN, 1, nDebug)
+						Call TrDebug_No_Date ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID , "",objDebug, MAX_LEN, 1, nDebug)
 						GetWinAppPID = True
 						Exit For
 					End If
@@ -647,7 +656,7 @@ Dim strUser, pUser, pDomain, wql
 					If pUser = strUser and InStr(process.CommandLine,strCommandLine) then 
 						strPID = process.ProcessId
 						strParentPID = Process.ParentProcessId
-						Call TrDebug ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID, "",objDebug, MAX_LEN, 1, nDebug)
+						Call TrDebug_No_Date ("GetWinAppPID: Process is already running. Desktop user owns the process: " & strPID, "",objDebug, MAX_LEN, 1, nDebug)
 						GetWinAppPID = True
 						Exit For
 					End If

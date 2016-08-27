@@ -251,7 +251,8 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			    Case 1
 				    crt.sleep 100
 					objTab_L.Screen.Send "yes" & chr(13)
-			        objTab_L.Screen.WaitForString "@" & strHostL & ">"						
+			        objTab_L.Screen.WaitForString "@" & strHostL & ">"
+					Call  TrDebug_No_Date (strSessionL & "Exit without commit", "TIME OUT", objDebug, MAX_LEN, 1, nInfo)
 			    Case 2 
                 Case Else 
                    Exit Do				

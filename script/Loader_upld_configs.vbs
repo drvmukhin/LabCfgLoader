@@ -285,8 +285,14 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 				objTab_L.Screen.Send "exit" & chr(13)
 				objTab_L.Screen.WaitForString "@" & strHostL & "#"
 			Next
-				objTab_L.Screen.Send "exit" & chr(13)
-				objTab_L.Screen.WaitForString "@" & strHostL & ">"
+			If Not ExitJunosEditMode(objTab_L) Then 
+				Call TrDebug_No_Date ("EXIT TIMEOUT", "ERROR", objDebug, MAX_LEN, 1, 1)
+				objTab_L.Session.Disconnect
+				bConnect = False
+				Exit Do
+			End If
+'				objTab_L.Screen.Send "exit" & chr(13)
+'				objTab_L.Screen.WaitForString "@" & strHostL & ">"
 			'---------------------------------------------
 			'   START FTP SESSION
 			'---------------------------------------------
@@ -363,6 +369,10 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 			objTab_L.Screen.WaitForString "@" & strHostL & "# "
 			objTab_L.Screen.Send "delete policy-options" & chr(13)
 			objTab_L.Screen.WaitForString "@" & strHostL & "# "
+			objTab_L.Screen.Send "delete firewall" & chr(13)
+			objTab_L.Screen.WaitForString "@" & strHostL & "# "
+			objTab_L.Screen.Send "delete interfaces" & chr(13)
+			objTab_L.Screen.WaitForString "@" & strHostL & "# "			
 			'---------------------------------------------
 			'   COMMIT CLEANED CONFIGURATION
 			'---------------------------------------------	
@@ -499,7 +509,8 @@ Call TrDebug_No_Date ("GetMyPID: PID = " & strPID & " ParentPID = " & strParentP
 		End If
         If bConnect Then 		
 			objTab_L.Screen.WaitForString "@" & strHostL & "#"
-			objTab_L.Screen.Send "exit" & chr(13)
+			If Not ExitJunosEditMode(objTab_L) Then Call TrDebug_No_Date ("EXIT TIMEOUT", "WARNING", objDebug, MAX_LEN, 1, 1)
+'			objTab_L.Screen.Send "exit" & chr(13)
 			objTab_L.Session.Disconnect	
 		End If
 	Next
@@ -840,3 +851,24 @@ Dim objEnvar
 	set objEnvar = Nothing
 	GetScreenUserSYS = strScreenUser
 End Function
+'---------------------------------------------------------------------------------
+' Function ExitJunosEditMode(objTab) 
+'---------------------------------------------------------------------------------
+Function ExitJunosEditMode(objTab)
+Dim vWaitForExit, nResult
+    ExitJunosEditMode = False
+    vWaitForExit = Array(">","(yes)")
+	objTab.Screen.Send "exit" & chr(13)
+	nResult = objTab.Screen.WaitForStrings (vWaitForExit, 5)
+	Select Case nResult
+	    Case 0
+		     ExitJunosEditMode = False
+		Case 1
+		     ExitJunosEditMode = True
+		Case 2
+		    objTab.Screen.Send "yes" & chr(13)
+		    objTab.Screen.WaitForString ">"
+			ExitJunosEditMode = True
+	End select
+End Function
+

@@ -22,6 +22,8 @@ Const MAX_LEN = 		134
 Const nABC =			2
 Const PARENTS = 		"1"
 Const DEBUG_FILE = "debug-loader"
+Const HideTerminal = 7
+Const ShowTerminal = 1
 ' Define global array which stores parameters of all my objects per class
 Dim vObjects, vObjIndex
 ' Define global array which keeps properties of all my Classes' 
@@ -390,9 +392,9 @@ Loop
 								vSettings(0) = vLines(nInd)
 							    Select Case Split(vLines(nInd),"=")(1)
 							        Case "1"
-                                        nWindowState = 2
+                                        nWindowState = HideTerminal
 								    Case Else
-									    nWindowState = 1
+									    nWindowState = ShowTerminal
 							    End Select
 					Case LAN_ADAPTER
 								vSettings(1) = vLines(nInd)
@@ -1383,7 +1385,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 	Set g_objIE = Nothing
     Set g_objShell = Nothing
 	Call TrDebug ("IE_PromptForInput: OPEN MAIN CONFIG LOADER FORM ", "", objDebug, MAX_LEN, 3, nDebug)				
-	vTag = Array("*", "MBH", "Metro", "RSVP", "ZTD", "ZTP", "CE20")
+	vTag = Array("*", "MBH", "Metro", "RSVP", "ZTD", "ztd", "ZTP", "CE20")
 	'-----------------------------------------------------
 	'   SORT CRT SESSIONS INTO FOUR GROUPS
 	'-----------------------------------------------------
@@ -1694,16 +1696,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 											"; background-color:" & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 											" onchange=document.all('ButtonHandler').value='Select_0';" &_
-											"type=text > "
-						htmlMain = htmlMain &_
-											"<option value='All'>All</option>" 
-
-					For nYear = 2012 to Year(Date())
-						htmlMain = htmlMain &_
-											"<option value='" & nYear & "'>" & nYear & "</option>" 
-					Next
-					htmlMain = htmlMain &_
-    							"<option value='All'></option>" &_
+											"type=text > " &_
 							"</select>" &_
 						"</td>"
 					'-----------------------------------------------------
@@ -1717,15 +1710,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 											"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 											"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
 											" onchange=document.all('ButtonHandler').value='Select_1';" &_
-											"type=text > "
-					For Each strTag in vTag
-						If strTag = "" Then Exit For
-						htmlMain = htmlMain &_
-											"<option value='" & strTag & "'>" & strTag & "</option>" 
-					Next
-						htmlMain = htmlMain &_
-											"<option value='*'> </option>" 
-					htmlMain = htmlMain &_
+											"type=text > " &_
 							"</select>" &_
 						"</td>"
 					'-----------------------------------------------------
@@ -2038,39 +2023,6 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
     g_objIE.Toolbar = False
     ' Wait for the "dialog" to be displayed before we attempt to set any
     ' of the dialog's default values.
-	'-----------------------------------------------------------------
-	'	SET DEFAULT PARAMETERS
-	'-----------------------------------------------------------------
-	CFG_Downloaded = False
-	YES_NO = False
-	nYear = Int(vSessionTmp(0))
-	nTag = Int(vSessionTmp(1))
-	nCfg = Int(vSessionTmp(2))
-	nVersion = Int(vSessionTmp(3))
-	CurrentCfg = vSessionTmp(4)
-	If vSessionTmp(5) = "0" Then YES_NO = False Else YES_NO = True
-	g_objIE.Document.All("ButtonHandler").Value = vSessionTmp(6)
-
-	g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
-	g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
-
-	'--------------------------------------
-	' WAIT UNTIL IE FORM LOADED
-	'--------------------------------------
-    Do
-        WScript.Sleep 100
-    Loop While g_objIE.Busy
-	if g_objIE.Document.All("ConfigLocation").Checked then	
-		SourceFolder = strDirectoryConfig & "\Tested"
-		Arg4 = "tested"
-	Else
-		SourceFolder = strDirectoryConfig
-		Arg4 = "original"
-    end if
-	'--------------------------------------
-	' LOAD INITAIAL YEAR AND SEARCH TAG
-	'--------------------------------------
-	
 	For i = 1 to 8
 	    Select case i
 		Case 1
@@ -2088,60 +2040,81 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 		g_objIE.document.getElementById("s_Button" & i).Style.borderradius = "25px"
 		End Select
 	Next
-	g_objIE.document.getElementById("m_Button1").Style.borderradius = "25px"
-
-    g_objIE.document.getElementById("Input_Param_0").selectedIndex = nYear
-	g_objIE.document.getElementById("Input_Param_1").selectedIndex = nTag
-	strYear = g_objIE.document.getElementById("Input_Param_0").options(nYear).Value
-	strTag = g_objIE.document.getElementById("Input_Param_1").options(nTag).Value
-	g_objIE.document.getElementById("Input_Param_0").length = 7
+	g_objIE.document.getElementById("m_Button1").Style.borderradius = "25px"	
+	'-----------------------------------------------------------------
+	'	SET DEFAULT PARAMETERS
+	'-----------------------------------------------------------------
+	CFG_Downloaded = False
+	YES_NO = False
+    ' Load Year List 
+	g_objIE.document.getElementById("Input_Param_0").length = Year(Date()) - 2012 + 1
 	i = 0
-	for nInd = 2010 to 2016
-	   g_objIE.document.getElementById("Input_Param_0").options(i).Value = nInd
-	   g_objIE.document.getElementById("Input_Param_0").options(i).Text = nInd
+	for nYear = 2012 to Year(Date())
+	    Select Case i
+	    Case 0
+		   g_objIE.document.getElementById("Input_Param_0").options(i).Value = "All"
+		   g_objIE.document.getElementById("Input_Param_0").options(i).Text = "All"
+	    Case Else
+		   g_objIE.document.getElementById("Input_Param_0").options(i).Value = nYear
+		   g_objIE.document.getElementById("Input_Param_0").options(i).Text = nYear
+		End Select
 	   i = i + 1
 	Next
-	
-	'--------------------------------------
+	' Select default Year
+	nYear = Int(vSessionTmp(0))
+    g_objIE.document.getElementById("Input_Param_0").selectedIndex = nYear
+	strYear = g_objIE.document.getElementById("Input_Param_0").options(nYear).Value
+    ' Load Search Tags
+	g_objIE.document.getElementById("Input_Param_1").length = UBound(vTag) + 1
+	nTag = 0
+	For Each strTag in vTag
+		If strTag = "" Then Exit For
+		g_objIE.document.getElementById("Input_Param_1").options(nTag).Value = strTag
+		g_objIE.document.getElementById("Input_Param_1").options(nTag).Text = strTag
+		nTag = nTag + 1
+	Next
+    ' Select Select Previously saved Search Tag	
+	nTag = Int(vSessionTmp(1))
+	g_objIE.document.getElementById("Input_Param_1").selectedIndex = nTag
+	strTag = g_objIE.document.getElementById("Input_Param_1").options(nTag).Value
+	' Select Previously saved configuration ID number
+	nCfg = Int(vSessionTmp(2))
 	' LOAD CONFIGURATION LIST
-	'--------------------------------------
 	nOptions = UpdateCfgList(g_objIE, nCfg, strYear, strTag, vCfgList, "cfg_name")
     g_objIE.document.getElementById("cfg_name").SelectedIndex = nOptions	
 	strCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Text
 	nCfg = g_objIE.document.getElementById("cfg_name").Options(nOptions).Value
-
-'	strConfigFileL = vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf"
-'	strConfigFileL = SourceFolder & "\" & vSvc(nService,1) & "\" & strConfigFileL
-'	    g_objIE.document.getElementById("bw_profile").Options(0).Text = "N/A"
-'	    g_objIE.document.getElementById("bw_profile").SelectedIndex = 0
-'	    g_objIE.document.getElementById("bw_profile").Disabled = True
 	'--------------------------------------
 	' UPDATE CFG VERSIONS
 	'--------------------------------------
 	nVersion = UpdateCfgVer(g_objIE, nCfg, vCfgList, "Input_Param_2")
+	' Select Select Previously saved Configuration Version	
+	nVersion = Int(vSessionTmp(3))
 	strVersion = g_objIE.document.getElementById("Input_Param_2").options(nVersion).text							
 	'--------------------------------------
 	'  SESSION STATUS CHECK BOXES
 	'--------------------------------------
-
-'	Select Case vSessionTmp(6)
-'	    Case "DOWNLOAD"
-'			Call UpdateSessionStatus(g_objIE, nCfg, SAVE_AS, vCfgList,vSessionCRT, vSessionEnable)
-'	    Case Else 
-'			Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)
-'	End Select
     Call UpdateSessionStatus(g_objIE, nCfg, strCfg, vCfgList,vSessionCRT, vSessionEnable)
-    '--------------------------------------
-	Call TrDebug("MAIN FORM:" , g_objIE.document.getElementById("Input_Param_1").Options(0).text, objDebug, MAX_LEN, 1, 1)
-	Call TrDebug("MAIN FORM:" , g_objIE.document.getElementById("Input_Param_1").Options(1).text, objDebug, MAX_LEN, 1, 1)
+	' Status Bar
+	CurrentCfg = vSessionTmp(4)
+	g_objIE.Document.All("Current_config")(0).Value = Split(vSettings(13),"=")(1)
+	g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
+	' Check if there is any action requires auto-completion
+	If vSessionTmp(5) = "0" Then YES_NO = False Else YES_NO = True
+    g_objIE.Document.All("ButtonHandler").Value = vSessionTmp(6)
 	'--------------------------------------
-	' LOAD LAST REMEMBERED PROFILE
+	' WAIT UNTIL IE FORM LOADED
 	'--------------------------------------
-	'nService = vSessionTmp(0)
-	'nFlavor = vSessionTmp(1)
-	'nTaskInd = vSessionTmp(2)
-	'nTask = Split(vFlavors(nService,nFlavor,1),",")(nTaskInd)
-
+    Do
+        WScript.Sleep 100
+    Loop While g_objIE.Busy
+	if g_objIE.Document.All("ConfigLocation").Checked then	
+		SourceFolder = strDirectoryConfig & "\Tested"
+		Arg4 = "tested"
+	Else
+		SourceFolder = strDirectoryConfig
+		Arg4 = "original"
+    end if
 	'----------------------------------------------------
 	'  GET MAIN FORM PID
 	'----------------------------------------------------
@@ -2156,7 +2129,6 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 	'----------------------------------------------------
 	'  START MAIN CYCLE OF THE INPUT FORM
 	'----------------------------------------------------
-	' g_objIE.Document.All("ButtonHandler").Value = "CHECK"
 	nPressSettings = 0
    Do
         ' If the user closes the IE window by Alt+F4 or clicking on the 'X'
@@ -2263,23 +2235,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 						nPressSettings = nPressSettings + 1
 				End Select
 		    Case "CONFIG_SOURCE"
-						if g_objIE.Document.All("ConfigLocation").Checked then
-						    SourceFolder = strDirectoryConfig & "\Tested"
-							Arg4 = "tested"
-							If Not objFSO.FileExists(SourceFolder & "\" & vSvc(nService,1) & "\" & vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform & "-l.conf") Then
-								vvMsg(0,0) = "CONFIGURATION: " &  vFlavors(nService, nFlavor,0) & "-" & nTask & "-" & Platform : vvMsg(0,1) = "bold" 	: vvMsg(0,2) =  HttpTextColor2
-								vvMsg(1,0) = "HASN'T BEEN TESTED YET."                    : vvMsg(1,1) = "normal" 	: vvMsg(1,2) =  HttpTextColor2
-								vvMsg(2,0) = "USE ORIGINAL CONFIGURATION INSTEAD"         : vvMsg(2,1) = "bold" 	: vvMsg(2,2) =  HttpTextColor1
-								Call IE_MSG(vIE_Scale, "Can't find configuration",vvMsg, 3, g_objIE)
-							    SourceFolder = strDirectoryConfig
-							    Arg4 = "original"
-								g_objIE.Document.All("ConfigLocation").Checked = False
-							End If
-						Else
-							SourceFolder = strDirectoryConfig
-							Arg4 = "original"
-						end if
-						g_objIE.Document.All("ButtonHandler").Value = "Nothing is selected"
+			            g_objIE.Document.All("ButtonHandler").Value = "None"
 			Case "Select_0", "Select_1"
 			            g_objIE.Document.All("ButtonHandler").Value = "None"
 						'--------------------------------------
@@ -2405,7 +2361,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 						g_objIE.Document.All("ButtonHandler").Value = "Do Nothing"
 						Do
 							Call IE_Hide(g_objIE)
-							nResult = IE_PromptForSettings(vIE_Scale, 6, vSettings, vSessionCRT, vPlatforms, nDebug)
+							nResult = IE_PromptForSettings(vIE_Scale, 6, vSettings, vSessionCRT, vPlatforms, 1)
 							Select Case nResult
 								Case 0, -1
 									Call IE_Unhide(g_objIE)
@@ -2413,12 +2369,13 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 								Case Else
 									Call IE_Unhide(g_objIE)
 									strCfg = vSettings(26)
-							End Select										
-							Call CreateNewCfg(strCfg, nCfg, strVersion,strDirectoryConfig, vCfgInventory, vCfgList, nDebug)
+							End Select	
+							Call CreateNewCfg(strCfg, nCfg, strVersion,strDirectoryConfig, vCfgInventory, vCfgList, 1)
 							nYear = 0
 							nTag = 0
 							nVersion = 0
 							CurrentCfg = strCfg
+							g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
 							YES_NO = True
 							g_objIE.Document.All("ButtonHandler").Value = "DOWNLOAD"
 							Exit Do
@@ -2494,6 +2451,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 								g_objShell.run strCmd, nWindowState, True
 								CurrentCfg = strCfg
 								CurrentVer = strVer
+								g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
 							    CFG_Downloaded = True
 								g_objIE.Document.All("ButtonHandler").Value = "Reload after Download"								
 							End If	
@@ -2540,6 +2498,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 							For each strCfg in vBulkList
 							    If strCfg = "" Then Exit For
 								CurrentCfg = strCfg
+								g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
 								nCfg = GetExactObjectLineNumber(vCfgInventory, UBound(vCfgInventory),strCfg)
 								' Call CreateNewCfg(strCfg, nCfg, strVersion, strDirectoryConfig,vCfgInventory, vCfgList, nDebug)
 								'---------------------------------------------------------
@@ -2565,6 +2524,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 								Call TrDebug ("IE_PromptForInput: " & " /SCRIPT " & strDirectoryWork & "\" & VBScript_BLK_DNLD_Config, "",objDebug, MAX_LEN, 1, 1)						
 								g_objShell.run strCmd, nWindowState, True
 								CurrentCfg = strCfg
+								g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
 								CurrentVer = strVer
 							    CFG_Downloaded = True
                             Next								
@@ -2629,6 +2589,7 @@ Function IE_PromptForInput(ByRef vIE_Scale, ByRef vCfgList, ByRef vSessionCRT, B
 								g_objShell.run strCmd, nWindowState
 								CurrentCfg = strCfg
 								CurrentVer = strVer
+								g_objIE.Document.All("Current_config")(1).Value = CurrentCfg
                                 CFG_Downloaded = False							
 							End If	
 							Exit Do
@@ -3554,17 +3515,12 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 							"</td>" &_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
 									"<select name='Minor_Release" & nImageType & "' id='Minor_Release" & nImageType & "'" &_
-									"style=""width: " & Int(LoginTitleW/6) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
-									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
-									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
-									" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImageType & "';" &_
-									"type=text > "
-									' Split(objMain(0,pIndex(1,"Minor List")),",")(nMinor)
-									' For nMinor = 0 to GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
-									For nMinor = 0 to 100
-										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " > </option>" 
-									Next
-									htmlMain = htmlMain & "</select>" &_
+										"style=""width: " & Int(LoginTitleW/6) & "px;border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
+										"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
+										"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
+										" onchange=document.all('ButtonHandler').value='SelectMinor_" & nImageType & "';" &_
+										"type=text > " &_
+								    "</select>" &_
 							"</td>" &_							
 						"</tr>"
 				Next
@@ -3689,7 +3645,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 		    g_objIE.Document.All("Settings_Param_25").Value = strFolder
 		Case 8 
 			for i=0 to Ubound(vImageTypes) - 1
-			    g_objIE.document.getElementById("Button1_" & i).style.borderRadius = "10px"
+			   g_objIE.document.getElementById("Button1_" & i).style.borderRadius = "10px"
 	           g_objIE.document.getElementById("Button2_" & i).style.borderRadius = "10px"
             Next
 		    Dim vMain, vMinor
@@ -4167,9 +4123,9 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 									Case HIDE_CRT
 										Select Case Split(vSettings(nInd),"=")(1)
 											Case "1"
-												nWindowState = 2
+												nWindowState = HideTerminal
 											Case Else
-												nWindowState = 1
+												nWindowState = ShowTerminal
 										End Select									
 									Case SECURECRT_FOLDER
 										strCRT_InstallFolder = Split(vSettings(nInd),"=")(1)
@@ -5010,11 +4966,12 @@ Function UpdateCfgList(byRef g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htm
 	nOptions_New = 0
 	g_objIE.document.getElementById("cfg_name").Options(0).Text = "N/A"
 	g_objIE.document.getElementById("cfg_name").Options(0).Value = 0				   	
-	For nInd = 1 to UBound(vCfgList,1)
-		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Text = " "
-		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Value = "N/A"					   
-	Next
+'	For nInd = 1 to UBound(vCfgList,1)
+'		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Text = " "
+'		g_objIE.document.getElementById(htmlCfgSelect).Options(nInd).Value = "N/A"					   
+'	Next
 	nOptions = 0
+	g_objIE.document.getElementById(htmlCfgSelect).Length = 1
 	For nInd = 0 to UBound(vCfgList,1) - 1
 		Do 
 			If strYear <> "All" Then 
@@ -5026,7 +4983,8 @@ Function UpdateCfgList(byRef g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htm
 				If InStr(vCfgList(nInd,0),LCase(strTag)) = 0 and InStr(vCfgList(nInd,0),strTag) = 0 Then 
 					Exit Do 
 				End If
-			End If			   
+			End If
+			g_objIE.document.getElementById(htmlCfgSelect).Length = nOptions + 1
 			g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Text = vCfgList(nInd,0)
 			g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Value = nInd
 '			MsgBox "nCfg = " & nCfg & chr(13) & "nInd = " & nInd
@@ -5037,8 +4995,6 @@ Function UpdateCfgList(byRef g_objIE, nCfg, strYear, strTag, ByRef vCfgList, htm
 			Exit Do
 		Loop 
 	Next
-'	g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Text = SAVE_AS & Space(100)
-'	g_objIE.document.getElementById(htmlCfgSelect).Options(nOptions).Value = nInd + 1	
 	UpdateCfgList = nOptions_New
 End Function
 '----------------------------------------------------------------------------------------
@@ -5049,23 +5005,14 @@ Function UpdateCfgVer(ByRef g_objIE, ByRef nCfg, ByRef vCfgList, htmlSelect)
 	UpdateCfgVer = 0
 	If Int(nCfg) >= Ubound(vCfgList,1) Then Exit Function
 	strLine = Split(vCfgList(nCfg,1),"=")(1)
-	Const MAX_PARAM = 10
-	For nInd = 0 to MAX_PARAM
-		If nInd < UBound(Split(strLine,",")) Then 
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Split(strLine,",")(nInd)
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = nInd
-		End If
-		If nInd = UBound(Split(strLine,",")) Then 
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Split(strLine,",")(nInd)
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = nInd
-			g_objIE.document.getElementById(htmlSelect).selectedIndex = nInd			
-		End If
-		If nInd > UBound(Split(strLine,",")) Then 
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).text = " "
-			g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = 0
-		End If
+	g_objIE.document.getElementById(htmlSelect).length = 1
+	For nInd = 0 to UBound(Split(strLine,","))
+		g_objIE.document.getElementById(htmlSelect).length = nInd + 1
+		g_objIE.document.getElementById(htmlSelect).Options(nInd).text = Split(strLine,",")(nInd)
+		g_objIE.document.getElementById(htmlSelect).Options(nInd).Value = nInd
 	Next
-	UpdateCfgVer = g_objIE.document.getElementById(htmlSelect).selectedIndex
+	g_objIE.document.getElementById(htmlSelect).selectedIndex = nInd - 1			
+	UpdateCfgVer = nInd - 1
 End Function 
 '----------------------------------------------------------------------------------------
 '   Function UpdateSessionStatus(ByRef g_objIE, nCfg, strCfg, ByRef vCfgList,ByRef vSessionCRT, ByRef vSessionEnable)
@@ -5122,7 +5069,7 @@ Function CreateNewCfg(ByRef strCfg, ByRef nCfg, ByRef strVersion, strDirectoryCo
 		'----------------------------------------------------
 	    nCfg = UBound(vCfgInventory)
 		' write new cfg name to CfgList file to the END of the list
-		Call WriteStrToFile(strDirectoryConfig & "\CfgList.txt", strCfg, vCfgInventory(nCfg - 1), 3, 0)
+		Call WriteStrToFile(strDirectoryConfig & "\CfgList.txt", strCfg, vCfgInventory(nCfg - 1), 3, 1)
 		' write new cfg name to CfgInventory Array
 		Redim Preserve vCfgInventory(nCfg + 1)
 		vCfgInventory(nCfg) = strCfg
@@ -6113,14 +6060,14 @@ Dim strLine, strCmd, vCmdOut
     Next
 End Function
 '------------------------------------------------------------------------------------------------------------------
-' Function returns the number of the line from 1 to N which contains string strObject. Returns 0 if nothing found
+' Function returns the number of the line from 1 to N which contains exact string strObject. Returns 0 if nothing found
 '------------------------------------------------------------------------------------------------------------------
-Function GetExactObjectLineNumber( byRef vArray, strObjectName, nDebug)
+Function SearchExactStringLineNumber( byRef vArray, strObjectName, nDebug)
  Dim nInd
  Dim nIndex
  Dim CharLeft, CharRight
 	nInd = 0
-	GetExactObjectLineNumber = 0
+	SearchExactStringLineNumber = 0
 	Do While nInd < UBound(vArray)
 	Call TrDebug (" LOOK FOR """ & strObjectName & """", " IN: " & vArray(nInd) & """", objDebug, MAX_LEN, 1, nDebug)
 	nIndex = InStr(vArray(nInd), strObjectName)
@@ -6129,24 +6076,24 @@ Function GetExactObjectLineNumber( byRef vArray, strObjectName, nDebug)
 		If Len(vArray(nInd)) = nIndex + Len(strObjectName) Then CharRight = "" 	Else CharRight = LCase(Mid(vArray(nInd),nIndex + Len(strObjectName),1)) End If
 		If CharLeft <> "" and CharRight <> "" Then 
 			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharLeft) = 0 and InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharRight) = 0 Then 
-				GetExactObjectLineNumber = nInd + 1
+				SearchExactStringLineNumber = nInd + 1
 				Exit Do
 			End If 
 		End If
 		If CharLeft <> "" and CharRight = "" Then 
 			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharLeft) = 0 Then 
-				GetExactObjectLineNumber = nInd + 1
+				SearchExactStringLineNumber = nInd + 1
 				Exit Do
 			End If 
 		End If
 		If CharLeft = "" and CharRight <> "" Then 
 			If InStr("1234567890_qwertyuiopasdfghjklzxcvbnm",CharRight) = 0 Then 
-				GetExactObjectLineNumber = nInd + 1
+				SearchExactStringLineNumber = nInd + 1
 				Exit Do
 			End If 
 		End If
 		If CharLeft = "" and CharRight = "" Then 
-			GetExactObjectLineNumber = nInd + 1
+			SearchExactStringLineNumber = nInd + 1
 			Exit Do
 		End If 
 	End If
@@ -6164,7 +6111,7 @@ Dim nInd, vImage
 		If objMain(nInd,pIndex(0,"Platform")) = strPlatform and objMain(nInd,pIndex(0,"Display_Name")) = strDisplayName Then 
 		    vImage(0) = objMain(nInd,pIndex(0,"Main List"))
 			Call TrDebug ("LOOKING FOR: " & strImageName & " in: " & vImage(0),"", objDebug, MAX_LEN, 1, nDebug)
-			If GetExactObjectLineNumber( vImage, strImageName, 0) = 1 Then 
+			If SearchExactStringLineNumber( vImage, strImageName, 0) = 1 Then 
 			    Call TrDebug ("FOUND: " & strImageName & " nImage=" & nInd,"", objDebug, MAX_LEN, 1, nDebug)
 				nImage = nInd
 				GetImageIDByName = True
@@ -6189,7 +6136,7 @@ End Function
 '   Function FillJunosCatalogueForm
 '---------------------------------------------------------------------
 Function FillJunosCatalogueForm (byRef g_objIE, byRef vImageTypes, nDebug) 
-Dim kInd, n, nInd
+Dim kInd, n, nInd, nSelect
 Dim nMinor,strMainItem, strMinorName,strMain,strMinor,strStatus,strImageType,LineItem
 Dim vMinorList,vMainList
 Dim nImageType, nImage
@@ -6215,17 +6162,21 @@ Dim nImageType, nImage
 						Call GetMinorIDByName(strMinorName, nMinor, nDebug)
 						vMinorList = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
 						kInd = 0
+						nSelect = -1
+						g_objIE.document.getElementById("Minor_Release" & nImageType).Length = 1
 						For Each LineItem in vMinorList
 							If LineItem = "" Then Exit For
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Length = kInd + 1
 							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(kInd).Text = LineItem
 							if strMinor = LineItem and strStatus = "Active" Then 
-								g_objIE.document.getElementById("Minor_Release" & nImageType).SelectedIndex = kInd
+							    nSelect = kInd
 							End If
 							kInd = kInd + 1
 						Next
-						For n = kInd to 99
-							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(n).Text = " "
-						Next
+						If nSelect => 0 Then g_objIE.document.getElementById("Minor_Release" & nImageType).SelectedIndex = nSelect
+'						For n = kInd to 99
+'							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(n).Text = " "
+'						Next
 					End If
 					nInd = nInd + 1
 				Next
