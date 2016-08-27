@@ -3513,7 +3513,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 								"type=text > " &_
 							"</td>" &_							
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Main_Release" & nImageType & "' id='Main_Relese" & nImageType & "'" &_
+									"<select name='Main_Release" & nImageType & "' id='Main_Release" & nImageType & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='1'" & _
@@ -3525,7 +3525,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_
 							"<td style="" border-style: None;"" class=""oa2"" height=""" & cellH & """ width=""" & Int(4 * LoginTitleW/16) & """valign=""top"" align=""center"">" &_									
-									"<select name='Minor_Release" & nImageType & "' id='Minor_Relese" & nImageType & "'" &_
+									"<select name='Minor_Release" & nImageType & "' id='Minor_Release" & nImageType & "'" &_
 									"style=""border: none ; outline: none; text-align: right; font-size: " & nFontSize_10 & ".0pt;" &_ 
 									"font-family: 'Helvetica'; color: " & HttpTextColor2 &_
 									"; background-color: " & HttpBgColor4 & "; font-weight: Normal;"" size='" & N_SELECT & "'" & _
@@ -3534,7 +3534,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 									' Split(objMain(0,pIndex(1,"Minor List")),",")(nMinor)
 									' For nMinor = 0 to GetVariable("ListNumber" & pIndex(1,"Minor List") + 1, vClass, 2, 1, 0, nDebug)
 									For nMinor = 0 to 100
-										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(35) & "</option>" 
+										htmlMain = htmlMain &	"<option value=Minor_" & nMinor & " >" & Space_html(40) & "</option>" 
 									Next
 									htmlMain = htmlMain & "</select>" &_
 							"</td>" &_							
@@ -3711,7 +3711,7 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						    If UBound(vMinor) >= nInd Then
 						       g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = vMinor(nInd)
 						    Else 
-							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = Space(35)
+							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = Space(40)
 							End If
 						Next
 						Exit Do
@@ -6174,10 +6174,10 @@ Dim nImageType, nImage
 				vMainList = Split(objMain(nImage,pIndex(0,"Main List")),",")
 				For Each strMainItem in vMainList
 					If strMainItem = "" Then Exit For
-					Call TrDebug ("Update Catalogue: WRITE INTO FORM: " & "Main_Release" & nImageType & " Options(" & nInd & ")" , "", objDebug, MAX_LEN, 1, 1)														
-					g_objIE.document.getElementById("Main_Release" & nImageType).Options(nInd).Text = strMainItem
+					Call TrDebug ("Update Catalogue: WRITE INTO FORM: " & "Main_Release" & nImageType & " Options(" & nInd & ")" , "", objDebug, MAX_LEN, 1, nDebug)														
+					g_objIE.Document.GetElementById("Main_Release" & nImageType).Options(nInd).Text = strMainItem
 					If RTrim(Ltrim(strMainItem)) = strMain Then 
-						g_objIE.document.getElementById("Main_Release" & nImageType).SelectedIndex = nInd
+						g_objIE.Document.getElementById("Main_Release" & nImageType).SelectedIndex = nInd
 						strMinorName = objMain(nImage,pIndex(0,"Name")) & "-" & strMainItem
 						' Get Minor object ID by its name
 						Call GetMinorIDByName(strMinorName, nMinor, nDebug)
