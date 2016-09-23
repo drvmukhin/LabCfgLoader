@@ -3694,14 +3694,26 @@ Function IE_PromptForSettings(ByRef vIE_Scale, MenuID, byRef vSettings, byRef vS
 						   Exit Do						   
 						End If
 						vMinor = Split(objMinor(nMinor,pIndex(1,"Minor List")),",")
+
+						g_objIE.document.getElementById("Minor_Release" & nImageType).Length = 1
 						nInd = 0
-						For nInd = 0 to 99
-						    If UBound(vMinor) >= nInd Then
-						       g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = vMinor(nInd)
-						    Else 
-							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = " "
-							End If
+						For Each LineItem in vMinor
+							If LineItem = "" Then Exit For
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Length = nInd + 1
+							g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = LineItem
+'							if strMinor = LineItem and strStatus = "Active" Then 
+'							    nSelect = nInd
+'							End If
+							nInd = nInd + 1
 						Next
+'						nInd = 0
+'						For nInd = 0 to 99
+'						    If UBound(vMinor) >= nInd Then
+'						       g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = vMinor(nInd)
+'						    Else 
+'							   g_objIE.document.getElementById("Minor_Release" & nImageType).Options(nInd).Text = " "
+'							End If
+'						Next
 						Exit Do
 					Loop
 			Case "SelectPlatform"

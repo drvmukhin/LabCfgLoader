@@ -34,13 +34,13 @@ Status 2=Disabled
 Status 3=Disabled
 Status 4=Disabled
 Status 5=Disabled
-Status 6=Enabled
+Status 6=Disabled
 Status 7=Disabled
 Status 8=Disabled
-Status 9=Enabled
+Status 9=Disabled
 Status 10=Disabled
 Status 11=Disabled
-Status 12=Disabled
+Status 12=Enabled
 
 [Settings]
 
@@ -53,10 +53,10 @@ CONFIGS_RE0                   = group-member0
 # CONFIGS_RE1                 = 
 Platform Name                 = Access and Aggregation v2.0
 Node Name Prefix              = acx
-Hide Terminal Session         = 0
-Network Adapter               = Juniper Networks Virtual Adapter
+Hide Terminal Session         = 1
+Network Adapter               = Juniper Networks Virtual Adapter #2
 Right Node IP                 = 10.164.1.142/24
-FTP IP                        = 172.29.100.158
+FTP IP                        = 172.29.103.51
 FTP User                      = mamba
 FTP Password                  = jnpr1234
 Blk Config File Folder        = C:\Users\vmukhin\Documents\LAB_CONFIGS\MissedCfgList.txt
